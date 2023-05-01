@@ -2,8 +2,9 @@
 
 /**
  * Plugin name: Msof Jobs
- * Description: Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+ * Description: Simple job listing plugin to manage job openings on your WordPress site.
  * Author: Marios Sofokleous
+ * Author URI: https://www.msof.me
  */
 
 // 01. If this file is access directly, abort!
@@ -11,24 +12,23 @@ defined('ABSPATH') or die('Unauthorized Access');
 
 // 02. Handle plugin dependencies
 function msof_jobs_handle_plugin_dependencies() {
-    if ( is_admin() && current_user_can( 'activate_plugins' ) &&  !is_plugin_active( 'radio-buttons-for-taxonomies/radio-buttons-for-taxonomies.php' ) ) {
-        add_action( 'admin_notices', 'msof_jobs_plugin_notice' );
+  if (is_admin() && current_user_can('activate_plugins') &&  !is_plugin_active('radio-buttons-for-taxonomies/radio-buttons-for-taxonomies.php')) {
+    add_action('admin_notices', 'msof_jobs_plugin_notice');
 
-        deactivate_plugins( plugin_basename( __FILE__ ) ); 
+    deactivate_plugins(plugin_basename(__FILE__));
 
-        if ( isset( $_GET['activate'] ) ) {
-            unset( $_GET['activate'] );
-        }
+    if (isset($_GET['activate'])) {
+      unset($_GET['activate']);
     }
+  }
 }
 function msof_jobs_plugin_notice() {
   echo '<div class="error"><p>Sorry, but <strong>Msof Jobs</strong> plugin requires the <strong>Radio Buttons for Taxonomies</strong> plugin to be installed and active.</p></div>';
 }
-add_action( 'admin_init', 'msof_jobs_handle_plugin_dependencies' );
+add_action('admin_init', 'msof_jobs_handle_plugin_dependencies');
 
 // 03. Register shortcode
-function msof_jobs_shortcode()
-{
+function msof_jobs_shortcode() {
   // Enqueue scripts and styles
   wp_enqueue_script('msof-jobs-script');
   wp_enqueue_style('msof-jobs-style');
@@ -38,8 +38,7 @@ function msof_jobs_shortcode()
 add_shortcode('msof_jobs', 'msof_jobs_shortcode');
 
 // 04. Register script
-function msof_jobs_register_script()
-{
+function msof_jobs_register_script() {
   // Do not enqueue here. Load in demand, enqueue in shortcode.
   wp_register_script(
     'msof-jobs-script', // Name of the script
@@ -52,8 +51,7 @@ function msof_jobs_register_script()
 add_action('wp_enqueue_scripts', 'msof_jobs_register_script');
 
 // 05. Register style
-function msof_jobs_register_style()
-{
+function msof_jobs_register_style() {
   // Do not enqueue here. Load in demand, enqueue in shortcode.
   wp_register_style(
     'msof-jobs-style',
@@ -66,8 +64,7 @@ function msof_jobs_register_style()
 add_action('wp_enqueue_scripts', 'msof_jobs_register_style');
 
 // 06. Register "msof_job" post type
-function register_cpt_msof_job()
-{
+function msof_jobs_register_cpt_msof_job() {
 
   $labels = [
     "name" => "Jobs",
@@ -125,17 +122,16 @@ function register_cpt_msof_job()
     "can_export" => true,
     "rewrite" => false,
     "query_var" => true,
-    "supports" => ["title"],
+    "supports" => ["title", "editor"],
     "show_in_graphql" => false
   ];
 
   register_post_type("msof_job", $args);
 }
-add_action('init', 'register_cpt_msof_job');
+add_action('init', 'msof_jobs_register_cpt_msof_job');
 
 // 07. Register "msof_job_location" taxonomy
-function register_msof_job_location()
-{
+function msof_jobs_register_msof_job_location() {
 
   $labels = [
     "name" => "Locations",
@@ -185,15 +181,14 @@ function register_msof_job_location()
     "sort" => false,
     "show_in_graphql" => false,
   ];
-  register_taxonomy("msof_job_location", array( 'msof_job' ), $args);
+  register_taxonomy("msof_job_location", array('msof_job'), $args);
 }
-add_action('init', 'register_msof_job_location');
+add_action('init', 'msof_jobs_register_msof_job_location');
 // Disable the "No term" option on the "msof_job_location" taxonomy
-add_filter( "radio_buttons_for_taxonomies_no_term_msof_job_location", "__return_FALSE" );
+add_filter("radio_buttons_for_taxonomies_no_term_msof_job_location", "__return_FALSE");
 
 // 08. Register "msof_job_category" taxonomy
-function register_msof_job_category()
-{
+function msof_jobs_register_msof_job_category() {
 
   $labels = [
     "name" => "Categories",
@@ -245,13 +240,12 @@ function register_msof_job_category()
   ];
   register_taxonomy("msof_job_category", ["msof_job"], $args);
 }
-add_action('init', 'register_msof_job_category');
+add_action('init', 'msof_jobs_register_msof_job_category');
 // Disable the "No term" option on the "msof_job_category" taxonomy
-add_filter( "radio_buttons_for_taxonomies_no_term_msof_job_category", "__return_FALSE" );
+add_filter("radio_buttons_for_taxonomies_no_term_msof_job_category", "__return_FALSE");
 
 // 09. Register "msof_job_type" taxonomy
-function register_msof_job_type()
-{
+function msof_jobs_register_msof_job_type() {
 
   $labels = [
     "name" => "Types",
@@ -303,6 +297,15 @@ function register_msof_job_type()
   ];
   register_taxonomy("msof_job_type", ["msof_job"], $args);
 }
-add_action('init', 'register_msof_job_type');
+add_action('init', 'msof_jobs_register_msof_job_type');
 // Disable the "No term" option on the "msof_job_type" taxonomy
-add_filter( "radio_buttons_for_taxonomies_no_term_msof_job_type", "__return_FALSE" );
+add_filter("radio_buttons_for_taxonomies_no_term_msof_job_type", "__return_FALSE");
+
+// 10. Disable the Gutenberg editor for the custom post type "msof_job"
+function msof_jobs_disable_gutenberg_editor( $can_edit, $post_type ) {
+  if ( 'msof_job' == $post_type ) {
+      $can_edit = false;
+  }
+  return $can_edit;
+}
+add_filter( 'use_block_editor_for_post_type', 'msof_jobs_disable_gutenberg_editor', 10, 2 );
