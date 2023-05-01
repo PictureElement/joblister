@@ -246,5 +246,63 @@ function register_msof_job_category()
   register_taxonomy("msof_job_category", ["msof_job"], $args);
 }
 add_action('init', 'register_msof_job_category');
-// Disable the "No term" option on the "msof_job_location" taxonomy
+// Disable the "No term" option on the "msof_job_category" taxonomy
 add_filter( "radio_buttons_for_taxonomies_no_term_msof_job_category", "__return_FALSE" );
+
+// 09. Register "msof_job_type" taxonomy
+function register_msof_job_type()
+{
+
+  $labels = [
+    "name" => "Types",
+    "singular_name" => "Type",
+    "menu_name" => "Types",
+    "all_items" => "All Types",
+    "edit_item" => "Edit Type",
+    "view_item" => "View Type",
+    "update_item" => "Update Type name",
+    "add_new_item" => "Add new Type",
+    "new_item_name" => "New Type name",
+    "parent_item" => "Parent Type",
+    "parent_item_colon" => "Parent Type:",
+    "search_items" => "Search Types",
+    "popular_items" => "Popular Types",
+    "separate_items_with_commas" => "Separate Types with commas",
+    "add_or_remove_items" => "Add or remove Types",
+    "choose_from_most_used" => "Choose from the most used Types",
+    "not_found" => "No Types found",
+    "no_terms" => "No Types",
+    "items_list_navigation" => "Types list navigation",
+    "items_list" => "Types list",
+    "back_to_items" => "Back to Types",
+    "name_field_description" => "The name is how it appears on your site.",
+    "parent_field_description" => "Assign a parent term to create a hierarchy. The term Jazz, for example, would be the parent of Bebop and Big Band.",
+    "slug_field_description" => "The slug is the URL-friendly version of the name. It is usually all lowercase and contains only letters, numbers, and hyphens.",
+    "desc_field_description" => "The description is not prominent by default; however, some themes may show it.",
+  ];
+
+  $args = [
+    "label" => "Types",
+    "labels" => $labels,
+    "public" => false,
+    "publicly_queryable" => false,
+    "hierarchical" => false,
+    "show_ui" => true,
+    "show_in_menu" => true,
+    "show_in_nav_menus" => true,
+    "query_var" => true,
+    "rewrite" => false,
+    "show_admin_column" => true,
+    "show_in_rest" => true,
+    "show_tagcloud" => false,
+    "rest_base" => "msof-job-types",
+    "rest_controller_class" => "WP_REST_Terms_Controller",
+    "show_in_quick_edit" => true,
+    "sort" => false,
+    "show_in_graphql" => false,
+  ];
+  register_taxonomy("msof_job_type", ["msof_job"], $args);
+}
+add_action('init', 'register_msof_job_type');
+// Disable the "No term" option on the "msof_job_type" taxonomy
+add_filter( "radio_buttons_for_taxonomies_no_term_msof_job_type", "__return_FALSE" );
