@@ -9,7 +9,24 @@
 // 01. If this file is access directly, abort!
 defined('ABSPATH') or die('Unauthorized Access');
 
-// 02. Register shortcode
+// 02. Handle plugin dependencies
+function msof_jobs_handle_plugin_dependencies() {
+    if ( is_admin() && current_user_can( 'activate_plugins' ) &&  !is_plugin_active( 'radio-buttons-for-taxonomies/radio-buttons-for-taxonomies.php' ) ) {
+        add_action( 'admin_notices', 'msof_jobs_plugin_notice' );
+
+        deactivate_plugins( plugin_basename( __FILE__ ) ); 
+
+        if ( isset( $_GET['activate'] ) ) {
+            unset( $_GET['activate'] );
+        }
+    }
+}
+function msof_jobs_plugin_notice() {
+  echo '<div class="error"><p>Sorry, but <strong>Msof Jobs</strong> plugin requires the <strong>Radio Buttons for Taxonomies</strong> plugin to be installed and active.</p></div>';
+}
+add_action( 'admin_init', 'msof_jobs_handle_plugin_dependencies' );
+
+// 03. Register shortcode
 function msof_jobs_shortcode()
 {
   // Enqueue scripts and styles
@@ -20,7 +37,7 @@ function msof_jobs_shortcode()
 }
 add_shortcode('msof_jobs', 'msof_jobs_shortcode');
 
-// 03. Register script
+// 04. Register script
 function msof_jobs_register_script()
 {
   // Do not enqueue here. Load in demand, enqueue in shortcode.
@@ -34,7 +51,7 @@ function msof_jobs_register_script()
 }
 add_action('wp_enqueue_scripts', 'msof_jobs_register_script');
 
-// 04. Register style
+// 05. Register style
 function msof_jobs_register_style()
 {
   // Do not enqueue here. Load in demand, enqueue in shortcode.
@@ -48,7 +65,7 @@ function msof_jobs_register_style()
 }
 add_action('wp_enqueue_scripts', 'msof_jobs_register_style');
 
-// 05. Register "msof_job" post type
+// 06. Register "msof_job" post type
 function register_cpt_msof_job()
 {
 
@@ -116,7 +133,7 @@ function register_cpt_msof_job()
 }
 add_action('init', 'register_cpt_msof_job');
 
-// 06. Register "msof_job_location" taxonomy
+// 07. Register "msof_job_location" taxonomy
 function register_msof_job_location()
 {
 
@@ -167,13 +184,14 @@ function register_msof_job_location()
     "show_in_quick_edit" => true,
     "sort" => false,
     "show_in_graphql" => false,
-    "meta_box_cb" => 'post_categories_meta_box',
   ];
   register_taxonomy("msof_job_location", array( 'msof_job' ), $args);
 }
 add_action('init', 'register_msof_job_location');
+// Disable the "No term" option on the "msof_job_location" taxonomy
+add_filter( "radio_buttons_for_taxonomies_no_term_msof_job_location", "__return_FALSE" );
 
-// 07. Register "msof_job_category" taxonomy
+// 08. Register "msof_job_category" taxonomy
 function register_msof_job_category()
 {
 
@@ -210,7 +228,7 @@ function register_msof_job_category()
     "labels" => $labels,
     "public" => false,
     "publicly_queryable" => false,
-    "hierarchical" => true,
+    "hierarchical" => false,
     "show_ui" => true,
     "show_in_menu" => true,
     "show_in_nav_menus" => true,
@@ -224,8 +242,9 @@ function register_msof_job_category()
     "show_in_quick_edit" => true,
     "sort" => false,
     "show_in_graphql" => false,
-    "meta_box_cb" => 'post_categories_meta_box',
   ];
   register_taxonomy("msof_job_category", ["msof_job"], $args);
 }
 add_action('init', 'register_msof_job_category');
+// Disable the "No term" option on the "msof_job_location" taxonomy
+add_filter( "radio_buttons_for_taxonomies_no_term_msof_job_category", "__return_FALSE" );
