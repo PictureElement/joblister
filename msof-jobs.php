@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Plugin name: Msof Jobs
+ * Plugin name: JobLister
  * Description: Simple job listing plugin to manage job openings on your WordPress site.
  * Author: Marios Sofokleous
  * Author URI: https://www.msof.me
@@ -11,9 +11,9 @@
 defined('ABSPATH') or die('Unauthorized Access');
 
 // 02. Handle plugin dependencies
-function msof_jobs_handle_plugin_dependencies() {
+function JL_handle_plugin_dependencies() {
   if (is_admin() && current_user_can('activate_plugins') &&  !is_plugin_active('radio-buttons-for-taxonomies/radio-buttons-for-taxonomies.php')) {
-    add_action('admin_notices', 'msof_jobs_plugin_notice');
+    add_action('admin_notices', 'JL_plugin_notice');
 
     deactivate_plugins(plugin_basename(__FILE__));
 
@@ -22,49 +22,49 @@ function msof_jobs_handle_plugin_dependencies() {
     }
   }
 }
-function msof_jobs_plugin_notice() {
-  echo '<div class="error"><p>Sorry, but <strong>Msof Jobs</strong> plugin requires the <strong>Radio Buttons for Taxonomies</strong> plugin to be installed and active.</p></div>';
+function JL_plugin_notice() {
+  echo '<div class="error"><p>Sorry, but <strong>JobLister</strong> plugin requires the <strong>Radio Buttons for Taxonomies</strong> plugin to be installed and active.</p></div>';
 }
-add_action('admin_init', 'msof_jobs_handle_plugin_dependencies');
+add_action('admin_init', 'JL_handle_plugin_dependencies');
 
 // 03. Register shortcode
-function msof_jobs_shortcode() {
+function JL_shortcode() {
   // Enqueue scripts and styles
-  wp_enqueue_script('msof-jobs-script');
-  wp_enqueue_style('msof-jobs-style');
+  wp_enqueue_script('jl-script');
+  wp_enqueue_style('jl-style');
 
-  return '<div class="msof-jobs-root" id="msofJobsRoot"></div>';
+  return '<div class="jl-root" id="jlRoot"></div>';
 }
-add_shortcode('msof_jobs', 'msof_jobs_shortcode');
+add_shortcode('joblister', 'JL_shortcode');
 
 // 04. Register script
-function msof_jobs_register_script() {
+function JL_register_script() {
   // Do not enqueue here. Load in demand, enqueue in shortcode.
   wp_register_script(
-    'msof-jobs-script', // Name of the script
+    'jl-script', // Name of the script
     plugin_dir_url(__FILE__) . '/build/index.js', // Full URL of the script
     ['wp-element'], // Dependencies
     rand(), // Script version number (Change this to null for production)
     true // Enqueue script before </body>
   );
 }
-add_action('wp_enqueue_scripts', 'msof_jobs_register_script');
+add_action('wp_enqueue_scripts', 'JL_register_script');
 
 // 05. Register style
-function msof_jobs_register_style() {
+function JL_register_style() {
   // Do not enqueue here. Load in demand, enqueue in shortcode.
   wp_register_style(
-    'msof-jobs-style',
+    'jl-style',
     plugin_dir_url(__FILE__) . '/build/index.css',
     [],
     rand(),
     'all'
   );
 }
-add_action('wp_enqueue_scripts', 'msof_jobs_register_style');
+add_action('wp_enqueue_scripts', 'JL_register_style');
 
-// 06. Register "msof_job" post type
-function msof_jobs_register_cpt_msof_job() {
+// 06. Register "jl_job" post type
+function JL_register_cpt_jl_job() {
 
   $labels = [
     "name" => "Jobs",
@@ -109,7 +109,7 @@ function msof_jobs_register_cpt_msof_job() {
     "publicly_queryable" => false,
     "show_ui" => true,
     "show_in_rest" => true,
-    "rest_base" => "msof-jobs",
+    "rest_base" => "jl-jobs",
     "rest_controller_class" => "WP_REST_Posts_Controller",
     "has_archive" => false,
     "show_in_menu" => true,
@@ -126,12 +126,12 @@ function msof_jobs_register_cpt_msof_job() {
     "show_in_graphql" => false
   ];
 
-  register_post_type("msof_job", $args);
+  register_post_type("jl_job", $args);
 }
-add_action('init', 'msof_jobs_register_cpt_msof_job');
+add_action('init', 'JL_register_cpt_jl_job');
 
-// 07. Register "msof_job_location" taxonomy
-function msof_jobs_register_msof_job_location() {
+// 07. Register "jl_location" taxonomy
+function JL_register_jl_location() {
 
   $labels = [
     "name" => "Locations",
@@ -175,20 +175,20 @@ function msof_jobs_register_msof_job_location() {
     "show_admin_column" => true,
     "show_in_rest" => true,
     "show_tagcloud" => false,
-    "rest_base" => "msof-job-locations",
+    "rest_base" => "jl-locations",
     "rest_controller_class" => "WP_REST_Terms_Controller",
     "show_in_quick_edit" => true,
     "sort" => false,
     "show_in_graphql" => false,
   ];
-  register_taxonomy("msof_job_location", array('msof_job'), $args);
+  register_taxonomy("jl_location", array('jl_job'), $args);
 }
-add_action('init', 'msof_jobs_register_msof_job_location');
-// Disable the "No term" option on the "msof_job_location" taxonomy
-add_filter("radio_buttons_for_taxonomies_no_term_msof_job_location", "__return_FALSE");
+add_action('init', 'JL_register_jl_location');
+// Disable the "No term" option on the "jl_location" taxonomy
+add_filter("radio_buttons_for_taxonomies_no_term_jl_location", "__return_FALSE");
 
-// 08. Register "msof_job_category" taxonomy
-function msof_jobs_register_msof_job_category() {
+// 08. Register "jl_category" taxonomy
+function JL_register_jl_category() {
 
   $labels = [
     "name" => "Categories",
@@ -232,20 +232,20 @@ function msof_jobs_register_msof_job_category() {
     "show_admin_column" => true,
     "show_in_rest" => true,
     "show_tagcloud" => false,
-    "rest_base" => "msof-job-categories",
+    "rest_base" => "jl-categories",
     "rest_controller_class" => "WP_REST_Terms_Controller",
     "show_in_quick_edit" => true,
     "sort" => false,
     "show_in_graphql" => false,
   ];
-  register_taxonomy("msof_job_category", ["msof_job"], $args);
+  register_taxonomy("jl_category", ["jl_job"], $args);
 }
-add_action('init', 'msof_jobs_register_msof_job_category');
-// Disable the "No term" option on the "msof_job_category" taxonomy
-add_filter("radio_buttons_for_taxonomies_no_term_msof_job_category", "__return_FALSE");
+add_action('init', 'JL_register_jl_category');
+// Disable the "No term" option on the "jl_category" taxonomy
+add_filter("radio_buttons_for_taxonomies_no_term_jl_category", "__return_FALSE");
 
-// 09. Register "msof_job_type" taxonomy
-function msof_jobs_register_msof_job_type() {
+// 09. Register "jl_type" taxonomy
+function JL_register_jl_type() {
 
   $labels = [
     "name" => "Types",
@@ -289,23 +289,80 @@ function msof_jobs_register_msof_job_type() {
     "show_admin_column" => true,
     "show_in_rest" => true,
     "show_tagcloud" => false,
-    "rest_base" => "msof-job-types",
+    "rest_base" => "jl-types",
     "rest_controller_class" => "WP_REST_Terms_Controller",
     "show_in_quick_edit" => true,
     "sort" => false,
     "show_in_graphql" => false,
   ];
-  register_taxonomy("msof_job_type", ["msof_job"], $args);
+  register_taxonomy("jl_type", ["jl_job"], $args);
 }
-add_action('init', 'msof_jobs_register_msof_job_type');
-// Disable the "No term" option on the "msof_job_type" taxonomy
-add_filter("radio_buttons_for_taxonomies_no_term_msof_job_type", "__return_FALSE");
+add_action('init', 'JL_register_jl_type');
+// Disable the "No term" option on the "jl_type" taxonomy
+add_filter("radio_buttons_for_taxonomies_no_term_jl_type", "__return_FALSE");
 
-// 10. Disable the Gutenberg editor for the custom post type "msof_job"
-function msof_jobs_disable_gutenberg_editor( $can_edit, $post_type ) {
-  if ( 'msof_job' == $post_type ) {
+// 10. Register "jl_experience_level" taxonomy
+function JL_register_jl_experience_level() {
+
+  $labels = [
+    "name" => "Experience Levels",
+    "singular_name" => "Experience Level",
+    "menu_name" => "Experience Levels",
+    "all_items" => "All Experience Levels",
+    "edit_item" => "Edit Experience Level",
+    "view_item" => "View Experience Level",
+    "update_item" => "Update Experience Level name",
+    "add_new_item" => "Add new Experience Level",
+    "new_item_name" => "New Experience Level name",
+    "parent_item" => "Parent Experience Level",
+    "parent_item_colon" => "Parent Experience Level:",
+    "search_items" => "Search Experience Levels",
+    "popular_items" => "Popular Experience Levels",
+    "separate_items_with_commas" => "Separate Experience Levels with commas",
+    "add_or_remove_items" => "Add or remove Experience Levels",
+    "choose_from_most_used" => "Choose from the most used Experience Levels",
+    "not_found" => "No Experience Levels found",
+    "no_terms" => "No Experience Levels",
+    "items_list_navigation" => "Experience Levels list navigation",
+    "items_list" => "Experience Levels list",
+    "back_to_items" => "Back to Experience Levels",
+    "name_field_description" => "The name is how it appears on your site.",
+    "parent_field_description" => "Assign a parent term to create a hierarchy. The term Jazz, for example, would be the parent of Bebop and Big Band.",
+    "slug_field_description" => "The slug is the URL-friendly version of the name. It is usually all lowercase and contains only letters, numbers, and hyphens.",
+    "desc_field_description" => "The description is not prominent by default; however, some themes may show it.",
+  ];
+
+  $args = [
+    "label" => "Experience Levels",
+    "labels" => $labels,
+    "public" => false,
+    "publicly_queryable" => false,
+    "hierarchical" => false,
+    "show_ui" => true,
+    "show_in_menu" => true,
+    "show_in_nav_menus" => true,
+    "query_var" => true,
+    "rewrite" => false,
+    "show_admin_column" => true,
+    "show_in_rest" => true,
+    "show_tagcloud" => false,
+    "rest_base" => "jl-experience-levels",
+    "rest_controller_class" => "WP_REST_Terms_Controller",
+    "show_in_quick_edit" => true,
+    "sort" => false,
+    "show_in_graphql" => false,
+  ];
+  register_taxonomy("jl_experience_level", ["jl_job"], $args);
+}
+add_action('init', 'JL_register_jl_experience_level');
+// Disable the "No term" option on the "jl_experience_level" taxonomy
+add_filter("radio_buttons_for_taxonomies_no_term_jl_experience_level", "__return_FALSE");
+
+// 11. Disable the Gutenberg editor for the custom post type "jl_job"
+function JL_disable_gutenberg_editor( $can_edit, $post_type ) {
+  if ( 'jl_job' == $post_type ) {
       $can_edit = false;
   }
   return $can_edit;
 }
-add_filter( 'use_block_editor_for_post_type', 'msof_jobs_disable_gutenberg_editor', 10, 2 );
+add_filter( 'use_block_editor_for_post_type', 'JL_disable_gutenberg_editor', 10, 2 );
