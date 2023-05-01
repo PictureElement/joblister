@@ -5,9 +5,9 @@ import './index.scss';
 const { render } = wp.element;
 
 // Check if element exists before rendering
-if (document.getElementById('msofJobsRoot')) {
+if (document.getElementById('jlRoot')) {
   render(
     <App />,
-    document.getElementById('msofJobsRoot')
+    document.getElementById('jlRoot')
   );
 }
