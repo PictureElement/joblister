@@ -359,10 +359,42 @@ add_action('init', 'JL_register_jl_experience_level');
 add_filter("radio_buttons_for_taxonomies_no_term_jl_experience_level", "__return_FALSE");
 
 // 11. Disable the Gutenberg editor for the custom post type "jl_job"
-function JL_disable_gutenberg_editor( $can_edit, $post_type ) {
+function JL_disable_gutenberg_editor($can_edit, $post_type) {
   if ( 'jl_job' == $post_type ) {
       $can_edit = false;
   }
   return $can_edit;
 }
-add_filter( 'use_block_editor_for_post_type', 'JL_disable_gutenberg_editor', 10, 2 );
+add_filter('use_block_editor_for_post_type', 'JL_disable_gutenberg_editor', 10, 2);
+
+// 12. Utility function that process the taxonomy term for the REST API response
+function JL_process_taxonomy_term($term_id) {
+  $result = new stdClass();
+  // Use slug as id
+  $result->id = get_term($term_id)->slug;
+  // Use html_entity_decode() to avoid html entities like &amp;
+  $result->name = html_entity_decode(get_term($term_id)->name);
+  return $result;
+}
+
+// 13. Filter the "jl_job" post data for the REST API response
+function JL_filter_rest_jl_job($response) {
+  $location = JL_process_taxonomy_term($response->data['jl-locations'][0]);
+  $category = JL_process_taxonomy_term($response->data['jl-categories'][0]);
+  $type = JL_process_taxonomy_term($response->data['jl-types'][0]);
+  $experience_level = JL_process_taxonomy_term($response->data['jl-experience-levels'][0]);
+
+  return [
+    'id' => $response->data['id'],
+    'modified' => $response->data['modified'],
+    'modified_gmt' => $response->data['modified_gmt'],
+    // Use html_entity_decode() to avoid html entities like &amp;
+    'title' => html_entity_decode($response->data['title']['rendered']),
+    'content' => html_entity_decode($response->data['content']['rendered']),
+    'location' => $location,
+    'category' => $category,
+    'type' => $type,
+    'experience_level' => $experience_level,
+  ];
+}
+add_filter('rest_prepare_jl_job', 'JL_filter_rest_jl_job');
