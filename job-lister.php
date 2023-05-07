@@ -422,3 +422,27 @@ function JL_filter_rest_jl_category($response) {
   ];
 }
 add_filter('rest_prepare_jl_category', 'JL_filter_rest_jl_category');
+
+// 16. Filter the "jl_type" taxonomy data for the REST API response
+function JL_filter_rest_jl_type($response) {
+  return [
+    // Use slug as id
+    'id' => $response->data['slug'],
+    'count' => $response->data['count'],
+    // Use html_entity_decode() to avoid html entities like &amp;
+    'name' => html_entity_decode($response->data['name']),
+  ];
+}
+add_filter('rest_prepare_jl_type', 'JL_filter_rest_jl_type');
+
+// 17. Filter the "jl_experience_level" taxonomy data for the REST API response
+function JL_filter_rest_jl_experience_level($response) {
+  return [
+    // Use slug as id
+    'id' => $response->data['slug'],
+    'count' => $response->data['count'],
+    // Use html_entity_decode() to avoid html entities like &amp;
+    'name' => html_entity_decode($response->data['name']),
+  ];
+}
+add_filter('rest_prepare_jl_experience_level', 'JL_filter_rest_jl_experience_level');
