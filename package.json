@@ -25,6 +25,7 @@
     "@wordpress/scripts": "^26.2.0"
   },
   "dependencies": {
-    "react-router-dom": "^6.11.1"
+    "react-router-dom": "^6.11.1",
+    "recoil": "^0.7.7"
   }
 }
