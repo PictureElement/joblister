@@ -410,3 +410,15 @@ function JL_filter_rest_jl_location($response) {
   ];
 }
 add_filter('rest_prepare_jl_location', 'JL_filter_rest_jl_location');
+
+// 15. Filter the "jl_category" taxonomy data for the REST API response
+function JL_filter_rest_jl_category($response) {
+  return [
+    // Use slug as id
+    'id' => $response->data['slug'],
+    'count' => $response->data['count'],
+    // Use html_entity_decode() to avoid html entities like &amp;
+    'name' => html_entity_decode($response->data['name']),
+  ];
+}
+add_filter('rest_prepare_jl_category', 'JL_filter_rest_jl_category');
