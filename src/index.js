@@ -1,13 +1,31 @@
-import App from './App';
+import Multi from './routes/Multi';
+import Single from './routes/Single';
 import './index.scss';
+import { createRoot, render } from '@wordpress/element';
+import { HashRouter, Routes, Route } from "react-router-dom";
 
-// We are using wp.element here.
-const { render } = wp.element;
+const domElement = document.getElementById('jlRoot');
 
-// Check if element exists before rendering
-if (document.getElementById('jlRoot')) {
+if (createRoot) {
+  createRoot(domElement).render(
+    <HashRouter>
+      <Routes>
+        <Route path="/">
+          <Route index element={<Multi />} />
+          <Route path=":id" element={<Single />} />
+        </Route>
+      </Routes>
+    </HashRouter>
+  );
+} else {
   render(
-    <App />,
-    document.getElementById('jlRoot')
+    <HashRouter>
+      <Routes>
+        <Route path="/">
+          <Route index element={<Multi />} />
+          <Route path=":id" element={<Single />} />
+        </Route>
+      </Routes>
+    </HashRouter>
   );
 }
