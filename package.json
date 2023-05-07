@@ -22,7 +22,8 @@
   "author": "Marios Sofokleous",
   "license": "MIT",
   "devDependencies": {
-    "@wordpress/scripts": "^26.2.0"
+    "@wordpress/scripts": "^26.2.0",
+    "dotenv-webpack": "^8.0.1"
   },
   "dependencies": {
     "react-router-dom": "^6.11.1",
