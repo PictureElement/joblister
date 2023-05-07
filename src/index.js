@@ -1,5 +1,5 @@
-import Multi from './routes/Multi';
 import Single from './routes/Single';
+import Multiple from './routes/Multiple';
 import './index.scss';
 import { createRoot, render } from '@wordpress/element';
 import { HashRouter, Routes, Route } from "react-router-dom";
@@ -14,7 +14,7 @@ if (createRoot) {
         <HashRouter>
           <Routes>
             <Route path="/">
-              <Route index element={<Multi />} />
+              <Route index element={<Multiple />} />
               <Route path=":id" element={<Single />} />
             </Route>
           </Routes>
@@ -29,7 +29,7 @@ if (createRoot) {
         <HashRouter>
           <Routes>
             <Route path="/">
-              <Route index element={<Multi />} />
+              <Route index element={<Multiple />} />
               <Route path=":id" element={<Single />} />
             </Route>
           </Routes>
