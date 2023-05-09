@@ -1,6 +1,12 @@
+import JobItem from "./JobItem";
+
 function JobList() {
   return (
-    <div>JobList</div>
+    <ul className="jl-job-list">
+      <JobItem />
+      <JobItem />
+      <JobItem />
+    </ul>
   )
 }
 
