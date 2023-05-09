@@ -7,6 +7,7 @@ import {
   allTypesState,
   allExperienceLevelsState
 } from '../recoil-state';
+import JobList from '../components/JobList';
 
 function Multiple() {
   /**
@@ -95,7 +96,11 @@ function Multiple() {
   }, []); // An empty array means it only runs once (after the component is mounted).
 
   return (
-    <div>Multiple</div>
+    <div className="jl-multiple">
+      <div className="jl-multiple__one">
+        <JobList />
+      </div>
+    </div>
   )
 }
 
