@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { RecoilRoot } from 'recoil';
+import { RecoilRoot, useSetRecoilState } from 'recoil';
 import { Outlet } from "react-router-dom";
 import {
   allJobsState,
@@ -15,6 +15,11 @@ function App() {
    * Notes:
    * - Use useSetRecoilState() when a component intends to write to state without reading it.
    */
+  const setAllJobs = useSetRecoilState(allJobsState);
+  const setAllLocations = useSetRecoilState(allLocationsState);
+  const setAllCategories = useSetRecoilState(allCategoriesState);
+  const setAllTypes = useSetRecoilState(allTypesState);
+  const setAllExperienceLevels = useSetRecoilState(allExperienceLevelsState);
   const [endpointJobs] = useState(
     process.env.APP_ENV === 'dev' ?
     process.env.APP_BASE_URL_DEV + process.env.APP_ENDPOINT_JOBS :
@@ -40,7 +45,7 @@ function App() {
     process.env.APP_BASE_URL_DEV + process.env.APP_ENDPOINT_EXPERIENCE_LEVELS :
     process.env.APP_BASE_URL_PROD + process.env.APP_ENDPOINT_EXPERIENCE_LEVELS
   );
-
+  
   return (
     <RecoilRoot>
       {endpointJobs}<br />
