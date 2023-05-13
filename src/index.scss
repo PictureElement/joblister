@@ -1,3 +1,82 @@
-h1 {
-  color: lime;
+@import "settings";
+
+#jlRoot .jl-job-list {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  li:not(:last-child) {
+    margin-bottom: 1rem;
+  }
 }
+
+#jlRoot .jl-job-item {
+  &__link {
+    border: 1px solid $border-color;
+    display: block;
+    will-change: transform;
+    transition: transform 200ms ease-out;
+    &:hover {
+      transform: translateX(-4px);
+      .jl-job-item__title {
+        color: $accent;
+      }
+    }
+  }
+  &__table {
+    display: table;
+    width: 100%;
+    padding: 12px 0;
+  }
+  &__row {
+    display: table-row;
+  }
+  &__job {
+    display: table-cell;
+    width: 40%;
+    border-inline-end: 1px solid $border-color;
+    padding: 0 12px;
+  }
+  &__title {
+    @include font-family;
+    font-size: 18px;
+    font-weight: 600;
+    color: $on-surface-primary;
+    transition: color 200ms ease-out;
+  }
+  &__subtitle {
+    @include font-family;
+    font-size: 14px;
+    font-weight: 14px;
+    color: $on-surface-secondary;
+  }
+  &__category {
+    @include font-family;
+    font-size: 14px;
+    font-weight: 400;
+    display: table-cell;
+    width: 30%;
+    border-inline-end: 1px solid $border-color;
+    color: $on-surface-secondary;
+    padding: 0 12px;
+  }
+  &__location {
+    @include font-family;
+    font-size: 14px;
+    font-weight: 400;
+    display: table-cell;
+    width: 15%;
+    border-inline-end: 1px solid $border-color;
+    color: $on-surface-secondary;
+    padding: 0 12px;
+  }
+  &__type {
+    @include font-family;
+    font-size: 14px;
+    font-weight: 400;
+    display: table-cell;
+    width: 15%;
+    color: $on-surface-secondary;
+    padding: 0 12px;
+  }
+}
+

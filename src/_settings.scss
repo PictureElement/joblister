@@ -1,0 +1,30 @@
+// Typography
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+$google-font-family: 'Poppins', sans-serif;
+$system-font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+
+$font-choice: google; // 'system' or 'google'
+
+@mixin font-family {
+  @if $font-choice == system {
+    font-family: $system-font-family;
+  } @else if $font-choice == google {
+    font-family: $google-font-family;
+  } @else {
+    font-family: $system-font-family;
+  }
+}
+
+// Colors
+$surface: #fff;
+$on-surface-primary: #202124;
+$on-surface-secondary: #5f6368;
+$accent: #1a73e8;
+$border-color: #dadce0;
+
+// Links
+$link-color: currentcolor;
+$link-decoration: underline;
+$link-hover-color: currentcolor;
+$link-hover-decoration: none;
