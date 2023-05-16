@@ -6,6 +6,9 @@ function JobList() {
       <JobItem />
       <JobItem />
       <JobItem />
+      <JobItem />
+      <JobItem />
+      <JobItem />
     </ul>
   )
 }
