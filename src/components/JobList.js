@@ -12,6 +12,7 @@ function JobList() {
   const jobItems = filteredJobs.map(job =>
     <JobItem
       key={job.id}
+      id={job.id}
       modifiedGMT={job.modified_gmt}
       title={job.title}
       content={job.content}
