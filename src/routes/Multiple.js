@@ -12,7 +12,6 @@ import JobList from '../components/JobList';
 function Multiple() {
   /**
    * State variables
-   * Notes:
    * - Use useSetRecoilState() when a component intends to write to state without reading it.
    */
   const setAllJobs = useSetRecoilState(allJobsState);

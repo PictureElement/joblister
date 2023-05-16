@@ -28,10 +28,22 @@ const allExperienceLevelsState = atom({
   default: []
 });
 
+/**
+ * Selectors
+ */
+const filteredJobsState = selector({
+  key: "filteredJobsState",
+  get: ({ get }) => {
+    let list = get(allJobsState);
+    return list;
+  },
+})
+
 export {
   allJobsState,
   allLocationsState,
   allCategoriesState,
   allTypesState,
-  allExperienceLevelsState
+  allExperienceLevelsState,
+  filteredJobsState
 };
