@@ -13,13 +13,11 @@ function JobList() {
     <JobItem
       key={job.id}
       id={job.id}
-      modifiedGMT={job.modified_gmt}
+      modifiedGmt={job.modified_gmt}
       title={job.title}
-      content={job.content}
-      location={job.location}
-      category={job.category}
-      type={job.type}
-      experienceLevel={job.experience_level}
+      location={job.location.name}
+      category={job.category.name}
+      experienceLevel={job.experience_level.name}
     />
   );
 

@@ -27,6 +27,8 @@
   },
   "dependencies": {
     "dompurify": "^3.0.3",
+    "moment": "^2.29.4",
+    "moment-timezone": "^0.5.43",
     "react-router-dom": "^6.11.1",
     "recoil": "^0.7.7"
   }
