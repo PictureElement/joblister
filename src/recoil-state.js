@@ -34,7 +34,7 @@ const allExperienceLevelsState = atom({
 const filteredJobsState = selector({
   key: "filteredJobsState",
   get: ({ get }) => {
-    let list = get(allJobsState);
+    const list = get(allJobsState);
     return list;
   },
 })

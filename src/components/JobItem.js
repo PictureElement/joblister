@@ -15,7 +15,7 @@ const calculateTimeAgo = (modifiedGmt) => {
 };
 
 function JobItem(props) {
-
+  // Props
   const id = props.id;
   const updatedTimeAgo = calculateTimeAgo(props.modifiedGmt);
   const title = { __html: DOMPurify.sanitize(props.title) };
@@ -24,7 +24,7 @@ function JobItem(props) {
   const location = props.location;
   const category = props.category;
   const experienceLevel = props.experienceLevel;
-  
+
   return (
     <li className="jl-job-item">
       <Link to={`${idDashSlug}`} className="jl-job-item__link">

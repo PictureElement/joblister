@@ -46,6 +46,7 @@ function App() {
     process.env.APP_BASE_URL_DEV + process.env.APP_ENDPOINT_EXPERIENCE_LEVELS :
     process.env.APP_BASE_URL_PROD + process.env.APP_ENDPOINT_EXPERIENCE_LEVELS
   );
+  const [loading, setLoading] = useState(true);
 
   async function getData() {
     try {
@@ -87,6 +88,9 @@ function App() {
       const data5 = await response5.json();
       // Filter out experience levels with a count of 0
       setAllExperienceLevels(data5.filter(experienceLevel => experienceLevel.count > 0));
+
+      // Set loading to false once data fetching is complete
+      setLoading(false);
     } catch (error) {
       console.error(error);
     }
@@ -95,6 +99,11 @@ function App() {
   useEffect(() => {
     getData();
   }, []); // An empty array means it only runs once (after the component is mounted).
+
+  // Render loading state while data is being fetched
+  if (loading) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <HashRouter>
