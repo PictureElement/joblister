@@ -30,6 +30,7 @@
     "moment": "^2.29.4",
     "moment-timezone": "^0.5.43",
     "react-router-dom": "^6.11.1",
+    "react-slugify": "^3.0.2",
     "recoil": "^0.7.7"
   }
 }
