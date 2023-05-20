@@ -1,13 +1,13 @@
 import { useParams } from 'react-router-dom';
 
 function Single() {
+
   // Get the id and slug parameters from the URL.
-  const { id, slug } = useParams();
+  const { idDashSlug} = useParams();
 
   return (
     <div>
-      <div>Job ID: {id}</div>
-      <div>Slug: {slug}</div>
+      <div>id-slug: {idDashSlug}</div>
     </div>
   )
 }

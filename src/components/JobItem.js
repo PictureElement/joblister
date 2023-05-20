@@ -20,13 +20,14 @@ function JobItem(props) {
   const updatedTimeAgo = calculateTimeAgo(props.modifiedGmt);
   const title = { __html: DOMPurify.sanitize(props.title) };
   const slug = slugify(props.title);
+  const idDashSlug = `${id}-${slug}`;
   const location = props.location;
   const category = props.category;
   const experienceLevel = props.experienceLevel;
   
   return (
     <li className="jl-job-item">
-      <Link to={`/${id}/${slug}`} className="jl-job-item__link">
+      <Link to={`${idDashSlug}`} className="jl-job-item__link">
         <div className="jl-job-item__table">
           <div className="jl-job-item__row">
             <div className="jl-job-item__job">
