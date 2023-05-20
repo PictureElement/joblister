@@ -26,7 +26,7 @@ function JobItem(props) {
   
   return (
     <li className="jl-job-item">
-      <Link to={`/${id}-${slug}`} className="jl-job-item__link">
+      <Link to={`/${id}/${slug}`} className="jl-job-item__link">
         <div className="jl-job-item__table">
           <div className="jl-job-item__row">
             <div className="jl-job-item__job">

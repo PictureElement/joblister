@@ -14,7 +14,7 @@ if (createRoot) {
         <Routes>
           <Route path="/" element={<App />}>
             <Route index element={<Multiple />} />
-            <Route path=":id" element={<Single />} />
+            <Route path=":id/:slug" element={<Single />} />
           </Route>
         </Routes>
       </HashRouter>
