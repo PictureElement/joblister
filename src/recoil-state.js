@@ -28,6 +28,11 @@ const allExperienceLevelsState = atom({
   default: []
 });
 
+const selectedJobIdState = selector({
+  key: "selectedJobId",
+  default: null
+});
+
 /**
  * Selectors
  */
@@ -39,11 +44,22 @@ const filteredJobsState = selector({
   },
 })
 
+const selectedJobState = selector({
+  key: 'selectedJobState',
+  get: ({ get }) => {
+    const selectedJobId = get(selectedJobIdState);
+    const allJobs = get(allJobsState);
+    return allJobs.find((job) => job.id === selectedJobId) || null;
+  },
+});
+
 export {
   allJobsState,
   allLocationsState,
   allCategoriesState,
   allTypesState,
   allExperienceLevelsState,
-  filteredJobsState
+  selectedJobIdState,
+  filteredJobsState,
+  selectedJobState
 };
