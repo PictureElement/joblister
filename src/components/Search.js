@@ -1,5 +1,5 @@
 import { useRecoilState, useSetRecoilState } from 'recoil';
-import { searchQueryState, locationFiltersState, categoryFiltersState } from '../recoil-state';
+import { searchQueryState, locationFiltersState, categoryFiltersState, typeFiltersState } from '../recoil-state';
 
 function Search() {
   /**
@@ -9,12 +9,14 @@ function Search() {
    */
   const setLocationFilters = useSetRecoilState(locationFiltersState);
   const setCategoryFilters = useSetRecoilState(categoryFiltersState);
+  const setTypeFilters = useSetRecoilState(typeFiltersState);
   const [searchQuery, setSearchQuery] = useRecoilState(searchQueryState);
 
   function handleChange(e) {
     // Clear all filters
     setLocationFilters([]);
     setCategoryFilters([]);
+    setTypeFilters([]);
     // Update search query
     setSearchQuery(e.target.value);
   }

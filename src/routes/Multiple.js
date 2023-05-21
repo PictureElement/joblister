@@ -2,7 +2,7 @@ import JobList from '../components/JobList';
 import Search from '../components/Search';
 import SelectMulti from '../components/SelectMulti';
 import { useRecoilValue, useRecoilState, useSetRecoilState } from 'recoil';
-import { allLocationsState, locationFiltersState, allCategoriesState, categoryFiltersState, searchQueryState } from '../recoil-state';
+import { allLocationsState, locationFiltersState, allCategoriesState, categoryFiltersState, allTypesState, typeFiltersState, searchQueryState } from '../recoil-state';
 
 function Multiple() {
   /**
@@ -15,6 +15,8 @@ function Multiple() {
   const [locationFilters, setLocationFilters] = useRecoilState(locationFiltersState);
   const allCategories = useRecoilValue(allCategoriesState);
   const [categoryFilters, setCategoryFilters] = useRecoilState(categoryFiltersState);
+  const allTypes = useRecoilValue(allTypesState);
+  const [typeFilters, setTypeFilters] = useRecoilState(typeFiltersState);
   const setSearchQuery = useSetRecoilState(searchQueryState);
 
   function handleFilterChange(filterState, setFilterState, actionType) {
@@ -48,6 +50,10 @@ function Multiple() {
   const handleCategoryChange = (_, actionType) => {
     handleFilterChange(categoryFilters, setCategoryFilters, actionType);
   }
+
+  const handleTypeChange = (_, actionType) => {
+    handleFilterChange(typeFilters, setTypeFilters, actionType);
+  }
   
   return (
     <div className="jl-multiple">
@@ -66,6 +72,12 @@ function Multiple() {
           placeholder="--Category--"
           handleChange={handleCategoryChange}
           options={allCategories} 
+        />
+        <SelectMulti
+          value={typeFilters}
+          placeholder="--Type--"
+          handleChange={handleTypeChange}
+          options={allTypes} 
         />
       </div>
       <div className="jl-multiple__three">

@@ -43,6 +43,11 @@ const categoryFiltersState = atom({
   default: []
 });
 
+const typeFiltersState = atom({
+  key: "typeFiltersState",
+  default: []
+});
+
 /**
  * Selectors
  */
@@ -54,6 +59,8 @@ const filteredJobsState = selector({
     const locationFiltersIds = locationFilters.map(location => location.id);
     const categoryFilters = get(categoryFiltersState);
     const categoryFiltersIds = categoryFilters.map(category => category.id);
+    const typeFilters = get(typeFiltersState);
+    const typeFiltersIds = typeFilters.map(type => type.id);
     let jobList = get(allJobsState);
 
     if (searchQuery) {
@@ -73,6 +80,11 @@ const filteredJobsState = selector({
       jobList = jobList.filter(job => categoryFiltersIds.includes(job.category.id));
     }
 
+    if (typeFiltersIds.length) {
+      // Include the job if its ID is included in the typeFilterIds
+      jobList = jobList.filter(job => typeFiltersIds.includes(job.type.id));
+    }
+
     return jobList;
   },
 })
@@ -86,5 +98,6 @@ export {
   searchQueryState,
   locationFiltersState,
   categoryFiltersState,
+  typeFiltersState,
   filteredJobsState
 };
