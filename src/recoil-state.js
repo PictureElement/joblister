@@ -33,6 +33,11 @@ const searchQueryState = atom({
   default: ''
 });
 
+const locationFiltersState = atom({
+  key: "locationFiltersState",
+  default: []
+});
+
 const categoryFiltersState = atom({
   key: "categoryFiltersState",
   default: []
@@ -45,6 +50,8 @@ const filteredJobsState = selector({
   key: "filteredJobsState",
   get: ({ get }) => {
     const searchQuery = get(searchQueryState);
+    const locationFilters = get(locationFiltersState);
+    const locationFiltersIds = locationFilters.map(location => location.id);
     const categoryFilters = get(categoryFiltersState);
     const categoryFiltersIds = categoryFilters.map(category => category.id);
     let jobList = get(allJobsState);
@@ -54,6 +61,11 @@ const filteredJobsState = selector({
       jobList = jobList.filter((job) => (job.title).toLowerCase().includes(searchQuery.toLocaleLowerCase()));
       // Return the list since search cancels filtration.
       return jobList;
+    }
+
+    if (locationFiltersIds.length) {
+      // Include the job if its ID is included in the locationFilterIds
+      jobList = jobList.filter(job => locationFiltersIds.includes(job.location.id));
     }
 
     if (categoryFiltersIds.length) {
@@ -72,6 +84,7 @@ export {
   allTypesState,
   allExperienceLevelsState,
   searchQueryState,
+  locationFiltersState,
   categoryFiltersState,
   filteredJobsState
 };
