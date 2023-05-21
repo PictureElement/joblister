@@ -28,13 +28,27 @@ const allExperienceLevelsState = atom({
   default: []
 });
 
+const searchQueryState = atom({
+  key: "searchQueryState",
+  default: ''
+});
+
 /**
  * Selectors
  */
 const filteredJobsState = selector({
   key: "filteredJobsState",
   get: ({ get }) => {
-    const list = get(allJobsState);
+    const searchQuery = get(searchQueryState);
+    let list = get(allJobsState);
+
+    if (searchQuery) {
+      // Make string comparisons case-insensitive by converting to lowercase
+      list = list.filter((item) => (item.title).toLowerCase().includes(searchQuery.toLocaleLowerCase()));
+      // Return the list since search cancels filtration.
+      return list;
+    }
+
     return list;
   },
 })
@@ -45,5 +59,6 @@ export {
   allCategoriesState,
   allTypesState,
   allExperienceLevelsState,
+  searchQueryState,
   filteredJobsState
 };
