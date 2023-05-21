@@ -1,14 +1,19 @@
 import { useRecoilState, useSetRecoilState } from 'recoil';
-import { searchQueryState } from '../recoil-state';
+import { searchQueryState, categoryFiltersState } from '../recoil-state';
 
 function Search() {
   /**
    * State variables
+   * - Use useSetRecoilState() when a component intends to write to state without reading it.
    * - Use useRecoilState() when a component intends to read and write state.
    */
+  const setCategoryFilters = useSetRecoilState(categoryFiltersState);
   const [searchQuery, setSearchQuery] = useRecoilState(searchQueryState);
 
   function handleChange(e) {
+    // Clear category filters
+    setCategoryFilters([]);
+    // Update search query
     setSearchQuery(e.target.value);
   }
 
