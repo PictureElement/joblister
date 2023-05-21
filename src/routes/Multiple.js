@@ -2,7 +2,17 @@ import JobList from '../components/JobList';
 import Search from '../components/Search';
 import SelectMulti from '../components/SelectMulti';
 import { useRecoilValue, useRecoilState, useSetRecoilState } from 'recoil';
-import { allLocationsState, locationFiltersState, allCategoriesState, categoryFiltersState, allTypesState, typeFiltersState, searchQueryState } from '../recoil-state';
+import {
+  allLocationsState,
+  locationFiltersState,
+  allCategoriesState,
+  categoryFiltersState,
+  allTypesState,
+  typeFiltersState,
+  allExperienceLevelsState,
+  experienceLevelFiltersState,
+  searchQueryState
+} from '../recoil-state';
 
 function Multiple() {
   /**
@@ -17,6 +27,8 @@ function Multiple() {
   const [categoryFilters, setCategoryFilters] = useRecoilState(categoryFiltersState);
   const allTypes = useRecoilValue(allTypesState);
   const [typeFilters, setTypeFilters] = useRecoilState(typeFiltersState);
+  const allExperienceLevels = useRecoilValue(allExperienceLevelsState);
+  const [experienceLevelFilters, setExperienceLevelFilters] = useRecoilState(experienceLevelFiltersState);
   const setSearchQuery = useSetRecoilState(searchQueryState);
 
   function handleFilterChange(filterState, setFilterState, actionType) {
@@ -54,6 +66,10 @@ function Multiple() {
   const handleTypeChange = (_, actionType) => {
     handleFilterChange(typeFilters, setTypeFilters, actionType);
   }
+
+  const handleExperienceLevelChange = (_, actionType) => {
+    handleFilterChange(experienceLevelFilters, setExperienceLevelFilters, actionType);
+  }
   
   return (
     <div className="jl-multiple">
@@ -78,6 +94,12 @@ function Multiple() {
           placeholder="--Type--"
           handleChange={handleTypeChange}
           options={allTypes} 
+        />
+        <SelectMulti
+          value={experienceLevelFilters}
+          placeholder="--Experience--"
+          handleChange={handleExperienceLevelChange}
+          options={allExperienceLevels} 
         />
       </div>
       <div className="jl-multiple__three">

@@ -48,6 +48,11 @@ const typeFiltersState = atom({
   default: []
 });
 
+const experienceLevelFiltersState = atom({
+  key: "experienceLevelFiltersState",
+  default: []
+});
+
 /**
  * Selectors
  */
@@ -61,6 +66,8 @@ const filteredJobsState = selector({
     const categoryFiltersIds = categoryFilters.map(category => category.id);
     const typeFilters = get(typeFiltersState);
     const typeFiltersIds = typeFilters.map(type => type.id);
+    const experienceLevelFilters = get(experienceLevelFiltersState);
+    const experienceLevelFiltersIds = experienceLevelFilters.map(experienceLevel => experienceLevel.id);
     let jobList = get(allJobsState);
 
     if (searchQuery) {
@@ -85,6 +92,11 @@ const filteredJobsState = selector({
       jobList = jobList.filter(job => typeFiltersIds.includes(job.type.id));
     }
 
+    if (experienceLevelFiltersIds.length) {
+      // Include the job if its ID is included in the experienceLevelFiltersIds
+      jobList = jobList.filter(job => experienceLevelFiltersIds.includes(job.experience_level.id));
+    }
+
     return jobList;
   },
 })
@@ -99,5 +111,6 @@ export {
   locationFiltersState,
   categoryFiltersState,
   typeFiltersState,
+  experienceLevelFiltersState,
   filteredJobsState
 };
