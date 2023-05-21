@@ -17,52 +17,36 @@ function Multiple() {
   const [categoryFilters, setCategoryFilters] = useRecoilState(categoryFiltersState);
   const setSearchQuery = useSetRecoilState(searchQueryState);
 
-  function handleLocationChange(_, actionType) {
+  function handleFilterChange(filterState, setFilterState, actionType) {
     // Clear search
     setSearchQuery('');
-
+  
     if (actionType.action === 'clear') {
-      // Clear location filters
-      setLocationFilters([]);
+      // Clear filters
+      setFilterState([]);
     }
-
+  
     if (actionType.action === 'select-option') {
-      setLocationFilters([...locationFilters, actionType.option]);
+      setFilterState([...filterState, actionType.option]);
     }
-
+  
     if (actionType.action === 'remove-value') {
       // Make a shallow copy of the array
-      let updatedLocationFilters = [...locationFilters];
-      const index = locationFilters.indexOf(actionType.removedValue);
+      let updatedFilters = [...filterState];
+      const index = filterState.indexOf(actionType.removedValue);
       // Remove filter
-      updatedLocationFilters.splice(index, 1);
+      updatedFilters.splice(index, 1);
       // Set state
-      setLocationFilters(updatedLocationFilters);
+      setFilterState(updatedFilters);
     }
   }
 
-  function handleCategoryChange(_, actionType) {
-    // Clear search
-    setSearchQuery('');
-
-    if (actionType.action === 'clear') {
-      // Clear category filters
-      setCategoryFilters([]);
-    }
-
-    if (actionType.action === 'select-option') {
-      setCategoryFilters([...categoryFilters, actionType.option]);
-    }
-
-    if (actionType.action === 'remove-value') {
-      // Make a shallow copy of the array
-      let updatedCategoryFilters = [...categoryFilters];
-      const index = categoryFilters.indexOf(actionType.removedValue);
-      // Remove filter
-      updatedCategoryFilters.splice(index, 1);
-      // Set state
-      setCategoryFilters(updatedCategoryFilters);
-    }
+  const handleLocationChange = (_, actionType) => {
+    handleFilterChange(locationFilters, setLocationFilters, actionType);
+  }
+  
+  const handleCategoryChange = (_, actionType) => {
+    handleFilterChange(categoryFilters, setCategoryFilters, actionType);
   }
   
   return (
