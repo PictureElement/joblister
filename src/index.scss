@@ -1,5 +1,62 @@
 @import "settings";
 
+// Typescale
+//
+#jlRoot h1,
+#jlRoot .jl-text-size-h1,
+#jlRoot h2,
+#jlRoot .jl-text-size-h2,
+#jlRoot h3,
+#jlRoot .jl-text-size-h3,
+#jlRoot h4,
+#jlRoot .jl-text-size-h4,
+#jlRoot p,
+#jlRoot .jl-text-size-p,
+#jlRoot small,
+#jlRoot .jl-text-size-small {
+  @include font-family;
+  margin: 0;
+  font-weight: 400;
+}
+
+#jlRoot h1,
+#jlRoot .jl-text-size-h1 {
+  font-size: 32px;
+  line-height: 40px;
+}
+
+#jlRoot h2,
+#jlRoot .jl-text-size-h2 {
+  font-size: 24px;
+  line-height: 28px;
+}
+
+#jlRoot h3,
+#jlRoot .jl-text-size-h3 {
+  font-size: 20px;
+  line-height: 24px;
+}
+
+#jlRoot h4,
+#jlRoot .jl-text-size-h4 {
+  font-size: 16px;
+  line-height: 20px;
+}
+
+#jlRoot p,
+#jlRoot .jl-text-size-p {
+  font-size: 16px;
+  line-height: 24px;
+}
+
+#jlRoot small,
+#jlRoot .jl-text-size-small {
+  font-size: 12px;
+  line-height: 16px;
+}
+
+// Job List Component
+//
 #jlRoot .jl-job-list {
   list-style-type: none;
   padding: 0;
@@ -9,6 +66,8 @@
   }
 }
 
+// Job Item Component
+//
 #jlRoot .jl-job-item {
   &__link {
     border: 1px solid $border-color;
@@ -24,59 +83,170 @@
   }
   &__table {
     display: table;
+    table-layout: fixed;
     width: 100%;
     padding: 12px 0;
+    @media (max-width: 767px) {
+      display: block;
+    }
   }
   &__row {
     display: table-row;
+    @media (max-width: 767px) {
+      display: block;
+      // Clearfix
+      &::after {
+        display: block;
+        clear: both;
+        content: "";
+      }
+    }
   }
   &__job {
     display: table-cell;
-    width: 40%;
+    width: 35%;
     border-inline-end: 1px solid $border-color;
     padding: 0 12px;
+    @media (max-width: 767px) {
+      width: 100%;
+      display: block;
+      margin-bottom: 12px;
+      border-width: 0;
+    }
   }
   &__title {
-    @include font-family;
-    font-size: 18px;
-    font-weight: 600;
-    color: $on-surface-primary;
+    color: $text-primary;
     transition: color 200ms ease-out;
+    font-weight: 500;
+    margin-bottom: 4px;
   }
   &__subtitle {
-    @include font-family;
-    font-size: 14px;
-    font-weight: 14px;
-    color: $on-surface-secondary;
+    color: $text-secondary;
   }
   &__category {
-    @include font-family;
-    font-size: 14px;
-    font-weight: 400;
+    overflow: hidden;
+    vertical-align: top;
     display: table-cell;
-    width: 30%;
+    width: 25%;
     border-inline-end: 1px solid $border-color;
-    color: $on-surface-secondary;
+    color: $text-primary;
     padding: 0 12px;
+    @media (max-width: 767px) {
+      width: 100%;
+      display: block;
+      padding-bottom: 12px;
+      margin-bottom: 12px;
+      border-inline-end-width: 0;
+      border-bottom: 1px solid $border-color;
+    }
   }
   &__location {
-    @include font-family;
-    font-size: 14px;
-    font-weight: 400;
+    overflow: hidden;
+    vertical-align: top;
     display: table-cell;
-    width: 15%;
+    width: 25%;
     border-inline-end: 1px solid $border-color;
-    color: $on-surface-secondary;
-    padding: 0 12px;
+    color: $text-primary;
+    padding-inline-start: 34px;
+    padding-inline-end: 12px;
+    position: relative;
+    &::before {
+      content: '';
+      display: block;
+      background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" height="18px" viewBox="0 0 24 24" width="18px" fill="%23000000"><path d="M0 0h24v24H0z" fill="none"/><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>');
+      width: 18px;
+      height: 18px;
+      position: absolute;
+      top: 1px;
+      inset-inline-start: 12px;
+    }
+    @media (max-width: 767px) {
+      width: 50%;
+      display: block;
+      float: left;
+      border-width: 0;
+    }
   }
   &__type {
-    @include font-family;
-    font-size: 14px;
-    font-weight: 400;
+    overflow: hidden;
+    vertical-align: top;
     display: table-cell;
-    width: 15%;
-    color: $on-surface-secondary;
+    width: 20%;
+    color: $text-primary;
     padding: 0 12px;
+    @media (max-width: 767px) {
+      width: 50%;
+      display: block;
+      float: right;
+    }
   }
 }
 
+// Single Component
+//
+#jlRoot .jl-single {
+  display: flex;
+  &__left {
+    width: 75%;
+  }
+  &__right {
+    width: 25%;
+  }
+  &__title {
+    color: $text-primary;
+    font-weight: 500;
+    margin-bottom: 16px;
+  }
+  &__content {
+    color: $text-primary;
+    h2 {
+      font-size: 24px;
+      line-height: 28px;
+      font-weight: 400;
+      padding-top: 12px;
+      margin-bottom: 16px;
+    }
+    h3 {
+      font-size: 20px;
+      line-height: 24px;
+      font-weight: 400;
+      padding-top: 12px;
+      margin-bottom: 16px;
+    }
+    h4 {
+      font-size: 16px;
+      line-height: 20px;
+      font-weight: 400;
+      padding-top: 12px;
+      margin-bottom: 16px;
+    }
+    p {
+      font-size: 16px;
+      line-height: 24px;
+      font-weight: 300;
+      margin-bottom: 16px;
+    }
+    ul, ol {
+      margin-bottom: 16px;
+    }
+    li {
+      @include font-family;
+      font-size: 16px;
+      line-height: 24px;
+      font-weight: 300;
+    }
+    a {
+      color: $accent;
+      text-decoration: underline;
+      &:hover {
+        text-decoration: none;
+      }
+    }
+  }
+}
+
+// Helpers
+//
+.jl-d-inline-block {
+  display: inline-block;
+}

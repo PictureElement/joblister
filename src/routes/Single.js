@@ -25,8 +25,15 @@ function Single() {
 
   return (
     <div className="jl-single">
-      <h1 className="jl-single__title" dangerouslySetInnerHTML={ title }></h1>
-      <div className="jl-single__content" dangerouslySetInnerHTML={ content }></div>
+      <div className="jl-single__left">
+        <div className="jl-single__header">
+          <h1 className="jl-single__title jl-text-size-h1" dangerouslySetInnerHTML={ title }></h1>
+        </div>
+        <div className="jl-single__content" dangerouslySetInnerHTML={ content }></div>
+      </div>
+      <div className="jl-single__right">
+        Sidebar
+      </div>
     </div>
   )
 }
