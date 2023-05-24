@@ -1,5 +1,6 @@
 import { useRecoilState, useSetRecoilState } from 'recoil';
 import { searchQueryState, locationFiltersState, categoryFiltersState, typeFiltersState, experienceLevelFiltersState } from '../recoil-state';
+import { ReactComponent as SearchIcon } from '../icons/search.svg';
 
 function Search() {
   /**
@@ -25,11 +26,12 @@ function Search() {
 
   return (
     <div className="jl-search">
-      <label htmlFor="jlSearchInput" className="sr-only">Search for jobs by title or keyword</label>
-      <div className="jl-search__input-wrapper">
+      <div className="jl-search__label">
+        <div className="sr-only">Search for jobs by title or keyword</div>
+        <SearchIcon />
         <input
+          autoComplete="off"
           value={searchQuery}
-          id="jlSearchInput"
           aria-label="Search for jobs by title or keyword"
           placeholder="Search for jobs by title or keyword"
           className="jl-search__input"
