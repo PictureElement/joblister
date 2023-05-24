@@ -76,30 +76,30 @@ function Multiple() {
       <div className="jl-multiple__one">
         <Search />
       </div>
-      <div className="jl-multiple__two">
+      <div className="jl-multiple__filters">
         <SelectMulti
           value={locationFilters}
           placeholder="--Location--"
           handleChange={handleLocationChange}
-          options={allLocations} 
+          options={allLocations}
         />
         <SelectMulti
           value={categoryFilters}
           placeholder="--Category--"
           handleChange={handleCategoryChange}
-          options={allCategories} 
+          options={allCategories}
         />
         <SelectMulti
           value={typeFilters}
           placeholder="--Type--"
           handleChange={handleTypeChange}
-          options={allTypes} 
+          options={allTypes}
         />
         <SelectMulti
           value={experienceLevelFilters}
           placeholder="--Experience--"
           handleChange={handleExperienceLevelChange}
-          options={allExperienceLevels} 
+          options={allExperienceLevels}
         />
       </div>
       <div className="jl-multiple__three">

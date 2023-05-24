@@ -10,6 +10,8 @@ function SelectMulti(props) {
       options={props.options}
       getOptionValue={(option) => `${option['id']}`}
       getOptionLabel={(option) => `${option['name']}`}
+      className="jl-select"
+      classNamePrefix="jl-select"
     />
   )
 }

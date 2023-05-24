@@ -182,6 +182,17 @@
   }
 }
 
+// Multiple Component
+//
+#jlRoot .jl-multiple {
+  &__filters {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+    margin: 32px 0;
+  }
+}
+
 // Single Component
 //
 #jlRoot .jl-single {
@@ -242,6 +253,63 @@
         text-decoration: none;
       }
     }
+  }
+}
+
+// Select Component
+#jlRoot .jl-select {
+  color: red;
+  &__control {
+    border-color: $border-color;
+    border-radius: 0;
+    &--is-focused {
+      box-shadow: 0 0 0 1px $accent;
+    }
+    &--menu-is-open {
+      box-shadow: 0 0 0 1px $accent;
+    }
+  }
+  &__placeholder {
+    @include font-family;
+    font-size: 16px;
+    line-height: 24px;
+    font-weight: 400;
+    text-transform: uppercase;
+    color: $text-primary;
+  }
+  &__option {
+    @include font-family;
+    font-size: 16px;
+    line-height: 24px;
+    font-weight: 400;
+    color: $text-primary;
+    border-inline-start: 3px solid transparent;
+    &--is-focused {
+      background-color: #f0f0f0;
+      border-inline-start: 3px solid $accent;
+    }
+  }
+  &__multi-value__label {
+    @include font-family;
+    font-size: 16px;
+    line-height: 1;
+    font-weight: 400;
+    color: $text-primary;
+    border-radius: 0;
+  }
+  &__menu {
+    border-radius: 0;
+    background-color: #fff;
+  }
+  &__menu-notice {
+    @include font-family;
+    font-size: 16px;
+    line-height: 24px;
+    font-weight: 400;
+    color: $text-primary;
+  }
+  &__menu-list {
+    padding: 0;
   }
 }
 
