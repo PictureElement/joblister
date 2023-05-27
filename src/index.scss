@@ -329,13 +329,27 @@
       padding-top: 12px;
       margin-bottom: 16px;
     }
-    &-item {
+    &-item-1 {
       padding-bottom: 16px;
       h3 {
         font-weight: 500;
       }
       div {
         font-weight: 300;
+      }
+    }
+    &-item-2 {
+      padding-top: 8px;
+      display: flex;
+      column-gap: 16px;
+      button {
+        transition: transform 200ms ease-out;
+        &:hover {
+          transform: scale(1.05);
+        }
+      }
+      svg {
+        display: block;
       }
     }
   }

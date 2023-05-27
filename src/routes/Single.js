@@ -3,6 +3,16 @@ import { useRecoilValue } from 'recoil';
 import { allJobsState } from '../recoil-state';
 import DOMPurify from 'dompurify';
 import { calculateTimeAgo } from '../utils';
+import {
+  EmailShareButton,
+  FacebookShareButton,
+  LinkedinShareButton,
+  TwitterShareButton,
+  EmailIcon,
+  FacebookIcon,
+  LinkedinIcon,
+  TwitterIcon
+} from "react-share";
 
 function Single() {
   /**
@@ -29,6 +39,7 @@ function Single() {
   const type = job.type.name;
   const experienceLevel = job.experience_level.name;
   
+  const shareUrl = window.location.href;
 
   return (
     <div className="jl-single">
@@ -51,19 +62,19 @@ function Single() {
           <hr className="jl-mobile-only" />
           <div className="jl-single__widget">
             <h2 className="jl-single__widget-title jl-text-size-h2">Job details</h2>
-            <div className="jl-single__widget-item">
+            <div className="jl-single__widget-item-1">
               <h3 className="jl-text-size-p">Location</h3>
               <div className="jl-text-size-p">{location}</div>
             </div>
-            <div className="jl-single__widget-item">
+            <div className="jl-single__widget-item-1">
               <h3 className="jl-text-size-p">Category</h3>
               <div className="jl-text-size-p">{category}</div>
             </div>
-            <div className="jl-single__widget-item">
+            <div className="jl-single__widget-item-1">
               <h3 className="jl-text-size-p">Type</h3>
               <div className="jl-text-size-p">{type}</div>
             </div>
-            <div className="jl-single__widget-item">
+            <div className="jl-single__widget-item-1">
               <h3 className="jl-text-size-p">Experience</h3>
               <div className="jl-text-size-p">{experienceLevel}</div>
             </div>
@@ -71,6 +82,20 @@ function Single() {
           <hr />
           <div className="jl-single__widget">
             <h2 className="jl-single__widget-title jl-text-size-h2">Share this job</h2>
+            <div className="jl-single__widget-item-2">
+              <FacebookShareButton url={shareUrl}>
+                <FacebookIcon size={32} />
+              </FacebookShareButton>
+              <LinkedinShareButton url={shareUrl}>
+                <LinkedinIcon size={32} />
+              </LinkedinShareButton>
+              <TwitterShareButton url={shareUrl}>
+                <TwitterIcon size={32} />
+              </TwitterShareButton>
+              <EmailShareButton url={shareUrl}>
+                <EmailIcon size={32} />
+              </EmailShareButton>
+            </div>
           </div>
         </div>
       </div>
