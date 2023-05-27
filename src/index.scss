@@ -55,6 +55,13 @@
   line-height: 16px;
 }
 
+#jlRoot hr {
+  border: 0;
+  height: 1px;
+  margin: 16px 0;
+  background-color: $accent;
+}
+
 // Job List Component
 //
 #jlRoot .jl-job-list {
@@ -199,17 +206,77 @@
 // Single Component
 //
 #jlRoot .jl-single {
-  display: flex;
-  &__left {
-    width: 75%;
-  }
-  &__right {
-    width: 25%;
+  &__header {
+    padding-bottom: 40px;
+    display: flex;
+    column-gap: 80px;
+    border-bottom: 1px solid $accent;
+    &-left {
+      width: 75%;
+      @media (max-width: 767px) {
+        width: 100%;
+        margin-bottom: 40px;
+      }
+    }
+    &-right {
+      width: 25%;
+      @media (max-width: 767px) {
+        width: 100%;
+      }
+    }
+    @media (max-width: 767px) {
+      flex-direction: column;
+    }
   }
   &__title {
     color: $text-primary;
     font-weight: 500;
-    margin-bottom: 16px;
+    margin-bottom: 8px;
+  }
+  &__subtitle {
+    color: $text-secondary;
+  }
+  &__apply {
+    background-color: $accent;
+    @include font-family;
+    font-size: 16px;
+    line-height: 1;
+    font-weight: 400;
+    padding: 16px;
+    display: inline-block;
+    width: 100%;
+    color: $on-accent;
+    text-align: center;
+    margin-top: 12px;
+    transition: transform 200ms ease-out;
+    &:hover {
+      transform: scale(1.05);
+    }
+    @media (max-width: 767px) {
+      width: auto;
+      margin-top: 0;
+      padding: 16px 32px;
+    }
+  }
+  &__body {
+    display: flex;
+    column-gap: 80px;
+    padding-top: 24px;
+    &-left {
+      width: 75%;
+      @media (max-width: 767px) {
+        width: 100%;
+      }
+    }
+    &-right {
+      width: 25%;
+      @media (max-width: 767px) {
+        width: 100%;
+      }
+    }
+    @media (max-width: 767px) {
+      flex-direction: column;
+    }
   }
   &__content {
     color: $text-primary;
@@ -254,6 +321,21 @@
       text-decoration: underline;
       &:hover {
         text-decoration: none;
+      }
+    }
+  }
+  &__widget {
+    &-title {
+      padding-top: 12px;
+      margin-bottom: 16px;
+    }
+    &-item {
+      padding-bottom: 16px;
+      h3 {
+        font-weight: 500;
+      }
+      div {
+        font-weight: 300;
       }
     }
   }
@@ -360,4 +442,18 @@
 //
 .jl-d-inline-block {
   display: inline-block;
+}
+
+.jl-mobile-only {
+  display: none;
+  @media (max-width: 767px) {
+    display: block;
+  }
+}
+
+.jl-desktop-only {
+  display: block;
+  @media (max-width: 767px) {
+    display: none;
+  }
 }

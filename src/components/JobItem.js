@@ -1,18 +1,8 @@
 import { ReactComponent as LocationIcon } from '../icons/location.svg';
 import { Link } from 'react-router-dom';
 import DOMPurify from 'dompurify';
-import moment from 'moment-timezone';
 import slugify from 'react-slugify';
-
-const calculateTimeAgo = (modifiedGmt) => {
-  const clientTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-  // Create a moment object representing the time the job was last modified in UTC.
-  const modifiedUtc = moment.utc(modifiedGmt);
-  // Convert the moment object to the client's timezone.
-  const modifiedInClientTimezone = modifiedUtc.tz(clientTimezone);
-  // Return the duration between the current time and the modified time in human-readable format (e.g. 2 days ago, 10 minutes ago)
-  return modifiedInClientTimezone.fromNow();
-};
+import { calculateTimeAgo } from '../utils';
 
 function JobItem(props) {
   // Props
