@@ -360,7 +360,7 @@ add_filter("radio_buttons_for_taxonomies_no_term_jl_experience_level", "__return
 
 // 11. Disable the Gutenberg editor for the custom post type "jl_job"
 function JL_disable_gutenberg_editor($can_edit, $post_type) {
-  if ( 'jl_job' == $post_type ) {
+  if ('jl_job' == $post_type) {
       $can_edit = false;
   }
   return $can_edit;
@@ -514,7 +514,7 @@ function JL_register_cpt_jl_application() {
 }
 add_action('init', 'JL_register_cpt_jl_application');
 
-// 19. Add a meta box to the "jl_application" post type screen
+// 19A. Add a meta box to the "jl_application" post type screen
 function JL_add_jl_application_fields() {
   add_meta_box(
     'JL-application-fields',
@@ -525,39 +525,81 @@ function JL_add_jl_application_fields() {
     'high'
   );
 }
-add_action( 'add_meta_boxes_jl_application', 'JL_add_jl_application_fields' );
+add_action('add_meta_boxes_jl_application', 'JL_add_jl_application_fields');
 
-// 20. Fill the meta box with the desired content
-function JL_render_jl_application_fields( $post ) {
-  $job_id = get_post_meta( $post->ID, 'job_id', true );
-  $name = get_post_meta( $post->ID, 'name', true );
-  $email = get_post_meta( $post->ID, 'email', true );
+// 19B. Fill the meta box with the desired content
+function JL_render_jl_application_fields($post) {
+  $job_id = get_post_meta($post->ID, 'job_id', true);
+  $name = get_post_meta($post->ID, 'name', true);
+  $email = get_post_meta($post->ID, 'email', true);
   ?>
   <div>
     <label for="job_id">Add Job ID</label>
-    <input type="text" id="job_id" name="job_id" autocomplete="off" value="<?php echo esc_attr( $job_id ); ?>">
+    <input type="text" id="job_id" name="job_id" autocomplete="off" value="<?php echo esc_attr($job_id); ?>">
   </div>
   <div>
     <label for="name">Add Name</label>
-    <input type="text" id="name" name="name" autocomplete="off" value="<?php echo esc_attr( $name ); ?>">
+    <input type="text" id="name" name="name" autocomplete="off" value="<?php echo esc_attr($name); ?>">
   </div>
   <div>
     <label for="email">Add Email</label>
-    <input type="email" id="email" name="email" value="<?php echo esc_attr( $email ); ?>">
+    <input type="email" id="email" name="email" value="<?php echo esc_attr($email); ?>">
   </div>
   <?php
 }
 
-// 21. Update "jl_application" meta fields once a post has been saved
-function JL_save_jl_application_fields( $post_id ) {
-  if ( isset( $_POST['job_id'] ) ) {
-      update_post_meta( $post_id, 'job_id', sanitize_text_field( $_POST['job_id'] ) );
+// 19C. Update "jl_application" meta fields once a post has been saved
+function JL_save_jl_application_fields($post_id) {
+  if (isset($_POST['job_id'])) {
+    update_post_meta($post_id, 'job_id', sanitize_text_field($_POST['job_id']));
   }
-  if ( isset( $_POST['name'] ) ) {
-      update_post_meta( $post_id, 'name', sanitize_text_field( $_POST['name'] ) );
+  if (isset($_POST['name'])) {
+    update_post_meta($post_id, 'name', sanitize_text_field($_POST['name']));
   }
-  if ( isset( $_POST['email'] ) ) {
-      update_post_meta( $post_id, 'email', sanitize_email( $_POST['email'] ) );
+  if (isset($_POST['email'])) {
+    update_post_meta($post_id, 'email', sanitize_email($_POST['email']));
   }
 }
-add_action( 'save_post', 'JL_save_jl_application_fields' );
+add_action('save_post', 'JL_save_jl_application_fields');
+
+// 20A. Filter the columns displayed in the Posts list table for the "jl_application" post type
+function JL_add_jl_application_columns($columns) {
+  $columns = array(
+    'cb' => '<input type="checkbox" />',
+    'id' => 'ID',
+    'name' => 'Name',
+    'email' => 'Email',
+    'job_title' => 'Job Title',
+    'date' => 'Date'
+  );
+  return $columns;
+}
+add_filter('manage_jl_application_posts_columns', 'JL_add_jl_application_columns');
+
+// 20B. Populate custom column data in the Posts list table for the "jl_application" post type
+function JL_populate_jl_application_columns($column, $post_id) {
+  switch ($column) {
+    case 'id':
+      $id = get_post_meta($post_id, 'id', true);
+      if ($id) {
+        echo $id;
+      } else {
+        echo 'N/A';
+      }
+      break;
+    case 'name':
+      $name = get_post_meta($post_id, 'name', true);
+      echo $name;
+      break;
+    case 'email':
+      $email = get_post_meta($post_id, 'email', true);
+      echo $email;
+      break;
+    case 'job_title':
+      $job_id = get_post_meta($post_id, 'job_id', true);
+      $job_title = get_the_title($job_id);
+      echo $job_title;
+      break;
+  }
+}
+add_action('manage_jl_application_posts_custom_column', 'JL_populate_jl_application_columns', 10, 2);
