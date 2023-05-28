@@ -492,7 +492,7 @@ function JL_register_cpt_jl_application() {
     "public" => false,
     "publicly_queryable" => false,
     "show_ui" => true,
-    "show_in_rest" => true,
+    "show_in_rest" => false,
     "rest_base" => "jl-applications",
     "rest_controller_class" => "WP_REST_Posts_Controller",
     "has_archive" => false,
@@ -580,12 +580,7 @@ add_filter('manage_jl_application_posts_columns', 'JL_add_jl_application_columns
 function JL_populate_jl_application_columns($column, $post_id) {
   switch ($column) {
     case 'id':
-      $id = get_post_meta($post_id, 'id', true);
-      if ($id) {
-        echo $id;
-      } else {
-        echo 'N/A';
-      }
+      echo $post_id;
       break;
     case 'name':
       $name = get_post_meta($post_id, 'name', true);
@@ -598,7 +593,11 @@ function JL_populate_jl_application_columns($column, $post_id) {
     case 'job_title':
       $job_id = get_post_meta($post_id, 'job_id', true);
       $job_title = get_the_title($job_id);
-      echo $job_title;
+      if ($job_title) {
+        echo $job_title;
+      } else {
+        echo 'N/A';
+      }
       break;
   }
 }
