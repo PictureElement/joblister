@@ -513,3 +513,37 @@ function JL_register_cpt_jl_application() {
   register_post_type("jl_application", $args);
 }
 add_action('init', 'JL_register_cpt_jl_application');
+
+// 19. Add a meta box to the "jl_application" post type screen
+function JL_add_jl_application_fields() {
+  add_meta_box(
+    'JL-application-fields',
+    'Application Details',
+    'JL_render_jl_application_fields',
+    'jl_application',
+    'normal',
+    'high'
+  );
+}
+add_action( 'add_meta_boxes_jl_application', 'JL_add_jl_application_fields' );
+
+// 20. Fill the meta box with the desired content
+function JL_render_jl_application_fields( $post ) {
+  $job_id = get_post_meta( $post->ID, 'job_id', true );
+  $name = get_post_meta( $post->ID, 'name', true );
+  $email = get_post_meta( $post->ID, 'email', true );
+  ?>
+  <div>
+    <label for="job_id">Add Job ID</label>
+    <input type="text" id="job_id" name="job_id" autocomplete="off" value="<?php echo esc_attr( $job_id ); ?>">
+  </div>
+  <div>
+    <label for="name">Add Name</label>
+    <input type="text" id="name" name="name" autocomplete="off" value="<?php echo esc_attr( $name ); ?>">
+  </div>
+  <div>
+    <label for="email">Add Email</label>
+    <input type="email" id="email" name="email" autocomplete="off" value="<?php echo esc_attr( $email ); ?>">
+  </div>
+  <?php
+}
