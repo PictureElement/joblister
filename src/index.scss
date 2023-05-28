@@ -2,60 +2,60 @@
 
 // Typescale
 //
-#jlRoot h1,
-#jlRoot .jl-text-size-h1,
-#jlRoot h2,
-#jlRoot .jl-text-size-h2,
-#jlRoot h3,
-#jlRoot .jl-text-size-h3,
-#jlRoot h4,
-#jlRoot .jl-text-size-h4,
-#jlRoot p,
-#jlRoot .jl-text-size-p,
-#jlRoot small,
-#jlRoot .jl-text-size-small {
+#jl-root h1,
+#jl-root .jl-text-size-h1,
+#jl-root h2,
+#jl-root .jl-text-size-h2,
+#jl-root h3,
+#jl-root .jl-text-size-h3,
+#jl-root h4,
+#jl-root .jl-text-size-h4,
+#jl-root p,
+#jl-root .jl-text-size-p,
+#jl-root small,
+#jl-root .jl-text-size-small {
   @include font-family;
   margin: 0;
   font-weight: 400;
 }
 
-#jlRoot h1,
-#jlRoot .jl-text-size-h1 {
+#jl-root h1,
+#jl-root .jl-text-size-h1 {
   font-size: 32px;
   line-height: 40px;
 }
 
-#jlRoot h2,
-#jlRoot .jl-text-size-h2 {
+#jl-root h2,
+#jl-root .jl-text-size-h2 {
   font-size: 24px;
   line-height: 28px;
 }
 
-#jlRoot h3,
-#jlRoot .jl-text-size-h3 {
+#jl-root h3,
+#jl-root .jl-text-size-h3 {
   font-size: 20px;
   line-height: 24px;
 }
 
-#jlRoot h4,
-#jlRoot .jl-text-size-h4 {
+#jl-root h4,
+#jl-root .jl-text-size-h4 {
   font-size: 16px;
   line-height: 20px;
 }
 
-#jlRoot p,
-#jlRoot .jl-text-size-p {
+#jl-root p,
+#jl-root .jl-text-size-p {
   font-size: 16px;
   line-height: 24px;
 }
 
-#jlRoot small,
-#jlRoot .jl-text-size-small {
+#jl-root small,
+#jl-root .jl-text-size-small {
   font-size: 12px;
   line-height: 16px;
 }
 
-#jlRoot hr {
+#jl-root hr {
   border: 0;
   height: 1px;
   margin: 16px 0;
@@ -64,7 +64,7 @@
 
 // Job List Component
 //
-#jlRoot .jl-job-list {
+#jl-root .jl-job-list {
   list-style-type: none;
   padding: 0;
   margin: 0;
@@ -75,7 +75,7 @@
 
 // Job Item Component
 //
-#jlRoot .jl-job-item {
+#jl-root .jl-job-item {
   &__link {
     border: 1px solid $border-color;
     display: block;
@@ -191,7 +191,7 @@
 
 // Multiple Component
 //
-#jlRoot .jl-multiple {
+#jl-root .jl-multiple {
   &__filters {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -205,7 +205,7 @@
 
 // Single Component
 //
-#jlRoot .jl-single {
+#jl-root .jl-single {
   &__header {
     padding-bottom: 40px;
     display: flex;
@@ -357,7 +357,7 @@
 
 // Select Component
 //
-#jlRoot .jl-select {
+#jl-root .jl-select {
   color: red;
   &__control {
     border-color: $border-color;
@@ -415,7 +415,7 @@
 
 // Search Component
 //
-#jlRoot .jl-search {
+#jl-root .jl-search {
   &__label {
     position: relative;
     & > svg {

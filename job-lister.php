@@ -11,9 +11,9 @@
 defined('ABSPATH') or die('Unauthorized Access');
 
 // 02. Handle plugin dependencies
-function JL_handle_plugin_dependencies() {
+function jl_handle_plugin_dependencies() {
   if (is_admin() && current_user_can('activate_plugins') &&  !is_plugin_active('radio-buttons-for-taxonomies/radio-buttons-for-taxonomies.php')) {
-    add_action('admin_notices', 'JL_plugin_notice');
+    add_action('admin_notices', 'jl_plugin_notice');
 
     deactivate_plugins(plugin_basename(__FILE__));
 
@@ -22,23 +22,23 @@ function JL_handle_plugin_dependencies() {
     }
   }
 }
-function JL_plugin_notice() {
+function jl_plugin_notice() {
   echo '<div class="error"><p>Sorry, but <strong>JobLister</strong> plugin requires the <strong>Radio Buttons for Taxonomies</strong> plugin to be installed and active.</p></div>';
 }
-add_action('admin_init', 'JL_handle_plugin_dependencies');
+add_action('admin_init', 'jl_handle_plugin_dependencies');
 
 // 03. Register shortcode
-function JL_shortcode() {
+function jl_shortcode() {
   // Enqueue scripts and styles
   wp_enqueue_script('jl-script');
   wp_enqueue_style('jl-style');
 
-  return '<div class="jl-root" id="jlRoot"></div>';
+  return '<div class="jl-root" id="jl-root"></div>';
 }
-add_shortcode('joblister', 'JL_shortcode');
+add_shortcode('joblister', 'jl_shortcode');
 
 // 04. Register script
-function JL_register_script() {
+function jl_register_script() {
   // Do not enqueue here. Load in demand, enqueue in shortcode.
   wp_register_script(
     'jl-script', // Name of the script
@@ -48,10 +48,10 @@ function JL_register_script() {
     true // Enqueue script before </body>
   );
 }
-add_action('wp_enqueue_scripts', 'JL_register_script');
+add_action('wp_enqueue_scripts', 'jl_register_script');
 
 // 05. Register style
-function JL_register_style() {
+function jl_register_style() {
   // Do not enqueue here. Load in demand, enqueue in shortcode.
   wp_register_style(
     'jl-style',
@@ -61,10 +61,10 @@ function JL_register_style() {
     'all'
   );
 }
-add_action('wp_enqueue_scripts', 'JL_register_style');
+add_action('wp_enqueue_scripts', 'jl_register_style');
 
 // 06. Register "jl_job" post type
-function JL_register_cpt_jl_job() {
+function jl_register_cpt_jl_job() {
 
   $labels = [
     "name" => "Jobs",
@@ -128,10 +128,10 @@ function JL_register_cpt_jl_job() {
 
   register_post_type("jl_job", $args);
 }
-add_action('init', 'JL_register_cpt_jl_job');
+add_action('init', 'jl_register_cpt_jl_job');
 
 // 07. Register "jl_location" taxonomy
-function JL_register_jl_location() {
+function jl_register_jl_location() {
 
   $labels = [
     "name" => "Locations",
@@ -183,12 +183,12 @@ function JL_register_jl_location() {
   ];
   register_taxonomy("jl_location", array('jl_job'), $args);
 }
-add_action('init', 'JL_register_jl_location');
+add_action('init', 'jl_register_jl_location');
 // Disable the "No term" option on the "jl_location" taxonomy
 add_filter("radio_buttons_for_taxonomies_no_term_jl_location", "__return_FALSE");
 
 // 08. Register "jl_category" taxonomy
-function JL_register_jl_category() {
+function jl_register_jl_category() {
 
   $labels = [
     "name" => "Categories",
@@ -240,12 +240,12 @@ function JL_register_jl_category() {
   ];
   register_taxonomy("jl_category", ["jl_job"], $args);
 }
-add_action('init', 'JL_register_jl_category');
+add_action('init', 'jl_register_jl_category');
 // Disable the "No term" option on the "jl_category" taxonomy
 add_filter("radio_buttons_for_taxonomies_no_term_jl_category", "__return_FALSE");
 
 // 09. Register "jl_type" taxonomy
-function JL_register_jl_type() {
+function jl_register_jl_type() {
 
   $labels = [
     "name" => "Types",
@@ -297,12 +297,12 @@ function JL_register_jl_type() {
   ];
   register_taxonomy("jl_type", ["jl_job"], $args);
 }
-add_action('init', 'JL_register_jl_type');
+add_action('init', 'jl_register_jl_type');
 // Disable the "No term" option on the "jl_type" taxonomy
 add_filter("radio_buttons_for_taxonomies_no_term_jl_type", "__return_FALSE");
 
 // 10. Register "jl_experience_level" taxonomy
-function JL_register_jl_experience_level() {
+function jl_register_jl_experience_level() {
 
   $labels = [
     "name" => "Experience Levels",
@@ -354,21 +354,21 @@ function JL_register_jl_experience_level() {
   ];
   register_taxonomy("jl_experience_level", ["jl_job"], $args);
 }
-add_action('init', 'JL_register_jl_experience_level');
+add_action('init', 'jl_register_jl_experience_level');
 // Disable the "No term" option on the "jl_experience_level" taxonomy
 add_filter("radio_buttons_for_taxonomies_no_term_jl_experience_level", "__return_FALSE");
 
 // 11. Disable the Gutenberg editor for the custom post type "jl_job"
-function JL_disable_gutenberg_editor($can_edit, $post_type) {
+function jl_disable_gutenberg_editor($can_edit, $post_type) {
   if ('jl_job' == $post_type) {
       $can_edit = false;
   }
   return $can_edit;
 }
-add_filter('use_block_editor_for_post_type', 'JL_disable_gutenberg_editor', 10, 2);
+add_filter('use_block_editor_for_post_type', 'jl_disable_gutenberg_editor', 10, 2);
 
 // 12. Utility function that process the taxonomy term for the REST API response
-function JL_process_taxonomy_term($term_id) {
+function jl_process_taxonomy_term($term_id) {
   $result = new stdClass();
   // Use slug as id
   $result->id = get_term($term_id)->slug;
@@ -378,11 +378,11 @@ function JL_process_taxonomy_term($term_id) {
 }
 
 // 13. Filter the "jl_job" post data for the REST API response
-function JL_filter_rest_jl_job($response) {
-  $location = JL_process_taxonomy_term($response->data['jl-locations'][0]);
-  $category = JL_process_taxonomy_term($response->data['jl-categories'][0]);
-  $type = JL_process_taxonomy_term($response->data['jl-types'][0]);
-  $experience_level = JL_process_taxonomy_term($response->data['jl-experience-levels'][0]);
+function jl_filter_rest_jl_job($response) {
+  $location = jl_process_taxonomy_term($response->data['jl-locations'][0]);
+  $category = jl_process_taxonomy_term($response->data['jl-categories'][0]);
+  $type = jl_process_taxonomy_term($response->data['jl-types'][0]);
+  $experience_level = jl_process_taxonomy_term($response->data['jl-experience-levels'][0]);
 
   return [
     'id' => $response->data['id'],
@@ -397,10 +397,10 @@ function JL_filter_rest_jl_job($response) {
     'experience_level' => $experience_level,
   ];
 }
-add_filter('rest_prepare_jl_job', 'JL_filter_rest_jl_job');
+add_filter('rest_prepare_jl_job', 'jl_filter_rest_jl_job');
 
 // 14. Filter the "jl_location" taxonomy data for the REST API response
-function JL_filter_rest_jl_location($response) {
+function jl_filter_rest_jl_location($response) {
   return [
     // Use slug as id
     'id' => $response->data['slug'],
@@ -409,10 +409,10 @@ function JL_filter_rest_jl_location($response) {
     'name' => html_entity_decode($response->data['name']),
   ];
 }
-add_filter('rest_prepare_jl_location', 'JL_filter_rest_jl_location');
+add_filter('rest_prepare_jl_location', 'jl_filter_rest_jl_location');
 
 // 15. Filter the "jl_category" taxonomy data for the REST API response
-function JL_filter_rest_jl_category($response) {
+function jl_filter_rest_jl_category($response) {
   return [
     // Use slug as id
     'id' => $response->data['slug'],
@@ -421,10 +421,10 @@ function JL_filter_rest_jl_category($response) {
     'name' => html_entity_decode($response->data['name']),
   ];
 }
-add_filter('rest_prepare_jl_category', 'JL_filter_rest_jl_category');
+add_filter('rest_prepare_jl_category', 'jl_filter_rest_jl_category');
 
 // 16. Filter the "jl_type" taxonomy data for the REST API response
-function JL_filter_rest_jl_type($response) {
+function jl_filter_rest_jl_type($response) {
   return [
     // Use slug as id
     'id' => $response->data['slug'],
@@ -433,10 +433,10 @@ function JL_filter_rest_jl_type($response) {
     'name' => html_entity_decode($response->data['name']),
   ];
 }
-add_filter('rest_prepare_jl_type', 'JL_filter_rest_jl_type');
+add_filter('rest_prepare_jl_type', 'jl_filter_rest_jl_type');
 
 // 17. Filter the "jl_experience_level" taxonomy data for the REST API response
-function JL_filter_rest_jl_experience_level($response) {
+function jl_filter_rest_jl_experience_level($response) {
   return [
     // Use slug as id
     'id' => $response->data['slug'],
@@ -445,10 +445,10 @@ function JL_filter_rest_jl_experience_level($response) {
     'name' => html_entity_decode($response->data['name']),
   ];
 }
-add_filter('rest_prepare_jl_experience_level', 'JL_filter_rest_jl_experience_level');
+add_filter('rest_prepare_jl_experience_level', 'jl_filter_rest_jl_experience_level');
 
 // 18. Register "jl_application" post type
-function JL_register_cpt_jl_application() {
+function jl_register_cpt_jl_application() {
 
   $labels = [
     "name" => "Applications",
@@ -512,23 +512,23 @@ function JL_register_cpt_jl_application() {
 
   register_post_type("jl_application", $args);
 }
-add_action('init', 'JL_register_cpt_jl_application');
+add_action('init', 'jl_register_cpt_jl_application');
 
 // 19A. Add a meta box to the "jl_application" post type screen
-function JL_add_jl_application_fields() {
+function jl_add_jl_application_fields() {
   add_meta_box(
-    'JL-application-fields',
+    'jl-application-fields',
     'Application Details',
-    'JL_render_jl_application_fields',
+    'jl_render_jl_application_fields',
     'jl_application',
     'normal',
     'high'
   );
 }
-add_action('add_meta_boxes_jl_application', 'JL_add_jl_application_fields');
+add_action('add_meta_boxes_jl_application', 'jl_add_jl_application_fields');
 
 // 19B. Fill the meta box with the desired content
-function JL_render_jl_application_fields($post) {
+function jl_render_jl_application_fields($post) {
   $job_id = get_post_meta($post->ID, 'job_id', true);
   $name = get_post_meta($post->ID, 'name', true);
   $email = get_post_meta($post->ID, 'email', true);
@@ -549,7 +549,7 @@ function JL_render_jl_application_fields($post) {
 }
 
 // 19C. Update "jl_application" meta fields once a post has been saved
-function JL_save_jl_application_fields($post_id) {
+function jl_save_jl_application_fields($post_id) {
   if (isset($_POST['job_id'])) {
     update_post_meta($post_id, 'job_id', sanitize_text_field($_POST['job_id']));
   }
@@ -560,10 +560,10 @@ function JL_save_jl_application_fields($post_id) {
     update_post_meta($post_id, 'email', sanitize_email($_POST['email']));
   }
 }
-add_action('save_post', 'JL_save_jl_application_fields');
+add_action('save_post', 'jl_save_jl_application_fields');
 
 // 20A. Filter the columns displayed in the Posts list table for the "jl_application" post type
-function JL_add_jl_application_columns($columns) {
+function jl_add_jl_application_columns($columns) {
   $columns = array(
     'cb' => '<input type="checkbox" />',
     'id' => 'ID',
@@ -574,10 +574,10 @@ function JL_add_jl_application_columns($columns) {
   );
   return $columns;
 }
-add_filter('manage_jl_application_posts_columns', 'JL_add_jl_application_columns');
+add_filter('manage_jl_application_posts_columns', 'jl_add_jl_application_columns');
 
 // 20B. Populate custom column data in the Posts list table for the "jl_application" post type
-function JL_populate_jl_application_columns($column, $post_id) {
+function jl_populate_jl_application_columns($column, $post_id) {
   switch ($column) {
     case 'id':
       echo $post_id;
@@ -601,19 +601,19 @@ function JL_populate_jl_application_columns($column, $post_id) {
       break;
   }
 }
-add_action('manage_jl_application_posts_custom_column', 'JL_populate_jl_application_columns', 10, 2);
+add_action('manage_jl_application_posts_custom_column', 'jl_populate_jl_application_columns', 10, 2);
 
 // 21A. Filter the columns displayed in the Posts list table for the "jl_job" post type
-function JL_add_jl_job_columns($columns) {
+function jl_add_jl_job_columns($columns) {
   $columns['post_id'] = 'ID';
   return $columns;
 }
-add_filter('manage_jl_job_posts_columns', 'JL_add_jl_job_columns');
+add_filter('manage_jl_job_posts_columns', 'jl_add_jl_job_columns');
 
 // 22B. Populate custom column data in the Posts list table for the "jl_job" post type
-function JL_populate_jl_job_columns($column, $post_id) {
+function jl_populate_jl_job_columns($column, $post_id) {
   if ($column === 'post_id') {
     echo $post_id;
   }
 }
-add_action('manage_jl_job_posts_custom_column', 'JL_populate_jl_job_columns', 10, 2);
+add_action('manage_jl_job_posts_custom_column', 'jl_populate_jl_job_columns', 10, 2);
