@@ -602,3 +602,18 @@ function JL_populate_jl_application_columns($column, $post_id) {
   }
 }
 add_action('manage_jl_application_posts_custom_column', 'JL_populate_jl_application_columns', 10, 2);
+
+// 21A. Filter the columns displayed in the Posts list table for the "jl_job" post type
+function JL_add_jl_job_columns($columns) {
+  $columns['post_id'] = 'ID';
+  return $columns;
+}
+add_filter('manage_jl_job_posts_columns', 'JL_add_jl_job_columns');
+
+// 22B. Populate custom column data in the Posts list table for the "jl_job" post type
+function JL_populate_jl_job_columns($column, $post_id) {
+  if ($column === 'post_id') {
+    echo $post_id;
+  }
+}
+add_action('manage_jl_job_posts_custom_column', 'JL_populate_jl_job_columns', 10, 2);
