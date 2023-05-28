@@ -543,7 +543,21 @@ function JL_render_jl_application_fields( $post ) {
   </div>
   <div>
     <label for="email">Add Email</label>
-    <input type="email" id="email" name="email" autocomplete="off" value="<?php echo esc_attr( $email ); ?>">
+    <input type="email" id="email" name="email" value="<?php echo esc_attr( $email ); ?>">
   </div>
   <?php
 }
+
+// 21. Update "jl_application" meta fields once a post has been saved
+function JL_save_jl_application_fields( $post_id ) {
+  if ( isset( $_POST['job_id'] ) ) {
+      update_post_meta( $post_id, 'job_id', sanitize_text_field( $_POST['job_id'] ) );
+  }
+  if ( isset( $_POST['name'] ) ) {
+      update_post_meta( $post_id, 'name', sanitize_text_field( $_POST['name'] ) );
+  }
+  if ( isset( $_POST['email'] ) ) {
+      update_post_meta( $post_id, 'email', sanitize_email( $_POST['email'] ) );
+  }
+}
+add_action( 'save_post', 'JL_save_jl_application_fields' );
