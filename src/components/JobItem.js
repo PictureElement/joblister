@@ -26,9 +26,9 @@ function JobItem(props) {
                 Job ID: {id} | Updated {updatedTimeAgo}
               </div>
             </div>
-            <div className="jl-job-item__category"><div className="jl-text-size-h4">{category}</div></div>
-            <div className="jl-job-item__location"><div className="jl-text-size-h4">{location}</div></div>
-            <div className="jl-job-item__type"><div className="jl-text-size-h4">{experienceLevel}</div></div>
+            <div className="jl-job-item__category"><div className="jl-text-size-h4">{category ? category : 'N/A'}</div></div>
+            <div className="jl-job-item__location"><div className="jl-text-size-h4">{location ? location : 'N/A'}</div></div>
+            <div className="jl-job-item__type"><div className="jl-text-size-h4">{experienceLevel ? experienceLevel : 'N/A'}</div></div>
           </div>
         </div>
       </Link>

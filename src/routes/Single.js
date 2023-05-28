@@ -64,19 +64,19 @@ function Single() {
             <h2 className="jl-single__widget-title jl-text-size-h2">Job details</h2>
             <div className="jl-single__widget-item-1">
               <h3 className="jl-text-size-p">Location</h3>
-              <div className="jl-text-size-p">{location}</div>
+              <div className="jl-text-size-p">{location ? location : 'N/A'}</div>
             </div>
             <div className="jl-single__widget-item-1">
               <h3 className="jl-text-size-p">Category</h3>
-              <div className="jl-text-size-p">{category}</div>
+              <div className="jl-text-size-p">{category ? category : 'N/A'}</div>
             </div>
             <div className="jl-single__widget-item-1">
               <h3 className="jl-text-size-p">Type</h3>
-              <div className="jl-text-size-p">{type}</div>
+              <div className="jl-text-size-p">{type ? type : 'N/A'}</div>
             </div>
             <div className="jl-single__widget-item-1">
               <h3 className="jl-text-size-p">Experience</h3>
-              <div className="jl-text-size-p">{experienceLevel}</div>
+              <div className="jl-text-size-p">{experienceLevel ? experienceLevel : 'N/A'}</div>
             </div>
           </div>
           <hr />
