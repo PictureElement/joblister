@@ -189,12 +189,25 @@
   }
 }
 
+html[dir="rlt"] #jl-root .jl-job-item {
+  &__location {
+    @media (max-width: 767px) {
+      float: right;
+    }
+  }
+  &__type {
+    @media (max-width: 767px) {
+      float: left;
+    }
+  }
+}
+
 // Multiple Component
 //
 #jl-root .jl-multiple {
   &__header {
+    display: flex;
     span {
-      float: left;
       text-transform: uppercase;
       padding: 0 12px 12px;
     }
@@ -209,12 +222,6 @@
     }
     span:nth-child(4) {
       width: 20%;
-    }
-    // Clearfix
-    &::after {
-      display: block;
-      clear: both;
-      content: "";
     }
     @media (max-width: 767px) {
       display: none;
@@ -379,6 +386,28 @@
       svg {
         display: block;
       }
+      @media (max-width: 767px) {
+        padding-bottom: 16px;
+      }
+    }
+  }
+  &__back-to-listing {
+    display: inline-flex;
+    align-items: center;
+    @include font-family;
+    font-size: 16px;
+    line-height: 1;
+    font-weight: 400;
+    padding: 16px 0;
+    color: $accent;
+    text-align: center;
+    transition: transform 200ms ease-out;
+    &:hover {
+      transform: translateX(-4px);
+    }
+    svg {
+      margin-inline-end: 8px;
+      fill: $accent;
     }
   }
 }

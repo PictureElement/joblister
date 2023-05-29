@@ -4,11 +4,10 @@ Examples:
 - https://jobs.zalando.com/en/jobs
 
 Todo:
-1. Column titles (frontend)
-2. Jobs found, pagination (frontend)
-3. Application form w. spam protection
-4. Add Resume field
-5. Back to listings link
+1. Jobs found, pagination (frontend)
+2. Application form w. spam protection
+3. Add Resume field
+4. Back to listings link
 
 Endpoints:
 http://localhost/dev/wp-json/wp/v2/JL-jobs

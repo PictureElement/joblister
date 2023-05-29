@@ -1,8 +1,11 @@
 import { useParams } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
+import { Link } from 'react-router-dom';
 import { allJobsState } from '../recoil-state';
 import DOMPurify from 'dompurify';
 import { calculateTimeAgo } from '../utils';
+import { ReactComponent as BackIcon } from '../icons/back.svg';
+
 import {
   EmailShareButton,
   FacebookShareButton,
@@ -98,6 +101,12 @@ function Single() {
             </div>
           </div>
         </div>
+      </div>
+      <hr className="jl-mobile-only" />
+      <div className="jl-single__footer">
+        <Link to="/" className="jl-single__back-to-listing">
+          <BackIcon /> Back to listing
+        </Link>
       </div>
     </div>
   )
