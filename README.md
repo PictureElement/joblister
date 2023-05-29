@@ -7,7 +7,6 @@ Todo:
 1. Jobs found, pagination (frontend)
 2. Application form w. spam protection
 3. Add Resume field
-4. Back to listings link
 
 Endpoints:
 http://localhost/dev/wp-json/wp/v2/JL-jobs

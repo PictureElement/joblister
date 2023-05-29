@@ -1,4 +1,3 @@
-import { ReactComponent as LocationIcon } from '../icons/location.svg';
 import { Link } from 'react-router-dom';
 import DOMPurify from 'dompurify';
 import slugify from 'react-slugify';
