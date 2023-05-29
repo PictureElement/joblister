@@ -78,16 +78,16 @@ function Multiple() {
       </div>
       <div className="jl-multiple__filters">
         <SelectMulti
-          value={locationFilters}
-          placeholder="--Location--"
-          handleChange={handleLocationChange}
-          options={allLocations}
-        />
-        <SelectMulti
           value={categoryFilters}
           placeholder="--Category--"
           handleChange={handleCategoryChange}
           options={allCategories}
+        />
+        <SelectMulti
+          value={locationFilters}
+          placeholder="--Location--"
+          handleChange={handleLocationChange}
+          options={allLocations}
         />
         <SelectMulti
           value={typeFilters}
@@ -101,6 +101,12 @@ function Multiple() {
           handleChange={handleExperienceLevelChange}
           options={allExperienceLevels}
         />
+      </div>
+      <div className="jl-multiple__header jl-clearfix">
+        <span className="jl-text-size-small">Job Title</span>
+        <span className="jl-text-size-small">Category</span>
+        <span className="jl-text-size-small">Location</span>
+        <span className="jl-text-size-small">Experience</span>
       </div>
       <div className="jl-multiple__three">
         <JobList />

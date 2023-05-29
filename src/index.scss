@@ -151,7 +151,7 @@
     overflow: hidden;
     vertical-align: top;
     display: table-cell;
-    width: 25%;
+    width: 20%;
     border-inline-end: 1px solid $border-color;
     color: $text-primary;
     padding-inline-start: 34px;
@@ -192,6 +192,34 @@
 // Multiple Component
 //
 #jl-root .jl-multiple {
+  &__header {
+    span {
+      float: left;
+      text-transform: uppercase;
+      padding: 0 12px 12px;
+    }
+    span:nth-child(1) {
+      width: 35%;
+    }
+    span:nth-child(2) {
+      width: 25%;
+    }
+    span:nth-child(3) {
+      width: 20%;
+    }
+    span:nth-child(4) {
+      width: 20%;
+    }
+    // Clearfix
+    &::after {
+      display: block;
+      clear: both;
+      content: "";
+    }
+    @media (max-width: 767px) {
+      display: none;
+    }
+  }
   &__filters {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
