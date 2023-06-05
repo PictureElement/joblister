@@ -4,7 +4,7 @@ Examples:
 - https://jobs.zalando.com/en/jobs
 
 Todo:
-1. Jobs found, pagination (frontend)
+1. Jobs found
 2. Application form w. spam protection
 3. Add Resume field
 

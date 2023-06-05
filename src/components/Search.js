@@ -1,5 +1,5 @@
 import { useRecoilState, useSetRecoilState } from 'recoil';
-import { searchQueryState, locationFiltersState, categoryFiltersState, typeFiltersState, experienceLevelFiltersState } from '../recoil-state';
+import { searchQueryState, locationFiltersState, categoryFiltersState, typeFiltersState, experienceLevelFiltersState, currentPageState } from '../recoil-state';
 import { ReactComponent as SearchIcon } from '../icons/search.svg';
 
 function Search() {
@@ -12,6 +12,7 @@ function Search() {
   const setCategoryFilters = useSetRecoilState(categoryFiltersState);
   const setTypeFilters = useSetRecoilState(typeFiltersState);
   const setExperienceLevelFilters = useSetRecoilState(experienceLevelFiltersState);
+  const setCurrentPage = useSetRecoilState(currentPageState);
   const [searchQuery, setSearchQuery] = useRecoilState(searchQueryState);
 
   function handleChange(e) {
@@ -20,6 +21,8 @@ function Search() {
     setCategoryFilters([]);
     setTypeFilters([]);
     setExperienceLevelFilters([]);
+    // Reset current page
+    setCurrentPage(1);
     // Update search query
     setSearchQuery(e.target.value);
   }

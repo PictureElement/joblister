@@ -53,6 +53,11 @@ const experienceLevelFiltersState = atom({
   default: []
 });
 
+const currentPageState = atom({
+  key: "currentPageState",
+  default: 1
+});
+
 /**
  * Selectors
  */
@@ -68,13 +73,26 @@ const filteredJobsState = selector({
     const typeFiltersIds = typeFilters.map(type => type.id);
     const experienceLevelFilters = get(experienceLevelFiltersState);
     const experienceLevelFiltersIds = experienceLevelFilters.map(experienceLevel => experienceLevel.id);
+
+    const currentPage = get(currentPageState);
+    const perPage = parseInt(process.env.APP_PER_PAGE, 10);
+    const startIndex = (currentPage - 1) * perPage;
+    const endIndex = startIndex + perPage;
+
     let jobList = get(allJobsState);
 
     if (searchQuery) {
       // Make string comparisons case-insensitive by converting to lowercase
       jobList = jobList.filter((job) => (job.title).toLowerCase().includes(searchQuery.toLocaleLowerCase()));
-      // Return the list since search cancels filtration.
-      return jobList;
+
+      const totalPages = Math.ceil(jobList.length / perPage);
+      const filteredJobs = jobList.slice(startIndex, endIndex);
+      
+      // Early return since search cancels filtration.
+      return {
+        filteredJobs,
+        totalPages,
+      }
     }
 
     if (locationFiltersIds.length) {
@@ -97,7 +115,14 @@ const filteredJobsState = selector({
       jobList = jobList.filter(job => experienceLevelFiltersIds.includes(job.experience_level.id));
     }
 
-    return jobList;
+    const totalPages = Math.ceil(jobList.length / perPage);
+    const filteredJobs = jobList.slice(startIndex, endIndex);
+    
+    // Return paginated filtered job list and total pages 
+    return {
+      filteredJobs,
+      totalPages,
+    }
   },
 })
 
@@ -112,5 +137,6 @@ export {
   categoryFiltersState,
   typeFiltersState,
   experienceLevelFiltersState,
+  currentPageState,
   filteredJobsState
 };

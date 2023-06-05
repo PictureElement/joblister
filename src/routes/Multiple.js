@@ -1,6 +1,7 @@
 import JobList from '../components/JobList';
 import Search from '../components/Search';
 import SelectMulti from '../components/SelectMulti';
+import Pagination from '../components/Pagination';
 import { useRecoilValue, useRecoilState, useSetRecoilState } from 'recoil';
 import {
   allLocationsState,
@@ -102,6 +103,9 @@ function Multiple() {
           options={allExperienceLevels}
         />
       </div>
+      <div>
+        <Pagination />
+      </div>
       <div className="jl-multiple__header jl-clearfix">
         <span className="jl-text-size-small">Job Title</span>
         <span className="jl-text-size-small">Category</span>
@@ -110,6 +114,9 @@ function Multiple() {
       </div>
       <div className="jl-multiple__three">
         <JobList />
+      </div>
+      <div>
+        <Pagination />
       </div>
     </div>
   )

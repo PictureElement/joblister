@@ -509,6 +509,24 @@ html[dir="rlt"] #jl-root .jl-job-item {
   }
 }
 
+// Pagination Component
+//
+#jl-root .jl-pagination {
+  &__control {
+    margin: 0 8px;
+    background-color: #fff;
+    border: 1px solid cyan;
+    color: #000;
+    &_disabled {
+      background-color: gainsboro;
+      border: 1px solid gainsboro;
+    }
+    &_active {
+      background-color: cyan;
+    }
+  }
+}
+
 // Helpers
 //
 .jl-d-inline-block {
