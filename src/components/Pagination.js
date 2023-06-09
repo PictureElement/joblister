@@ -1,5 +1,7 @@
 import { currentPageState, filteredJobsState } from '../recoil-state';
 import { useRecoilState, useRecoilValue } from 'recoil';
+import { ReactComponent as PreviousIcon } from '../icons/previous.svg';
+import { ReactComponent as NextIcon } from '../icons/next.svg';
 
 function Pagination() {
   /**
@@ -88,16 +90,19 @@ function Pagination() {
         onClick={() => handlePageChange(currentPage - 1)}
         aria-label="Previous page"
       >
-        Previous
+        <PreviousIcon />
       </button>
-      {generatePagination()}
+      <div className="jl-pagination__numbers">
+        {generatePagination()}
+        <div className="jl-pagination__fraction">{currentPage}/{totalPages}</div>
+      </div>
       <button
         className="jl-pagination__control jl-pagination__control_next"
         disabled={currentPage === totalPages}
         onClick={() => handlePageChange(currentPage + 1)}
         aria-label="Next page"
       >
-        Next
+        <NextIcon />
       </button>
     </div>
   )

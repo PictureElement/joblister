@@ -74,7 +74,7 @@ function Multiple() {
   
   return (
     <div className="jl-multiple">
-      <div className="jl-multiple__one">
+      <div className="jl-multiple__search">
         <Search />
       </div>
       <div className="jl-multiple__filters">
@@ -103,7 +103,7 @@ function Multiple() {
           options={allExperienceLevels}
         />
       </div>
-      <div>
+      <div className="jl-multiple__pagination jl-multiple__pagination_top">
         <Pagination />
       </div>
       <div className="jl-multiple__header jl-clearfix">
@@ -112,10 +112,10 @@ function Multiple() {
         <span className="jl-text-size-small">Location</span>
         <span className="jl-text-size-small">Experience</span>
       </div>
-      <div className="jl-multiple__three">
+      <div className="jl-multiple__list">
         <JobList />
       </div>
-      <div>
+      <div className="jl-multiple__pagination jl-multiple__pagination_bottom">
         <Pagination />
       </div>
     </div>

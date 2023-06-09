@@ -62,6 +62,14 @@
   background-color: $accent;
 }
 
+#jl-root button,
+#jl-root a {
+  &:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px $accent;
+  }
+}
+
 // Job List Component
 //
 #jl-root .jl-job-list {
@@ -124,7 +132,7 @@
   &__title {
     color: $text-primary;
     transition: color 200ms ease-out;
-    font-weight: 500;
+    font-weight: 600;
     margin-bottom: 4px;
   }
   &__subtitle {
@@ -205,6 +213,14 @@ html[dir="rlt"] #jl-root .jl-job-item {
 // Multiple Component
 //
 #jl-root .jl-multiple {
+  &__pagination {
+    &_top {
+      margin-bottom: 32px;
+    }
+    &_bottom {
+      margin-top: 32px;
+    }
+  }
   &__header {
     display: flex;
     span {
@@ -265,7 +281,7 @@ html[dir="rlt"] #jl-root .jl-job-item {
   }
   &__title {
     color: $text-primary;
-    font-weight: 500;
+    font-weight: 600;
     margin-bottom: 8px;
   }
   &__subtitle {
@@ -367,7 +383,7 @@ html[dir="rlt"] #jl-root .jl-job-item {
     &-item-1 {
       padding-bottom: 16px;
       h3 {
-        font-weight: 500;
+        font-weight: 600;
       }
       div {
         font-weight: 300;
@@ -381,6 +397,9 @@ html[dir="rlt"] #jl-root .jl-job-item {
         transition: transform 200ms ease-out;
         &:hover {
           transform: scale(1.05);
+        }
+        &:focus {
+          border-radius: 0;
         }
       }
       svg {
@@ -398,7 +417,7 @@ html[dir="rlt"] #jl-root .jl-job-item {
     font-size: 16px;
     line-height: 1;
     font-weight: 400;
-    padding: 16px 0;
+    padding: 16px 4px 16px 0;
     color: $accent;
     text-align: center;
     transition: transform 200ms ease-out;
@@ -415,15 +434,14 @@ html[dir="rlt"] #jl-root .jl-job-item {
 // Select Component
 //
 #jl-root .jl-select {
-  color: red;
   &__control {
     border-color: $border-color;
     border-radius: 0;
     &--is-focused {
-      box-shadow: 0 0 0 1px $accent;
+      box-shadow: 0 0 0 2px $accent;
     }
     &--menu-is-open {
-      box-shadow: 0 0 0 1px $accent;
+      box-shadow: 0 0 0 2px $accent;
     }
   }
   &__placeholder {
@@ -431,7 +449,6 @@ html[dir="rlt"] #jl-root .jl-job-item {
     font-size: 16px;
     line-height: 24px;
     font-weight: 400;
-    text-transform: uppercase;
     color: $text-primary;
   }
   &__option {
@@ -445,6 +462,12 @@ html[dir="rlt"] #jl-root .jl-job-item {
       background-color: #f0f0f0;
       border-inline-start: 3px solid $accent;
     }
+  }
+  &__value-container {
+    padding: 5px 8px;
+  }
+  &__indicator {
+    padding: 11px;
   }
   &__multi-value__label {
     @include font-family;
@@ -488,7 +511,7 @@ html[dir="rlt"] #jl-root .jl-job-item {
     border: none;
     border-radius: 0;
     text-indent: 40px;
-    padding: 8px 0;
+    padding: 9px 0;
     padding-inline-end: 8px;
     @include font-family;
     font-size: 16px;
@@ -497,7 +520,7 @@ html[dir="rlt"] #jl-root .jl-job-item {
     color: $text-primary;
     border: 1px solid $border-color;
     &:focus {
-      box-shadow: 0 0 0 1px $accent;
+      box-shadow: 0 0 0 2px $accent;
     }
     &::placeholder {
       @include font-family;
@@ -512,17 +535,58 @@ html[dir="rlt"] #jl-root .jl-job-item {
 // Pagination Component
 //
 #jl-root .jl-pagination {
+  display: flex;
+  justify-content: space-between;
+  &__numbers {
+    display: flex;
+    align-items: center;
+    button {
+      @media (max-width: 767px) {
+        height: 28px;
+        width: 28px;
+      }
+      @media (max-width: 400px) {
+        display: none;
+      }
+    }
+  }
+  &__fraction {
+    display: none;
+    @include font-family;
+    font-weight: 400;
+    @media (max-width: 400px) {
+      display: inline-block;
+    }
+  }
   &__control {
-    margin: 0 8px;
     background-color: #fff;
-    border: 1px solid cyan;
-    color: #000;
+    border: none;
+    border-radius: 0;
+    color: $text-primary;
+    margin: 0 4px;
+    padding: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    @include font-family;
+    font-weight: 400;
+    height: 44px;
+    width: 44px;
+    &_prev {
+      border: 1px solid $border-color;
+      margin: 0;
+      margin-inline-end: 4px;
+    }
+    &_next {
+      border: 1px solid $border-color;
+      margin: 0;
+      margin-inline-start: 4px;
+    }
     &_disabled {
-      background-color: gainsboro;
-      border: 1px solid gainsboro;
+      color: $text-secondary;
     }
     &_active {
-      background-color: cyan;
+      color: $accent;
     }
   }
 }
