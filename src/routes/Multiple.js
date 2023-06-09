@@ -12,6 +12,7 @@ import {
   typeFiltersState,
   allExperienceLevelsState,
   experienceLevelFiltersState,
+  currentPageState,
   searchQueryState
 } from '../recoil-state';
 
@@ -31,10 +32,13 @@ function Multiple() {
   const allExperienceLevels = useRecoilValue(allExperienceLevelsState);
   const [experienceLevelFilters, setExperienceLevelFilters] = useRecoilState(experienceLevelFiltersState);
   const setSearchQuery = useSetRecoilState(searchQueryState);
+  const setCurrentPage = useSetRecoilState(currentPageState);
 
   function handleFilterChange(filterState, setFilterState, actionType) {
     // Clear search
     setSearchQuery('');
+    // Reset current page
+    setCurrentPage(1);
   
     if (actionType.action === 'clear') {
       // Clear filters
