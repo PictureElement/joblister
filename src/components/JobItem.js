@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import DOMPurify from 'dompurify';
 import slugify from 'react-slugify';
 import { calculateTimeAgo } from '../utils';
+import { ReactComponent as LocationIcon } from '../icons/location.svg';
 
 function JobItem(props) {
   // Props
@@ -26,7 +27,10 @@ function JobItem(props) {
               </div>
             </div>
             <div className="jl-job-item__category"><div className="jl-text-size-h4">{category ? category : 'N/A'}</div></div>
-            <div className="jl-job-item__location"><div className="jl-text-size-h4">{location ? location : 'N/A'}</div></div>
+            <div className="jl-job-item__location">
+              <LocationIcon />
+              <div className="jl-text-size-h4">{location ? location : 'N/A'}</div>
+            </div>
             <div className="jl-job-item__type"><div className="jl-text-size-h4">{experienceLevel ? experienceLevel : 'N/A'}</div></div>
           </div>
         </div>

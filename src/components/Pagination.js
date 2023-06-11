@@ -54,7 +54,7 @@ function Pagination() {
         return (
           <button
             key={index}
-            className="jl-pagination__control jl-pagination__control_disabled"
+            className="jl-pagination__control jl-pagination__control_ellipsis"
             disabled
             aria-label="Page ..."
             aria-disabled="true"
@@ -85,7 +85,7 @@ function Pagination() {
   return (
     <div className="jl-pagination">
       <button
-        className="jl-pagination__control jl-pagination__control_prev"
+        className="jl-pagination__control jl-pagination__arrow jl-pagination__arrow_prev"
         disabled={currentPage === 1}
         onClick={() => handlePageChange(currentPage - 1)}
         aria-label="Previous page"
@@ -97,7 +97,7 @@ function Pagination() {
         <div className="jl-pagination__fraction">{currentPage}/{totalPages}</div>
       </div>
       <button
-        className="jl-pagination__control jl-pagination__control_next"
+        className="jl-pagination__control jl-pagination__arrow jl-pagination__arrow_next"
         disabled={currentPage === totalPages}
         onClick={() => handlePageChange(currentPage + 1)}
         aria-label="Next page"
