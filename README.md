@@ -4,7 +4,7 @@ Examples:
 - https://jobs.zalando.com/en/jobs
 
 Todo:
-1. Jobs found + Clear all
+1. Change Apply now and social media buttons hover state
 2. Application form w. spam protection
 3. Add Resume field
 
