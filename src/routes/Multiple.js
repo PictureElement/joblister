@@ -77,6 +77,18 @@ function Multiple() {
   const handleExperienceLevelChange = (_, actionType) => {
     handleFilterChange(experienceLevelFilters, setExperienceLevelFilters, actionType);
   }
+
+  const handleClearAll = () => {
+    // Clear search
+    setSearchQuery('');
+    // Clear filters
+    setLocationFilters([]);
+    setCategoryFilters([]);
+    setTypeFilters([]);
+    setExperienceLevelFilters([]);
+    // Reset current page
+    setCurrentPage(1);
+  }
   
   return (
     <div className="jl-multiple">
@@ -111,7 +123,7 @@ function Multiple() {
       </div>
       <div className="jl-multiple__count-clear">
         <div className="jl-multiple__count jl-text-size-h4"><strong>{totalJobs}</strong> jobs found</div>
-        <button class="jl-multiple__clear jl-text-size-h4">Clear all</button>
+        <button onClick={handleClearAll} class="jl-multiple__clear jl-text-size-h4">Clear all</button>
       </div>
       <div className="jl-multiple__pagination jl-multiple__pagination_top">
         <Pagination />
