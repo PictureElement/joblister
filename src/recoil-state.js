@@ -85,13 +85,15 @@ const filteredJobsState = selector({
       // Make string comparisons case-insensitive by converting to lowercase
       jobList = jobList.filter((job) => (job.title).toLowerCase().includes(searchQuery.toLocaleLowerCase()));
 
-      const totalPages = Math.ceil(jobList.length / perPage);
       const filteredJobs = jobList.slice(startIndex, endIndex);
+      const totalPages = Math.ceil(jobList.length / perPage);
+      const totalJobs = jobList.length;
       
       // Early return since search cancels filtration.
       return {
         filteredJobs,
         totalPages,
+        totalJobs,
       }
     }
 
@@ -115,13 +117,15 @@ const filteredJobsState = selector({
       jobList = jobList.filter(job => experienceLevelFiltersIds.includes(job.experience_level.id));
     }
 
-    const totalPages = Math.ceil(jobList.length / perPage);
     const filteredJobs = jobList.slice(startIndex, endIndex);
+    const totalPages = Math.ceil(jobList.length / perPage);
+    const totalJobs = jobList.length;
     
     // Return paginated filtered job list and total pages 
     return {
       filteredJobs,
       totalPages,
+      totalJobs,
     }
   },
 })

@@ -13,7 +13,8 @@ import {
   allExperienceLevelsState,
   experienceLevelFiltersState,
   currentPageState,
-  searchQueryState
+  searchQueryState,
+  filteredJobsState 
 } from '../recoil-state';
 
 function Multiple() {
@@ -33,6 +34,7 @@ function Multiple() {
   const [experienceLevelFilters, setExperienceLevelFilters] = useRecoilState(experienceLevelFiltersState);
   const setSearchQuery = useSetRecoilState(searchQueryState);
   const setCurrentPage = useSetRecoilState(currentPageState);
+  const { totalJobs } = useRecoilValue(filteredJobsState);
 
   function handleFilterChange(filterState, setFilterState, actionType) {
     // Clear search
@@ -108,7 +110,7 @@ function Multiple() {
         />
       </div>
       <div className="jl-multiple__count-clear">
-        <div className="jl-multiple__count jl-text-size-h4"><strong>300</strong> jobs found</div>
+        <div className="jl-multiple__count jl-text-size-h4"><strong>{totalJobs}</strong> jobs found</div>
         <button class="jl-multiple__clear jl-text-size-h4">Clear all</button>
       </div>
       <div className="jl-multiple__pagination jl-multiple__pagination_top">
