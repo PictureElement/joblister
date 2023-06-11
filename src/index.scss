@@ -207,12 +207,46 @@
 // Multiple Component
 //
 #jl-root .jl-multiple {
+  &__count-clear {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 16px;
+  }
+  &__search {
+    margin-bottom: 16px;
+  }
+  &__count {
+    text-align: center;
+    @include font-family;
+    font-weight: 400;
+    color: $on-background-primary;
+    strong {
+      font-weight: 600;
+    }
+  }
+  &__clear {
+    @include font-family;
+    font-weight: 400;
+    height: 44px;
+    color: $accent;
+    border-radius: 0;
+    border: none;
+    padding: 0;
+    background: none;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
   &__pagination {
     &_top {
-      margin-bottom: 32px;
+      margin-bottom: 12px;
+      @media (max-width: 767px) {
+        margin-bottom: 16px;
+      }
     }
     &_bottom {
-      margin-top: 32px;
+      margin-top: 16px;
     }
   }
   &__header {
@@ -242,7 +276,7 @@
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 16px;
-    margin: 32px 0;
+    margin-bottom: 16px;
     @media (max-width: 767px) {
       grid-template-columns: repeat(1, 1fr);
     }
@@ -412,15 +446,11 @@
     display: inline-flex;
     align-items: center;
     @include font-family;
-    font-size: 16px;
-    line-height: 1;
     font-weight: 400;
-    padding: 16px 4px 16px 0;
+    height: 44px;
     color: $accent;
-    text-align: center;
-    transition: transform 200ms ease-out;
     &:hover {
-      transform: translateX(-4px);
+      text-decoration: underline;
     }
     svg {
       margin-inline-end: 8px;

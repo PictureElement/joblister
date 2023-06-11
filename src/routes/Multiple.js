@@ -107,6 +107,10 @@ function Multiple() {
           options={allExperienceLevels}
         />
       </div>
+      <div className="jl-multiple__count-clear">
+        <div className="jl-multiple__count jl-text-size-h4"><strong>300</strong> jobs found</div>
+        <button class="jl-multiple__clear jl-text-size-h4">Clear all</button>
+      </div>
       <div className="jl-multiple__pagination jl-multiple__pagination_top">
         <Pagination />
       </div>

@@ -104,7 +104,7 @@ function Single() {
       </div>
       <hr className="jl-mobile-only" />
       <div className="jl-single__footer">
-        <Link to="/" className="jl-single__back-to-listing">
+        <Link to="/" className="jl-single__back-to-listing jl-text-size-h4">
           <BackIcon /> Back to listing
         </Link>
       </div>
