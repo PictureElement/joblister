@@ -123,7 +123,7 @@ function Multiple() {
       </div>
       <div className="jl-multiple__count-clear">
         <div className="jl-multiple__count jl-text-size-h4"><strong>{totalJobs}</strong> jobs found</div>
-        <button onClick={handleClearAll} class="jl-multiple__clear jl-text-size-h4">Clear all</button>
+        <button onClick={handleClearAll} className="jl-multiple__clear jl-text-size-h4">Clear all</button>
       </div>
       <div className="jl-multiple__pagination jl-multiple__pagination_top">
         <Pagination />

@@ -5,7 +5,7 @@ import { allJobsState } from '../recoil-state';
 import DOMPurify from 'dompurify';
 import { calculateTimeAgo } from '../utils';
 import { ReactComponent as BackIcon } from '../icons/back.svg';
-
+import Form from '../components/form';
 import {
   EmailShareButton,
   FacebookShareButton,
@@ -108,6 +108,7 @@ function Single() {
           <BackIcon /> Back to listing
         </Link>
       </div>
+      <Form />
     </div>
   )
 }
