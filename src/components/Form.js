@@ -1,20 +1,6 @@
 import { useState } from 'react';
 import InputFactory from '../helpers/InputFactory';
-
-const inputs = [
-  {
-    name: 'name',
-    type: 'text',
-    placeholder: 'Name',
-    label: 'Name'
-  },
-  {
-    name: 'email',
-    type: 'text',
-    placeholder: 'Email',
-    label: 'Email'
-  }
-];
+import inputConfig from '../config/inputConfig';
 
 function Form() {
 
@@ -39,12 +25,12 @@ function Form() {
 
   return (
     <form className="js-form" method="post" onSubmit={handleSubmit}>
-      {inputs.map((input, index) => {
+      {inputConfig.map((config, index) => {
         return (
           <InputFactory
             key={index}
-            {...input}
-            value={values[input.name]}
+            {...config}
+            value={values[config.name]}
             onChange={onChange}
           />
         );
