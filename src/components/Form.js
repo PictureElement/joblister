@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import Input from "./Input";
+import InputFactory from '../helpers/InputFactory';
 
 const inputs = [
   {
@@ -39,14 +39,16 @@ function Form() {
 
   return (
     <form className="js-form" method="post" onSubmit={handleSubmit}>
-      {inputs.map((input, index) => (
-        <Input
-          key={index}
-          {...input}
-          value={values[input.name]}
-          onChange={onChange}
-        />
-      ))}
+      {inputs.map((input, index) => {
+        return (
+          <InputFactory
+            key={index}
+            {...input}
+            value={values[input.name]}
+            onChange={onChange}
+          />
+        );
+      })}
       <button type="submit" className="js-form__submit">Submit</button>
     </form>
   )
