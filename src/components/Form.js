@@ -1,8 +1,11 @@
 import { useState } from 'react';
+import DOMPurify from 'dompurify';
 import InputFactory from '../helpers/InputFactory';
 import inputConfig from '../config/inputConfig';
 
 function Form() {
+
+  const nonceHiddenFields = { __html: DOMPurify.sanitize(jl_script_data.nonce) };
 
   const [values, setValues] = useState({
     name: '',
@@ -35,6 +38,7 @@ function Form() {
           />
         );
       })}
+      <div dangerouslySetInnerHTML={ nonceHiddenFields }></div>
       <button type="submit" className="js-form__submit">Submit</button>
     </form>
   )

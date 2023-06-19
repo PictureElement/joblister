@@ -33,6 +33,14 @@ function jl_shortcode() {
   wp_enqueue_script('jl-script');
   wp_enqueue_style('jl-style');
 
+  // Generate the nonce hidden fields for forms
+  $nonce = wp_nonce_field( 'jl-add-application', '_jlnonce' );
+
+  // Pass the jl_script_data object to jl-script
+  wp_localize_script('jl-script', 'jl_script_data', array(
+    'nonce' => $nonce,
+  ));
+
   return '<div class="jl-root" id="jl-root"></div>';
 }
 add_shortcode('joblister', 'jl_shortcode');
