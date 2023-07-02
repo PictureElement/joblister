@@ -33,14 +33,6 @@ function jl_shortcode() {
   wp_enqueue_script('jl-script');
   wp_enqueue_style('jl-style');
 
-  // Generate the nonce hidden fields for forms
-  $nonce = wp_nonce_field( 'jl-add-application', '_jlnonce' );
-
-  // Pass the jl_script_data object to jl-script
-  wp_localize_script('jl-script', 'jl_script_data', array(
-    'nonce' => $nonce,
-  ));
-
   return '<div class="jl-root" id="jl-root"></div>';
 }
 add_shortcode('joblister', 'jl_shortcode');
@@ -113,7 +105,7 @@ function jl_register_cpt_jl_job() {
     "label" => "Jobs",
     "labels" => $labels,
     "description" => "",
-    "public" => false,
+    "public" => true,
     "publicly_queryable" => false,
     "show_ui" => true,
     "show_in_rest" => true,
@@ -172,7 +164,7 @@ function jl_register_jl_location() {
   $args = [
     "label" => "Locations",
     "labels" => $labels,
-    "public" => false,
+    "public" => true,
     "publicly_queryable" => false,
     "hierarchical" => false,
     "show_ui" => true,
@@ -229,7 +221,7 @@ function jl_register_jl_category() {
   $args = [
     "label" => "Categories",
     "labels" => $labels,
-    "public" => false,
+    "public" => true,
     "publicly_queryable" => false,
     "hierarchical" => false,
     "show_ui" => true,
@@ -286,7 +278,7 @@ function jl_register_jl_type() {
   $args = [
     "label" => "Types",
     "labels" => $labels,
-    "public" => false,
+    "public" => true,
     "publicly_queryable" => false,
     "hierarchical" => false,
     "show_ui" => true,
@@ -343,7 +335,7 @@ function jl_register_jl_experience_level() {
   $args = [
     "label" => "Experience Levels",
     "labels" => $labels,
-    "public" => false,
+    "public" => true,
     "publicly_queryable" => false,
     "hierarchical" => false,
     "show_ui" => true,
@@ -387,10 +379,26 @@ function jl_process_taxonomy_term($term_id) {
 
 // 13. Filter the "jl_job" post data for the REST API response
 function jl_filter_rest_jl_job($response) {
-  $location = jl_process_taxonomy_term($response->data['jl-locations'][0]);
-  $category = jl_process_taxonomy_term($response->data['jl-categories'][0]);
-  $type = jl_process_taxonomy_term($response->data['jl-types'][0]);
-  $experience_level = jl_process_taxonomy_term($response->data['jl-experience-levels'][0]);
+
+  $location = '';
+  if (isset($response->data['jl-locations'][0])) {
+    $location = jl_process_taxonomy_term($response->data['jl-locations'][0]);
+  }
+
+  $category = '';
+  if (isset($response->data['jl-categories'][0])) {
+    $category = jl_process_taxonomy_term($response->data['jl-categories'][0]);
+  }
+  
+  $type = '';
+  if (isset($response->data['jl-types'][0])) {
+    $type = jl_process_taxonomy_term($response->data['jl-types'][0]);
+  }
+
+  $experience_level = '';
+  if (isset($response->data['jl-experience-levels'][0])) {
+    $experience_level = jl_process_taxonomy_term($response->data['jl-experience-levels'][0]);
+  }
 
   return [
     'id' => $response->data['id'],
@@ -500,7 +508,7 @@ function jl_register_cpt_jl_application() {
     "public" => false,
     "publicly_queryable" => false,
     "show_ui" => true,
-    "show_in_rest" => false,
+    "show_in_rest" => true,
     "rest_base" => "jl-applications",
     "rest_controller_class" => "WP_REST_Posts_Controller",
     "has_archive" => false,
@@ -600,11 +608,11 @@ function jl_populate_jl_application_columns($column, $post_id) {
       break;
     case 'job_title':
       $job_id = get_post_meta($post_id, 'job_id', true);
-      $job_title = get_the_title($job_id);
-      if ($job_title) {
+      if ($job_id) {
+        $job_title = get_the_title($job_id);
         echo $job_title;
       } else {
-        echo 'N/A';
+        echo '—';
       }
       break;
   }
@@ -625,3 +633,38 @@ function jl_populate_jl_job_columns($column, $post_id) {
   }
 }
 add_action('manage_jl_job_posts_custom_column', 'jl_populate_jl_job_columns', 10, 2);
+
+// 23. Add a custom POST endpoint for the "jl_application" post type 
+function jl_modify_jl_application_post_endpoint( $endpoints ) {
+  $endpoints['/wp/v2/jl-applications'] = array(
+      'methods'  => 'POST',
+      'callback' => 'jl_application_post_callback',
+  );
+
+  return $endpoints;
+}
+add_filter( 'rest_endpoints', 'jl_modify_jl_application_post_endpoint' );
+
+function jl_application_post_callback( $request ) {
+  // Create a new application
+  $name = sanitize_text_field( $request['name'] );
+  $email = sanitize_email( $request['email'] );
+  $job_id = sanitize_text_field( $request['job_id'] );
+  
+  $new_jl_application_id = wp_insert_post(array (
+    'post_type' => 'jl_application',
+    'name' => $name,
+    'email' => $email,
+    'job_id' => $job_id,
+    'post_status' => 'publish',
+  ));
+
+  if ( $new_jl_application_id ) {
+    update_post_meta( $new_jl_application_id, 'name', $name );
+    update_post_meta( $new_jl_application_id, 'email', $email );
+    update_post_meta( $new_jl_application_id, 'job_id', $job_id );
+    return new WP_REST_Response( 'Application created successfully.', 201 );
+  } else {
+    return new WP_REST_Response( 'Failed to create application.', 500 );
+  }
+}
