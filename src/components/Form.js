@@ -12,6 +12,10 @@ function Form() {
     name: '',
     email: ''
   });
+  const [errors, setErrors] = useState({
+    name: '',
+    email: ''
+  })
 
   // Get the :idDashSlug parameter from the URL.
   const { idDashSlug } = useParams();
@@ -67,7 +71,10 @@ function Form() {
   }
 
   return (
-    <form className="js-form" onSubmit={handleSubmit}>
+    <form className="jl-form" onSubmit={handleSubmit}>
+      <h2 className="jl-form__title">Apply for this job</h2>
+      <p className="jl-form__subtitle">Use the form below to submit your job application</p>
+      <div className="jl-form__required jl-text-size-small">* indicates a required field</div>
       {inputConfig.map((config, index) => {
         return (
           <InputFactory
@@ -78,7 +85,7 @@ function Form() {
           />
         );
       })}
-      <button type="submit" className="js-form__submit">Submit</button>
+      <button type="submit" className="jl-form__submit">Submit</button>
     </form>
   )
 }

@@ -61,13 +61,6 @@
   background-color: $background;
 }
 
-#jl-root hr {
-  border: 0;
-  height: 1px;
-  margin: 16px 0;
-  background-color: $accent;
-}
-
 #jl-root button,
 #jl-root a {
   &:focus {
@@ -84,7 +77,7 @@
   padding: 0;
   margin: 0;
   li:not(:last-child) {
-    margin-bottom: 1rem;
+    margin-bottom: 16px;
   }
 }
 
@@ -287,15 +280,15 @@
 //
 #jl-root .jl-single {
   &__header {
-    padding-bottom: 40px;
+    padding-bottom: 32px;
     display: flex;
     column-gap: 80px;
-    border-bottom: 1px solid $accent;
+    border-bottom: 1px solid $on-background-border;
     &-left {
       width: 75%;
       @media (max-width: 767px) {
         width: 100%;
-        margin-bottom: 40px;
+        margin-bottom: 32px;
       }
     }
     &-right {
@@ -341,7 +334,9 @@
   &__body {
     display: flex;
     column-gap: 80px;
-    padding-top: 24px;
+    padding-top: 20px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid $on-background-border;
     &-left {
       width: 75%;
       @media (max-width: 767px) {
@@ -356,6 +351,7 @@
     }
     @media (max-width: 767px) {
       flex-direction: column;
+      padding-bottom: 32px;
     }
   }
   &__content {
@@ -398,47 +394,9 @@
     }
     a {
       color: $accent;
-      text-decoration: underline;
+      text-decoration: none;
       &:hover {
-        text-decoration: none;
-      }
-    }
-  }
-  &__widget {
-    &-title {
-      padding-top: 12px;
-      margin-bottom: 16px;
-      color: $on-background-primary;
-    }
-    &-item-category {
-      padding-bottom: 16px;
-      h3 {
-        font-weight: 600;
-        color: $on-background-primary;
-      }
-      div {
-        font-weight: 300;
-        color: $on-background-primary;
-      }
-    }
-    &-item-social {
-      padding-top: 8px;
-      display: flex;
-      column-gap: 16px;
-      button {
-        transition: transform 200ms ease-out;
-        &:hover {
-          transform: scale(1.05);
-        }
-        &:focus {
-          border-radius: 0;
-        }
-      }
-      svg {
-        display: block;
-      }
-      @media (max-width: 767px) {
-        padding-bottom: 16px;
+        text-decoration: underline;
       }
     }
   }
@@ -449,12 +407,64 @@
     font-weight: 400;
     height: 44px;
     color: $accent;
+    margin-top: 16px;
     &:hover {
       text-decoration: underline;
     }
     svg {
       margin-inline-end: 8px;
       fill: $accent;
+    }
+  }
+}
+
+#jl-root .jl-job-details {
+  border-bottom: 1px solid $on-background-border;
+  padding-bottom: 16px;
+  &__title {
+    padding-top: 12px;
+    padding-bottom: 16px;
+    color: $on-background-primary;
+  }
+  &__category {
+    padding-bottom: 16px;
+    h3 {
+      font-weight: 600;
+      color: $on-background-primary;
+    }
+    div {
+      font-weight: 300;
+      color: $on-background-primary;
+    }
+  }
+  @media (max-width: 767px) {
+    border-top: 1px solid $on-background-border;
+    padding-top: 20px;
+    margin-top: 16px;
+  }
+}
+
+#jl-root .jl-share {
+  padding-top: 16px;
+  &__title {
+    padding-top: 16px;
+    padding-bottom: 16px;
+    color: $on-background-primary;
+  }
+  &__container {
+    display: flex;
+    column-gap: 16px;
+    button {
+      transition: transform 200ms ease-out;
+      &:hover {
+        transform: scale(1.05);
+      }
+      &:focus {
+        border-radius: 0;
+      }
+    }
+    svg {
+      display: block;
     }
   }
 }
@@ -647,6 +657,85 @@
   }
 }
 
+// Form Component
+#jl-root .jl-form {
+  border: 1px solid $on-background-border;
+  padding: 32px;
+  max-width: 400px;
+  margin-top: 32px;
+  &__title {
+    text-align: center;
+    margin-bottom: 16px;
+    color: $on-background-primary;
+  }
+  &__subtitle {
+    text-align: center;
+    color: $on-background-primary;
+    margin-bottom: 16px;
+    font-weight: 300;
+  }
+  &__required {
+    margin-bottom: 16px;
+    color: $on-background-secondary;
+    text-align: center;
+  }
+  &__submit {
+    all: unset;
+    margin-top: 8px;
+    cursor: pointer;
+    user-select: none;
+    background-color: $accent;
+    @include font-family;
+    font-size: 16px;
+    line-height: 1;
+    font-weight: 400;
+    box-sizing: border-box;
+    padding: 16px;
+    width: 100%;
+    display: inline-block;
+    color: $on-accent;
+    text-align: center;
+  }
+}
+
+// Input Component
+//
+#jl-root .jl-input {
+  margin-bottom: 16px;
+  &__label {
+    color: $on-background-primary;
+    margin-bottom: 4px;
+  }
+  &__hint {
+    margin-top: 4px;
+    color: $on-background-secondary;
+  }
+  &__control {
+    appearance: none;
+    outline: 0;
+    border: none;
+    margin-bottom: 4px;
+    border-radius: 0;
+    padding: 9px 8px;
+    @include font-family;
+    font-size: 16px;
+    line-height: 24px;
+    font-weight: 400;
+    color: $on-surface-primary;
+    border: 1px solid $on-background-border;
+    background-color: $surface;
+    &:focus {
+      outline: 2px solid $accent;
+      outline-offset: 1px;
+      transition: outline-offset 0s,outline 0s;
+    }
+  }
+  &__error {
+    color: $error;
+    margin-top: 4px;
+  }
+}
+
 // RTL-specific
 //
 html[dir="rtl"] #jl-root {
@@ -675,18 +764,4 @@ html[dir="rtl"] #jl-root {
 //
 .jl-d-inline-block {
   display: inline-block;
-}
-
-.jl-mobile-only {
-  display: none;
-  @media (max-width: 767px) {
-    display: block;
-  }
-}
-
-.jl-desktop-only {
-  display: block;
-  @media (max-width: 767px) {
-    display: none;
-  }
 }

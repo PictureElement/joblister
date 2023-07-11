@@ -62,30 +62,28 @@ function Single() {
           <div className="jl-single__content" dangerouslySetInnerHTML={ content }></div>
         </div>
         <div className="jl-single__body-right">
-          <hr className="jl-mobile-only" />
-          <div className="jl-single__widget">
-            <h2 className="jl-single__widget-title jl-text-size-h2">Job details</h2>
-            <div className="jl-single__widget-item-category">
+          <div className="jl-job-details">
+            <h2 className="jl-job-details__title jl-text-size-h2">Job details</h2>
+            <div className="jl-job-details__category">
               <h3 className="jl-text-size-p">Location</h3>
               <div className="jl-text-size-p">{location ? location : 'N/A'}</div>
             </div>
-            <div className="jl-single__widget-item-category">
+            <div className="jl-job-details__category">
               <h3 className="jl-text-size-p">Category</h3>
               <div className="jl-text-size-p">{category ? category : 'N/A'}</div>
             </div>
-            <div className="jl-single__widget-item-category">
+            <div className="jl-job-details__category">
               <h3 className="jl-text-size-p">Type</h3>
               <div className="jl-text-size-p">{type ? type : 'N/A'}</div>
             </div>
-            <div className="jl-single__widget-item-category">
+            <div className="jl-job-details__category">
               <h3 className="jl-text-size-p">Experience</h3>
               <div className="jl-text-size-p">{experienceLevel ? experienceLevel : 'N/A'}</div>
             </div>
           </div>
-          <hr />
-          <div className="jl-single__widget">
-            <h2 className="jl-single__widget-title jl-text-size-h2">Share this job</h2>
-            <div className="jl-single__widget-item-social">
+          <div className="jl-share">
+            <h2 className="jl-share__title jl-text-size-h2">Share this job</h2>
+            <div className="jl-share__container">
               <FacebookShareButton url={shareUrl}>
                 <FacebookIcon size={32} />
               </FacebookShareButton>
@@ -102,13 +100,10 @@ function Single() {
           </div>
         </div>
       </div>
-      <hr className="jl-mobile-only" />
-      <div className="jl-single__footer">
-        <Link to="/" className="jl-single__back-to-listing jl-text-size-h4">
-          <BackIcon /> Back to listing
-        </Link>
-      </div>
       <Form />
+      <Link to="/" className="jl-single__back-to-listing jl-text-size-h4">
+        <BackIcon /> Back to listing
+      </Link>  
     </div>
   )
 }

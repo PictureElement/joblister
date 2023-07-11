@@ -5,14 +5,16 @@ const inputConfig = [
   {
     name: 'name',
     type: 'text',
-    placeholder: 'Name',
-    label: 'Name'
+    hint: 'Must have at least 6 characters',
+    label: '* Name',
+    errorMessage: ''
   },
   {
     name: 'email',
     type: 'text',
-    placeholder: 'Email',
-    label: 'Email'
+    hint: 'Must be a valid email address',
+    label: '* Email',
+    errorMessage: ''
   }
 ];
 

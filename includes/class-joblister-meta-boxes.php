@@ -25,7 +25,7 @@ class JL_Meta_Boxes
   }
 
   // Fill the meta box with the desired content
-  private function render_jl_application_fields($post)
+  public function render_jl_application_fields($post)
   {
     $job_id = get_post_meta($post->ID, 'job_id', true);
     $name = get_post_meta($post->ID, 'name', true);

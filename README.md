@@ -4,7 +4,7 @@ Examples:
 - https://jobs.zalando.com/en/jobs
 
 Todo:
-1. Change Apply now and social media buttons hover state
+1. Change Apply, Submit now and social media buttons hover state
 2. Style "No jobs found" and "Loading ..."
 3. Application form w. spam protection
 4. Add Resume field
