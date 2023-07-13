@@ -44,6 +44,11 @@ function Single() {
   
   const shareUrl = window.location.href;
 
+  // Smoothly scroll to the application form
+  function scrollToForm() {
+    document.querySelector('.jl-form').scrollIntoView({ behavior: 'smooth' });
+  };
+  
   return (
     <div className="jl-single">
       <div className="jl-single__header">
@@ -54,7 +59,7 @@ function Single() {
           </div>
         </div>
         <div className="jl-single__header-right">
-          <a href="#apply" className="jl-single__apply">Apply</a>
+          <button onClick={scrollToForm} className="jl-single__apply">Apply</button>
         </div>
       </div>
       <div className="jl-single__body">

@@ -310,17 +310,20 @@
     color: $on-background-secondary;
   }
   &__apply {
+    all: unset;
+    margin-top: 12px;
+    cursor: pointer;
+    user-select: none;
     background-color: $accent;
     @include font-family;
     font-size: 16px;
     line-height: 1;
     font-weight: 400;
     padding: 16px;
-    display: inline-block;
     width: 100%;
+    display: inline-block;
     color: $on-accent;
     text-align: center;
-    margin-top: 12px;
     transition: transform 200ms ease-out;
     &:hover {
       transform: scale(1.05);
