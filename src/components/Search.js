@@ -30,7 +30,7 @@ function Search() {
   return (
     <div className="jl-search">
       <div className="jl-search__label">
-        <div className="sr-only">Search for jobs by title or keyword</div>
+        <div className="jl-visually-hidden">Search for jobs by title or keyword</div>
         <SearchIcon />
         <input
           autoComplete="off"

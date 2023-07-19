@@ -727,6 +727,7 @@
     color: $on-surface-primary;
     border: 1px solid $on-background-border;
     background-color: $surface;
+    width: 100%;
     &:focus {
       outline: 2px solid $accent;
       outline-offset: 1px;
@@ -765,6 +766,12 @@ html[dir="rtl"] #jl-root {
 
 // Helpers
 //
-.jl-d-inline-block {
-  display: inline-block;
+.jl-visually-hidden {
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  height: 1px;
+  overflow: hidden;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
 }

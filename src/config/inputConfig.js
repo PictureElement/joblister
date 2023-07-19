@@ -13,6 +13,13 @@ const inputConfig = [
     type: 'text',
     hint: 'Must be a valid email address',
     label: '* Email'
+  },
+  {
+    name: 'resume',
+    type: 'file',
+    hint: 'Allowed Type(s): .pdf, .doc, .docx',
+    label: '* Resume',
+    accept: '.pdf,.doc,.docx'
   }
 ];
 

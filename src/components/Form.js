@@ -10,11 +10,13 @@ function Form() {
    */
   const [values, setValues] = useState({
     name: '',
-    email: ''
+    email: '',
+    resume: null
   });
   const [errors, setErrors] = useState({
     name: '',
-    email: ''
+    email: '',
+    resume: ''
   })
 
   // Get the :idDashSlug parameter from the URL.
@@ -34,23 +36,20 @@ function Form() {
     const encodedCredentials = window.btoa(`${username}:${password}`);
     const basicAuthHeader = `Basic ${encodedCredentials}`;
 
-    const requestBody = JSON.stringify({
-      job_id: id,
-      name: values.name,
-      email: values.email
-      // Include other form fields as needed
-    });
-
-    console.log(requestBody);
+    const formData = new FormData();
+    formData.append('job_id', id);
+    formData.append('name', values.name);
+    formData.append('email', values.email);
+    formData.append('resume', values.resume);
 
     // Initiate POST request
     fetch("https://dev.test/wp-json/wp/v2/jl-applications", {
       method: "POST",
       headers: {
-        "Content-Type": "application/json",
-        "Authorization": basicAuthHeader
+        "Authorization": basicAuthHeader,
+        "Content-Type": "multipart/form-data" // Add this line
       },
-      body: requestBody
+      body: formData
     })
       .then(response => response.json())
       .then(data => {
@@ -64,14 +63,22 @@ function Form() {
   }
 
   function onChange(e) {
-    setValues({
-      ...values,
-      [e.target.name]: e.target.value
-    });
-  }
-
+    if (e.target.type === 'file') {
+      const file = e.target.files.length > 0 ? e.target.files[0] : null;
+      setValues({
+        ...values,
+        [e.target.name]: file,
+      });
+    } else {
+      setValues({
+        ...values,
+        [e.target.name]: e.target.value,
+      });
+    }
+  } 
+  
   return (
-    <form className="jl-form" onSubmit={handleSubmit}>
+    <form className="jl-form" onSubmit={handleSubmit} encType="multipart/form-data">
       <h2 className="jl-form__title">Apply for this job</h2>
       <p className="jl-form__subtitle">Use the form below to submit your job application</p>
       <div className="jl-form__required jl-text-size-small">* indicates a required field</div>
@@ -80,7 +87,6 @@ function Form() {
           <InputFactory
             key={index}
             {...config}
-            value={values[config.name]}
             onChange={onChange}
           />
         );

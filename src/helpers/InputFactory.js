@@ -11,6 +11,8 @@ function InputFactory(props) {
       return <Input type="text" {...remainingProps} />;
     case 'email':
       return <Input type="email" {...remainingProps} />;
+    case 'file':
+      return <Input type="file" {...remainingProps} />;
     // Add cases for other input types as needed
     default:
       throw new Error(`Invalid input type: ${type}`);
