@@ -36,17 +36,17 @@ class JL_Admin_Columns
         break;
       case 'name':
         $name = get_post_meta($post_id, 'name', true);
-        echo $name;
+        echo $name ? $name : '—';
         break;
       case 'email':
         $email = get_post_meta($post_id, 'email', true);
-        echo $email;
+        echo $email ? $email : '—';
         break;
       case 'job_title':
         $job_id = get_post_meta($post_id, 'job_id', true);
         if ($job_id) {
-          $job_title = get_the_title($job_id);
-          echo $job_title;
+          $job_post = get_post($job_id);
+          echo $job_post ? get_the_title($job_id) : '—';
         } else {
           echo '—';
         }

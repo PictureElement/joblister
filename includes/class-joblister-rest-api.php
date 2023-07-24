@@ -125,22 +125,50 @@ class JL_REST_API
   public function application_post_callback($request)
   {
     // Create a new application
+    $job_id = sanitize_text_field($request['job_id']);
     $name = sanitize_text_field($request['name']);
     $email = sanitize_email($request['email']);
-    $job_id = sanitize_text_field($request['job_id']);
+    
+    // Handle resume file upload
+    $files = $request->get_file_params();
+    if (isset($files['resume']) && !empty($files['resume']['tmp_name'])) {
+      // The wp_handle_upload function takes the upload file array as an argument and returns an array with file information.
+      $overrides = ['test_form' => false];  // This bypasses the normal form checks - as this isn't coming from a form
+      $file = wp_handle_upload($files['resume'], $overrides);
+
+      if (isset($file['error'])) {
+        return new WP_Error('upload_error', $file['error'], array('status' => 500));
+      }
+
+      // Use wp_insert_attachment to move the file to the uploads directory and add the appropriate database entries
+      $attachment = array(
+        'guid' => $file['url'],
+        'post_mime_type' => $file['type'],
+        'post_title' => preg_replace('/\.[^.]+$/', '', basename($file['file'])),
+        'post_content' => '',
+        'post_status' => 'inherit'
+      );
+
+      $attachment_id = wp_insert_attachment($attachment, $file['file']);
+
+      require_once(ABSPATH . 'wp-admin/includes/image.php');
+
+      $attachment_data = wp_generate_attachment_metadata($attachment_id, $file['file']);
+      wp_update_attachment_metadata($attachment_id, $attachment_data);
+    }
 
     $new_jl_application_id = wp_insert_post(array(
       'post_type' => 'jl_application',
-      'name' => $name,
-      'email' => $email,
-      'job_id' => $job_id,
       'post_status' => 'publish',
     ));
 
     if ($new_jl_application_id) {
+      update_post_meta($new_jl_application_id, 'job_id', $job_id);
       update_post_meta($new_jl_application_id, 'name', $name);
       update_post_meta($new_jl_application_id, 'email', $email);
-      update_post_meta($new_jl_application_id, 'job_id', $job_id);
+      if (isset($attachment_id)) {
+        update_post_meta($new_jl_application_id, 'resume', $attachment_id);
+      }
       return new WP_REST_Response('Application created successfully.', 201);
     } else {
       return new WP_REST_Response('Failed to create application.', 500);

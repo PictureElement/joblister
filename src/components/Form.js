@@ -46,8 +46,7 @@ function Form() {
     fetch("https://dev.test/wp-json/wp/v2/jl-applications", {
       method: "POST",
       headers: {
-        "Authorization": basicAuthHeader,
-        "Content-Type": "multipart/form-data" // Add this line
+        "Authorization": basicAuthHeader
       },
       body: formData
     })

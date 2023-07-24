@@ -95,7 +95,7 @@ class JL_Meta_Boxes
     );
 
     // File upload
-    if (isset($_FILES['resume'])) {
+    if (isset($_FILES['resume']) && $_FILES['resume']['size'] > 0) {
       // Sanitize the file name
       $filename = sanitize_file_name($_FILES['resume']['name']);
 
