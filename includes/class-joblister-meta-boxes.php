@@ -52,25 +52,30 @@ class JL_Meta_Boxes
     $email = get_post_meta($post->ID, 'email', true);
     $resume = get_post_meta($post->ID, 'resume', true);
 ?>
-    <div>
-      <label for="job_id">Job ID</label>
-      <input type="text" id="job_id" name="job_id" autocomplete="off" value="<?php echo esc_attr($job_id); ?>">
+    <div style="margin-bottom:1em;">
+      <label style="display:block;margin-bottom:4px;" for="job_id">Job ID</label>
+      <input style="width:100%;" type="text" id="job_id" name="job_id" autocomplete="off" value="<?php echo esc_attr($job_id); ?>">
     </div>
-    <div>
-      <label for="name">Name</label>
-      <input type="text" id="name" name="name" autocomplete="off" value="<?php echo esc_attr($name); ?>">
+    <div style="margin-bottom:1em;">
+      <label style="display:block;margin-bottom:4px;" for="name">Name</label>
+      <input style="width:100%;" type="text" id="name" name="name" autocomplete="off" value="<?php echo esc_attr($name); ?>">
     </div>
-    <div>
-      <label for="email">Email</label>
-      <input type="email" id="email" name="email" value="<?php echo esc_attr($email); ?>">
+    <div style="margin-bottom:1em;">
+      <label style="display:block;margin-bottom:4px;" for="email">Email</label>
+      <input style="width:100%;" type="email" id="email" name="email" value="<?php echo esc_attr($email); ?>">
     </div>
-    <div>
-      <label for="resume">Resume</label>
-      <input type="file" id="resume" name="resume" accept=".pdf,.doc,.docx">
-      <?php if ($resume) : ?>
-        <p>Resume file: <a href="<?php echo esc_url(wp_get_attachment_url($resume)); ?>" target="_blank"><?php echo esc_html(basename(get_attached_file($resume))); ?></a></p>
-      <?php endif; ?>
+    <div style="margin-bottom:1em;">
+      <label style="display:block;margin-bottom:4px;" for="resume">Resume</label>
+      <input style="padding:0;" type="file" id="resume" name="resume" accept=".pdf,.doc,.docx">
     </div>
+    <?php if ($resume) : ?>
+      <div style="display:flex;align-items:center;">
+        <label style="margin-inline-end:4px;cursor:default;" for="uploaded_file">Uploaded File:</label>
+        <output id="uploaded_resume" name="uploaded_file">
+          <a href="<?php echo esc_url(wp_get_attachment_url($resume)); ?>" target="_blank"><?php echo esc_html(basename(get_attached_file($resume))); ?></a>
+        </output>
+      </div>
+    <?php endif; ?>
 <?php
   }
 
