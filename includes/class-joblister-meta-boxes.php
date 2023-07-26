@@ -64,18 +64,21 @@ class JL_Meta_Boxes
       <label style="display:block;margin-bottom:4px;" for="email">Email</label>
       <input style="width:100%;" type="email" id="email" name="email" value="<?php echo esc_attr($email); ?>">
     </div>
+
     <div style="margin-bottom:1em;">
       <label style="display:block;margin-bottom:4px;" for="resume">Resume</label>
       <input style="padding:0;" type="file" id="resume" name="resume" accept=".pdf,.doc,.docx">
     </div>
-    <?php if ($resume) : ?>
-      <div style="display:flex;align-items:center;">
-        <label style="margin-inline-end:4px;cursor:default;" for="uploaded_file">Uploaded File:</label>
-        <output id="uploaded_resume" name="uploaded_file">
+    <div style="display:flex;align-items:center;">
+      <label style="margin-inline-end:4px;cursor:default;" for="uploaded_file">Uploaded File:</label>
+      <output id="uploaded_resume" name="uploaded_file">
+        <?php if ($resume && esc_url(wp_get_attachment_url($resume))) : ?>
           <a href="<?php echo esc_url(wp_get_attachment_url($resume)); ?>" target="_blank"><?php echo esc_html(basename(get_attached_file($resume))); ?></a>
-        </output>
-      </div>
-    <?php endif; ?>
+        <?php else: ?>
+          —
+        <?php endif; ?>
+      </output>
+    </div>
 <?php
   }
 
