@@ -46,7 +46,16 @@ class JL_Admin_Columns
         $job_id = get_post_meta($post_id, 'job_id', true);
         if ($job_id) {
           $job_post = get_post($job_id);
-          echo $job_post ? get_the_title($job_id) : '—';
+          if ($job_post) {
+            $title = get_the_title($job_id);
+            if ($title) {
+              echo $title;
+            } else {
+              echo '(no title)';
+            }
+          } else {
+            echo '—';
+          }
         } else {
           echo '—';
         }

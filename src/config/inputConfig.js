@@ -5,19 +5,19 @@ const inputConfig = [
   {
     name: 'name',
     type: 'text',
-    hint: 'Must have at least 6 characters',
+    helper: '',
     label: '* Name'
   },
   {
     name: 'email',
     type: 'text',
-    hint: 'Must be a valid email address',
+    helper: '',
     label: '* Email'
   },
   {
     name: 'resume',
     type: 'file',
-    hint: 'Allowed Type(s): .pdf, .doc, .docx',
+    helper: 'Allowed Type(s): .pdf, .doc, .docx',
     label: '* Resume',
     accept: '.pdf,.doc,.docx'
   }

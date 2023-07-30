@@ -53,7 +53,11 @@ function Single() {
     <div className="jl-single">
       <div className="jl-single__header">
         <div className="jl-single__header-left">
-          <h1 className="jl-single__title jl-text-size-h1" dangerouslySetInnerHTML={ title }></h1>
+          { title.__html ?
+            <h1 className="jl-single__title jl-text-size-h1" dangerouslySetInnerHTML={ title }></h1>
+            :
+            <h1 className="jl-single__title jl-text-size-h1">(no title)</h1>
+          } 
           <div className="jl-single__subtitle jl-text-size-small">
             Job ID: {id} | Updated {updatedTimeAgo}
           </div>
@@ -64,26 +68,30 @@ function Single() {
       </div>
       <div className="jl-single__body">
         <div className="jl-single__body-left">
-          <div className="jl-single__content" dangerouslySetInnerHTML={ content }></div>
+          { content.__html ?
+            <div className="jl-single__content" dangerouslySetInnerHTML={ content }></div>
+            :
+            <div className="jl-single__content">—</div>
+          }
         </div>
         <div className="jl-single__body-right">
           <div className="jl-job-details">
             <h2 className="jl-job-details__title jl-text-size-h2">Job details</h2>
             <div className="jl-job-details__category">
               <h3 className="jl-text-size-p">Location</h3>
-              <div className="jl-text-size-p">{location ? location : 'N/A'}</div>
+              <div className="jl-text-size-p">{location ? location : '—'}</div>
             </div>
             <div className="jl-job-details__category">
               <h3 className="jl-text-size-p">Category</h3>
-              <div className="jl-text-size-p">{category ? category : 'N/A'}</div>
+              <div className="jl-text-size-p">{category ? category : '—'}</div>
             </div>
             <div className="jl-job-details__category">
               <h3 className="jl-text-size-p">Type</h3>
-              <div className="jl-text-size-p">{type ? type : 'N/A'}</div>
+              <div className="jl-text-size-p">{type ? type : '—'}</div>
             </div>
             <div className="jl-job-details__category">
               <h3 className="jl-text-size-p">Experience</h3>
-              <div className="jl-text-size-p">{experienceLevel ? experienceLevel : 'N/A'}</div>
+              <div className="jl-text-size-p">{experienceLevel ? experienceLevel : '—'}</div>
             </div>
           </div>
           <div className="jl-share">

@@ -21,17 +21,21 @@ function JobItem(props) {
         <div className="jl-job-item__table">
           <div className="jl-job-item__row">
             <div className="jl-job-item__job">
-              <div className="jl-job-item__title jl-text-size-h3" dangerouslySetInnerHTML={ title }></div>
+              {title.__html ?
+                <div className="jl-job-item__title jl-text-size-h3" dangerouslySetInnerHTML={ title }></div>
+                :
+                <div className="jl-job-item__title jl-text-size-h3">(no title)</div>
+              }
               <div className="jl-job-item__subtitle jl-text-size-small">
                 Job ID: {id} | Updated {updatedTimeAgo}
               </div>
             </div>
-            <div className="jl-job-item__category"><div className="jl-text-size-h4">{category ? category : 'N/A'}</div></div>
+            <div className="jl-job-item__category"><div className="jl-text-size-h4">{category ? category : '—'}</div></div>
             <div className="jl-job-item__location">
               <LocationIcon />
-              <div className="jl-text-size-h4">{location ? location : 'N/A'}</div>
+              <div className="jl-text-size-h4">{location ? location : '—'}</div>
             </div>
-            <div className="jl-job-item__type"><div className="jl-text-size-h4">{experienceLevel ? experienceLevel : 'N/A'}</div></div>
+            <div className="jl-job-item__type"><div className="jl-text-size-h4">{experienceLevel ? experienceLevel : '—'}</div></div>
           </div>
         </div>
       </Link>

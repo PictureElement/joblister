@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import InputFactory from '../helpers/InputFactory';
 import inputConfig from '../config/inputConfig';
+import validate from '../helpers/validate';
 
 function Form() {
   
@@ -24,43 +25,63 @@ function Form() {
   // Extract the job id.
   const id = parseInt(idDashSlug.split('-').shift());
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     // Prevent the browser from reloading the page
     e.preventDefault();
-
-    // Retrieve credentials for accessing the WP REST API
-    const username = process.env.APP_USERNAME;
-    const password = process.env.APP_PASSWORD;
-
-    // Encode credentials in Base64
-    const encodedCredentials = window.btoa(`${username}:${password}`);
-    const basicAuthHeader = `Basic ${encodedCredentials}`;
-
-    const formData = new FormData();
-    formData.append('job_id', id);
-    formData.append('name', values.name);
-    formData.append('email', values.email);
-    formData.append('resume', values.resume);
-
-    // Initiate POST request
-    fetch("https://dev.test/wp-json/wp/v2/jl-applications", {
-      method: "POST",
-      headers: {
-        "Authorization": basicAuthHeader
-      },
-      body: formData
-    })
-      .then(response => response.json())
-      .then(data => {
+  
+    const validationErrors = validate(values);
+    
+    setErrors(validationErrors);
+  
+    // Check if there are any validation errors
+    const isFormValid = Object.values(validationErrors).every(x => !x);
+  
+    if (isFormValid) {
+      const formData = new FormData();
+      formData.append('job_id', id);
+      formData.append('name', values.name);
+      formData.append('email', values.email);
+      formData.append('resume', values.resume);
+  
+      // Retrieve credentials for accessing the WP REST API
+      const username = process.env.APP_USERNAME;
+      const password = process.env.APP_PASSWORD;
+  
+      // Encode credentials in Base64
+      const encodedCredentials = window.btoa(`${username}:${password}`);
+      const basicAuthHeader = `Basic ${encodedCredentials}`;
+  
+      // Initiate POST request
+      try {
+        const response = await fetch("https://dev.test/wp-json/wp/v2/jl-applications", {
+          method: "POST",
+          headers: {
+            "Authorization": basicAuthHeader
+          },
+          body: formData
+        });
+        
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+  
+        const data = await response.json();
+        
         // Handle the response data
         console.log(data);
-      })
-      .catch(error => {
+        // Reset state
+        setValues({name: '', email: '', resume: null});
+        setErrors({name: '', email: '', resume: ''});
+        // Reset all file input elements
+        const fileInputs = document.querySelectorAll('.jl-form input[type="file"]');
+        fileInputs.forEach((input) => (input.value = ''));
+      } catch (error) {
         // Handle any errors
         console.error('Error:', error);
-      });
+      }
+    }
   }
-
+  
   function onChange(e) {
     if (e.target.type === 'file') {
       const file = e.target.files.length > 0 ? e.target.files[0] : null;
@@ -87,6 +108,8 @@ function Form() {
             key={index}
             {...config}
             onChange={onChange}
+            value={values[config.name]}
+            error={errors[config.name]}
           />
         );
       })}

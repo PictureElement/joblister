@@ -2,7 +2,7 @@ import React from 'react'
 
 function Input(props) {
 
-  const { label, name, hint, ...remainingProps } = props;
+  const { value, label, name, helper, error, ...remainingProps } = props;
 
   return (
     <div className="jl-input">
@@ -13,12 +13,13 @@ function Input(props) {
       </label>
       <input
         {...remainingProps}
+        value={value}
         name={name}
         id={`jl-input-${name}`}
         className="jl-input__control"
       />
-      <div className="jl-input__hint jl-text-size-small">{hint}</div>
-      <div className="jl-input__error jl-text-size-small">Please provide a valid name.</div>
+      {helper && <div className="jl-input__helper jl-text-size-small">{helper}</div>}
+      {error && <div className="jl-input__error jl-text-size-small">{error}</div>}
     </div>
   )
 }

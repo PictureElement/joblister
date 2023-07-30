@@ -4,13 +4,13 @@ import Input from "../components/Input";
 // This improves code organization and separation of concerns
 function InputFactory(props) {
 
-  const { type, ...remainingProps } = props;
+  const { type, value, ...remainingProps } = props;
 
   switch (type) {
     case 'text':
-      return <Input type="text" {...remainingProps} />;
+      return <Input type="text" value={value} {...remainingProps} />;
     case 'email':
-      return <Input type="email" {...remainingProps} />;
+      return <Input type="email" value={value} {...remainingProps} />;
     case 'file':
       return <Input type="file" {...remainingProps} />;
     // Add cases for other input types as needed
