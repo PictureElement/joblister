@@ -682,6 +682,13 @@
     color: $on-background-secondary;
     text-align: center;
   }
+  &__captcha-wrapper {
+    padding-top: 8px;
+    padding-bottom: 16px;
+    &  div > div > div {
+      margin: 0 auto;
+    }
+  }
   &__submit {
     all: unset;
     margin-top: 8px;

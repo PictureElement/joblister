@@ -6,10 +6,11 @@ Examples:
 Todo:
 1. Change Apply, Submit now and social media buttons hover state
 2. Style "No jobs found" and "Loading ..."
-3. Application form w. spam protection
 4. Retrieve more than 100 records by making multiple API requests and combine the results.
 5. If there's only one page of content, hide the pagination
 6. Input validation (frontend + backend)
+7. Add consent checkbox
+8. Add thank you message after submission
 
 Endpoints:
 http://localhost/dev/wp-json/wp/v2/jl-jobs

@@ -1,8 +1,9 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { useParams } from 'react-router-dom';
 import InputFactory from '../helpers/InputFactory';
 import inputConfig from '../config/inputConfig';
 import validate from '../helpers/validate';
+import ReCAPTCHA from "react-google-recaptcha";
 
 function Form() {
   
@@ -19,6 +20,8 @@ function Form() {
     email: '',
     resume: ''
   })
+  const [verified, setVerified] = useState(false);
+  const recaptchaRef = useRef();
 
   // Get the :idDashSlug parameter from the URL.
   const { idDashSlug } = useParams();
@@ -36,7 +39,7 @@ function Form() {
     // Check if there are any validation errors
     const isFormValid = Object.values(validationErrors).every(x => !x);
   
-    if (isFormValid) {
+    if (isFormValid && verified) {
       const formData = new FormData();
       formData.append('job_id', id);
       formData.append('name', values.name);
@@ -75,9 +78,17 @@ function Form() {
         // Reset all file input elements
         const fileInputs = document.querySelectorAll('.jl-form input[type="file"]');
         fileInputs.forEach((input) => (input.value = ''));
+        // Reset captcha
+        if (recaptchaRef.current) {
+          recaptchaRef.current.reset();
+        }
       } catch (error) {
         // Handle any errors
         console.error('Error:', error);
+        // Reset captcha
+        if (recaptchaRef.current) {
+          recaptchaRef.current.reset();
+        }
       }
     }
   }
@@ -95,7 +106,12 @@ function Form() {
         [e.target.name]: e.target.value,
       });
     }
-  } 
+  }
+
+  // The function to be called when the user successfully completes the captcha
+  function onCaptchaVerification(value) {
+    setVerified(true);
+  }
   
   return (
     <form className="jl-form" onSubmit={handleSubmit} encType="multipart/form-data">
@@ -113,6 +129,13 @@ function Form() {
           />
         );
       })}
+      <div className="jl-form__captcha-wrapper">
+        <ReCAPTCHA
+          ref={recaptchaRef}
+          sitekey={process.env.APP_CAPTCHA_KEY}
+          onChange={onCaptchaVerification}
+        />
+      </div>
       <button type="submit" className="jl-form__submit">Submit</button>
     </form>
   )
