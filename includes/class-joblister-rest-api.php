@@ -127,6 +127,7 @@ class JL_REST_API
     // Create a new application
     $job_id = sanitize_text_field($request['job_id']);
     $name = sanitize_text_field($request['name']);
+    $cover = sanitize_textarea_field($request['cover']);
     $email = sanitize_email($request['email']);
     
     // Handle resume file upload
@@ -166,6 +167,7 @@ class JL_REST_API
       update_post_meta($new_jl_application_id, 'job_id', $job_id);
       update_post_meta($new_jl_application_id, 'name', $name);
       update_post_meta($new_jl_application_id, 'email', $email);
+      update_post_meta($new_jl_application_id, 'cover', $cover);
       if (isset($attachment_id)) {
         update_post_meta($new_jl_application_id, 'resume', $attachment_id);
       }

@@ -15,6 +15,12 @@ const inputConfig = [
     label: '* Email'
   },
   {
+    name: 'cover',
+    type: 'textarea',
+    helper: '',
+    label: '* Cover Letter'
+  },
+  {
     name: 'resume',
     type: 'file',
     helper: 'Allowed Type(s): .pdf, .doc, .docx',

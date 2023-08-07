@@ -1,4 +1,5 @@
 import Input from "../components/Input";
+import Textarea from "../components/Textarea";
 
 // InputFactory dynamically creates input field components based on input type
 // This improves code organization and separation of concerns
@@ -13,6 +14,8 @@ function InputFactory(props) {
       return <Input type="email" value={value} {...remainingProps} />;
     case 'file':
       return <Input type="file" {...remainingProps} />;
+    case 'textarea':
+      return <Textarea value={value} {...remainingProps} />;
     // Add cases for other input types as needed
     default:
       throw new Error(`Invalid input type: ${type}`);

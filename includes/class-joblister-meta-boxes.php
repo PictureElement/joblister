@@ -50,6 +50,7 @@ class JL_Meta_Boxes
     $job_id = get_post_meta($post->ID, 'job_id', true);
     $name = get_post_meta($post->ID, 'name', true);
     $email = get_post_meta($post->ID, 'email', true);
+    $cover = get_post_meta($post->ID, 'cover', true);
     $resume = get_post_meta($post->ID, 'resume', true);
 ?>
     <div style="margin-bottom:1em;">
@@ -64,7 +65,10 @@ class JL_Meta_Boxes
       <label style="display:block;margin-bottom:4px;" for="email">Email</label>
       <input style="width:100%;" type="email" id="email" name="email" value="<?php echo esc_attr($email); ?>">
     </div>
-
+    <div style="margin-bottom:1em;">
+      <label style="display:block;margin-bottom:4px;" for="cover">Cover Letter</label>
+      <textarea rows="5" style="width:100%;" id="cover" name="cover"><?php echo esc_attr($cover); ?></textarea>
+    </div>
     <div style="margin-bottom:1em;">
       <label style="display:block;margin-bottom:4px;" for="resume">Resume</label>
       <input style="padding:0;" type="file" id="resume" name="resume" accept=".pdf,.doc,.docx">
@@ -136,6 +140,10 @@ class JL_Meta_Boxes
 
     if (isset($_POST['email'])) {
       update_post_meta($post_id, 'email', sanitize_email($_POST['email']));
+    }
+
+    if (isset($_POST['cover'])) {
+      update_post_meta($post_id, 'cover', sanitize_textarea_field($_POST['cover']));
     }
   }
 }

@@ -9,6 +9,10 @@
  * - It checks if the email is provided.
  * - It uses a regular expression to check if the email is in a valid format.
  * 
+ *  * For cover letter:
+ * - It checks if the cover letter is provided.
+ * - It validates that the cover letter is no more than maxLength characters long.
+ * 
  * For resume file:
  * - It checks if the file is provided.
  * - It validates the file extension, ensuring it is one of: 'pdf', 'doc', 'docx'.
@@ -38,6 +42,14 @@ export default function validate(values) {
     errors.email = "Enter your email";
   } else if (!validEmailRegex.test(values.email)) {
     errors.email = "Enter a valid email address";
+  }
+
+  const maxLength = 4000;
+
+  if (!values.cover) {
+    errors.cover = "Provide a cover letter";
+  } else if (values.cover.length > maxLength) {
+    errors.cover = `Cover letter should be no more than ${maxLength} characters`;
   }
 
   if (!values.resume) {

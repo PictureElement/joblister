@@ -13,11 +13,13 @@ function Form() {
   const [values, setValues] = useState({
     name: '',
     email: '',
+    cover: '',
     resume: null
   });
   const [errors, setErrors] = useState({
     name: '',
     email: '',
+    cover: '',
     resume: ''
   })
   const [verified, setVerified] = useState(false);
@@ -44,6 +46,7 @@ function Form() {
       formData.append('job_id', id);
       formData.append('name', values.name);
       formData.append('email', values.email);
+      formData.append('cover', values.cover);
       formData.append('resume', values.resume);
   
       // Retrieve credentials for accessing the WP REST API
@@ -73,8 +76,8 @@ function Form() {
         // Handle the response data
         console.log(data);
         // Reset state
-        setValues({name: '', email: '', resume: null});
-        setErrors({name: '', email: '', resume: ''});
+        setValues({name: '', email: '', cover: '', resume: null});
+        setErrors({name: '', email: '', cover: '', resume: ''});
         // Reset all file input elements
         const fileInputs = document.querySelectorAll('.jl-form input[type="file"]');
         fileInputs.forEach((input) => (input.value = ''));
