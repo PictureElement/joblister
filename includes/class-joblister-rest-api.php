@@ -122,17 +122,76 @@ class JL_REST_API
     return $endpoints;
   }
 
+  private function job_exists($job_id) {
+    $args = array(
+        'post_type' => 'jl_job',
+        'p' => $job_id,
+    );
+    $job_posts = get_posts($args);
+
+    // If there is at least one post returned, it means the job post with the given ID exists
+    return count($job_posts) > 0;
+  }
+
   public function application_post_callback($request)
   {
-    // Create a new application
-    $job_id = sanitize_text_field($request['job_id']);
-    $name = sanitize_text_field($request['name']);
-    $cover = sanitize_textarea_field($request['cover']);
-    $email = sanitize_email($request['email']);
+    // Sanitize & validate job_id
+    $job_id = intval(sanitize_text_field($request['job_id']));
+    if (empty($job_id) || !$this->job_exists($job_id)) {
+      return new WP_Error('invalid_job_id', 'Invalid job ID.', array('status' => 400));
+    }
     
-    // Handle resume file upload
+    // Sanitize & validate name
+    $name = sanitize_text_field($request['name']);
+    if (empty($name)) {
+      return new WP_Error('empty_name', 'Enter your name.', array('status' => 400));
+    } elseif (strlen($name) < 2) {
+      return new WP_Error('short_name', 'Use 2 characters or more for your name.', array('status' => 400));
+    } elseif (strlen($name) > 70) {
+      return new WP_Error('long_name', 'Use 70 characters or less for your name.', array('status' => 400));
+    }
+
+    // Sanitize & validate email
+    $email = sanitize_email($request['email']);
+    if (empty($email)) {
+      return new WP_Error('empty_email', 'Enter your email.', array('status' => 400));
+    } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+      return new WP_Error('invalid_email', 'Enter a valid email address.', array('status' => 400));
+    }
+
+    // Sanitize & validate cover
+    $cover = sanitize_textarea_field($request['cover']);
+    $max_length = 4000;
+    if (empty($cover)) {
+      return new WP_Error('empty_cover', 'Provide a cover letter.', array('status' => 400));
+    } elseif (strlen($cover) > $max_length) {
+      return new WP_Error('long_cover', "Cover letter should be no more than {$max_length} characters.", array('status' => 400));
+    }
+
+    // Sanitize & validate resume
     $files = $request->get_file_params();
     if (isset($files['resume']) && !empty($files['resume']['tmp_name'])) {
+      $file = $files['resume'];
+
+      // Validate file extension
+      $file_extension = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
+      $allowed_extensions = ['pdf', 'doc', 'docx'];
+      if (!in_array($file_extension, $allowed_extensions)) {
+          return new WP_Error('invalid_file_extension', 'Invalid file extension. Please upload a .pdf, .doc, or .docx file.', array('status' => 400));
+      }
+
+      // Validate MIME type
+      $allowed_mime_types = ['application/pdf', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'];
+      if (!in_array($file['type'], $allowed_mime_types)) {
+          return new WP_Error('invalid_file_type', 'Invalid file type. Please upload a .pdf, .doc, or .docx file.', array('status' => 400));
+      }
+
+      // Validate file size
+      $max_file_size = 5000000; // 5MB
+      if ($file['size'] > $max_file_size) {
+          return new WP_Error('file_size_exceeded', 'File size is too large. Please upload a file that is 5MB or less.', array('status' => 400));
+      }
+    
       // The wp_handle_upload function takes the upload file array as an argument and returns an array with file information.
       $overrides = ['test_form' => false];  // This bypasses the normal form checks - as this isn't coming from a form
       $file = wp_handle_upload($files['resume'], $overrides);
@@ -151,11 +210,20 @@ class JL_REST_API
       );
 
       $attachment_id = wp_insert_attachment($attachment, $file['file']);
+      if (is_wp_error($attachment_id)) {
+        return new WP_Error('attachment_creation_failed', $attachment_id->get_error_message(), array('status' => 500));
+      }
 
       require_once(ABSPATH . 'wp-admin/includes/image.php');
 
       $attachment_data = wp_generate_attachment_metadata($attachment_id, $file['file']);
       wp_update_attachment_metadata($attachment_id, $attachment_data);
+    }
+
+    // Sanitize and validate consent
+    $consent = isset($request['consent']) && ($request['consent'] === true || $request['consent'] === 'true') ? true : false;
+    if (!$consent) {
+      return new WP_Error('invalid_consent', 'Consent must be provided.', array('status' => 400));
     }
 
     $new_jl_application_id = wp_insert_post(array(
@@ -168,12 +236,13 @@ class JL_REST_API
       update_post_meta($new_jl_application_id, 'name', $name);
       update_post_meta($new_jl_application_id, 'email', $email);
       update_post_meta($new_jl_application_id, 'cover', $cover);
+      update_post_meta($new_jl_application_id, 'consent', $consent);
       if (isset($attachment_id)) {
         update_post_meta($new_jl_application_id, 'resume', $attachment_id);
       }
       return new WP_REST_Response('Application created successfully.', 201);
     } else {
-      return new WP_REST_Response('Failed to create application.', 500);
+      return new WP_Error('application_creation_failed', 'Failed to create application.', array('status' => 500));
     }
   }
 }

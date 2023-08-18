@@ -14,13 +14,15 @@ function Form() {
     name: '',
     email: '',
     cover: '',
-    resume: null
+    resume: null,
+    consent: false
   });
   const [errors, setErrors] = useState({
     name: '',
     email: '',
     cover: '',
-    resume: ''
+    resume: '',
+    consent: ''
   })
   const [verified, setVerified] = useState(false);
   const recaptchaRef = useRef();
@@ -30,7 +32,7 @@ function Form() {
   // Extract the job id.
   const id = parseInt(idDashSlug.split('-').shift());
 
-  async function handleSubmit(e) {
+  function handleSubmit(e) {
     // Prevent the browser from reloading the page
     e.preventDefault();
   
@@ -40,58 +42,70 @@ function Form() {
   
     // Check if there are any validation errors
     const isFormValid = Object.values(validationErrors).every(x => !x);
+
+    if (isFormValid) {
+      // Execute the invisible ReCAPTCHA check
+      recaptchaRef.current.execute();
+    }
+  }
+
+  async function submitForm() {
+    const formData = new FormData();
+    
+    formData.append('job_id', id);
+    formData.append('name', values.name);
+    formData.append('email', values.email);
+    formData.append('cover', values.cover);
+    formData.append('resume', values.resume);
+    formData.append('consent', values.consent);
+
+    // Display the key/value pairs
+    for (var pair of formData.entries()) {
+      console.log(pair[0]+ ', ' + pair[1]); 
+    }
   
-    if (isFormValid && verified) {
-      const formData = new FormData();
-      formData.append('job_id', id);
-      formData.append('name', values.name);
-      formData.append('email', values.email);
-      formData.append('cover', values.cover);
-      formData.append('resume', values.resume);
-  
-      // Retrieve credentials for accessing the WP REST API
-      const username = process.env.APP_USERNAME;
-      const password = process.env.APP_PASSWORD;
-  
-      // Encode credentials in Base64
-      const encodedCredentials = window.btoa(`${username}:${password}`);
-      const basicAuthHeader = `Basic ${encodedCredentials}`;
-  
-      // Initiate POST request
-      try {
-        const response = await fetch("https://dev.test/wp-json/wp/v2/jl-applications", {
-          method: "POST",
-          headers: {
-            "Authorization": basicAuthHeader
-          },
-          body: formData
-        });
-        
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
-        }
-  
-        const data = await response.json();
-        
-        // Handle the response data
-        console.log(data);
-        // Reset state
-        setValues({name: '', email: '', cover: '', resume: null});
-        setErrors({name: '', email: '', cover: '', resume: ''});
-        // Reset all file input elements
-        const fileInputs = document.querySelectorAll('.jl-form input[type="file"]');
-        fileInputs.forEach((input) => (input.value = ''));
-        // Reset captcha
-        if (recaptchaRef.current) {
-          recaptchaRef.current.reset();
-        }
-      } catch (error) {
-        // Handle any errors
-        console.error('Error:', error);
-        // Reset captcha
-        if (recaptchaRef.current) {
-          recaptchaRef.current.reset();
-        }
+    // Retrieve credentials for accessing the WP REST API
+    const username = process.env.APP_USERNAME;
+    const password = process.env.APP_PASSWORD;
+
+    // Encode credentials in Base64
+    const encodedCredentials = window.btoa(`${username}:${password}`);
+    const basicAuthHeader = `Basic ${encodedCredentials}`;
+
+    // Initiate POST request
+    try {
+      const response = await fetch("https://dev.test/wp-json/wp/v2/jl-applications", {
+        method: "POST",
+        headers: {
+          "Authorization": basicAuthHeader
+        },
+        body: formData
+      });
+      
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      const data = await response.json();
+      
+      // Handle the response data
+      console.log(data);
+      // Reset state
+      setValues({name: '', email: '', cover: '', resume: null, consent: false});
+      setErrors({name: '', email: '', cover: '', resume: '', consent: ''});
+      // Reset all file input elements
+      const fileInputs = document.querySelectorAll('.jl-form input[type="file"]');
+      fileInputs.forEach((input) => (input.value = ''));
+      // Reset captcha
+      if (recaptchaRef.current) {
+        recaptchaRef.current.reset();
+      }
+    } catch (error) {
+      // Handle any errors
+      console.error('Error:', error);
+      // Reset captcha
+      if (recaptchaRef.current) {
+        recaptchaRef.current.reset();
       }
     }
   }
@@ -103,6 +117,11 @@ function Form() {
         ...values,
         [e.target.name]: file,
       });
+    } else if (e.target.type === 'checkbox') {
+      setValues({
+        ...values,
+        [e.target.name]: e.target.checked,
+      });
     } else {
       setValues({
         ...values,
@@ -111,9 +130,15 @@ function Form() {
     }
   }
 
-  // The function to be called when the user successfully completes the captcha
   function onCaptchaVerification(value) {
-    setVerified(true);
+    if (value) {
+      setVerified(true);
+      // Continue with the form submission
+      submitForm();
+    } else {
+      // Handle the case where the ReCAPTCHA verification failed
+      console.error('ReCAPTCHA verification failed');
+    }
   }
   
   return (
@@ -132,13 +157,12 @@ function Form() {
           />
         );
       })}
-      <div className="jl-form__captcha-wrapper">
-        <ReCAPTCHA
-          ref={recaptchaRef}
-          sitekey={process.env.APP_CAPTCHA_KEY}
-          onChange={onCaptchaVerification}
-        />
-      </div>
+      <ReCAPTCHA
+        ref={recaptchaRef}
+        sitekey={process.env.APP_CAPTCHA_KEY}
+        size="invisible"
+        onChange={onCaptchaVerification}
+      />
       <button type="submit" className="jl-form__submit">Submit</button>
     </form>
   )

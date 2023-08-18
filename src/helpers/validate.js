@@ -62,5 +62,9 @@ export default function validate(values) {
     errors.resume = "File size is too large. Please upload a file that is 5MB or less.";
   }
 
+  if (!values.consent) {
+    errors.consent = "Consent is required.";
+  }
+
   return errors;
 }

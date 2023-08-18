@@ -145,6 +145,8 @@ class JL_Meta_Boxes
     if (isset($_POST['cover'])) {
       update_post_meta($post_id, 'cover', sanitize_textarea_field($_POST['cover']));
     }
+
+    update_post_meta($post_id, 'consent', true);
   }
 }
 

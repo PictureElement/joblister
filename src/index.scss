@@ -664,7 +664,7 @@
 #jl-root .jl-form {
   border: 1px solid $on-background-border;
   padding: 32px;
-  max-width: 400px;
+  max-width: 440px;
   margin-top: 32px;
   &__title {
     text-align: center;
@@ -683,15 +683,15 @@
     text-align: center;
   }
   &__captcha-wrapper {
-    padding-top: 8px;
-    padding-bottom: 16px;
+    margin-bottom: 20px;
+    background-color: $surface;
+    border: 1px solid $on-background-border;
     &  div > div > div {
       margin: 0 auto;
     }
   }
   &__submit {
     all: unset;
-    margin-top: 8px;
     cursor: pointer;
     user-select: none;
     background-color: $accent;
@@ -705,6 +705,9 @@
     display: inline-block;
     color: $on-accent;
     text-align: center;
+  }
+  @media (max-width: 767px) {
+    padding: 16px;
   }
 }
 
@@ -724,7 +727,7 @@
     appearance: none;
     outline: 0;
     border: none;
-    margin-bottom: 4px;
+    display: block;
     border-radius: 0;
     padding: 9px 8px;
     @include font-family;
@@ -739,6 +742,38 @@
       outline: 2px solid $accent;
       outline-offset: 1px;
       transition: outline-offset 0s,outline 0s;
+    }
+  }
+  &__error {
+    color: $error;
+    margin-top: 4px;
+  }
+}
+
+// Checkbox Component
+//
+#jl-root .jl-checkbox {
+  position: relative;
+  z-index: 1;
+  display: inline-block;
+  min-height: 24px;
+  padding-left: 24px;
+  margin-bottom: 20px;
+  &__control {
+    position: absolute;
+    inset-inline-start: 0;
+    z-index: -1;
+    width: 16px;
+    height: 24px;
+  }
+  &__label {
+    color: $on-background-primary;
+    a {
+      color: $on-background-primary;
+      text-decoration: underline;
+      &:hover {
+        text-decoration: none;
+      }
     }
   }
   &__error {
