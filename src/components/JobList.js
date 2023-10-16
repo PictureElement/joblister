@@ -1,6 +1,7 @@
 import { useRecoilValue } from 'recoil';
 import { filteredJobsState } from '../recoil-state';
 import JobItem from "./JobItem";
+import NoJobsFound from './NoJobsFound';
 
 function JobList() {
   /**
@@ -29,7 +30,7 @@ function JobList() {
             {jobItems}
           </ul>
         :
-          <div>No jobs found matching your filtering criteria.</div>
+          <NoJobsFound />
       }
     </>
   )

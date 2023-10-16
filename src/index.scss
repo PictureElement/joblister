@@ -785,6 +785,40 @@
   }
 }
 
+// No Jobs Found Component
+#jl-root .jl-no-jobs-found {
+  text-align: center;
+  &__emoji {
+    @include font-family;
+    font-size: 200px;
+    color: $on-background-primary;
+    margin-bottom: 12px;
+    @media (max-width: 767px) {
+      font-size: 100px;
+    }
+    @media (max-width: 575px) {
+      font-size: 64px;
+    }
+  }
+  &__text {
+    margin-bottom: 8px;
+    color: $on-background-primary;
+  }
+  &__clear {
+    @include font-family;
+    font-weight: 400;
+    height: 44px;
+    color: $accent;
+    border-radius: 0;
+    border: none;
+    padding: 0;
+    background: none;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
 // RTL-specific
 //
 html[dir="rtl"] #jl-root {
