@@ -92,10 +92,12 @@ function Pagination() {
       >
         <PreviousIcon />
       </button>
-      <div className="jl-pagination__numbers">
-        {generatePagination()}
-        <div className="jl-pagination__fraction">{currentPage}/{totalPages}</div>
-      </div>
+      {generatePagination().length > 1 && (
+        <div className="jl-pagination__numbers">
+          {generatePagination()}
+          <div className="jl-pagination__fraction">{currentPage}/{totalPages}</div>
+        </div>
+      )}
       <button
         className="jl-pagination__control jl-pagination__arrow jl-pagination__arrow_next"
         disabled={currentPage === totalPages}
