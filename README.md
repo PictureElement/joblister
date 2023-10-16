@@ -1,5 +1,4 @@
 ## Project To-Do List
-1. Update the hover state of the Apply, Submit, and social media buttons.
 2. Style the "No jobs found" and "Loading..." messages.
 3. Retrieve more than 100 records by making multiple API requests and combining the results.
 4. Hide the pagination if there is only one page of content.

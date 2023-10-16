@@ -326,7 +326,7 @@
     text-align: center;
     transition: transform 200ms ease-out;
     &:hover {
-      transform: scale(1.05);
+      background-color: darken($accent, 5%);
     }
     @media (max-width: 767px) {
       width: auto;
@@ -705,6 +705,9 @@
     display: inline-block;
     color: $on-accent;
     text-align: center;
+    &:hover {
+      background-color: darken($accent, 5%);
+    }
   }
   @media (max-width: 767px) {
     padding: 16px;
