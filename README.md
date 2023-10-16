@@ -1,5 +1,5 @@
 ## Project To-Do List
-2. Style the "No jobs found" and "Loading..." messages.
+2. Style the "Loading..." messages.
 3. Retrieve more than 100 records by making multiple API requests and combining the results.
 5. Handle form submission errors on the frontend.
 6. Display a thank you message after successful form submission.
