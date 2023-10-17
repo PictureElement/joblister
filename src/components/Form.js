@@ -4,6 +4,7 @@ import InputFactory from '../helpers/InputFactory';
 import inputConfig from '../config/inputConfig';
 import validate from '../helpers/validate';
 import ReCAPTCHA from "react-google-recaptcha";
+import Success from './Success';
 
 function Form() {
   
@@ -25,6 +26,7 @@ function Form() {
     consent: ''
   })
   const [verified, setVerified] = useState(false);
+  const [isFormSubmitted, setIsFormSubmitted] = useState(false);
   const recaptchaRef = useRef();
 
   // Get the :idDashSlug parameter from the URL.
@@ -87,6 +89,9 @@ function Form() {
       }
 
       const data = await response.json();
+
+      // Handle successful submission
+      setIsFormSubmitted(true);
       
       // Handle the response data
       console.log(data);
@@ -142,29 +147,35 @@ function Form() {
   }
   
   return (
-    <form className="jl-form" onSubmit={handleSubmit} encType="multipart/form-data">
-      <h2 className="jl-form__title">Apply for this job</h2>
-      <p className="jl-form__subtitle">Use the form below to submit your job application</p>
-      <div className="jl-form__required jl-text-size-small">* indicates a required field</div>
-      {inputConfig.map((config, index) => {
-        return (
-          <InputFactory
-            key={index}
-            {...config}
-            onChange={onChange}
-            value={values[config.name]}
-            error={errors[config.name]}
+    <div className="jl-form">
+      {isFormSubmitted ? (
+        <Success />
+      ) : (
+        <form className="jl-form__form" onSubmit={handleSubmit} encType="multipart/form-data">
+          <h2 className="jl-form__title">Apply for this job</h2>
+          <p className="jl-form__subtitle">Use the form below to submit your job application</p>
+          <div className="jl-form__required jl-text-size-small">* indicates a required field</div>
+          {inputConfig.map((config, index) => {
+            return (
+              <InputFactory
+                key={index}
+                {...config}
+                onChange={onChange}
+                value={values[config.name]}
+                error={errors[config.name]}
+              />
+            );
+          })}
+          <ReCAPTCHA
+            ref={recaptchaRef}
+            sitekey={process.env.APP_CAPTCHA_KEY}
+            size="invisible"
+            onChange={onCaptchaVerification}
           />
-        );
-      })}
-      <ReCAPTCHA
-        ref={recaptchaRef}
-        sitekey={process.env.APP_CAPTCHA_KEY}
-        size="invisible"
-        onChange={onCaptchaVerification}
-      />
-      <button type="submit" className="jl-form__submit">Submit</button>
-    </form>
+          <button type="submit" className="jl-form__submit">Submit</button>
+        </form>
+      )}
+    </div>
   )
 }
 

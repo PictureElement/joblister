@@ -819,6 +819,23 @@
   }
 }
 
+// Success Component
+#jl-root .jl-success {
+  text-align: center;
+  &__emoji {
+    @include font-family;
+    font-size: 100px;
+    color: $success;
+    margin-bottom: 12px;
+    @media (max-width: 575px) {
+      font-size: 64px;
+    }
+  }
+  &__text {
+    color: $success;
+  }
+}
+
 // RTL-specific
 //
 html[dir="rtl"] #jl-root {
