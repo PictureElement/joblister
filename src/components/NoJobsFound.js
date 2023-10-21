@@ -1,5 +1,5 @@
 import React from 'react';
-import { useSetRecoilState } from 'recoil';
+import { useSetRecoilState, useRecoilState } from 'recoil';
 import {
   locationFiltersState,
   categoryFiltersState,
@@ -14,8 +14,9 @@ function NoJobsFound() {
   /**
    * State variables
    * - Use useSetRecoilState() when a component intends to write to state without reading it.
+   * - Use useRecoilState() when a component intends to read and write state.
    */
-  const setSearchQuery = useSetRecoilState(searchQueryState);
+  const [searchQuery, setSearchQuery] = useRecoilState(searchQueryState);
   const setLocationFilters = useSetRecoilState(locationFiltersState);
   const setCategoryFilters = useSetRecoilState(categoryFiltersState);
   const setTypeFilters = useSetRecoilState(typeFiltersState);
@@ -37,8 +38,16 @@ function NoJobsFound() {
   return (
     <div className="jl-no-jobs-found">
       <div className="jl-no-jobs-found__emoji">(&gt;_&lt;)</div>
-      <div className="jl-no-jobs-found__text jl-text-size-h3">No jobs found matching your filtering criteria.</div>
-      <button onClick={handleClearAll} className="jl-no-jobs-found__clear jl-text-size-h4">Clear your filters and try again</button>
+      {searchQuery.length > 0
+        ? (
+          <div className="jl-no-jobs-found__text jl-text-size-h3">No jobs found for “{searchQuery}”</div>
+        ) : (
+          <>
+            <div className="jl-no-jobs-found__text jl-text-size-h3">No jobs found matching your filtering criteria.</div>
+            <button onClick={handleClearAll} className="jl-no-jobs-found__clear jl-text-size-h4">Clear your filters and try again</button>
+          </>
+        )
+      }
     </div>
   )
 }
