@@ -359,6 +359,7 @@
   }
   &__apply {
     all: unset;
+    box-sizing: border-box;
     margin-top: 12px;
     cursor: pointer;
     user-select: none;
