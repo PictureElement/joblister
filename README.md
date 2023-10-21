@@ -1,7 +1,6 @@
 ## Project To-Do List
-1. Style the "Loading..." messages.
-2. Retrieve more than 100 records by making multiple API requests and combining the results.
-3. Handle form submission errors on the frontend.
+1. Retrieve more than 100 records by making multiple API requests and combining the results.
+2. Handle form submission errors on the frontend.
 
 ## API Endpoints
 

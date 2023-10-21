@@ -70,6 +70,54 @@
   }
 }
 
+// Dot Flashing Loader
+//
+#jl-root .jl-dot-flashing {
+  position: relative;
+  margin: 0 auto;
+  width: 16px;
+  height: 16px;
+  border-radius: 8px;
+  background-color: $accent;
+  color: $accent;
+  animation: jl-dot-flashing 1s infinite linear alternate;
+  animation-delay: 0.5s;
+  &::before, &::after {
+    content: "";
+    display: inline-block;
+    position: absolute;
+    top: 0;
+  }
+  &::before {
+    left: -24px;
+    width: 16px;
+    height: 16px;
+    border-radius: 8px;
+    background-color: $accent;
+    color: $accent;
+    animation: jl-dot-flashing 1s infinite alternate;
+    animation-delay: 0s;
+  }
+  &::after {
+    left: 24px;
+    width: 16px;
+    height: 16px;
+    border-radius: 8px;
+    background-color: $accent;
+    color: $accent;
+    animation: jl-dot-flashing 1s infinite alternate;
+    animation-delay: 1s;
+  }
+  @keyframes jl-dot-flashing {
+    0% {
+      background-color: $accent;
+    }
+    50%, 100% {
+      background-color: rgba($accent, 0.2);
+    }
+  }
+}
+
 // Job List Component
 //
 #jl-root .jl-job-list {

@@ -102,7 +102,9 @@ function App() {
 
   // Render loading state while data is being fetched
   if (loading) {
-    return <div>Loading...</div>;
+    return (
+      <div className="jl-dot-flashing"><span className="jl-visually-hidden">Loading...</span></div>
+    )
   }
 
   return (
