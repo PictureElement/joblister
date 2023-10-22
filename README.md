@@ -21,8 +21,3 @@ Please note that *Application Passwords* requires an SSL/HTTPS connection by def
 If you're working in a development environment without SSL/HTTPS and need to test the functionality, you can override the default requirement by adding the following code to your theme's `functions.php` file:
 
 `add_filter( 'wp_is_application_passwords_available', '__return_false' );`
-
-## Temporary
-Since ACF uses core WP REST API endpoints, it uses core authentication methods (cookies and nonces) by default. This means that if you are building something in the WordPress dashboard, the code will be run in an already logged-in session, and no specific authentication is needed.
-
-Should you wish to build something using the REST API endpoints outside a logged-in session (for example a JavaScript application powered by the REST API), you will need to authenticate for any POST requests. There are a number of ways to handle this authentication, including Application Passwords (available in WordPress core) the OAuth 1.0a Server plugin or the JSON Web Tokens plugin.
