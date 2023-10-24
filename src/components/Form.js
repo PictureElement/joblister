@@ -67,8 +67,8 @@ function Form() {
     }
   
     // Retrieve credentials for accessing the WP REST API
-    const username = process.env.APP_USERNAME;
-    const password = process.env.APP_PASSWORD;
+    const username = process.env.APP_WORDPRESS_USERNAME;
+    const password = process.env.APP_APPLICATION_PASSWORD;
 
     // Encode credentials in Base64
     const encodedCredentials = window.btoa(`${username}:${password}`);
@@ -168,7 +168,7 @@ function Form() {
           })}
           <ReCAPTCHA
             ref={recaptchaRef}
-            sitekey={process.env.APP_CAPTCHA_KEY}
+            sitekey={process.env.APP_CAPTCHA_SITE_KEY}
             size="invisible"
             onChange={onCaptchaVerification}
           />

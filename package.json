@@ -35,5 +35,6 @@
     "react-share": "^4.4.1",
     "react-slugify": "^3.0.2",
     "recoil": "^0.7.7"
-  }
+  },
+  "files": [ "joblister.php", "includes", "build" ]
 }
