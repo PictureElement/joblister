@@ -1,6 +1,6 @@
 # JobLister
 
-![Banner Image](banner.png)
+![Banner Image](assets/banner-1544x500.png)
 
 ## Description
 
