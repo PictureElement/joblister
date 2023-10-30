@@ -23,6 +23,7 @@ if (!class_exists('JobLister')) {
     // Load dependencies
     private function load_dependencies()
     {
+      require_once plugin_dir_path(__FILE__) . '/class-joblister-settings.php';
       require_once plugin_dir_path(__FILE__) . '/class-joblister-dependencies.php';
       require_once plugin_dir_path(__FILE__) . '/class-joblister-scripts.php';
       require_once plugin_dir_path(__FILE__) . '/class-joblister-styles.php';
@@ -37,6 +38,7 @@ if (!class_exists('JobLister')) {
     // Initialize classes
     private function initialize_classes()
     {
+      $joblister_settings = new JL_Settings();
       $joblister_dependencies = new JL_Dependencies();
       $joblister_scripts = new JL_Scripts();
       $joblister_styles = new JL_Styles();

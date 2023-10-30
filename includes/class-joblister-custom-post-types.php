@@ -70,7 +70,7 @@ class JL_Custom_Post_Types
       "map_meta_cap" => true,
       "hierarchical" => false,
       "can_export" => true,
-      "rewrite" => false,
+      "rewrite" => true,
       "query_var" => true,
       "supports" => ["title", "editor"],
       "show_in_graphql" => false
@@ -145,7 +145,7 @@ class JL_Custom_Post_Types
       "map_meta_cap" => true,
       "hierarchical" => false,
       "can_export" => true,
-      "rewrite" => false,
+      "rewrite" => true,
       "query_var" => true,
       "supports" => false,
       "show_in_graphql" => false

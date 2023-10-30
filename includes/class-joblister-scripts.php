@@ -25,7 +25,7 @@ class JL_Scripts
 
     // Localize the script with data
     $data = array(
-      'baseUrl' => get_option('jl_base_url', '/'),
+      'restBaseUrl' => rest_url(),
       'perPage' => get_option('jl_per_page', '10'),
       'wordpressUsername' => get_option('jl_wordpress_username', ''),
       'applicationPassword' => get_option('jl_application_password', ''),

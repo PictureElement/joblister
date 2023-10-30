@@ -21,11 +21,11 @@ function App() {
   const setAllCategories = useSetRecoilState(allCategoriesState);
   const setAllTypes = useSetRecoilState(allTypesState);
   const setAllExperienceLevels = useSetRecoilState(allExperienceLevelsState);
-  const [endpointJobs] = useState(jlData.baseUrl + "wp-json/wp/v2/jl-jobs");
-  const [endpointLocations] = useState(jlData.baseUrl + "wp-json/wp/v2/jl-locations");
-  const [endpointCategories] = useState(jlData.baseUrl + "wp-json/wp/v2/jl-categories");
-  const [endpointTypes] = useState(jlData.baseUrl + "wp-json/wp/v2/jl-types");
-  const [endpointExperienceLevels] = useState(jlData.baseUrl + "wp-json/wp/v2/jl-experience-levels");
+  const [endpointJobs] = useState(jlData.restBaseUrl + "wp/v2/jl-jobs");
+  const [endpointLocations] = useState(jlData.restBaseUrl + "wp/v2/jl-locations");
+  const [endpointCategories] = useState(jlData.restBaseUrl + "wp/v2/jl-categories");
+  const [endpointTypes] = useState(jlData.restBaseUrl + "wp/v2/jl-types");
+  const [endpointExperienceLevels] = useState(jlData.restBaseUrl + "wp/v2/jl-experience-levels");
   const [loading, setLoading] = useState(true);
 
   async function getData() {
@@ -33,14 +33,14 @@ function App() {
       /**
        * Fetch jobs and set recoil state
        */
-      const response1 = await fetch(endpointJobs + '?per_page=100');
+      const response1 = await fetch(endpointJobs);
       const data1 = await response1.json();
       setAllJobs(data1);
 
       /**
        * Fetch locations and set recoil state
        */
-      const response2 = await fetch(endpointLocations + '?per_page=100');
+      const response2 = await fetch(endpointLocations);
       const data2 = await response2.json();
       // Filter out locations with a count of 0
       setAllLocations(data2.filter(location => location.count > 0));
@@ -48,7 +48,7 @@ function App() {
       /**
        * Fetch categories and set recoil state
        */
-      const response3 = await fetch(endpointCategories + '?per_page=100');
+      const response3 = await fetch(endpointCategories);
       const data3 = await response3.json();
       // Filter out categories with a count of 0
       setAllCategories(data3.filter(category => category.count > 0));
@@ -56,7 +56,7 @@ function App() {
       /**
        * Fetch types and set recoil state
        */
-      const response4 = await fetch(endpointTypes + '?per_page=100');
+      const response4 = await fetch(endpointTypes);
       const data4 = await response4.json();
       // Filter out types with a count of 0
       setAllTypes(data4.filter(type => type.count > 0));
@@ -64,7 +64,7 @@ function App() {
       /**
        * Fetch experience levels and set recoil state
        */
-      const response5 = await fetch(endpointExperienceLevels + '?per_page=100');
+      const response5 = await fetch(endpointExperienceLevels);
       const data5 = await response5.json();
       // Filter out experience levels with a count of 0
       setAllExperienceLevels(data5.filter(experienceLevel => experienceLevel.count > 0));
