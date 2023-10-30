@@ -63,6 +63,7 @@
 
 #jl-root button,
 #jl-root a {
+  cursor: pointer;
   &:focus {
     outline: 2px solid $accent;
     outline-offset: 1px;
@@ -609,6 +610,7 @@
     } 
   }
   &__input {
+    width: 100%;
     appearance: none;
     outline: 0;
     border: none;

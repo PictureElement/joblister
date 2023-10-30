@@ -28,6 +28,6 @@ class JL_Dependencies
 
   public static function plugin_notice()
   {
-    echo '<div class="error"><p>Sorry, but <strong>JobLister</strong> plugin requires the <strong>Radio Buttons for Taxonomies</strong> plugin to be installed and active.</p></div>';
+    echo '<div class="error"><p>Sorry, but <strong>JobLister</strong> requires the <a target="_blank" href="https://wordpress.org/plugins/radio-buttons-for-taxonomies/"><strong>Radio Buttons for Taxonomies</strong></a> plugin to be installed and active.</p></div>';
   }
 }
