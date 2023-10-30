@@ -22,5 +22,15 @@ class JL_Scripts
       rand(), // Script version number (Change this to null for production)
       true // Enqueue script before </body>
     );
+
+    // Localize the script with data
+    $data = array(
+      'baseUrl' => get_option('jl_base_url', '/'),
+      'perPage' => get_option('jl_per_page', '10'),
+      'wordpressUsername' => get_option('jl_wordpress_username', ''),
+      'applicationPassword' => get_option('jl_application_password', ''),
+      'captchaSiteKey' => get_option('jl_captcha_site_key', '')
+    );
+    wp_localize_script('jl-script', 'jlData', $data);
   }
 }

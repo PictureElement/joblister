@@ -21,31 +21,11 @@ function App() {
   const setAllCategories = useSetRecoilState(allCategoriesState);
   const setAllTypes = useSetRecoilState(allTypesState);
   const setAllExperienceLevels = useSetRecoilState(allExperienceLevelsState);
-  const [endpointJobs] = useState(
-    process.env.APP_ENV === 'dev' ?
-    process.env.APP_BASE_URL_DEV + process.env.APP_ENDPOINT_JOBS :
-    process.env.APP_BASE_URL_PROD + process.env.APP_ENDPOINT_JOBS
-  );
-  const [endpointLocations] = useState(
-    process.env.APP_ENV === 'dev' ?
-    process.env.APP_BASE_URL_DEV + process.env.APP_ENDPOINT_LOCATIONS :
-    process.env.APP_BASE_URL_PROD + process.env.APP_ENDPOINT_LOCATIONS
-  );
-  const [endpointCategories] = useState(
-    process.env.APP_ENV === 'dev' ?
-    process.env.APP_BASE_URL_DEV + process.env.APP_ENDPOINT_CATEGORIES :
-    process.env.APP_BASE_URL_PROD + process.env.APP_ENDPOINT_CATEGORIES
-  );
-  const [endpointTypes] = useState(
-    process.env.APP_ENV === 'dev' ?
-    process.env.APP_BASE_URL_DEV + process.env.APP_ENDPOINT_TYPES :
-    process.env.APP_BASE_URL_PROD + process.env.APP_ENDPOINT_TYPES
-  );
-  const [endpointExperienceLevels] = useState(
-    process.env.APP_ENV === 'dev' ?
-    process.env.APP_BASE_URL_DEV + process.env.APP_ENDPOINT_EXPERIENCE_LEVELS :
-    process.env.APP_BASE_URL_PROD + process.env.APP_ENDPOINT_EXPERIENCE_LEVELS
-  );
+  const [endpointJobs] = useState(jlData.baseUrl + "wp-json/wp/v2/jl-jobs");
+  const [endpointLocations] = useState(jlData.baseUrl + "wp-json/wp/v2/jl-locations");
+  const [endpointCategories] = useState(jlData.baseUrl + "wp-json/wp/v2/jl-categories");
+  const [endpointTypes] = useState(jlData.baseUrl + "wp-json/wp/v2/jl-types");
+  const [endpointExperienceLevels] = useState(jlData.baseUrl + "wp-json/wp/v2/jl-experience-levels");
   const [loading, setLoading] = useState(true);
 
   async function getData() {
