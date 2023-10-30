@@ -1,10 +1,13 @@
 <?php
-
-/**
- * Plugin name: JobLister
- * Description: Simple job listing plugin to manage job openings on your WordPress site.
- * Author: Marios Sofokleous
- * Author URI: https://www.msof.me
+/*
+ * Plugin Name:       JobLister
+ * Plugin URI:        https://example.com/plugins/the-basics/
+ * Description:       React-powered job listing made simple for WordPress.
+ * Version:           1.0.0
+ * Author:            Marios Sofokleous
+ * Author URI:        https://www.msof.me/
+ * License:           GNU General Public License v3.0
+ * License URI:       https://www.gnu.org/licenses/gpl-3.0.en.html
  */
 
 // Exit if accessed directly.
