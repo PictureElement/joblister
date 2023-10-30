@@ -23,13 +23,14 @@ class JL_Scripts
       true // Enqueue script before </body>
     );
 
-    // Localize the script with data
+    // Localize the script with Settings page data
+    $options = get_option('joblister_options');
     $data = array(
       'restBaseUrl' => rest_url(),
-      'perPage' => get_option('jl_per_page', '10'),
-      'wordpressUsername' => get_option('jl_wordpress_username', ''),
-      'applicationPassword' => get_option('jl_application_password', ''),
-      'captchaSiteKey' => get_option('jl_captcha_site_key', '')
+      'perPage' => !empty($options['per_page']) ? $options['per_page'] : '10',
+      'wordpressUsername' => isset($options['wordpress_username']) ? $options['wordpress_username'] : '',
+      'applicationPassword' => isset($options['application_password']) ? $options['application_password'] : '',
+      'captchaSiteKey' => !empty($options['captcha_site_key']) ? $options['captcha_site_key'] : '6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI',
     );
     wp_localize_script('jl-script', 'jlData', $data);
   }

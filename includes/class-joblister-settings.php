@@ -46,13 +46,6 @@ class JL_Settings {
       'joblister'
     );
     add_settings_field(
-      'joblister_base_url',
-      'Base URL',
-      array($this, 'base_url_callback'),
-      'joblister',
-      'joblister_main'
-    );
-    add_settings_field(
       'joblister_per_page',
       'Items Per Page',
       array($this, 'per_page_callback'),
@@ -75,7 +68,7 @@ class JL_Settings {
     );
     add_settings_field(
       'joblister_captcha_site_key',
-      'Captcha Site Key',
+      'Invisible reCAPTCHA v2 Site Key',
       array($this, 'captcha_site_key_callback'),
       'joblister',
       'joblister_main'
@@ -84,13 +77,6 @@ class JL_Settings {
 
   public function main_callback() {
     echo 'Configure the main settings for the JobLister plugin. These settings will affect how the plugin interacts with your WordPress site and how the job listings are displayed.';
-  }
-
-  public function base_url_callback() {
-    $options = get_option('joblister_options');
-    ?>
-    <input type="text" id="joblister_base_url" name="joblister_options[base_url]" value="<?php echo isset($options['base_url']) ? esc_attr($options['base_url']) : '/'; ?>">
-    <?php
   }
 
   public function per_page_callback() {
@@ -117,14 +103,13 @@ class JL_Settings {
   public function captcha_site_key_callback() {
     $options = get_option('joblister_options');
     ?>
-    <input type="text" id="joblister_captcha_site_key" name="joblister_options[captcha_site_key]" value="<?php echo isset($options['captcha_site_key']) ? esc_attr($options['captcha_site_key']) : ''; ?>">
+    <input type="text" id="joblister_captcha_site_key" name="joblister_options[captcha_site_key]" value="<?php echo isset($options['captcha_site_key']) ? esc_attr($options['captcha_site_key']) : '6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI'; ?>">
     <?php
   }
 
   public function options_validate($input) {
     // Validate the input data
-    $input['base_url'] = sanitize_text_field($input['base_url']);
-    $input['per_page'] = sanitize_text_field($input['per_page']);
+    $input['per_page'] = is_numeric($input['per_page']) ? intval($input['per_page']) : '10';
     $input['wordpress_username'] = sanitize_text_field($input['wordpress_username']);
     $input['application_password'] = sanitize_text_field($input['application_password']);
     $input['captcha_site_key'] = sanitize_text_field($input['captcha_site_key']);

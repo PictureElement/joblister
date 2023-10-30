@@ -130,7 +130,7 @@ class JL_Custom_Post_Types
       "label" => "Applications",
       "labels" => $labels,
       "description" => "",
-      "public" => false,
+      "public" => true,
       "publicly_queryable" => false,
       "show_ui" => true,
       "show_in_rest" => true,
