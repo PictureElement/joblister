@@ -240,6 +240,3 @@ class JL_Custom_Taxonomies
     return false;
   }
 }
-
-// Initialize the JL_Custom_Taxonomies
-new JL_Custom_Taxonomies();

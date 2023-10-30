@@ -78,6 +78,3 @@ class JL_Admin_Columns
     }
   }
 }
-
-// Initialize the JL_Admin_Columns
-new JL_Admin_Columns();

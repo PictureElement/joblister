@@ -149,6 +149,3 @@ class JL_Meta_Boxes
     update_post_meta($post_id, 'consent', true);
   }
 }
-
-// Initialize the JL_Meta_Boxes
-new JL_Meta_Boxes();

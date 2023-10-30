@@ -13,7 +13,7 @@
 // Exit if accessed directly.
 defined( 'ABSPATH' ) || exit;
 
-// The core plugin class
+// Include core class file
 require_once plugin_dir_path(__FILE__) . 'includes/class-joblister.php';
 
 // Initialize the JobLister plugin

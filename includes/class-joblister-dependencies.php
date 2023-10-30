@@ -31,6 +31,3 @@ class JL_Dependencies
     echo '<div class="error"><p>Sorry, but <strong>JobLister</strong> plugin requires the <strong>Radio Buttons for Taxonomies</strong> plugin to be installed and active.</p></div>';
   }
 }
-
-// Initialize the JL_Dependencies
-new JL_Dependencies();

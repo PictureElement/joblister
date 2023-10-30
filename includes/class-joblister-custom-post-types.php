@@ -154,6 +154,3 @@ class JL_Custom_Post_Types
     register_post_type("jl_application", $args);
   }
 }
-
-// Initialize the JL_Custom_Post_Types
-new JL_Custom_Post_Types();

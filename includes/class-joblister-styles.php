@@ -24,6 +24,3 @@ class JL_Styles
     );
   }
 }
-
-// Initialize the JL_Styles
-new JL_Styles();

@@ -24,6 +24,3 @@ class JL_Scripts
     );
   }
 }
-
-// Initialize the JL_Scripts
-new JL_Scripts();

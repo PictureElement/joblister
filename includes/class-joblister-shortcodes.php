@@ -21,6 +21,3 @@ class JL_Shortcodes
     return '<div class="jl-root" id="jl-root"></div>';
   }
 }
-
-// Initialize the JL_Shortcodes
-new JL_Shortcodes();

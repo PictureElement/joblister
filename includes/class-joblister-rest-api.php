@@ -246,6 +246,3 @@ class JL_REST_API
     }
   }
 }
-
-// Initialize the JL_REST_API
-new JL_REST_API();
