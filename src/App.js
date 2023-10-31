@@ -21,11 +21,11 @@ function App() {
   const setAllCategories = useSetRecoilState(allCategoriesState);
   const setAllTypes = useSetRecoilState(allTypesState);
   const setAllExperienceLevels = useSetRecoilState(allExperienceLevelsState);
-  const [endpointJobs] = useState(jlData.restBaseUrl + "wp/v2/jl-jobs");
-  const [endpointLocations] = useState(jlData.restBaseUrl + "wp/v2/jl-locations");
-  const [endpointCategories] = useState(jlData.restBaseUrl + "wp/v2/jl-categories");
-  const [endpointTypes] = useState(jlData.restBaseUrl + "wp/v2/jl-types");
-  const [endpointExperienceLevels] = useState(jlData.restBaseUrl + "wp/v2/jl-experience-levels");
+  const [endpointJobs] = useState(jlData.restBaseUrl + "wp/v2/jl-jobs" + jlData.separator + "per_page=100");
+  const [endpointLocations] = useState(jlData.restBaseUrl + "wp/v2/jl-locations" + jlData.separator + "per_page=100");
+  const [endpointCategories] = useState(jlData.restBaseUrl + "wp/v2/jl-categories" + jlData.separator + "per_page=100");
+  const [endpointTypes] = useState(jlData.restBaseUrl + "wp/v2/jl-types" + jlData.separator + "per_page=100");
+  const [endpointExperienceLevels] = useState(jlData.restBaseUrl + "wp/v2/jl-experience-levels" + jlData.separator + "per_page=100");
   const [loading, setLoading] = useState(true);
 
   async function getData() {

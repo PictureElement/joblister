@@ -134,6 +134,7 @@
 //
 #jl-root .jl-job-item {
   &__link {
+    text-decoration: none;
     background-color: $surface;
     border: 1px solid $on-background-border;
     display: block;
@@ -506,6 +507,8 @@
   }
   &__container {
     display: flex;
+    flex-wrap: wrap;
+    row-gap: 16px;
     column-gap: 16px;
     button {
       transition: transform 200ms ease-out;
