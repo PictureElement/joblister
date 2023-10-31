@@ -76,7 +76,7 @@ function Form() {
 
     // Initiate POST request
     try {
-      const response = await fetch("https://dev.test/wp-json/wp/v2/jl-applications", {
+      const response = await fetch(jlData.restBaseUrl + "wp/v2/jl-applications", {
         method: "POST",
         headers: {
           "Authorization": basicAuthHeader
