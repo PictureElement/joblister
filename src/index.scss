@@ -528,6 +528,7 @@
 // Select Component
 //
 #jl-root .jl-select {
+  min-width: 0;
   &__control {
     cursor: pointer;
     border-color: $on-background-border;
