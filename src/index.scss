@@ -61,6 +61,16 @@
   background-color: $background;
 }
 
+#jl-root *,
+#jl-root *::before,
+#jl-root *::after {
+  box-sizing: border-box;
+}
+
+#jl-root * {
+  margin: 0;
+}
+
 #jl-root button,
 #jl-root a {
   cursor: pointer;
