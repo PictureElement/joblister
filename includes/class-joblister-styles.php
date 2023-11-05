@@ -9,6 +9,7 @@ class JL_Styles
   public function __construct()
   {
     add_action('wp_enqueue_scripts', array($this, 'register_style'));
+    add_action('wp_enqueue_scripts', array($this, 'add_styles_to_registered_style'));
   }
 
   // Register style
@@ -22,5 +23,24 @@ class JL_Styles
       rand(), // Style version number (Change this to null for production)
       'all' // Media
     );
+
+    // Add custom styles to the registered style
+    $this->add_styles_to_registered_style();
+  }
+
+  public function add_styles_to_registered_style()
+  {
+    // Get options
+    $options = get_option('joblister_options');
+
+    $accent = $options['accent'];
+
+    $custom_css = "
+      :root {
+        --jl-accent: {$accent};
+      }
+    ";
+
+    wp_add_inline_style('jl-style', $custom_css);
   }
 }

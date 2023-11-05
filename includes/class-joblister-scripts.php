@@ -34,10 +34,10 @@ class JL_Scripts
 
     $data = array(
       'restBaseUrl' => rest_url(),
-      'perPage' => !empty($options['per_page']) ? $options['per_page'] : '10',
-      'wordpressUsername' => isset($options['wordpress_username']) ? $options['wordpress_username'] : '',
-      'applicationPassword' => isset($options['application_password']) ? $options['application_password'] : '',
-      'captchaSiteKey' => !empty($options['captcha_site_key']) ? $options['captcha_site_key'] : '6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI',
+      'perPage' => $options['per_page'],
+      'wordpressUsername' => $options['wordpress_username'],
+      'applicationPassword' => $options['application_password'],
+      'captchaSiteKey' => $options['captcha_site_key'],
       'separator' => $separator,
     );
     wp_localize_script('jl-script', 'jlData', $data);

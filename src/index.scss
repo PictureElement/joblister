@@ -58,7 +58,7 @@
 // Global
 //
 #jl-root {
-  background-color: $background;
+  background-color: var(--jl-background);
 }
 
 #jl-root *,
@@ -75,7 +75,7 @@
 #jl-root a {
   cursor: pointer;
   &:focus {
-    outline: 2px solid $accent;
+    outline: 2px solid var(--jl-accent);
     outline-offset: 1px;
     transition: outline-offset 0s,outline 0s;
   }
@@ -89,8 +89,8 @@
   width: 16px;
   height: 16px;
   border-radius: 8px;
-  background-color: $accent;
-  color: $accent;
+  background-color: var(--jl-accent);
+  color: var(--jl-accent);
   animation: jl-dot-flashing 1s infinite linear alternate;
   animation-delay: 0.5s;
   &::before, &::after {
@@ -104,8 +104,8 @@
     width: 16px;
     height: 16px;
     border-radius: 8px;
-    background-color: $accent;
-    color: $accent;
+    background-color: var(--jl-accent);
+    color: var(--jl-accent);
     animation: jl-dot-flashing 1s infinite alternate;
     animation-delay: 0s;
   }
@@ -114,17 +114,17 @@
     width: 16px;
     height: 16px;
     border-radius: 8px;
-    background-color: $accent;
-    color: $accent;
+    background-color: var(--jl-accent);
+    color: var(--jl-accent);
     animation: jl-dot-flashing 1s infinite alternate;
     animation-delay: 1s;
   }
   @keyframes jl-dot-flashing {
     0% {
-      background-color: $accent;
+      background-color: var(--jl-accent);
     }
     50%, 100% {
-      background-color: rgba($accent, 0.2);
+      background-color: rgba(var(--jl-accent), 0.2);
     }
   }
 }
@@ -145,15 +145,15 @@
 #jl-root .jl-job-item {
   &__link {
     text-decoration: none;
-    background-color: $surface;
-    border: 1px solid $on-background-border;
+    background-color: var(--jl-surface);
+    border: 1px solid var(--jl-on-background-border);
     display: block;
     will-change: transform;
     transition: transform 200ms ease-out;
     &:hover {
       transform: translateX(-4px);
       .jl-job-item__title {
-        color: $accent;
+        color: var(--jl-accent);
       }
     }
   }
@@ -181,7 +181,7 @@
   &__job {
     display: table-cell;
     width: 35%;
-    border-inline-end: 1px solid $on-surface-border;
+    border-inline-end: 1px solid var(--jl-on-surface-border);
     padding: 0 12px;
     @media (max-width: 767px) {
       width: 100%;
@@ -191,21 +191,21 @@
     }
   }
   &__title {
-    color: $on-surface-primary;
+    color: var(--jl-on-surface-primary);
     transition: color 200ms ease-out;
     font-weight: 600;
     margin-bottom: 4px;
   }
   &__subtitle {
-    color: $on-surface-secondary;
+    color: var(--jl-on-surface-secondary);
   }
   &__category {
     overflow: hidden;
     vertical-align: top;
     display: table-cell;
     width: 25%;
-    border-inline-end: 1px solid $on-surface-border;
-    color: $on-surface-primary;
+    border-inline-end: 1px solid var(--jl-on-surface-border);
+    color: var(--jl-on-surface-primary);
     padding: 0 12px;
     @media (max-width: 767px) {
       width: 100%;
@@ -213,7 +213,7 @@
       padding-bottom: 12px;
       margin-bottom: 12px;
       border-inline-end-width: 0;
-      border-bottom: 1px solid $on-surface-border;
+      border-bottom: 1px solid var(--jl-on-surface-border);
     }
   }
   &__location {
@@ -221,8 +221,8 @@
     vertical-align: top;
     display: table-cell;
     width: 20%;
-    border-inline-end: 1px solid $on-surface-border;
-    color: $on-surface-primary;
+    border-inline-end: 1px solid var(--jl-on-surface-border);
+    color: var(--jl-on-surface-primary);
     padding: 0 12px;
     position: relative;
     & > svg {
@@ -230,7 +230,7 @@
       top: 0;
       inset-inline-start: 12px;
       transform: translateY(-2px);
-      fill: $on-surface-secondary;
+      fill: var(--jl-on-surface-secondary);
     }
     & div {
       padding-inline-start: 32px;
@@ -247,7 +247,7 @@
     vertical-align: top;
     display: table-cell;
     width: 20%;
-    color: $on-surface-primary;
+    color: var(--jl-on-surface-primary);
     padding: 0 12px;
     @media (max-width: 767px) {
       width: 50%;
@@ -273,7 +273,7 @@
     text-align: center;
     @include font-family;
     font-weight: 400;
-    color: $on-background-primary;
+    color: var(--jl-on-background-primary);
     strong {
       font-weight: 600;
     }
@@ -282,7 +282,7 @@
     @include font-family;
     font-weight: 400;
     height: 44px;
-    color: $accent;
+    color: var(--jl-accent);
     border-radius: 0;
     border: none;
     padding: 0;
@@ -305,7 +305,7 @@
   &__header {
     display: flex;
     span {
-      color: $on-background-secondary;
+      color: var(--jl-on-background-secondary);
       text-transform: uppercase;
       padding: 0 12px 12px;
     }
@@ -343,7 +343,7 @@
     padding-bottom: 32px;
     display: flex;
     column-gap: 80px;
-    border-bottom: 1px solid $on-background-border;
+    border-bottom: 1px solid var(--jl-on-background-border);
     &-left {
       width: 75%;
       @media (max-width: 767px) {
@@ -362,12 +362,12 @@
     }
   }
   &__title {
-    color: $on-background-primary;
+    color: var(--jl-on-background-primary);
     font-weight: 600;
     margin-bottom: 8px;
   }
   &__subtitle {
-    color: $on-background-secondary;
+    color: var(--jl-on-background-secondary);
   }
   &__apply {
     all: unset;
@@ -375,7 +375,7 @@
     margin-top: 12px;
     cursor: pointer;
     user-select: none;
-    background-color: $accent;
+    background-color: var(--jl-accent);
     @include font-family;
     font-size: 16px;
     line-height: 1;
@@ -383,11 +383,11 @@
     padding: 16px;
     width: 100%;
     display: inline-block;
-    color: $on-accent;
+    color: var(--jl-on-accent);
     text-align: center;
     transition: transform 200ms ease-out;
     &:hover {
-      background-color: darken($accent, 5%);
+      // background-color: darken(var(--jl-accent), 5%);
     }
     @media (max-width: 767px) {
       width: auto;
@@ -400,7 +400,7 @@
     column-gap: 80px;
     padding-top: 20px;
     padding-bottom: 16px;
-    border-bottom: 1px solid $on-background-border;
+    border-bottom: 1px solid var(--jl-on-background-border);
     &-left {
       width: 75%;
       @media (max-width: 767px) {
@@ -419,7 +419,7 @@
     }
   }
   &__content {
-    color: $on-background-primary;
+    color: var(--jl-on-background-primary);
     h2 {
       font-size: 24px;
       line-height: 28px;
@@ -457,7 +457,7 @@
       font-weight: 300;
     }
     a {
-      color: $accent;
+      color: var(--jl-accent);
       text-decoration: none;
       &:hover {
         text-decoration: underline;
@@ -470,39 +470,39 @@
     @include font-family;
     font-weight: 400;
     height: 44px;
-    color: $accent;
+    color: var(--jl-accent);
     margin-top: 16px;
     &:hover {
       text-decoration: underline;
     }
     svg {
       margin-inline-end: 8px;
-      fill: $accent;
+      fill: var(--jl-accent);
     }
   }
 }
 
 #jl-root .jl-job-details {
-  border-bottom: 1px solid $on-background-border;
+  border-bottom: 1px solid var(--jl-on-background-border);
   padding-bottom: 16px;
   &__title {
     padding-top: 12px;
     padding-bottom: 16px;
-    color: $on-background-primary;
+    color: var(--jl-on-background-primary);
   }
   &__category {
     padding-bottom: 16px;
     h3 {
       font-weight: 600;
-      color: $on-background-primary;
+      color: var(--jl-on-background-primary);
     }
     div {
       font-weight: 300;
-      color: $on-background-primary;
+      color: var(--jl-on-background-primary);
     }
   }
   @media (max-width: 767px) {
-    border-top: 1px solid $on-background-border;
+    border-top: 1px solid var(--jl-on-background-border);
     padding-top: 20px;
     margin-top: 16px;
   }
@@ -513,7 +513,7 @@
   &__title {
     padding-top: 16px;
     padding-bottom: 16px;
-    color: $on-background-primary;
+    color: var(--jl-on-background-primary);
   }
   &__container {
     display: flex;
@@ -541,12 +541,12 @@
   min-width: 0;
   &__control {
     cursor: pointer;
-    border-color: $on-background-border;
+    border-color: var(--jl-on-background-border);
     border-radius: 0;
-    background-color: $surface;
+    background-color: var(--jl-surface);
     &--is-focused {
       box-shadow: none;
-      outline: 2px solid $accent!important;
+      outline: 2px solid var(--jl-accent)!important;
       outline-offset: 1px;
       transition: outline-offset 0s,outline 0s;
     }
@@ -556,32 +556,32 @@
     font-size: 16px;
     line-height: 24px;
     font-weight: 400;
-    color: $on-surface-secondary;
+    color: var(--jl-on-surface-secondary);
   }
   &__option {
     @include font-family;
     font-size: 16px;
     line-height: 24px;
     font-weight: 400;
-    background-color: $surface;
-    color: $on-surface-primary;
+    background-color: var(--jl-surface);
+    color: var(--jl-on-surface-primary);
     border-inline-start: 3px solid transparent;
     cursor: pointer;
     &--is-focused {
-      background-color: darken($surface, 5%);
-      border-inline-start: 3px solid $accent;
+      // background-color: darken(var(--jl-surface), 5%);
+      border-inline-start: 3px solid var(--jl-accent);
     }
   }
   &__value-container {
     padding: 5px 8px;
   }
   &__indicator-separator {
-    background-color: $on-surface-border;
+    background-color: var(--jl-on-surface-border);
   }
   &__indicator {
     padding: 11px;
     > svg {
-      fill: $accent;
+      fill: var(--jl-accent);
     }
   }
   &__multi-value__label {
@@ -589,8 +589,8 @@
     font-size: 16px;
     line-height: 1;
     font-weight: 400;
-    background-color: darken($surface, 5%);
-    color: $on-surface-primary;
+    // background-color: darken(var(--jl-surface), 5%);
+    color: var(--jl-on-surface-primary);
     border-radius: 0;
   }
   &__menu {
@@ -602,8 +602,8 @@
     font-size: 16px;
     line-height: 24px;
     font-weight: 400;
-    background-color: $surface;
-    color: $on-surface-primary;
+    background-color: var(--jl-surface);
+    color: var(--jl-on-surface-primary);
   }
   &__menu-list {
     padding: 0;
@@ -620,7 +620,7 @@
       top: 50%;
       transform: translateY(-50%);
       inset-inline-start: 8px;
-      fill: $on-surface-secondary;
+      fill: var(--jl-on-surface-secondary);
     } 
   }
   &__input {
@@ -636,11 +636,11 @@
     font-size: 16px;
     line-height: 24px;
     font-weight: 400;
-    color: $on-surface-primary;
-    border: 1px solid $on-background-border;
-    background-color: $surface;
+    color: var(--jl-on-surface-primary);
+    border: 1px solid var(--jl-on-background-border);
+    background-color: var(--jl-surface);
     &:focus {
-      outline: 2px solid $accent;
+      outline: 2px solid var(--jl-accent);
       outline-offset: 1px;
       transition: outline-offset 0s,outline 0s;
     }
@@ -649,7 +649,7 @@
       font-size: 16px;
       line-height: 24px;
       font-weight: 400;
-      color: $on-surface-secondary;
+      color: var(--jl-on-surface-secondary);
     }
   }
 }
@@ -674,7 +674,7 @@
   }
   &__fraction {
     display: none;
-    color: $on-background-primary;
+    color: var(--jl-on-background-primary);
     @include font-family;
     font-weight: 400;
     @media (max-width: 400px) {
@@ -682,10 +682,10 @@
     }
   }
   &__control {
-    background-color: $background;
+    background-color: var(--jl-background);
     border: none;
     border-radius: 0;
-    color: $on-background-primary;
+    color: var(--jl-on-background-primary);
     margin: 0 4px;
     padding: 0;
     display: inline-flex;
@@ -696,21 +696,21 @@
     height: 44px;
     width: 44px;
     &:hover {
-      background-color: darken($background, 5%);
+      // background-color: darken(var(--jl-background), 5%);
     }
     &_ellipsis {
-      color: $on-background-secondary;
+      color: var(--jl-on-background-secondary);
       &:hover {
         background-color: transparent;
       }
     }
     &_active {
-      color: $accent;
+      color: var(--jl-accent);
     }
   }
   &__arrow {
-    border: 1px solid $on-background-border;
-    fill: $on-background-primary;
+    border: 1px solid var(--jl-on-background-border);
+    fill: var(--jl-on-background-primary);
     margin: 0;
     transition: opacity 200ms ease-out;
     &:disabled {
@@ -727,30 +727,30 @@
 
 // Form Component
 #jl-root .jl-form {
-  border: 1px solid $on-background-border;
+  border: 1px solid var(--jl-on-background-border);
   padding: 32px;
   max-width: 440px;
   margin-top: 32px;
   &__title {
     text-align: center;
     margin-bottom: 16px;
-    color: $on-background-primary;
+    color: var(--jl-on-background-primary);
   }
   &__subtitle {
     text-align: center;
-    color: $on-background-primary;
+    color: var(--jl-on-background-primary);
     margin-bottom: 16px;
     font-weight: 300;
   }
   &__required {
     margin-bottom: 16px;
-    color: $on-background-secondary;
+    color: var(--jl-on-background-secondary);
     text-align: center;
   }
   &__captcha-wrapper {
     margin-bottom: 20px;
-    background-color: $surface;
-    border: 1px solid $on-background-border;
+    background-color: var(--jl-surface);
+    border: 1px solid var(--jl-on-background-border);
     &  div > div > div {
       margin: 0 auto;
     }
@@ -759,7 +759,7 @@
     all: unset;
     cursor: pointer;
     user-select: none;
-    background-color: $accent;
+    background-color: var(--jl-accent);
     @include font-family;
     font-size: 16px;
     line-height: 1;
@@ -768,10 +768,10 @@
     padding: 16px;
     width: 100%;
     display: inline-block;
-    color: $on-accent;
+    color: var(--jl-on-accent);
     text-align: center;
     &:hover {
-      background-color: darken($accent, 5%);
+      // background-color: darken(var(--jl-accent), 5%);
     }
   }
   @media (max-width: 767px) {
@@ -784,12 +784,12 @@
 #jl-root .jl-input {
   margin-bottom: 16px;
   &__label {
-    color: $on-background-primary;
+    color: var(--jl-on-background-primary);
     margin-bottom: 4px;
   }
   &__helper {
     margin-top: 4px;
-    color: $on-background-secondary;
+    color: var(--jl-on-background-secondary);
   }
   &__control {
     appearance: none;
@@ -802,18 +802,18 @@
     font-size: 16px;
     line-height: 24px;
     font-weight: 400;
-    color: $on-surface-primary;
-    border: 1px solid $on-background-border;
-    background-color: $surface;
+    color: var(--jl-on-surface-primary);
+    border: 1px solid var(--jl-on-background-border);
+    background-color: var(--jl-surface);
     width: 100%;
     &:focus {
-      outline: 2px solid $accent;
+      outline: 2px solid var(--jl-accent);
       outline-offset: 1px;
       transition: outline-offset 0s,outline 0s;
     }
   }
   &__error {
-    color: $error;
+    color: var(--jl-error);
     margin-top: 4px;
   }
 }
@@ -835,9 +835,9 @@
     height: 24px;
   }
   &__label {
-    color: $on-background-primary;
+    color: var(--jl-on-background-primary);
     a {
-      color: $on-background-primary;
+      color: var(--jl-on-background-primary);
       text-decoration: underline;
       &:hover {
         text-decoration: none;
@@ -845,7 +845,7 @@
     }
   }
   &__error {
-    color: $error;
+    color: var(--jl-error);
     margin-top: 4px;
   }
 }
@@ -856,7 +856,7 @@
   &__emoji {
     @include font-family;
     font-size: 200px;
-    color: $on-background-primary;
+    color: var(--jl-on-background-primary);
     margin-bottom: 12px;
     @media (max-width: 767px) {
       font-size: 100px;
@@ -867,13 +867,13 @@
   }
   &__text {
     margin-bottom: 8px;
-    color: $on-background-primary;
+    color: var(--jl-on-background-primary);
   }
   &__clear {
     @include font-family;
     font-weight: 400;
     height: 44px;
-    color: $accent;
+    color: var(--jl-accent);
     border-radius: 0;
     border: none;
     padding: 0;
@@ -890,14 +890,14 @@
   &__emoji {
     @include font-family;
     font-size: 100px;
-    color: $success;
+    color: var(--jl-success);
     margin-bottom: 12px;
     @media (max-width: 575px) {
       font-size: 64px;
     }
   }
   &__text {
-    color: $success;
+    color: var(--jl-success);
   }
 }
 
