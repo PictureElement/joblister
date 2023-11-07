@@ -86,6 +86,13 @@ class JL_Settings {
       'joblister',
       'joblister_style'
     );
+    add_settings_field(
+      'joblister_on_accent',
+      'On Accent Color',
+      array($this, 'on_accent_callback'),
+      'joblister',
+      'joblister_style'
+    );
   }
 
   public function primary_callback() {
@@ -132,6 +139,14 @@ class JL_Settings {
     <?php
   }
 
+  public function on_accent_callback() {
+    $options = get_option('joblister_options');
+    ?>
+    <input type="text" id="joblister_on_accent" name="joblister_options[on_accent]" value="<?php echo isset($options['on_accent']) ? esc_attr($options['on_accent']) : ''; ?>">
+    <p class="description">Enter the <strong>on accent</strong> color in hex format. E.g., #ff4500</p>
+    <?php
+  }
+
   public function options_validate($input) {
     // Validate the input data
     $input['per_page'] = is_numeric($input['per_page']) ? intval($input['per_page']) : '10';
@@ -139,6 +154,7 @@ class JL_Settings {
     $input['application_password'] = sanitize_text_field($input['application_password']);
     $input['captcha_site_key'] = sanitize_text_field($input['captcha_site_key']) ?: '6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI';
     $input['accent'] = sanitize_hex_color($input['accent']) ?: '#1a73e8';
+    $input['on_accent'] = sanitize_hex_color($input['on_accent']) ?: '#ffffff';
     
     // Return the array to ensure the settings are saved.
     return $input;

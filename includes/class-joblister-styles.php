@@ -34,10 +34,12 @@ class JL_Styles
     $options = get_option('joblister_options');
 
     $accent = $options['accent'];
+    $on_accent = $options['on_accent'];
 
     $custom_css = "
       :root {
         --jl-accent: {$accent};
+        --jl-on-accent: {$on_accent};
       }
     ";
 
