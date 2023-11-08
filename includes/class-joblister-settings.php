@@ -148,14 +148,27 @@ class JL_Settings {
   }
 
   public function options_validate($input) {
-    // Validate the input data
-    $input['per_page'] = is_numeric($input['per_page']) ? intval($input['per_page']) : '10';
-    $input['wordpress_username'] = sanitize_text_field($input['wordpress_username']);
-    $input['application_password'] = sanitize_text_field($input['application_password']);
-    $input['captcha_site_key'] = sanitize_text_field($input['captcha_site_key']) ?: '6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI';
-    $input['accent'] = sanitize_hex_color($input['accent']) ?: '#1a73e8';
-    $input['on_accent'] = sanitize_hex_color($input['on_accent']) ?: '#ffffff';
+    // Set 'per_page' input to an integer greater than 0. If it's not set, not numeric, or less than 1, default to 10.
+    $input['per_page'] = (isset($input['per_page']) && is_numeric($input['per_page']) && intval($input['per_page']) > 0) ? intval($input['per_page']) : 10;
+
+    // Sanitize and save the 'wordpress_username' input. If it's not set, default to an empty string.
+    $input['wordpress_username'] = isset($input['wordpress_username']) ? sanitize_text_field(trim($input['wordpress_username'])) : '';
+
+    // Sanitize and save the 'application_password' input. If it's not set, default to an empty string.
+    $input['application_password'] = isset($input['application_password']) ? sanitize_text_field(trim($input['application_password'])) : '';
     
+    // Trim and sanitize 'captcha_site_key'. If it's not set or after sanitization and trimming it's an empty string, use the default key.
+    $trimmed_and_sanitized_captcha_site_key = isset($input['captcha_site_key']) ? sanitize_text_field(trim($input['captcha_site_key'])) : '';
+    $input['captcha_site_key'] = $trimmed_and_sanitized_captcha_site_key !== '' ? $trimmed_and_sanitized_captcha_site_key : '6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI';
+
+    // Trim and sanitize 'accent' color input. If it's not set or is an invalid color, use the default color.
+    $trimmed_and_sanitized_accent = isset($input['accent']) ? sanitize_hex_color(trim($input['accent'])) : '';
+    $input['accent'] = $trimmed_and_sanitized_accent !== '' ? $trimmed_and_sanitized_accent : '#1a73e8';
+
+    // Trim and sanitize 'on_accent' color input. If it's not set or is an invalid color, use the default color.
+    $trimmed_and_sanitized_on_accent = isset($input['on_accent']) ? sanitize_hex_color(trim($input['on_accent'])) : '';
+    $input['on_accent'] = $trimmed_and_sanitized_on_accent !== '' ? $trimmed_and_sanitized_on_accent : '#ffffff';
+
     // Return the array to ensure the settings are saved.
     return $input;
   }
