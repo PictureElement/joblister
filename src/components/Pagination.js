@@ -31,7 +31,7 @@ function Pagination() {
     if (start > 1) {
       pagination.push(1);
       if (start > 2) {
-        pagination.push('...');
+        pagination.push('···');
       }
     }
   
@@ -43,20 +43,20 @@ function Pagination() {
     // Add the ellipsis after the end if necessary
     if (end < totalPages) {
       if (end < totalPages - 1) {
-        pagination.push('...');
+        pagination.push('···');
       }
       pagination.push(totalPages);
     }
     
     // Map over array of page numbers and return an array of buttons
     return pagination.map((page, index) => {
-      if (page === '...') {
+      if (page === '···') {
         return (
           <button
             key={index}
             className="jl-pagination__control jl-pagination__control_ellipsis"
             disabled
-            aria-label="Page ..."
+            aria-label="Page ···"
             aria-disabled="true"
           >
             {page}

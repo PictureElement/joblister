@@ -16,7 +16,7 @@ class JL_Settings {
       'Settings',
       'Settings',
       'manage_options',
-      'settings',
+      'jl_settings',
       array($this, 'settings_page'),
       7
     );
@@ -28,8 +28,11 @@ class JL_Settings {
       <h1>Settings</h1>
       <form method="post" action="options.php">
         <?php
-        settings_fields('joblister_options');
-        do_settings_sections('joblister');
+        // Generates the necessary hidden input fields (nonce field, action field, and option_page field)
+        settings_fields('jl_option_group');
+        // Renders the sections on the settings page:
+        do_settings_sections('jl_settings_page');
+        // Generate the submit button
         submit_button();
         ?>
       </form>
@@ -38,61 +41,141 @@ class JL_Settings {
   }
 
   public function register_settings() {
-    register_setting('joblister_options', 'joblister_options', array($this, 'options_validate'));
+    register_setting('jl_option_group', 'jl_options', array($this, 'options_validate'));
+
     add_settings_section(
-      'joblister_primary',
+      'jl_primary',
       'Primary Settings',
       array($this, 'primary_callback'),
-      'joblister'
+      'jl_settings_page'
     );
+
     add_settings_field(
-      'joblister_per_page',
+      'jl_per_page',
       'Items Per Page',
       array($this, 'per_page_callback'),
-      'joblister',
-      'joblister_primary'
+      'jl_settings_page',
+      'jl_primary'
     );
+
     add_settings_field(
-      'joblister_wordpress_username',
+      'jl_wordpress_username',
       'WordPress Username',
       array($this, 'wordpress_username_callback'),
-      'joblister',
-      'joblister_primary'
+      'jl_settings_page',
+      'jl_primary'
     );
+
     add_settings_field(
-      'joblister_application_password',
+      'jl_application_password',
       'Application Password',
       array($this, 'application_password_callback'),
-      'joblister',
-      'joblister_primary'
+      'jl_settings_page',
+      'jl_primary'
     );
+    
     add_settings_field(
-      'joblister_captcha_site_key',
+      'jl_captcha_site_key',
       'Invisible reCAPTCHA v2 Site Key',
       array($this, 'captcha_site_key_callback'),
-      'joblister',
-      'joblister_primary'
+      'jl_settings_page',
+      'jl_primary'
     );
+
     add_settings_section(
-      'joblister_style',
+      'jl_style',
       'Style Settings',
       array($this, 'style_callback'),
-      'joblister'
+      'jl_settings_page'
     );
-    add_settings_field(
-      'joblister_accent',
-      'Accent Color',
-      array($this, 'accent_callback'),
-      'joblister',
-      'joblister_style'
-    );
-    add_settings_field(
-      'joblister_on_accent',
-      'On Accent Color',
-      array($this, 'on_accent_callback'),
-      'joblister',
-      'joblister_style'
-    );
+
+    $color_settings = [
+      'jl_accent' => [
+        'title' => 'Accent Color',
+        'description' => 'Enter the "accent" color in hex format. Defaults to #1a73e8.'
+      ],
+      'jl_on_accent' => [
+        'title' => 'On Accent Color',
+        'description' => 'Enter the "on accent" color in hex format. Defaults to #ffffff.'
+      ],
+      'jl_background' => [
+        'title' => 'Background Color',
+        'description' => 'Enter the "background" color in hex format. Defaults to #f8f9fa.'
+      ],
+      'jl_on_background_primary' => [
+        'title' => 'On Background Primary Color',
+        'description' => 'Enter the "on background primary" color in hex format. Defaults to #202124.'
+      ],
+      'jl_on_background_secondary' => [
+        'title' => 'On Background Secondary Color',
+        'description' => 'Enter the "on background secondary" color in hex format. Defaults to #5f6368.'
+      ],
+      'jl_on_background_border' => [
+        'title' => 'On Background Border Color',
+        'description' => 'Enter the "on background border" color in hex format. Defaults to #dadce0.'
+      ],
+      'jl_surface' => [
+        'title' => 'Surface Color',
+        'description' => 'Enter the "surface" color in hex format. Defaults to #ffffff.'
+      ],
+      'jl_on_surface_primary' => [
+        'title' => 'On Surface Primary Color',
+        'description' => 'Enter the "on surface primary" color in hex format. Defaults to #202124.'
+      ],
+      'jl_on_surface_secondary' => [
+        'title' => 'On Surface Secondary Color',
+        'description' => 'Enter the "on surface secondary" color in hex format. Defaults to #5f6368.'
+      ],
+      'jl_on_surface_border' => [
+        'title' => 'On Surface Border Color',
+        'description' => 'Enter the "on surface border" color in hex format. Defaults to #dadce0.'
+      ],
+      'jl_error' => [
+        'title' => 'Error Color',
+        'description' => 'Enter the "error" color in hex format. Defaults to #dc3545.'
+      ],
+      'jl_success' => [
+        'title' => 'Success Color',
+        'description' => 'Enter the "success" color in hex format. Defaults to #198754.'
+      ]
+    ];
+
+    foreach ($color_settings as $key => $value) {
+      add_settings_field(
+        $key,
+        $value['title'],
+        array($this, 'color_callback'),
+        'jl_settings_page',
+        'jl_style',
+        // Extra arguments that get passed to the callback function
+        array(
+          'id' => $key,
+          'description' => $value['description']
+        )
+      );
+    }
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  public function color_callback($args) {
+    $options = get_option('jl_options');
+    ?>
+    <input type="text" id="<?php echo esc_attr($args['id']); ?>" name="jl_options[<?php echo esc_attr($args['id']); ?>]" value="<?php echo isset($options[$args['id']]) ? esc_attr($options[$args['id']]) : '' ?>">
+    <p class="description"><?php echo esc_html($args['description']); ?></p>
+    <?php
   }
 
   public function primary_callback() {
@@ -100,30 +183,30 @@ class JL_Settings {
   }
 
   public function per_page_callback() {
-    $options = get_option('joblister_options');
+    $options = get_option('jl_options');
     ?>
-    <input type="text" id="joblister_per_page" name="joblister_options[per_page]" value="<?php echo isset($options['per_page']) ? esc_attr($options['per_page']) : '10'; ?>">
+    <input type="text" id="jl_per_page" name="jl_options[jl_per_page]" value="<?php echo isset($options['jl_per_page']) ? esc_attr($options['jl_per_page']) : '10'; ?>">
     <?php
   }
 
   public function wordpress_username_callback() {
-    $options = get_option('joblister_options');
+    $options = get_option('jl_options');
     ?>
-    <input type="text" id="joblister_wordpress_username" name="joblister_options[wordpress_username]" value="<?php echo isset($options['wordpress_username']) ? esc_attr($options['wordpress_username']) : ''; ?>">
+    <input type="text" id="jl_wordpress_username" name="jl_options[jl_wordpress_username]" value="<?php echo isset($options['jl_wordpress_username']) ? esc_attr($options['jl_wordpress_username']) : ''; ?>">
     <?php
   }
 
   public function application_password_callback() {
-    $options = get_option('joblister_options');
+    $options = get_option('jl_options');
     ?>
-    <input type="text" id="joblister_application_password" name="joblister_options[application_password]" value="<?php echo isset($options['application_password']) ? esc_attr($options['application_password']) : ''; ?>">
+    <input type="text" id="jl_application_password" name="jl_options[jl_application_password]" value="<?php echo isset($options['jl_application_password']) ? esc_attr($options['jl_application_password']) : ''; ?>">
     <?php
   }
 
   public function captcha_site_key_callback() {
-    $options = get_option('joblister_options');
+    $options = get_option('jl_options');
     ?>
-    <input type="text" id="joblister_captcha_site_key" name="joblister_options[captcha_site_key]" value="<?php echo isset($options['captcha_site_key']) ? esc_attr($options['captcha_site_key']) : '6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI'; ?>">
+    <input type="text" id="jl_captcha_site_key" name="jl_options[jl_captcha_site_key]" value="<?php echo isset($options['jl_captcha_site_key']) ? esc_attr($options['jl_captcha_site_key']) : '6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI'; ?>">
     <?php
   }
 
@@ -131,43 +214,38 @@ class JL_Settings {
     echo 'Adjust the visual style of your job listings. Tailor colors, fonts, and more to ensure the JobLister plugin complements your site\'s theme.';
   }
 
-  public function accent_callback() {
-    $options = get_option('joblister_options');
-    ?>
-    <input type="text" id="joblister_accent" name="joblister_options[accent]" value="<?php echo isset($options['accent']) ? esc_attr($options['accent']) : ''; ?>">
-    <p class="description">Enter the accent color in hex format. E.g., #ff4500</p>
-    <?php
-  }
-
-  public function on_accent_callback() {
-    $options = get_option('joblister_options');
-    ?>
-    <input type="text" id="joblister_on_accent" name="joblister_options[on_accent]" value="<?php echo isset($options['on_accent']) ? esc_attr($options['on_accent']) : ''; ?>">
-    <p class="description">Enter the <strong>on accent</strong> color in hex format. E.g., #ff4500</p>
-    <?php
+  // Trim and sanitize color input. If it's not set or is an invalid color, use the default color.
+  public function sanitize_color_option($color, $default) {
+    $trimmed_and_sanitized_color = isset($color) ? sanitize_hex_color(trim($color)) : '';
+    return $trimmed_and_sanitized_color ? $trimmed_and_sanitized_color : $default;
   }
 
   public function options_validate($input) {
     // Set 'per_page' input to an integer greater than 0. If it's not set, not numeric, or less than 1, default to 10.
-    $input['per_page'] = (isset($input['per_page']) && is_numeric($input['per_page']) && intval($input['per_page']) > 0) ? intval($input['per_page']) : 10;
+    $input['jl_per_page'] = (isset($input['jl_per_page']) && is_numeric($input['jl_per_page']) && intval($input['jl_per_page']) > 0) ? intval($input['jl_per_page']) : 10;
 
     // Sanitize and save the 'wordpress_username' input. If it's not set, default to an empty string.
-    $input['wordpress_username'] = isset($input['wordpress_username']) ? sanitize_text_field(trim($input['wordpress_username'])) : '';
+    $input['jl_wordpress_username'] = isset($input['jl_wordpress_username']) ? sanitize_text_field(trim($input['jl_wordpress_username'])) : '';
 
     // Sanitize and save the 'application_password' input. If it's not set, default to an empty string.
-    $input['application_password'] = isset($input['application_password']) ? sanitize_text_field(trim($input['application_password'])) : '';
+    $input['jl_application_password'] = isset($input['jl_application_password']) ? sanitize_text_field(trim($input['jl_application_password'])) : '';
     
     // Trim and sanitize 'captcha_site_key'. If it's not set or after sanitization and trimming it's an empty string, use the default key.
-    $trimmed_and_sanitized_captcha_site_key = isset($input['captcha_site_key']) ? sanitize_text_field(trim($input['captcha_site_key'])) : '';
-    $input['captcha_site_key'] = $trimmed_and_sanitized_captcha_site_key !== '' ? $trimmed_and_sanitized_captcha_site_key : '6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI';
+    $trimmed_and_sanitized_captcha_site_key = isset($input['jl_captcha_site_key']) ? sanitize_text_field(trim($input['jl_captcha_site_key'])) : '';
+    $input['jl_captcha_site_key'] = $trimmed_and_sanitized_captcha_site_key !== '' ? $trimmed_and_sanitized_captcha_site_key : '6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI';
 
-    // Trim and sanitize 'accent' color input. If it's not set or is an invalid color, use the default color.
-    $trimmed_and_sanitized_accent = isset($input['accent']) ? sanitize_hex_color(trim($input['accent'])) : '';
-    $input['accent'] = $trimmed_and_sanitized_accent !== '' ? $trimmed_and_sanitized_accent : '#1a73e8';
-
-    // Trim and sanitize 'on_accent' color input. If it's not set or is an invalid color, use the default color.
-    $trimmed_and_sanitized_on_accent = isset($input['on_accent']) ? sanitize_hex_color(trim($input['on_accent'])) : '';
-    $input['on_accent'] = $trimmed_and_sanitized_on_accent !== '' ? $trimmed_and_sanitized_on_accent : '#ffffff';
+    $input['jl_accent'] = $this->sanitize_color_option($input['jl_accent'], '#1a73e8');
+    $input['jl_on_accent'] = $this->sanitize_color_option($input['jl_on_accent'], '#ffffff');
+    $input['jl_background'] = $this->sanitize_color_option($input['jl_background'], '#f8f9fa');
+    $input['jl_on_background_primary'] = $this->sanitize_color_option($input['jl_on_background_primary'], '#202124');
+    $input['jl_on_background_secondary'] = $this->sanitize_color_option($input['jl_on_background_secondary'], '#5f6368');
+    $input['jl_on_background_border'] = $this->sanitize_color_option($input['jl_on_background_border'], '#dadce0');
+    $input['jl_surface'] = $this->sanitize_color_option($input['jl_surface'], '#ffffff');
+    $input['jl_on_surface_primary'] = $this->sanitize_color_option($input['jl_on_surface_primary'], '#202124');
+    $input['jl_on_surface_secondary'] = $this->sanitize_color_option($input['jl_on_surface_secondary'], '#5f6368');
+    $input['jl_on_surface_border'] = $this->sanitize_color_option($input['jl_on_surface_border'], '#dadce0');
+    $input['jl_error'] = $this->sanitize_color_option($input['jl_error'], '#dc3545');
+    $input['jl_success'] = $this->sanitize_color_option($input['jl_success'], '#198754');
 
     // Return the array to ensure the settings are saved.
     return $input;

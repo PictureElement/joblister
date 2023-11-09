@@ -31,15 +31,35 @@ class JL_Styles
   public function add_styles_to_registered_style()
   {
     // Get options
-    $options = get_option('joblister_options');
-
-    $accent = $options['accent'];
-    $on_accent = $options['on_accent'];
+    $options = get_option('jl_options', [
+      'jl_accent' => '#1a73e8',
+      'jl_on_accent' => '#ffffff',
+      'jl_background' => '#f8f9fa',
+      'jl_on_background_primary' => '#202124',
+      'jl_on_background_secondary' => '#5f6368',
+      'jl_on_background_border' => '#dadce0',
+      'jl_surface' => '#ffffff',
+      'jl_on_surface_primary' => '#202124',
+      'jl_on_surface_secondary' => '#5f6368',
+      'jl_on_surface_border' => '#dadce0',
+      'jl_error' => '#dc3545',
+      'jl_success' => '#198754'
+    ]);
 
     $custom_css = "
       :root {
-        --jl-accent: {$accent};
-        --jl-on-accent: {$on_accent};
+        --jl-accent: {$options['jl_accent']};
+        --jl-on-accent: {$options['jl_on_accent']};
+        --jl-background: {$options['jl_background']};
+        --jl-on-background-primary: {$options['jl_on_background_primary']};
+        --jl-on-background-secondary: {$options['jl_on_background_secondary']};
+        --jl-on-background-border: {$options['jl_on_background_border']};
+        --jl-surface: {$options['jl_surface']};
+        --jl-on-surface-primary: {$options['jl_on_surface_primary']};
+        --jl-on-surface-secondary: {$options['jl_on_surface_secondary']};
+        --jl-on-surface-border: {$options['jl_on_surface_border']};
+        --jl-error: {$options['jl_error']};
+        --jl-success: {$options['jl_success']};
       }
     ";
 
