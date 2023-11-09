@@ -24,7 +24,7 @@ class JL_Scripts
     );
 
     // Localize the script with Settings page data
-    $options = get_option('joblister_options');
+    $options = get_option('jl_options');
 
     // If the permalink structure is empty, it means WordPress is using "Plain" permalinks,
     // and we should use "&" to append query parameters to the URL.
@@ -34,10 +34,10 @@ class JL_Scripts
 
     $data = array(
       'restBaseUrl' => rest_url(),
-      'perPage' => $options['per_page'],
-      'wordpressUsername' => $options['wordpress_username'],
-      'applicationPassword' => $options['application_password'],
-      'captchaSiteKey' => $options['captcha_site_key'],
+      'perPage' => $options['jl_per_page'],
+      'wordpressUsername' => $options['jl_wordpress_username'],
+      'applicationPassword' => $options['jl_application_password'],
+      'captchaSiteKey' => $options['jl_captcha_site_key'],
       'separator' => $separator,
     );
     wp_localize_script('jl-script', 'jlData', $data);

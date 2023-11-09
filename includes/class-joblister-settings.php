@@ -91,51 +91,51 @@ class JL_Settings {
 
     $color_settings = [
       'jl_accent' => [
-        'title' => 'Accent Color',
+        'title' => 'Accent',
         'description' => 'Enter the "accent" color in hex format. Defaults to #1a73e8.'
       ],
       'jl_on_accent' => [
-        'title' => 'On Accent Color',
+        'title' => 'On Accent',
         'description' => 'Enter the "on accent" color in hex format. Defaults to #ffffff.'
       ],
       'jl_background' => [
-        'title' => 'Background Color',
+        'title' => 'Background',
         'description' => 'Enter the "background" color in hex format. Defaults to #f8f9fa.'
       ],
       'jl_on_background_primary' => [
-        'title' => 'On Background Primary Color',
+        'title' => 'On Background Primary',
         'description' => 'Enter the "on background primary" color in hex format. Defaults to #202124.'
       ],
       'jl_on_background_secondary' => [
-        'title' => 'On Background Secondary Color',
+        'title' => 'On Background Secondary',
         'description' => 'Enter the "on background secondary" color in hex format. Defaults to #5f6368.'
       ],
       'jl_on_background_border' => [
-        'title' => 'On Background Border Color',
+        'title' => 'On Background Border',
         'description' => 'Enter the "on background border" color in hex format. Defaults to #dadce0.'
       ],
       'jl_surface' => [
-        'title' => 'Surface Color',
+        'title' => 'Surface',
         'description' => 'Enter the "surface" color in hex format. Defaults to #ffffff.'
       ],
       'jl_on_surface_primary' => [
-        'title' => 'On Surface Primary Color',
+        'title' => 'On Surface Primary',
         'description' => 'Enter the "on surface primary" color in hex format. Defaults to #202124.'
       ],
       'jl_on_surface_secondary' => [
-        'title' => 'On Surface Secondary Color',
+        'title' => 'On Surface Secondary',
         'description' => 'Enter the "on surface secondary" color in hex format. Defaults to #5f6368.'
       ],
       'jl_on_surface_border' => [
-        'title' => 'On Surface Border Color',
+        'title' => 'On Surface Border',
         'description' => 'Enter the "on surface border" color in hex format. Defaults to #dadce0.'
       ],
       'jl_error' => [
-        'title' => 'Error Color',
+        'title' => 'Error',
         'description' => 'Enter the "error" color in hex format. Defaults to #dc3545.'
       ],
       'jl_success' => [
-        'title' => 'Success Color',
+        'title' => 'Success',
         'description' => 'Enter the "success" color in hex format. Defaults to #198754.'
       ]
     ];
@@ -154,28 +154,6 @@ class JL_Settings {
         )
       );
     }
-  }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  public function color_callback($args) {
-    $options = get_option('jl_options');
-    ?>
-    <input type="text" id="<?php echo esc_attr($args['id']); ?>" name="jl_options[<?php echo esc_attr($args['id']); ?>]" value="<?php echo isset($options[$args['id']]) ? esc_attr($options[$args['id']]) : '' ?>">
-    <p class="description"><?php echo esc_html($args['description']); ?></p>
-    <?php
   }
 
   public function primary_callback() {
@@ -214,6 +192,14 @@ class JL_Settings {
     echo 'Adjust the visual style of your job listings. Tailor colors, fonts, and more to ensure the JobLister plugin complements your site\'s theme.';
   }
 
+  public function color_callback($args) {
+    $options = get_option('jl_options');
+    ?>
+    <input type="text" id="<?php echo esc_attr($args['id']); ?>" name="jl_options[<?php echo esc_attr($args['id']); ?>]" value="<?php echo isset($options[$args['id']]) ? esc_attr($options[$args['id']]) : '' ?>">
+    <p class="description"><?php echo esc_html($args['description']); ?></p>
+    <?php
+  }
+
   // Trim and sanitize color input. If it's not set or is an invalid color, use the default color.
   public function sanitize_color_option($color, $default) {
     $trimmed_and_sanitized_color = isset($color) ? sanitize_hex_color(trim($color)) : '';
@@ -221,16 +207,16 @@ class JL_Settings {
   }
 
   public function options_validate($input) {
-    // Set 'per_page' input to an integer greater than 0. If it's not set, not numeric, or less than 1, default to 10.
+    // Set 'jl_per_page' input to an integer greater than 0. If it's not set, not numeric, or less than 1, default to 10.
     $input['jl_per_page'] = (isset($input['jl_per_page']) && is_numeric($input['jl_per_page']) && intval($input['jl_per_page']) > 0) ? intval($input['jl_per_page']) : 10;
 
-    // Sanitize and save the 'wordpress_username' input. If it's not set, default to an empty string.
+    // Sanitize and save the 'jl_wordpress_username' input. If it's not set, default to an empty string.
     $input['jl_wordpress_username'] = isset($input['jl_wordpress_username']) ? sanitize_text_field(trim($input['jl_wordpress_username'])) : '';
 
-    // Sanitize and save the 'application_password' input. If it's not set, default to an empty string.
+    // Sanitize and save the 'jl_application_password' input. If it's not set, default to an empty string.
     $input['jl_application_password'] = isset($input['jl_application_password']) ? sanitize_text_field(trim($input['jl_application_password'])) : '';
     
-    // Trim and sanitize 'captcha_site_key'. If it's not set or after sanitization and trimming it's an empty string, use the default key.
+    // Trim and sanitize 'jl_captcha_site_key'. If it's not set or after sanitization and trimming it's an empty string, use the default key.
     $trimmed_and_sanitized_captcha_site_key = isset($input['jl_captcha_site_key']) ? sanitize_text_field(trim($input['jl_captcha_site_key'])) : '';
     $input['jl_captcha_site_key'] = $trimmed_and_sanitized_captcha_site_key !== '' ? $trimmed_and_sanitized_captcha_site_key : '6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI';
 
