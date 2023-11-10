@@ -89,6 +89,22 @@ class JL_Settings {
       'jl_settings_page'
     );
 
+    add_settings_field(
+      'jl_google_font_link',
+      'Google Font Link',
+      array($this, 'google_font_import_callback'),
+      'jl_settings_page',
+      'jl_style'
+    );
+
+    add_settings_field(
+      'jl_google_font_family',
+      'Google Font Family',
+      array($this, 'google_font_family_callback'),
+      'jl_settings_page',
+      'jl_style'
+    );
+
     $color_settings = [
       'jl_accent' => [
         'title' => 'Accent',
@@ -163,28 +179,28 @@ class JL_Settings {
   public function per_page_callback() {
     $options = get_option('jl_options');
     ?>
-    <input type="text" id="jl_per_page" name="jl_options[jl_per_page]" value="<?php echo isset($options['jl_per_page']) ? esc_attr($options['jl_per_page']) : '10'; ?>">
+    <input style="width: 100%;" type="text" id="jl_per_page" name="jl_options[jl_per_page]" value="<?php echo isset($options['jl_per_page']) ? esc_attr($options['jl_per_page']) : '10'; ?>">
     <?php
   }
 
   public function wordpress_username_callback() {
     $options = get_option('jl_options');
     ?>
-    <input type="text" id="jl_wordpress_username" name="jl_options[jl_wordpress_username]" value="<?php echo isset($options['jl_wordpress_username']) ? esc_attr($options['jl_wordpress_username']) : ''; ?>">
+    <input style="width: 100%;" type="text" id="jl_wordpress_username" name="jl_options[jl_wordpress_username]" value="<?php echo isset($options['jl_wordpress_username']) ? esc_attr($options['jl_wordpress_username']) : ''; ?>">
     <?php
   }
 
   public function application_password_callback() {
     $options = get_option('jl_options');
     ?>
-    <input type="text" id="jl_application_password" name="jl_options[jl_application_password]" value="<?php echo isset($options['jl_application_password']) ? esc_attr($options['jl_application_password']) : ''; ?>">
+    <input style="width: 100%;" type="text" id="jl_application_password" name="jl_options[jl_application_password]" value="<?php echo isset($options['jl_application_password']) ? esc_attr($options['jl_application_password']) : ''; ?>">
     <?php
   }
 
   public function captcha_site_key_callback() {
     $options = get_option('jl_options');
     ?>
-    <input type="text" id="jl_captcha_site_key" name="jl_options[jl_captcha_site_key]" value="<?php echo isset($options['jl_captcha_site_key']) ? esc_attr($options['jl_captcha_site_key']) : '6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI'; ?>">
+    <input style="width: 100%;" type="text" id="jl_captcha_site_key" name="jl_options[jl_captcha_site_key]" value="<?php echo isset($options['jl_captcha_site_key']) ? esc_attr($options['jl_captcha_site_key']) : '6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI'; ?>">
     <?php
   }
 
@@ -192,10 +208,26 @@ class JL_Settings {
     echo 'Adjust the visual style of your job listings. Tailor colors, fonts, and more to ensure the JobLister plugin complements your site\'s theme.';
   }
 
+  public function google_font_import_callback() {
+    $options = get_option('jl_options');
+    ?>
+    <input style="width: 100%;" type="text" id="jl_google_font_link" name="jl_options[jl_google_font_link]" value="<?php echo isset($options['jl_google_font_link']) ? esc_attr($options['jl_google_font_link']) : ''; ?>">
+    <p class="description">Enter the CSS @import link for your chosen Google Font, including the weights: 300, 400, and 700. Example: <strong>https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700&display=swap</strong></p>
+    <?php
+  }
+
+  public function google_font_family_callback() {
+    $options = get_option('jl_options');
+    ?>
+    <input style="width: 100%;" type="text" id="jl_google_font_family" name="jl_options[jl_google_font_family]" value="<?php echo isset($options['jl_google_font_family']) ? esc_attr($options['jl_google_font_family']) : ''; ?>">
+    <p class="description">Enter just the font family portion for your chosen Google Font, as you would use in a CSS 'font-family' property. Do not include 'font-family:' itself. Example: <strong>'Poppins', sans-serif</strong></p>
+    <?php
+  }
+
   public function color_callback($args) {
     $options = get_option('jl_options');
     ?>
-    <input type="text" id="<?php echo esc_attr($args['id']); ?>" name="jl_options[<?php echo esc_attr($args['id']); ?>]" value="<?php echo isset($options[$args['id']]) ? esc_attr($options[$args['id']]) : '' ?>">
+    <input style="width: 100%;" type="text" id="<?php echo esc_attr($args['id']); ?>" name="jl_options[<?php echo esc_attr($args['id']); ?>]" value="<?php echo isset($options[$args['id']]) ? esc_attr($options[$args['id']]) : '' ?>">
     <p class="description"><?php echo esc_html($args['description']); ?></p>
     <?php
   }
@@ -232,6 +264,12 @@ class JL_Settings {
     $input['jl_on_surface_border'] = $this->sanitize_color_option($input['jl_on_surface_border'], '#dadce0');
     $input['jl_error'] = $this->sanitize_color_option($input['jl_error'], '#dc3545');
     $input['jl_success'] = $this->sanitize_color_option($input['jl_success'], '#198754');
+
+    // Sanitize and save the 'jl_google_font_link' input. If it's not set, default to an empty string.
+    $input['jl_google_font_link'] = isset($input['jl_google_font_link']) ? esc_url_raw(trim($input['jl_google_font_link'])) : '';
+
+    // Sanitize and save the 'jl_google_font_family' input. If it's not set, default to an empty string.
+    $input['jl_google_font_family'] = isset($input['jl_google_font_family']) ? sanitize_text_field(trim($input['jl_google_font_family'])) : '';
 
     // Return the array to ensure the settings are saved.
     return $input;
