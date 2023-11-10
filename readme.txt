@@ -27,7 +27,16 @@ Yes, we welcome contributions. Please refer to the contributing section in the G
 
 == Screenshots ==
 
-1. Dummy screenshot
+1. Job listings - Frontend
+2. No Jobs Found (Searching) - Frontend 
+3. No Jobs Found (Filtering) - Frontend
+4. A single job listing - Frontend
+5. Successfull application submission - Frontend
+6. The application form - Frontend
+7. Job listings - Backend
+8. Edit job - Backend
+9. Application list - Backend
+10. Edit Application - Backend
 
 == Changelog ==
 

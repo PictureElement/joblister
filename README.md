@@ -126,3 +126,13 @@ Your contributions are highly appreciated! If you wish to contribute to this pro
 ## License
 
 &copy; 2023 [Marios Sofokleous](https://www.msof.me/). Code released under the [GPL-3.0](LICENSE.md) license.
+
+
+
+Todo:
+
+1. Privacy Policy link to settings
+2. adjust Select tag margin
+3. Add font family to Settings, switch to enable system fonts.
+4. Take screenshot of Settings
+5. Update README

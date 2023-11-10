@@ -115,7 +115,7 @@ function Single() {
       </div>
       <Form />
       <Link to="/" className="jl-single__back-to-listing jl-text-size-h4">
-        <BackIcon /> Back to listing
+        <BackIcon /> Back to jobs
       </Link>  
     </div>
   )
