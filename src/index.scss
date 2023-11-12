@@ -385,9 +385,9 @@
     display: inline-block;
     color: var(--jl-on-accent);
     text-align: center;
-    transition: transform 200ms ease-out;
+    transition: filter 200ms ease-in-out;
     &:hover {
-      // background-color: darken(var(--jl-accent), 5%);
+      filter: brightness(90%);
     }
     @media (max-width: 767px) {
       width: auto;
@@ -521,6 +521,7 @@
     row-gap: 16px;
     column-gap: 16px;
     button {
+      will-change: transform;
       transition: transform 200ms ease-out;
       &:hover {
         transform: scale(1.05);
@@ -568,7 +569,7 @@
     border-inline-start: 3px solid transparent;
     cursor: pointer;
     &--is-focused {
-      // background-color: darken(var(--jl-surface), 5%);
+      filter: brightness(90%);
       border-inline-start: 3px solid var(--jl-accent);
     }
   }
@@ -684,6 +685,7 @@
     }
   }
   &__control {
+    transition: filter 200ms ease-in-out;
     background-color: var(--jl-background);
     border: none;
     border-radius: 0;
@@ -698,12 +700,13 @@
     height: 44px;
     width: 44px;
     &:hover {
-      // background-color: darken(var(--jl-background), 5%);
+      filter: brightness(90%);
     }
     &_ellipsis {
       color: var(--jl-on-background-secondary);
+      cursor: auto;
       &:hover {
-        background-color: transparent;
+        filter: none;
       }
     }
     &_active {
@@ -762,6 +765,7 @@
     all: unset;
     cursor: pointer;
     user-select: none;
+    transition: filter 200ms ease-in-out;
     background-color: var(--jl-accent);
     font-family: var(--jl-family);
     font-size: 16px;
@@ -774,7 +778,7 @@
     color: var(--jl-on-accent);
     text-align: center;
     &:hover {
-      // background-color: darken(var(--jl-accent), 5%);
+      filter: brightness(90%);
     }
   }
   @media (max-width: 767px) {
