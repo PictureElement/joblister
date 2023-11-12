@@ -131,7 +131,4 @@ Your contributions are highly appreciated! If you wish to contribute to this pro
 
 Todo:
 
-1. Privacy Policy link to settings
-2. Adjust Select tag margin
-3. Take screenshot of Settings
-4. Update README
+1. Update README

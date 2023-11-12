@@ -37,6 +37,7 @@ Yes, we welcome contributions. Please refer to the contributing section in the G
 8. Edit job - Backend
 9. Application list - Backend
 10. Edit Application - Backend
+11. Settings - Backend
 
 == Changelog ==
 

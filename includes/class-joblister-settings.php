@@ -181,7 +181,7 @@ class JL_Settings {
   }
 
   public function primary_callback() {
-    echo 'Set up core aspects of JobLister for optimal integration with your site.';
+    echo 'Set up core aspects for optimal integration with your site.';
   }
 
   public function per_page_callback() {
