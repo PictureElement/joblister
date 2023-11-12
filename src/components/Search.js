@@ -30,13 +30,13 @@ function Search() {
   return (
     <div className="jl-search">
       <div className="jl-search__label">
-        <div className="jl-visually-hidden">Search for jobs by title or keyword</div>
+        <div className="jl-visually-hidden">Search for jobs by keyword</div>
         <SearchIcon />
         <input
           autoComplete="off"
           value={searchQuery}
-          aria-label="Search for jobs by title or keyword"
-          placeholder="Search for jobs by title or keyword"
+          aria-label="Search for jobs by keyword"
+          placeholder="Search for jobs by keyword"
           className="jl-search__input"
           type="search"
           onChange={handleChange}

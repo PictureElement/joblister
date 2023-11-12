@@ -67,7 +67,7 @@
   box-sizing: border-box;
 }
 
-#jl-root * {
+#jl-root * { 
   margin: 0;
 }
 
@@ -584,14 +584,16 @@
       fill: var(--jl-accent);
     }
   }
-  &__multi-value__label {
-    font-family: var(--jl-family);
-    font-size: 16px;
-    line-height: 1;
-    font-weight: 400;
-    // background-color: darken(var(--jl-surface), 5%);
-    color: var(--jl-on-surface-primary);
-    border-radius: 0;
+  &__multi-value {
+    margin: 2px;
+    &__label {
+      font-family: var(--jl-family);
+      font-size: 16px;
+      line-height: 1;
+      font-weight: 400;
+      color: var(--jl-on-surface-primary);
+      border-radius: 0;
+    }
   }
   &__menu {
     border-radius: 0;
@@ -726,6 +728,7 @@
 }
 
 // Form Component
+//
 #jl-root .jl-form {
   border: 1px solid var(--jl-on-background-border);
   padding: 32px;
@@ -851,6 +854,7 @@
 }
 
 // No Jobs Found Component
+//
 #jl-root .jl-no-jobs-found {
   text-align: center;
   &__emoji {
@@ -885,6 +889,7 @@
 }
 
 // Success Component
+//
 #jl-root .jl-success {
   text-align: center;
   &__emoji {

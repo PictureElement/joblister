@@ -22,8 +22,7 @@
   "author": "Marios Sofokleous",
   "license": "MIT",
   "devDependencies": {
-    "@wordpress/scripts": "^26.2.0",
-    "dotenv-webpack": "^8.0.1"
+    "@wordpress/scripts": "^26.2.0"
   },
   "dependencies": {
     "dompurify": "^3.0.3",
@@ -36,5 +35,9 @@
     "react-slugify": "^3.0.2",
     "recoil": "^0.7.7"
   },
-  "files": [ "joblister.php", "includes", "build" ]
+  "files": [
+    "joblister.php",
+    "includes",
+    "build"
+  ]
 }
