@@ -17,7 +17,7 @@ function Checkbox(props) {
       <label
         htmlFor={`jl-checkbox-${name}`}
         className="jl-checkbox__label jl-text-size-p"
-        dangerouslySetInnerHTML={ {__html: DOMPurify.sanitize(label)} }
+        dangerouslySetInnerHTML={ {__html: DOMPurify.sanitize(label, { ADD_ATTR: ['target'] })} }
       />
       {error && <div className="jl-checkbox__error jl-text-size-small">{error}</div>}
     </div>

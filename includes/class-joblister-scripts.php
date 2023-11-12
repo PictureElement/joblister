@@ -38,6 +38,7 @@ class JL_Scripts
       'wordpressUsername' => $options['jl_wordpress_username'],
       'applicationPassword' => $options['jl_application_password'],
       'captchaSiteKey' => $options['jl_captcha_site_key'],
+      'privacyLink' => $options['jl_privacy_link'],
       'separator' => $separator,
     );
     wp_localize_script('jl-script', 'jlData', $data);

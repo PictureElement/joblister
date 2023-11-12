@@ -82,6 +82,14 @@ class JL_Settings {
       'jl_primary'
     );
 
+    add_settings_field(
+      'jl_privacy_link',
+      'Privacy Policy Link',
+      array($this, 'privacy_link_callback'),
+      'jl_settings_page',
+      'jl_primary'
+    );
+
     add_settings_section(
       'jl_style',
       'Style Settings',
@@ -204,6 +212,13 @@ class JL_Settings {
     <?php
   }
 
+  public function privacy_link_callback() {
+    $options = get_option('jl_options');
+    ?>
+    <input style="width: 100%;" type="url" id="jl_privacy_link" name="jl_options[jl_privacy_link]" value="<?php echo isset($options['jl_privacy_link']) ? esc_attr($options['jl_privacy_link']) : ''; ?>">
+    <?php
+  }
+
   public function style_callback() {
     echo 'Adjust the visual style of your job listings. Tailor colors, fonts, and more to ensure the JobLister plugin complements your site\'s theme.';
   }
@@ -211,7 +226,7 @@ class JL_Settings {
   public function google_font_import_callback() {
     $options = get_option('jl_options');
     ?>
-    <input style="width: 100%;" type="text" id="jl_google_font_link" name="jl_options[jl_google_font_link]" value="<?php echo isset($options['jl_google_font_link']) ? esc_attr($options['jl_google_font_link']) : ''; ?>">
+    <input style="width: 100%;" type="url" id="jl_google_font_link" name="jl_options[jl_google_font_link]" value="<?php echo isset($options['jl_google_font_link']) ? esc_attr($options['jl_google_font_link']) : ''; ?>">
     <p class="description">Enter the CSS @import link for your chosen Google Font, including the weights: 300, 400, and 700. Example: <strong>https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700&display=swap</strong></p>
     <?php
   }
@@ -252,6 +267,9 @@ class JL_Settings {
     $trimmed_and_sanitized_captcha_site_key = isset($input['jl_captcha_site_key']) ? sanitize_text_field(trim($input['jl_captcha_site_key'])) : '';
     $input['jl_captcha_site_key'] = $trimmed_and_sanitized_captcha_site_key !== '' ? $trimmed_and_sanitized_captcha_site_key : '6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI';
 
+    // Sanitize and save the 'jl_privacy_link' input. If it's not set, default to an empty string.
+    $input['jl_privacy_link'] = isset($input['jl_privacy_link']) ? sanitize_url(trim($input['jl_privacy_link'])) : '';
+
     $input['jl_accent'] = $this->sanitize_color_option($input['jl_accent'], '#1a73e8');
     $input['jl_on_accent'] = $this->sanitize_color_option($input['jl_on_accent'], '#ffffff');
     $input['jl_background'] = $this->sanitize_color_option($input['jl_background'], '#f8f9fa');
@@ -266,7 +284,7 @@ class JL_Settings {
     $input['jl_success'] = $this->sanitize_color_option($input['jl_success'], '#198754');
 
     // Sanitize and save the 'jl_google_font_link' input. If it's not set, default to an empty string.
-    $input['jl_google_font_link'] = isset($input['jl_google_font_link']) ? esc_url_raw(trim($input['jl_google_font_link'])) : '';
+    $input['jl_google_font_link'] = isset($input['jl_google_font_link']) ? sanitize_url(trim($input['jl_google_font_link'])) : '';
 
     // Sanitize and save the 'jl_google_font_family' input. If it's not set, default to an empty string.
     $input['jl_google_font_family'] = isset($input['jl_google_font_family']) ? sanitize_text_field(trim($input['jl_google_font_family'])) : '';
