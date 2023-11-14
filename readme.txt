@@ -17,19 +17,19 @@ JobLister is a free and open-source WordPress plugin that allows you to set up a
 
 = Features =
 
-- **Free and Open Source:** Collaborate to improve JobLister with the community.
-- **Single Page Application with React:** Offers lightning-fast interactions and a seamless user experience.
-- **Versatile Job Listings Display:**
-  - **Overview Mode:** List jobs with search and filter capabilities.
-  - **Detail Mode:** View job details and apply directly.
-- **Efficient Job Search and Filter Functionality:** Narrow down job searches by keywords, categories, location, type, and experience.
-- **Customization Settings:** Personalize the appearance and functionality with an intuitive settings page.
-- **Convenient Pagination:** Navigate through job listings with ease.
-- **Sharable Links:** Share job listings with others through shareable links.
-- **Application Form:** Apply easily using a form protected by Google reCAPTCHA.
-- **Responsive Design:** Ensures a seamless experience across all devices.
-- **RTL-Ready Design:** Supports Right-to-Left languages.
-- **Support for Multiple File Formats:** Accept resumes in various formats.
+* **Free and Open Source:** Collaborate to improve JobLister with the community.
+* **Single Page Application with React:** Offers lightning-fast interactions and a seamless user experience.
+* **Versatile Job Listings Display:**
+  * **Overview Mode:** List jobs with search and filter capabilities.
+  * **Detail Mode:** View job details and apply directly.
+* **Efficient Job Search and Filter Functionality:** Narrow down job searches by keywords, categories, location, type, and experience.
+* **Customization Settings:** Personalize the appearance and functionality with an intuitive settings page.
+* **Convenient Pagination:** Navigate through job listings with ease.
+* **Sharable Links:** Share job listings with others through shareable links.
+* **Application Form:** Apply easily using a form protected by Google reCAPTCHA.
+* **Responsive Design:** Ensures a seamless experience across all devices.
+* **RTL-Ready Design:** Supports Right-to-Left languages.
+* **Support for Multiple File Formats:** Accept resumes in various formats.
 
 == Installation ==
 
@@ -92,9 +92,9 @@ The application form is designed to collect essential information from job appli
 == Changelog ==
 
 = 1.0.0 =
-- Initial release.
+* Initial release.
 
 == Upgrade Notice ==
 
 = 1.0.0 =
-- Initial release.
+* Initial release.
