@@ -76,19 +76,20 @@ This process compiles all necessary files into a zip format, ready for deploymen
 
 ## Features
 
-- **Free and Open Source:** Collaborate to improve JobLister with the community.
-- **Single Page Application with React:** Offers lightning-fast interactions and a seamless user experience.
-- **Versatile Job Listings Display:**
-  - **Overview Mode:** List jobs with search and filter capabilities.
-  - **Detail Mode:** View job details and apply directly.
-- **Efficient Job Search and Filter Functionality:** Narrow down job searches by keywords, categories, location, type, and experience.
-- **Customization Settings:** Personalize the appearance and functionality with an intuitive settings page.
-- **Convenient Pagination:** Navigate through job listings with ease.
-- **Sharable Links:** Share job listings with others through shareable links.
-- **Application Form:** Apply easily using a form protected by Google reCAPTCHA.
-- **Responsive Design:** Ensures a seamless experience across all devices.
-- **RTL-Ready Design:** Supports Right-to-Left languages.
-- **Support for Multiple File Formats:** Accept resumes in various formats.
+* **Free and Open Source:** Collaborate to improve JobLister with the community.
+* **Single Page Application with React:** Offers lightning-fast interactions and a seamless user experience.
+* **Versatile Job Listings Display:**
+  * **Overview Mode:** List jobs with search and filter capabilities.
+  * **Detail Mode:** View job details and apply directly.
+* **Efficient Job Search and Filter Functionality:** Narrow down job searches by keywords, categories, location, type, and experience.
+* **Customization Settings:** Personalize the appearance and functionality with an intuitive settings page.
+* **No Account Required:** Applicants can submit job applications without the need to log in, ensuring a user-friendly and accessible process.
+* **Convenient Pagination:** Navigate through job listings with ease.
+* **Sharable Links:** Share job listings with others through shareable links.
+* **Application Form:** Apply easily using a form protected by Google reCAPTCHA.
+* **Responsive Design:** Ensures a seamless experience across all devices.
+* **RTL-Ready Design:** Supports Right-to-Left languages.
+* **Support for Multiple File Formats:** Accept resumes in various formats.
 
 ## Screenshots
 

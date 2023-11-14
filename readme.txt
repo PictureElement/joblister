@@ -24,6 +24,7 @@ JobLister is a free and open-source WordPress plugin that allows you to set up a
   * **Detail Mode:** View job details and apply directly.
 * **Efficient Job Search and Filter Functionality:** Narrow down job searches by keywords, categories, location, type, and experience.
 * **Customization Settings:** Personalize the appearance and functionality with an intuitive settings page.
+* **No Account Required:** Applicants can submit job applications without the need to log in, ensuring a user-friendly and accessible process.
 * **Convenient Pagination:** Navigate through job listings with ease.
 * **Sharable Links:** Share job listings with others through shareable links.
 * **Application Form:** Apply easily using a form protected by Google reCAPTCHA.
