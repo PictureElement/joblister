@@ -26,3 +26,6 @@ if (function_exists('wp_delete_term')) {
         }
     }
 }
+
+// Delete the plugin options
+delete_option('jl_options');
