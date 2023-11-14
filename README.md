@@ -46,13 +46,9 @@ This guide outlines the steps to configure the development environment for JobLi
 
 6. Navigate to 'Settings > Radio Buttons for Taxonomies' and select `jl_category`, `jl_experience_level`, `jl_location`, and `jl_type`, and save your changes.
 
-7. Navigate to your user's 'Profile' page and generate a new application password. Note down the username and password.
+7. To interact with the plugin, insert the [joblister] shortcode on any page.
 
-8. Navigate to 'Jobs > Settings' and enter the noted username and password.
-
-9. To interact with the plugin, insert the [joblister] shortcode on any page.
-
-10. Begin development with fast refresh:
+8. Begin development with fast refresh:
 
   ```sh
   npm run start:hot
