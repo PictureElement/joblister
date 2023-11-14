@@ -1,97 +1,145 @@
 # JobLister
 
-![Banner Image](assets/banner-1544x500.png)
+![Banner Image](assets/banner-1544x500.jpg)
 
 ## Description
 
-JobLister is a free and open-source WordPress plugin that allows you to set up a job listing page on your WordPress website using a simple `[joblister]` shortcode. The plugin is powered by React and functions as a Single-page app, providing a range of features including a search functionality, filters, an application form, and a RTL-ready design.
+JobLister is a free and open-source WordPress plugin that allows you to set up a job listing page on your WordPress website using a simple [joblister] shortcode. The plugin is powered by React and functions as a Single-page app, providing a range of features including a search functionality, filters, an application form, and a RTL-ready design.
 
-## Installation
+## Development Setup Instructions
 
-To install JobLister, follow these steps:
+This guide outlines the steps to configure the development environment for JobLister. Follow the instructions closely to ensure a successful setup.
 
-1. Clone repository and navigate to the newly created directory:
+### Prerequisites
+
+- Confirm that Docker Desktop is installed and actively running on your system.
+- Install `wp-env` globally on your system if it isn't already installed:
+
   ```sh
-  git clone https://github.com/PictureElement/joblister.git
-  cd joblister
+  npm -g i @wordpress/env
   ```
 
-2. Install dependencies:
+### Enviroment Setup
+
+1. Clone repository and navigate to its directory:
+
+  ```sh
+  git clone https://github.com/PictureElement/job-lister.git
+  cd job-lister
+  ```
+
+2. Install necessary dependencies:
+
   ```sh
   npm install
   ```
 
-3. In WP Admin, install and activate the [Radio Buttons for Taxonomies](https://wordpress.org/plugins/radio-buttons-for-taxonomies/) plugin.
+3. Deploy a local WordPress instance:
 
-4. In WP Admin, generate a new *Application Password* from the Edit User page. Note down the username and password.
-
-5. [Sign up for a Google reCAPTCHA API key pair](http://www.google.com/recaptcha/admin) for your site, choosing "reCAPTCHA v2, Invisible". Note down the API Site Key.
-
-6. Add your settings to the `.env` file:
-  ```
-  APP_WORDPRESS_USERNAME="YOUR_WORDPRESS_USERNAME"
-  APP_APPLICATION_PASSWORD="YOUR_APPLICATION_PASSWORD"
-  APP_CAPTCHA_SITE_KEY = "YOUR_CAPTCHA_SITE_KEY"
+  ```sh
+  wp-env start
   ```
 
-7. Build for production:
+4. Access the WordPress dashboard at [http://localhost:8888/wp-admin/](http://localhost:8888/wp-admin/). Use `admin`/`password` as login credentials.
+
+5. Install and activate the [Radio Buttons for Taxonomies](https://wordpress.org/plugins/radio-buttons-for-taxonomies/) plugin, a required dependency for JobLister to function correctly.
+
+6. Navigate to 'Settings > Radio Buttons for Taxonomies' and select `jl_category`, `jl_experience_level`, `jl_location`, and `jl_type`, and save your changes.
+
+7. Navigate to your user's 'Profile' page and generate a new application password. Note down the username and password.
+
+8. Navigate to 'Jobs > Settings' and enter the noted username and password.
+
+9. To interact with the plugin, insert the [joblister] shortcode on any page.
+
+10. Begin development with fast refresh:
+
+  ```sh
+  npm run start:hot
+  ```
+
+## Preparing for Production
+
+When ready to move JobLister into a production environment, follow these steps:
+
+1. Navigate to the plugin's directory.
+
+2. Compile the production-ready version:
+
   ```sh
   npm run build
   ```
 
-8. Create the plugin zip file:
+3. Create a distributable zip file:
+
   ```sh
   npm run plugin-zip
   ```
 
-9. Install the plugin zip file in WordPress.
-
-10. Add the `[joblister]` shortcode to your job listing page.
+This process compiles all necessary files into a zip format, ready for deployment in a production environment.
 
 ## Features
 
-- **Free and Open Source:**
-  - Contribute and improve JobLister together.
+- **Free and Open Source:** Collaborate to improve JobLister with the community.
+- **Single Page Application with React:** Offers lightning-fast interactions and a seamless user experience.
 - **Versatile Job Listings Display:**
-  - **Overview Mode:**
-    - List jobs with filters and search.
-  - **Detail Mode:**
-    - View job details and apply with the form.
-- **Efficient Job Search and Filter Functionality:**
-  - Filter jobs by keywords, categories, location, type, and experience.
-- **Stylish and Customizable Design:**
-  - Adjust the theme with Sass variables. Comes with two predefined themes: light and dark.
-- **Convenient Pagination:**
-  - Navigate job listings with ease.
-- **Sharable Links:**
-  - Share job listings with others through sharable links.
-- **Application Form:**
-  - Apply with ease using a form protected by Google reCAPTCHA.
-- **Responsive Design:**
-  - A seamless experience across all devices.
-- **RTL-Ready Design:**
-  - Supports Right-to-Left languages.
-- **Support for Multiple File Formats:**
-  - Upload resumes in various formats.
+  - **Overview Mode:** List jobs with search and filter capabilities.
+  - **Detail Mode:** View job details and apply directly.
+- **Efficient Job Search and Filter Functionality:** Narrow down job searches by keywords, categories, location, type, and experience.
+- **Customization Settings:** Personalize the appearance and functionality with an intuitive settings page.
+- **Convenient Pagination:** Navigate through job listings with ease.
+- **Sharable Links:** Share job listings with others through shareable links.
+- **Application Form:** Apply easily using a form protected by Google reCAPTCHA.
+- **Responsive Design:** Ensures a seamless experience across all devices.
+- **RTL-Ready Design:** Supports Right-to-Left languages.
+- **Support for Multiple File Formats:** Accept resumes in various formats.
 
 ## Screenshots
 
-![Job Listings on the Frontend](banner.png)
-![Admin Interface](banner.png)
-![Single Job on the Frontend](banner.png)
+![Job listings - Frontend](assets/screenshot-1.png)
+*Job listings - Frontend*
+
+![No Jobs Found (Searching) - Frontend](assets/screenshot-2.png)
+*No Jobs Found (Searching) - Frontend*
+
+![No Jobs Found (Filtering) - Frontend](assets/screenshot-3.png)
+*No Jobs Found (Filtering) - Frontend*
+
+![A single job listing - Frontend](assets/screenshot-4.png)
+*A single job listing - Frontend*
+
+![Successfull application submission - Frontend](assets/screenshot-5.png)
+*Successfull application submission - Frontend*
+
+![The application form - Frontend](assets/screenshot-6.png)
+*The application form - Frontend*
+
+![Job listings - Backend](assets/screenshot-7.png)
+*Job listings - Backend*
+
+![Edit job - Backend](assets/screenshot-8.png)
+*Edit job - Backend*
+
+![Application list - Backend](assets/screenshot-9.png)
+*Application list - Backend*
+
+![Edit Application - Backend](assets/screenshot-10.png)
+*Edit Application - Backend*
+
+![Settings - Backend](assets/screenshot-11.png)
+*Settings - Backend*
 
 ## Future Enhancements
 
-1. Retrieve more than 100 records by making multiple API requests and combining the results.
-2. Handle form submission errors on the frontend.
-3. Properly unistall the plugin. Delete any options or custom tables that the plugin created when it was activated.
-4. Internationalization
+1. Overcoming the current 100-record limit per API request by implementing a system for handling multiple API requests. This will allow for managing larger datasets seamlessly.
+2. Upgrading the uninstallation process to automatically remove all JobLister-related settings and data, ensuring a clean and efficient removal.
+3. Expanding language support to make JobLister accessible to a global audience.
 
 ## Technical Details
 
 ### Add Dummy Content Using FakerPress
 
-To make custom post types and custom taxonomies available to FakerPress, set `"public" => true` in the respective post type and taxonomy configurations.
+To make custom post types and custom taxonomies available to FakerPress, set `"public" => true` in the respective post type and taxonomy configurations. However, it's crucial to revert this setting to `"public" => false` if you're operating in a production environment.
 
 ### Generated API Endpoints
 
@@ -105,7 +153,7 @@ To make custom post types and custom taxonomies available to FakerPress, set `"p
 
 We utilize the *Application Passwords* feature of WordPress to authenticate our React application, thereby enabling it to make POST requests to the WP REST API.
 
-Please note that *Application Passwords* necessitates an SSL/HTTPS connection as a default security measure.
+Please note that this feature necessitates an SSL/HTTPS connection as a default security measure.
 
 In case you are operating in a development environment devoid of SSL/HTTPS and wish to test the functionality, override the default requirement by adding the following code to your theme's `functions.php` file:
 
@@ -126,9 +174,3 @@ Your contributions are highly appreciated! If you wish to contribute to this pro
 ## License
 
 &copy; 2023 [Marios Sofokleous](https://www.msof.me/). Code released under the [GPL-3.0](LICENSE.md) license.
-
-
-
-Todo:
-
-1. Update README

@@ -53,7 +53,7 @@ class JL_Custom_Taxonomies
     $args = [
       "label" => "Locations",
       "labels" => $labels,
-      "public" => true,
+      "public" => false,
       "publicly_queryable" => false,
       "hierarchical" => false,
       "show_ui" => true,
@@ -107,7 +107,7 @@ class JL_Custom_Taxonomies
     $args = [
       "label" => "Categories",
       "labels" => $labels,
-      "public" => true,
+      "public" => false,
       "publicly_queryable" => false,
       "hierarchical" => false,
       "show_ui" => true,
@@ -161,7 +161,7 @@ class JL_Custom_Taxonomies
     $args = [
       "label" => "Types",
       "labels" => $labels,
-      "public" => true,
+      "public" => false,
       "publicly_queryable" => false,
       "hierarchical" => false,
       "show_ui" => true,
@@ -215,7 +215,7 @@ class JL_Custom_Taxonomies
     $args = [
       "label" => "Experience Levels",
       "labels" => $labels,
-      "public" => true,
+      "public" => false,
       "publicly_queryable" => false,
       "hierarchical" => false,
       "show_ui" => true,
