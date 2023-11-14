@@ -1,7 +1,7 @@
 <?php
 /*
  * Plugin Name:       JobLister
- * Plugin URI:        https://github.com/PictureElement/job-lister
+ * Plugin URI:        https://github.com/PictureElement/joblister
  * Description:       React-powered job listing made simple for WordPress.
  * Version:           1.0.0
  * Author:            Marios Sofokleous

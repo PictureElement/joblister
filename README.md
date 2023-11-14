@@ -24,8 +24,8 @@ This guide outlines the steps to configure the development environment for JobLi
 1. Clone repository and navigate to its directory:
 
   ```sh
-  git clone https://github.com/PictureElement/job-lister.git
-  cd job-lister
+  git clone https://github.com/PictureElement/joblister.git
+  cd joblister
   ```
 
 2. Install necessary dependencies:

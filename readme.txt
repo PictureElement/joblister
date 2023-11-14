@@ -42,7 +42,7 @@ JobLister is a free and open-source WordPress plugin that allows you to set up a
 
 = Install JobLister manually =
 
-1. Upload the ‘job-lister’ folder to the `/wp-content/plugins/` directory.
+1. Upload the ‘joblister’ folder to the `/wp-content/plugins/` directory.
 2. Activate the JobLister plugin through the ‘Plugins’ menu within your dashboard.
 3. Go to ‘After activation’ below.
 
@@ -63,7 +63,7 @@ JobLister is a free and open-source WordPress plugin that allows you to set up a
 
 = Can I contribute to JobLister? =
 
-Yes, we welcome contributions. Please refer to the [Contributing](https://github.com/PictureElement/job-lister#contributing) section in the GitHub repository's `README.md` file.
+Yes, we welcome contributions. Please refer to the [Contributing](https://github.com/PictureElement/joblister#contributing) section in the GitHub repository's `README.md` file.
 
 = Can I customize the look and feel of the JobLister plugin to match my site's design? =
 
