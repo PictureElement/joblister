@@ -13,6 +13,8 @@
 // Exit if accessed directly.
 defined( 'ABSPATH' ) || exit;
 
+define('JBLS_PLUGIN_FILE', __FILE__);
+
 // Include core class file
 require_once plugin_dir_path(__FILE__) . 'includes/class-jbls.php';
 

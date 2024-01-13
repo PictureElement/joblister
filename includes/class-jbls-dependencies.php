@@ -18,7 +18,7 @@ class JBLS_Dependencies
     if (is_admin() && current_user_can('activate_plugins') &&  !is_plugin_active('radio-buttons-for-taxonomies/radio-buttons-for-taxonomies.php')) {
       add_action('admin_notices', array($this, 'jbls_plugin_notice'));
 
-      deactivate_plugins(plugin_basename(__FILE__));
+      deactivate_plugins(plugin_basename(JBLS_PLUGIN_FILE));
 
       if (isset($_GET['activate'])) {
         unset($_GET['activate']);

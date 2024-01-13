@@ -17,7 +17,7 @@ class JBLS_Settings {
       'Settings',
       'manage_options',
       'jbls_settings',
-      array($this, 'settings_page'),
+      array($this, 'jbls_settings_page'),
       7
     );
   }
