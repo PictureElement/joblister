@@ -3,18 +3,18 @@
 // Exit if accessed directly.
 defined('ABSPATH') || exit;
 
-class JL_Custom_Post_Types
+class JBLS_Post_Types
 {
   // Constructor
   public function __construct()
   {
-    add_action('init', array($this, 'register_cpt_jl_job'));
-    add_filter('use_block_editor_for_post_type', array($this, 'disable_gutenberg_editor'), 10, 2);
-    add_action('init', array($this, 'register_cpt_jl_application'));
+    add_action('init', array($this, 'jbls_register_cpt_jbls_job'));
+    add_filter('use_block_editor_for_post_type', array($this, 'jbls_disable_gutenberg_editor'), 10, 2);
+    add_action('init', array($this, 'jbls_register_cpt_jbls_application'));
   }
 
-  // Register "jl_job" post type
-  public function register_cpt_jl_job()
+  // Register "jbls_job" post type
+  public function jbls_register_cpt_jbls_job()
   {
     $labels = [
       "name" => "Jobs",
@@ -59,7 +59,7 @@ class JL_Custom_Post_Types
       "publicly_queryable" => false,
       "show_ui" => true,
       "show_in_rest" => true,
-      "rest_base" => "jl-jobs",
+      "rest_base" => "jbls-jobs",
       "rest_controller_class" => "WP_REST_Posts_Controller",
       "has_archive" => false,
       "show_in_menu" => true,
@@ -76,20 +76,20 @@ class JL_Custom_Post_Types
       "show_in_graphql" => false
     ];
 
-    register_post_type("jl_job", $args);
+    register_post_type("jbls_job", $args);
   }
 
-  // Disable the Gutenberg editor for the custom post type "jl_job"
-  public function disable_gutenberg_editor($can_edit, $post_type)
+  // Disable the Gutenberg editor for the custom post type "jbls_job"
+  public function jbls_disable_gutenberg_editor($can_edit, $post_type)
   {
-    if ('jl_job' == $post_type) {
+    if ('jbls_job' == $post_type) {
       $can_edit = false;
     }
     return $can_edit;
   }
 
-  // Register "jl_application" post type
-  public function register_cpt_jl_application()
+  // Register "jbls_application" post type
+  public function jbls_register_cpt_jbls_application()
   {
     $labels = [
       "name" => "Applications",
@@ -134,10 +134,10 @@ class JL_Custom_Post_Types
       "publicly_queryable" => false,
       "show_ui" => true,
       "show_in_rest" => true,
-      "rest_base" => "jl-applications",
+      "rest_base" => "jbls-applications",
       "rest_controller_class" => "WP_REST_Posts_Controller",
       "has_archive" => false,
-      "show_in_menu" => 'edit.php?post_type=jl_job', // Set the menu location to match the "jl_job" post type
+      "show_in_menu" => 'edit.php?post_type=jbls_job', // Set the menu location to match the "jbls_job" post type
       "show_in_nav_menus" => true,
       "delete_with_user" => false,
       "exclude_from_search" => true,
@@ -151,6 +151,6 @@ class JL_Custom_Post_Types
       "show_in_graphql" => false
     ];
 
-    register_post_type("jl_application", $args);
+    register_post_type("jbls_application", $args);
   }
 }

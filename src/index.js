@@ -3,7 +3,7 @@ import App from './App';
 import { createRoot, render } from '@wordpress/element';
 import { RecoilRoot } from 'recoil';
 
-const domElement = document.getElementById('jl-root');
+const domElement = document.getElementById('jbls-root');
 
 if (createRoot) {
   createRoot(domElement).render(

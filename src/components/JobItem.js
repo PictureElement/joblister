@@ -16,26 +16,26 @@ function JobItem(props) {
   const experienceLevel = props.experienceLevel;
 
   return (
-    <li className="jl-job-item">
-      <Link to={`${idDashSlug}`} className="jl-job-item__link">
-        <div className="jl-job-item__table">
-          <div className="jl-job-item__row">
-            <div className="jl-job-item__job">
+    <li className="jbls-job-item">
+      <Link to={`${idDashSlug}`} className="jbls-job-item__link">
+        <div className="jbls-job-item__table">
+          <div className="jbls-job-item__row">
+            <div className="jbls-job-item__job">
               {title.__html ?
-                <div className="jl-job-item__title jl-text-size-h3" dangerouslySetInnerHTML={ title }></div>
+                <div className="jbls-job-item__title jbls-text-size-h3" dangerouslySetInnerHTML={ title }></div>
                 :
-                <div className="jl-job-item__title jl-text-size-h3">(no title)</div>
+                <div className="jbls-job-item__title jbls-text-size-h3">(no title)</div>
               }
-              <div className="jl-job-item__subtitle jl-text-size-small">
+              <div className="jbls-job-item__subtitle jbls-text-size-small">
                 Job ID: {id} | Updated {updatedTimeAgo}
               </div>
             </div>
-            <div className="jl-job-item__category"><div className="jl-text-size-h4">{category ? category : '—'}</div></div>
-            <div className="jl-job-item__location">
+            <div className="jbls-job-item__category"><div className="jbls-text-size-h4">{category ? category : '—'}</div></div>
+            <div className="jbls-job-item__location">
               <LocationIcon />
-              <div className="jl-text-size-h4">{location ? location : '—'}</div>
+              <div className="jbls-text-size-h4">{location ? location : '—'}</div>
             </div>
-            <div className="jl-job-item__type"><div className="jl-text-size-h4">{experienceLevel ? experienceLevel : '—'}</div></div>
+            <div className="jbls-job-item__type"><div className="jbls-text-size-h4">{experienceLevel ? experienceLevel : '—'}</div></div>
           </div>
         </div>
       </Link>

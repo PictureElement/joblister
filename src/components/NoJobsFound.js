@@ -36,15 +36,15 @@ function NoJobsFound() {
   }
 
   return (
-    <div className="jl-no-jobs-found">
-      <div className="jl-no-jobs-found__emoji">(&gt;_&lt;)</div>
+    <div className="jbls-no-jobs-found">
+      <div className="jbls-no-jobs-found__emoji">(&gt;_&lt;)</div>
       {searchQuery.length > 0
         ? (
-          <div className="jl-no-jobs-found__text jl-text-size-h3">No jobs found for “{searchQuery}”</div>
+          <div className="jbls-no-jobs-found__text jbls-text-size-h3">No jobs found for “{searchQuery}”</div>
         ) : (
           <>
-            <div className="jl-no-jobs-found__text jl-text-size-h3">No jobs found matching your filtering criteria.</div>
-            <button onClick={handleClearAll} className="jl-no-jobs-found__clear jl-text-size-h4">Clear your filters and try again</button>
+            <div className="jbls-no-jobs-found__text jbls-text-size-h3">No jobs found matching your filtering criteria.</div>
+            <button onClick={handleClearAll} className="jbls-no-jobs-found__clear jbls-text-size-h4">Clear your filters and try again</button>
           </>
         )
       }

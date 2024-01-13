@@ -3,18 +3,18 @@
 // Exit if accessed directly.
 defined('ABSPATH') || exit;
 
-class JL_Admin_Columns
+class JBLS_Admin_Columns
 {
   public function __construct()
   {
-    add_filter('manage_jl_application_posts_columns', array($this, 'add_jl_application_columns'));
-    add_action('manage_jl_application_posts_custom_column', array($this, 'populate_jl_application_columns'), 10, 2);
-    add_filter('manage_jl_job_posts_columns', array($this, 'add_jl_job_columns'));
-    add_action('manage_jl_job_posts_custom_column', array($this, 'populate_jl_job_columns'), 10, 2);
+    add_filter('manage_jbls_application_posts_columns', array($this, 'jbls_add_jbls_application_columns'));
+    add_action('manage_jbls_application_posts_custom_column', array($this, 'jbls_populate_jbls_application_columns'), 10, 2);
+    add_filter('manage_jbls_job_posts_columns', array($this, 'jbls_add_jbls_job_columns'));
+    add_action('manage_jbls_job_posts_custom_column', array($this, 'jbls_populate_jbls_job_columns'), 10, 2);
   }
 
-  // Filter the columns displayed in the Posts list table for the "jl_application" post type
-  public function add_jl_application_columns($columns)
+  // Filter the columns displayed in the Posts list table for the "jbls_application" post type
+  public function jbls_add_jbls_application_columns($columns)
   {
     $columns = array(
       'cb' => '<input type="checkbox" />',
@@ -27,8 +27,8 @@ class JL_Admin_Columns
     return $columns;
   }
 
-  // Populate custom column data in the Posts list table for the "jl_application" post type
-  public function populate_jl_application_columns($column, $post_id)
+  // Populate custom column data in the Posts list table for the "jbls_application" post type
+  public function jbls_populate_jbls_application_columns($column, $post_id)
   {
     switch ($column) {
       case 'id':
@@ -63,15 +63,15 @@ class JL_Admin_Columns
     }
   }
 
-  // Filter the columns displayed in the Posts list table for the "jl_job" post type
-  public function add_jl_job_columns($columns)
+  // Filter the columns displayed in the Posts list table for the "jbls_job" post type
+  public function jbls_add_jbls_job_columns($columns)
   {
     $columns['post_id'] = 'ID';
     return $columns;
   }
 
-  // Populate custom column data in the Posts list table for the "jl_job" post type
-  public function populate_jl_job_columns($column, $post_id)
+  // Populate custom column data in the Posts list table for the "jbls_job" post type
+  public function jbls_populate_jbls_job_columns($column, $post_id)
   {
     if ($column === 'post_id') {
       echo $post_id;

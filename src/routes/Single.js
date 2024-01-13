@@ -46,57 +46,57 @@ function Single() {
 
   // Smoothly scroll to the application form
   function scrollToForm() {
-    document.querySelector('.jl-form').scrollIntoView({ behavior: 'smooth' });
+    document.querySelector('.jbls-form').scrollIntoView({ behavior: 'smooth' });
   };
   
   return (
-    <div className="jl-single">
-      <div className="jl-single__header">
-        <div className="jl-single__header-left">
+    <div className="jbls-single">
+      <div className="jbls-single__header">
+        <div className="jbls-single__header-left">
           { title.__html ?
-            <h1 className="jl-single__title jl-text-size-h1" dangerouslySetInnerHTML={ title }></h1>
+            <h1 className="jbls-single__title jbls-text-size-h1" dangerouslySetInnerHTML={ title }></h1>
             :
-            <h1 className="jl-single__title jl-text-size-h1">(no title)</h1>
+            <h1 className="jbls-single__title jbls-text-size-h1">(no title)</h1>
           } 
-          <div className="jl-single__subtitle jl-text-size-small">
+          <div className="jbls-single__subtitle jbls-text-size-small">
             Job ID: {id} | Updated {updatedTimeAgo}
           </div>
         </div>
-        <div className="jl-single__header-right">
-          <button onClick={scrollToForm} className="jl-single__apply">Apply</button>
+        <div className="jbls-single__header-right">
+          <button onClick={scrollToForm} className="jbls-single__apply">Apply</button>
         </div>
       </div>
-      <div className="jl-single__body">
-        <div className="jl-single__body-left">
+      <div className="jbls-single__body">
+        <div className="jbls-single__body-left">
           { content.__html ?
-            <div className="jl-single__content" dangerouslySetInnerHTML={ content }></div>
+            <div className="jbls-single__content" dangerouslySetInnerHTML={ content }></div>
             :
-            <div className="jl-single__content">—</div>
+            <div className="jbls-single__content">—</div>
           }
         </div>
-        <div className="jl-single__body-right">
-          <div className="jl-job-details">
-            <h2 className="jl-job-details__title jl-text-size-h2">Job details</h2>
-            <div className="jl-job-details__category">
-              <h3 className="jl-text-size-p">Location</h3>
-              <div className="jl-text-size-p">{location ? location : '—'}</div>
+        <div className="jbls-single__body-right">
+          <div className="jbls-job-details">
+            <h2 className="jbls-job-details__title jbls-text-size-h2">Job details</h2>
+            <div className="jbls-job-details__category">
+              <h3 className="jbls-text-size-p">Location</h3>
+              <div className="jbls-text-size-p">{location ? location : '—'}</div>
             </div>
-            <div className="jl-job-details__category">
-              <h3 className="jl-text-size-p">Category</h3>
-              <div className="jl-text-size-p">{category ? category : '—'}</div>
+            <div className="jbls-job-details__category">
+              <h3 className="jbls-text-size-p">Category</h3>
+              <div className="jbls-text-size-p">{category ? category : '—'}</div>
             </div>
-            <div className="jl-job-details__category">
-              <h3 className="jl-text-size-p">Type</h3>
-              <div className="jl-text-size-p">{type ? type : '—'}</div>
+            <div className="jbls-job-details__category">
+              <h3 className="jbls-text-size-p">Type</h3>
+              <div className="jbls-text-size-p">{type ? type : '—'}</div>
             </div>
-            <div className="jl-job-details__category">
-              <h3 className="jl-text-size-p">Experience</h3>
-              <div className="jl-text-size-p">{experienceLevel ? experienceLevel : '—'}</div>
+            <div className="jbls-job-details__category">
+              <h3 className="jbls-text-size-p">Experience</h3>
+              <div className="jbls-text-size-p">{experienceLevel ? experienceLevel : '—'}</div>
             </div>
           </div>
-          <div className="jl-share">
-            <h2 className="jl-share__title jl-text-size-h2">Share this job</h2>
-            <div className="jl-share__container">
+          <div className="jbls-share">
+            <h2 className="jbls-share__title jbls-text-size-h2">Share this job</h2>
+            <div className="jbls-share__container">
               <FacebookShareButton url={shareUrl}>
                 <FacebookIcon size={32} />
               </FacebookShareButton>
@@ -114,7 +114,7 @@ function Single() {
         </div>
       </div>
       <Form />
-      <Link to="/" className="jl-single__back-to-listing jl-text-size-h4">
+      <Link to="/" className="jbls-single__back-to-listing jbls-text-size-h4">
         <BackIcon /> Back to jobs
       </Link>  
     </div>

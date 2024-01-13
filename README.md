@@ -4,7 +4,7 @@
 
 ## Description
 
-JobLister is a free and open-source WordPress plugin that allows you to set up a job listing page on your WordPress website using a simple [joblister] shortcode. The plugin is powered by React and functions as a Single-page app, providing a range of features including a search functionality, filters, an application form, and a RTL-ready design.
+JobLister is a free and open-source WordPress plugin that allows you to set up a job listing page on your WordPress website using a simple [jbls_jobs] shortcode. The plugin is powered by React and functions as a Single-page app, providing a range of features including a search functionality, filters, an application form, and a RTL-ready design.
 
 ## Development Setup Instructions
 
@@ -44,9 +44,9 @@ This guide outlines the steps to configure the development environment for JobLi
 
 5. Install and activate the [Radio Buttons for Taxonomies](https://wordpress.org/plugins/radio-buttons-for-taxonomies/) plugin, a required dependency for JobLister to function correctly.
 
-6. Navigate to 'Settings > Radio Buttons for Taxonomies' and select `jl_category`, `jl_experience_level`, `jl_location`, and `jl_type`, and save your changes.
+6. Navigate to 'Settings > Radio Buttons for Taxonomies' and select `jbls_category`, `jbls_experience_level`, `jbls_location`, and `jbls_type`, and save your changes.
 
-7. To interact with the plugin, insert the [joblister] shortcode on any page.
+7. To interact with the plugin, insert the [jbls_jobs] shortcode on any page.
 
 8. Begin development with fast refresh:
 
@@ -140,11 +140,11 @@ To make custom post types and custom taxonomies available to FakerPress, set `"p
 
 ### Generated API Endpoints
 
-- Jobs: `/wp-json/wp/v2/jl-jobs`
-- Categories: `/wp-json/wp/v2/jl-categories`
-- Locations: `/wp-json/wp/v2/jl-locations`
-- Types: `/wp-json/wp/v2/jl-types`
-- Experience Levels: `/wp-json/wp/v2/jl-experience-levels`
+- Jobs: `/wp-json/wp/v2/jbls-jobs`
+- Categories: `/wp-json/wp/v2/jbls-categories`
+- Locations: `/wp-json/wp/v2/jbls-locations`
+- Types: `/wp-json/wp/v2/jbls-types`
+- Experience Levels: `/wp-json/wp/v2/jbls-experience-levels`
 
 ### Authentication
 

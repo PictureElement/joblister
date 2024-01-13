@@ -26,7 +26,7 @@ function JobList() {
     <>
       {filteredJobs.length > 0
         ?
-          <ul className="jl-job-list">
+          <ul className="jbls-job-list">
             {jobItems}
           </ul>
         :

@@ -75,7 +75,7 @@ const filteredJobsState = selector({
     const experienceLevelFiltersIds = experienceLevelFilters.map(experienceLevel => experienceLevel.id);
 
     const currentPage = get(currentPageState);
-    const perPage = parseInt(jlData.perPage, 10);
+    const perPage = parseInt(jblsData.perPage, 10);
     const startIndex = (currentPage - 1) * perPage;
     const endIndex = startIndex + perPage;
 

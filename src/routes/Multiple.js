@@ -91,11 +91,11 @@ function Multiple() {
   }
   
   return (
-    <div className="jl-multiple">
-      <div className="jl-multiple__search">
+    <div className="jbls-multiple">
+      <div className="jbls-multiple__search">
         <Search />
       </div>
-      <div className="jl-multiple__filters">
+      <div className="jbls-multiple__filters">
         <SelectMulti
           value={categoryFilters}
           placeholder="--Category--"
@@ -121,23 +121,23 @@ function Multiple() {
           options={allExperienceLevels}
         />
       </div>
-      <div className="jl-multiple__count-clear">
-        <div className="jl-multiple__count jl-text-size-h4"><strong>{totalJobs}</strong> jobs found</div>
-        <button onClick={handleClearAll} className="jl-multiple__clear jl-text-size-h4">Clear all</button>
+      <div className="jbls-multiple__count-clear">
+        <div className="jbls-multiple__count jbls-text-size-h4"><strong>{totalJobs}</strong> jobs found</div>
+        <button onClick={handleClearAll} className="jbls-multiple__clear jbls-text-size-h4">Clear all</button>
       </div>
-      <div className="jl-multiple__pagination jl-multiple__pagination_top">
+      <div className="jbls-multiple__pagination jbls-multiple__pagination_top">
         <Pagination />
       </div>
-      <div className="jl-multiple__header jl-clearfix">
-        <span className="jl-text-size-small">Job Title</span>
-        <span className="jl-text-size-small">Category</span>
-        <span className="jl-text-size-small">Location</span>
-        <span className="jl-text-size-small">Experience</span>
+      <div className="jbls-multiple__header jbls-clearfix">
+        <span className="jbls-text-size-small">Job Title</span>
+        <span className="jbls-text-size-small">Category</span>
+        <span className="jbls-text-size-small">Location</span>
+        <span className="jbls-text-size-small">Experience</span>
       </div>
-      <div className="jl-multiple__list">
+      <div className="jbls-multiple__list">
         <JobList />
       </div>
-      <div className="jl-multiple__pagination jl-multiple__pagination_bottom">
+      <div className="jbls-multiple__pagination jbls-multiple__pagination_bottom">
         <Pagination />
       </div>
     </div>

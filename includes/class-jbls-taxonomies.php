@@ -3,24 +3,24 @@
 // Exit if accessed directly.
 defined( 'ABSPATH' ) || exit;
 
-class JL_Custom_Taxonomies
+class JBLS_Taxonomies
 {
 
   public function __construct()
   {
-    add_action('init', [$this, 'register_jl_location']);
-    add_action('init', [$this, 'register_jl_category']);
-    add_action('init', [$this, 'register_jl_type']);
-    add_action('init', [$this, 'register_jl_experience_level']);
-    // Disable the "No term" option on the "jl_location" taxonomy
-    add_filter("radio_buttons_for_taxonomies_no_term_jl_location", [$this, '__return_FALSE']);
-    add_filter("radio_buttons_for_taxonomies_no_term_jl_category", [$this, '__return_FALSE']);
-    add_filter("radio_buttons_for_taxonomies_no_term_jl_type", [$this, '__return_FALSE']);
-    add_filter("radio_buttons_for_taxonomies_no_term_jl_experience_level", [$this, '__return_FALSE']);
+    add_action('init', [$this, 'jbls_register_jbls_location']);
+    add_action('init', [$this, 'jbls_register_jbls_category']);
+    add_action('init', [$this, 'jbls_register_jbls_type']);
+    add_action('init', [$this, 'jbls_register_jbls_experience_level']);
+    // Disable the "No term" option on the "jbls_location" taxonomy
+    add_filter("radio_buttons_for_taxonomies_no_term_jbls_location", __return_false());
+    add_filter("radio_buttons_for_taxonomies_no_term_jbls_category", __return_false());
+    add_filter("radio_buttons_for_taxonomies_no_term_jbls_type", __return_false());
+    add_filter("radio_buttons_for_taxonomies_no_term_jbls_experience_level", __return_false());
   }
 
-  // Register "jl_location" taxonomy
-  public function register_jl_location()
+  // Register "jbls_location" taxonomy
+  public function jbls_register_jbls_location()
   {
     $labels = [
       "name" => "Locations",
@@ -64,17 +64,17 @@ class JL_Custom_Taxonomies
       "show_admin_column" => true,
       "show_in_rest" => true,
       "show_tagcloud" => false,
-      "rest_base" => "jl-locations",
+      "rest_base" => "jbls-locations",
       "rest_controller_class" => "WP_REST_Terms_Controller",
       "show_in_quick_edit" => true,
       "sort" => false,
       "show_in_graphql" => false,
     ];
-    register_taxonomy("jl_location", array('jl_job'), $args);
+    register_taxonomy("jbls_location", array('jbls_job'), $args);
   }
 
-  // Register "jl_category" taxonomy
-  public function register_jl_category()
+  // Register "jbls_category" taxonomy
+  public function jbls_register_jbls_category()
   {
     $labels = [
       "name" => "Categories",
@@ -118,17 +118,17 @@ class JL_Custom_Taxonomies
       "show_admin_column" => true,
       "show_in_rest" => true,
       "show_tagcloud" => false,
-      "rest_base" => "jl-categories",
+      "rest_base" => "jbls-categories",
       "rest_controller_class" => "WP_REST_Terms_Controller",
       "show_in_quick_edit" => true,
       "sort" => false,
       "show_in_graphql" => false,
     ];
-    register_taxonomy("jl_category", ["jl_job"], $args);
+    register_taxonomy("jbls_category", ["jbls_job"], $args);
   }
 
-  // Register "jl_type" taxonomy
-  public function register_jl_type()
+  // Register "jbls_type" taxonomy
+  public function jbls_register_jbls_type()
   {
     $labels = [
       "name" => "Types",
@@ -172,17 +172,17 @@ class JL_Custom_Taxonomies
       "show_admin_column" => true,
       "show_in_rest" => true,
       "show_tagcloud" => false,
-      "rest_base" => "jl-types",
+      "rest_base" => "jbls-types",
       "rest_controller_class" => "WP_REST_Terms_Controller",
       "show_in_quick_edit" => true,
       "sort" => false,
       "show_in_graphql" => false,
     ];
-    register_taxonomy("jl_type", ["jl_job"], $args);
+    register_taxonomy("jbls_type", ["jbls_job"], $args);
   }
 
-  // Register "jl_experience_level" taxonomy
-  public function register_jl_experience_level()
+  // Register "jbls_experience_level" taxonomy
+  public function jbls_register_jbls_experience_level()
   {
     $labels = [
       "name" => "Experience Levels",
@@ -226,17 +226,12 @@ class JL_Custom_Taxonomies
       "show_admin_column" => true,
       "show_in_rest" => true,
       "show_tagcloud" => false,
-      "rest_base" => "jl-experience-levels",
+      "rest_base" => "jbls-experience-levels",
       "rest_controller_class" => "WP_REST_Terms_Controller",
       "show_in_quick_edit" => true,
       "sort" => false,
       "show_in_graphql" => false,
     ];
-    register_taxonomy("jl_experience_level", ["jl_job"], $args);
-  }
-
-  public static function __return_FALSE()
-  {
-    return false;
+    register_taxonomy("jbls_experience_level", ["jbls_job"], $args);
   }
 }

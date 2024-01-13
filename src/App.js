@@ -21,11 +21,11 @@ function App() {
   const setAllCategories = useSetRecoilState(allCategoriesState);
   const setAllTypes = useSetRecoilState(allTypesState);
   const setAllExperienceLevels = useSetRecoilState(allExperienceLevelsState);
-  const [endpointJobs] = useState(jlData.restBaseUrl + "wp/v2/jl-jobs" + jlData.separator + "per_page=100");
-  const [endpointLocations] = useState(jlData.restBaseUrl + "wp/v2/jl-locations" + jlData.separator + "per_page=100");
-  const [endpointCategories] = useState(jlData.restBaseUrl + "wp/v2/jl-categories" + jlData.separator + "per_page=100");
-  const [endpointTypes] = useState(jlData.restBaseUrl + "wp/v2/jl-types" + jlData.separator + "per_page=100");
-  const [endpointExperienceLevels] = useState(jlData.restBaseUrl + "wp/v2/jl-experience-levels" + jlData.separator + "per_page=100");
+  const [endpointJobs] = useState(jblsData.restBaseUrl + "wp/v2/jbls-jobs" + jblsData.separator + "per_page=100");
+  const [endpointLocations] = useState(jblsData.restBaseUrl + "wp/v2/jbls-locations" + jblsData.separator + "per_page=100");
+  const [endpointCategories] = useState(jblsData.restBaseUrl + "wp/v2/jbls-categories" + jblsData.separator + "per_page=100");
+  const [endpointTypes] = useState(jblsData.restBaseUrl + "wp/v2/jbls-types" + jblsData.separator + "per_page=100");
+  const [endpointExperienceLevels] = useState(jblsData.restBaseUrl + "wp/v2/jbls-experience-levels" + jblsData.separator + "per_page=100");
   const [loading, setLoading] = useState(true);
 
   async function getData() {
@@ -83,7 +83,7 @@ function App() {
   // Render loading state while data is being fetched
   if (loading) {
     return (
-      <div className="jl-dot-flashing"><span className="jl-visually-hidden">Loading...</span></div>
+      <div className="jbls-dot-flashing"><span className="jbls-visually-hidden">Loading...</span></div>
     )
   }
 

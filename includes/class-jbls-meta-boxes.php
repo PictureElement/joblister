@@ -17,35 +17,35 @@ require_once ABSPATH . 'wp-admin/includes/image.php';
 require_once ABSPATH . 'wp-admin/includes/file.php';
 require_once ABSPATH . 'wp-admin/includes/media.php';
 
-class JL_Meta_Boxes
+class JBLS_Meta_Boxes
 {
   public function __construct()
   {
-    add_action('post_edit_form_tag', array($this, 'post_edit_form_tag'));
-    add_action('add_meta_boxes_jl_application', array($this, 'add_jl_application_fields'));
-    add_action('save_post', array($this, 'save_jl_application_fields'));
+    add_action('post_edit_form_tag', array($this, 'jbls_post_edit_form_tag'));
+    add_action('add_meta_boxes_jbls_application', array($this, 'jbls_add_jbls_application_fields'));
+    add_action('save_post_jbls_application', array($this, 'jbls_save_jbls_application_fields'));
   }
 
-  public function post_edit_form_tag()
+  public function jbls_post_edit_form_tag()
   {
     echo ' enctype="multipart/form-data"';
   }
 
-  // Add a meta box to the "jl_application" post type screen
-  public function add_jl_application_fields()
+  // Add a meta box to the "jbls_application" post type screen
+  public function jbls_add_jbls_application_fields()
   {
     add_meta_box(
-      'jl-application-fields',
+      'jbls-application-fields',
       'Application Details',
-      array($this, 'render_jl_application_fields'),
-      'jl_application',
+      array($this, 'jbls_render_jbls_application_fields'),
+      'jbls_application',
       'normal',
       'high'
     );
   }
 
   // Fill the meta box with the desired content
-  public function render_jl_application_fields($post)
+  public function jbls_render_jbls_application_fields($post)
   {
     $job_id = get_post_meta($post->ID, 'job_id', true);
     $name = get_post_meta($post->ID, 'name', true);
@@ -86,8 +86,8 @@ class JL_Meta_Boxes
 <?php
   }
 
-  // Update "jl_application" meta fields once a post has been saved
-  public function save_jl_application_fields($post_id)
+  // Update "jbls_application" meta fields once a post has been saved
+  public function jbls_save_jbls_application_fields($post_id)
   {
     // Capability check
     if (!current_user_can('edit_post', $post_id)) {

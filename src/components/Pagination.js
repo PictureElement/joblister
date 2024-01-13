@@ -54,7 +54,7 @@ function Pagination() {
         return (
           <button
             key={index}
-            className="jl-pagination__control jl-pagination__control_ellipsis"
+            className="jbls-pagination__control jbls-pagination__control_ellipsis"
             disabled
             aria-label="Page ···"
             aria-disabled="true"
@@ -66,7 +66,7 @@ function Pagination() {
         return (
           <button
             key={index}
-            className={page === currentPage ? 'jl-pagination__control jl-pagination__control_active' : 'jl-pagination__control'}
+            className={page === currentPage ? 'jbls-pagination__control jbls-pagination__control_active' : 'jbls-pagination__control'}
             onClick={() => handlePageChange(page)}
             aria-label={`Page ${page}`}
           >
@@ -83,9 +83,9 @@ function Pagination() {
   }
 
   return (
-    <div className="jl-pagination">
+    <div className="jbls-pagination">
       <button
-        className="jl-pagination__control jl-pagination__arrow jl-pagination__arrow_prev"
+        className="jbls-pagination__control jbls-pagination__arrow jbls-pagination__arrow_prev"
         disabled={currentPage === 1}
         onClick={() => handlePageChange(currentPage - 1)}
         aria-label="Previous page"
@@ -93,13 +93,13 @@ function Pagination() {
         <PreviousIcon />
       </button>
       {generatePagination().length > 1 && (
-        <div className="jl-pagination__numbers">
+        <div className="jbls-pagination__numbers">
           {generatePagination()}
-          <div className="jl-pagination__fraction">{currentPage}/{totalPages}</div>
+          <div className="jbls-pagination__fraction">{currentPage}/{totalPages}</div>
         </div>
       )}
       <button
-        className="jl-pagination__control jl-pagination__arrow jl-pagination__arrow_next"
+        className="jbls-pagination__control jbls-pagination__arrow jbls-pagination__arrow_next"
         disabled={currentPage === totalPages}
         onClick={() => handlePageChange(currentPage + 1)}
         aria-label="Next page"

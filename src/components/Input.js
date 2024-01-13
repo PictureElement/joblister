@@ -5,21 +5,21 @@ function Input(props) {
   const { value, label, name, helper, error, ...remainingProps } = props;
 
   return (
-    <div className="jl-input">
+    <div className="jbls-input">
       <label
-        htmlFor={`jl-input-${name}`}
-        className="jl-input__label jl-text-size-p">
+        htmlFor={`jbls-input-${name}`}
+        className="jbls-input__label jbls-text-size-p">
           {label}
       </label>
       <input
         {...remainingProps}
         value={value}
         name={name}
-        id={`jl-input-${name}`}
-        className="jl-input__control"
+        id={`jbls-input-${name}`}
+        className="jbls-input__control"
       />
-      {helper && <div className="jl-input__helper jl-text-size-small">{helper}</div>}
-      {error && <div className="jl-input__error jl-text-size-small">{error}</div>}
+      {helper && <div className="jbls-input__helper jbls-text-size-small">{helper}</div>}
+      {error && <div className="jbls-input__error jbls-text-size-small">{error}</div>}
     </div>
   )
 }

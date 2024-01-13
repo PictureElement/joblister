@@ -67,8 +67,8 @@ function Form() {
     }
   
     // Retrieve credentials for accessing the WP REST API
-    const username = jlData.wordpressUsername;
-    const password = jlData.applicationPassword;
+    const username = jblsData.wordpressUsername;
+    const password = jblsData.applicationPassword;
 
     // Encode credentials in Base64
     const encodedCredentials = window.btoa(`${username}:${password}`);
@@ -76,7 +76,7 @@ function Form() {
 
     // Initiate POST request
     try {
-      const response = await fetch(jlData.restBaseUrl + "wp/v2/jl-applications", {
+      const response = await fetch(jblsData.restBaseUrl + "wp/v2/jbls-applications", {
         method: "POST",
         headers: {
           "Authorization": basicAuthHeader
@@ -99,7 +99,7 @@ function Form() {
       setValues({name: '', email: '', cover: '', resume: null, consent: false});
       setErrors({name: '', email: '', cover: '', resume: '', consent: ''});
       // Reset all file input elements
-      const fileInputs = document.querySelectorAll('.jl-form input[type="file"]');
+      const fileInputs = document.querySelectorAll('.jbls-form input[type="file"]');
       fileInputs.forEach((input) => (input.value = ''));
       // Reset captcha
       if (recaptchaRef.current) {
@@ -147,14 +147,14 @@ function Form() {
   }
   
   return (
-    <div className="jl-form">
+    <div className="jbls-form">
       {isFormSubmitted ? (
         <Success />
       ) : (
-        <form className="jl-form__form" onSubmit={handleSubmit} encType="multipart/form-data">
-          <h2 className="jl-form__title">Apply for this job</h2>
-          <p className="jl-form__subtitle">Use the form below to submit your job application</p>
-          <div className="jl-form__required jl-text-size-small">* indicates a required field</div>
+        <form className="jbls-form__form" onSubmit={handleSubmit} encType="multipart/form-data">
+          <h2 className="jbls-form__title">Apply for this job</h2>
+          <p className="jbls-form__subtitle">Use the form below to submit your job application</p>
+          <div className="jbls-form__required jbls-text-size-small">* indicates a required field</div>
           {inputConfig.map((config, index) => {
             return (
               <InputFactory
@@ -168,11 +168,11 @@ function Form() {
           })}
           <ReCAPTCHA
             ref={recaptchaRef}
-            sitekey={jlData.captchaSiteKey}
+            sitekey={jblsData.captchaSiteKey}
             size="invisible"
             onChange={onCaptchaVerification}
           />
-          <button type="submit" className="jl-form__submit">Submit</button>
+          <button type="submit" className="jbls-form__submit">Submit</button>
         </form>
       )}
     </div>
