@@ -43,9 +43,9 @@ if (!class_exists('JBLS')) {
       $jbls_scripts = new JBLS_Scripts();
       $jbls_styles = new JBLS_Styles();
       $jbls_shortcodes = new JBLS_Shortcodes();
-      $jbls_custom_post_types = new JBLS_Custom_Post_Types();
-      $jbls_custom_taxonomies = new JBLS_Custom_Taxonomies();
-      $jbls_rest_api = new JBLS_REST_API();
+      $jbls_custom_post_types = new JBLS_Post_Types();
+      $jbls_custom_taxonomies = new JBLS_Taxonomies();
+      $jbls_rest_api = new JBLS_REST();
       $jbls_meta_boxes = new JBLS_Meta_Boxes();
       $jbls_admin_columns = new JBLS_Admin_Columns();
     }
