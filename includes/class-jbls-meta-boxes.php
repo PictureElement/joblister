@@ -67,7 +67,7 @@ class JBLS_Meta_Boxes
     </div>
     <div style="margin-bottom:1em;">
       <label style="display:block;margin-bottom:4px;" for="cover">Cover Letter</label>
-      <textarea rows="5" style="width:100%;" id="cover" name="cover"><?php echo esc_attr($cover); ?></textarea>
+      <textarea rows="5" style="width:100%;" id="cover" name="cover"><?php echo esc_textarea($cover); ?></textarea>
     </div>
     <div style="margin-bottom:1em;">
       <label style="display:block;margin-bottom:4px;" for="resume">Resume</label>

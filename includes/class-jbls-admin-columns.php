@@ -32,15 +32,15 @@ class JBLS_Admin_Columns
   {
     switch ($column) {
       case 'id':
-        echo $post_id;
+        echo esc_html($post_id);
         break;
       case 'name':
         $name = get_post_meta($post_id, 'name', true);
-        echo $name ? $name : '—';
+        echo $name ? esc_html($name) : '—';
         break;
       case 'email':
         $email = get_post_meta($post_id, 'email', true);
-        echo $email ? $email : '—';
+        echo $email ? esc_html($email) : '—';
         break;
       case 'job_title':
         $job_id = get_post_meta($post_id, 'job_id', true);
@@ -49,7 +49,7 @@ class JBLS_Admin_Columns
           if ($job_post) {
             $title = get_the_title($job_id);
             if ($title) {
-              echo $title;
+              echo esc_html($title);
             } else {
               echo '(no title)';
             }
@@ -74,7 +74,7 @@ class JBLS_Admin_Columns
   public function jbls_populate_jbls_job_columns($column, $post_id)
   {
     if ($column === 'post_id') {
-      echo $post_id;
+      echo esc_html($post_id);
     }
   }
 }
