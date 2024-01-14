@@ -1,20 +1,13 @@
-import './index.scss';
-import App from './App';
-import { createRoot, render } from '@wordpress/element';
+const { createRoot } = wp.element;
 import { RecoilRoot } from 'recoil';
+import App from './App';
+import './index.scss';
 
-const domElement = document.getElementById('jbls-root');
+const domNode = document.getElementById('jbls-root');
 
-if (createRoot) {
-  createRoot(domElement).render(
-    <React.StrictMode>
-      <RecoilRoot>
-        <App />
-      </RecoilRoot>
-    </React.StrictMode>
-  );
-} else {
-  render(
+if (domNode) {
+  const root = createRoot(domNode);
+  root.render(
     <React.StrictMode>
       <RecoilRoot>
         <App />

@@ -51,8 +51,7 @@ class JBLS_REST
 
     return [
       'id' => $response->data['id'],
-      'modified' => $response->data['modified'],
-      'modified_gmt' => $response->data['modified_gmt'],
+      'modified_gmt' => $response->data['modified_gmt'] . 'Z', // Append 'Z' to indicate GMT/UTC time
       // Use html_entity_decode() to avoid html entities like &amp;
       'title' => html_entity_decode($response->data['title']['rendered']),
       'content' => html_entity_decode($response->data['content']['rendered']),

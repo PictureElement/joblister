@@ -15,6 +15,7 @@
     "packages-update": "wp-scripts packages-update",
     "plugin-zip": "wp-scripts plugin-zip",
     "start": "wp-scripts start",
+    "start:hot": "wp-scripts start --hot",
     "test:e2e": "wp-scripts test-e2e",
     "test:unit": "wp-scripts test-unit-js"
   },
@@ -25,9 +26,8 @@
     "@wordpress/scripts": "^26.2.0"
   },
   "dependencies": {
+    "dayjs": "^1.11.10",
     "dompurify": "^3.0.3",
-    "moment": "^2.29.4",
-    "moment-timezone": "^0.5.43",
     "react-google-recaptcha": "^3.1.0",
     "react-router-dom": "^6.11.1",
     "react-select": "^5.7.3",
