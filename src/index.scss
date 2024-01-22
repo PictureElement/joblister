@@ -12,7 +12,7 @@
 #jbls-root .jbls-text-size-p,
 #jbls-root small,
 #jbls-root .jbls-text-size-small {
-  font-family: var(--jbls-family);
+  font-family: var(--jbls-google-font-family);
   margin: 0;
   font-weight: 400;
 }
@@ -269,7 +269,7 @@
   }
   &__count {
     text-align: center;
-    font-family: var(--jbls-family);
+    font-family: var(--jbls-google-font-family);
     font-weight: 400;
     color: var(--jbls-on-background-primary);
     strong {
@@ -277,7 +277,7 @@
     }
   }
   &__clear {
-    font-family: var(--jbls-family);
+    font-family: var(--jbls-google-font-family);
     font-weight: 400;
     height: 44px;
     color: var(--jbls-accent);
@@ -374,7 +374,7 @@
     cursor: pointer;
     user-select: none;
     background-color: var(--jbls-accent);
-    font-family: var(--jbls-family);
+    font-family: var(--jbls-google-font-family);
     font-size: 16px;
     line-height: 1;
     font-weight: 400;
@@ -449,7 +449,7 @@
       margin-bottom: 16px;
     }
     li {
-      font-family: var(--jbls-family);
+      font-family: var(--jbls-google-font-family);
       font-size: 16px;
       line-height: 24px;
       font-weight: 300;
@@ -465,7 +465,7 @@
   &__back-to-listing {
     display: inline-flex;
     align-items: center;
-    font-family: var(--jbls-family);
+    font-family: var(--jbls-google-font-family);
     font-weight: 400;
     height: 44px;
     color: var(--jbls-accent);
@@ -551,14 +551,14 @@
     }
   }
   &__placeholder {
-    font-family: var(--jbls-family);
+    font-family: var(--jbls-google-font-family);
     font-size: 16px;
     line-height: 24px;
     font-weight: 400;
     color: var(--jbls-on-surface-secondary);
   }
   &__option {
-    font-family: var(--jbls-family);
+    font-family: var(--jbls-google-font-family);
     font-size: 16px;
     line-height: 24px;
     font-weight: 400;
@@ -586,7 +586,7 @@
   &__multi-value {
     margin: 2px;
     &__label {
-      font-family: var(--jbls-family);
+      font-family: var(--jbls-google-font-family);
       font-size: 16px;
       line-height: 1;
       font-weight: 400;
@@ -599,7 +599,7 @@
     box-shadow: 0 3px 5px -1px rgba(0,0,0,.2), 0 6px 10px 0 rgba(0,0,0,.14), 0 1px 18px 0 rgba(0,0,0,.12);
   }
   &__menu-notice {
-    font-family: var(--jbls-family);
+    font-family: var(--jbls-google-font-family);
     font-size: 16px;
     line-height: 24px;
     font-weight: 400;
@@ -633,7 +633,7 @@
     text-indent: 40px;
     padding: 9px 0;
     padding-inline-end: 8px;
-    font-family: var(--jbls-family);
+    font-family: var(--jbls-google-font-family);
     font-size: 16px;
     line-height: 24px;
     font-weight: 400;
@@ -646,7 +646,7 @@
       transition: outline-offset 0s, outline 0s;
     }
     &::placeholder {
-      font-family: var(--jbls-family);
+      font-family: var(--jbls-google-font-family);
       font-size: 16px;
       line-height: 24px;
       font-weight: 400;
@@ -676,7 +676,7 @@
   &__fraction {
     display: none;
     color: var(--jbls-on-background-primary);
-    font-family: var(--jbls-family);
+    font-family: var(--jbls-google-font-family);
     font-weight: 400;
     @media (max-width: 400px) {
       display: inline-block;
@@ -693,7 +693,7 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    font-family: var(--jbls-family);
+    font-family: var(--jbls-google-font-family);
     font-weight: 400;
     height: 44px;
     width: 44px;
@@ -764,7 +764,7 @@
     user-select: none;
     transition: filter 200ms ease-in-out;
     background-color: var(--jbls-accent);
-    font-family: var(--jbls-family);
+    font-family: var(--jbls-google-font-family);
     font-size: 16px;
     line-height: 1;
     font-weight: 400;
@@ -802,7 +802,7 @@
     display: block;
     border-radius: 0;
     padding: 9px 8px;
-    font-family: var(--jbls-family);
+    font-family: var(--jbls-google-font-family);
     font-size: 16px;
     line-height: 24px;
     font-weight: 400;
@@ -859,7 +859,7 @@
 #jbls-root .jbls-no-jobs-found {
   text-align: center;
   &__emoji {
-    font-family: var(--jbls-family);
+    font-family: var(--jbls-google-font-family);
     font-size: 200px;
     color: var(--jbls-on-background-primary);
     margin-bottom: 12px;
@@ -875,7 +875,7 @@
     color: var(--jbls-on-background-primary);
   }
   &__clear {
-    font-family: var(--jbls-family);
+    font-family: var(--jbls-google-font-family);
     font-weight: 400;
     height: 44px;
     color: var(--jbls-accent);
@@ -894,7 +894,7 @@
 #jbls-root .jbls-success {
   text-align: center;
   &__emoji {
-    font-family: var(--jbls-family);
+    font-family: var(--jbls-google-font-family);
     font-size: 100px;
     color: var(--jbls-success);
     margin-bottom: 12px;

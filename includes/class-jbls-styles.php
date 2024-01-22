@@ -29,10 +29,9 @@ class JBLS_Styles
 
   public function jbls_add_styles_to_registered_style()
   {
-    // Get options
-    $options = get_option('jbls_options', [
-      'jbls_google_font_link' => '',
-      'jbls_google_font_family' => '',
+    // Define default values for the settings
+    $defaults = [
+      'jbls_google_font_family' => 'inherit',
       'jbls_accent' => '#1a73e8',
       'jbls_on_accent' => '#ffffff',
       'jbls_background' => '#f8f9fa',
@@ -45,49 +44,37 @@ class JBLS_Styles
       'jbls_on_surface_border' => '#dadce0',
       'jbls_error' => '#dc3545',
       'jbls_success' => '#198754'
-    ]);
+    ];
 
-    // Check if the Google Font Link and Google Font Family are set and not empty
-    if (!empty($options['jbls_google_font_link']) && !empty($options['jbls_google_font_family'])) {
-        // Add the @import statement to custom_css
-        $custom_css = "
-          @import url('{$options['jbls_google_font_link']}');
-          :root {
-            --jbls-family: {$options['jbls_google_font_family']};
-            --jbls-accent: {$options['jbls_accent']};
-            --jbls-on-accent: {$options['jbls_on_accent']};
-            --jbls-background: {$options['jbls_background']};
-            --jbls-on-background-primary: {$options['jbls_on_background_primary']};
-            --jbls-on-background-secondary: {$options['jbls_on_background_secondary']};
-            --jbls-on-background-border: {$options['jbls_on_background_border']};
-            --jbls-surface: {$options['jbls_surface']};
-            --jbls-on-surface-primary: {$options['jbls_on_surface_primary']};
-            --jbls-on-surface-secondary: {$options['jbls_on_surface_secondary']};
-            --jbls-on-surface-border: {$options['jbls_on_surface_border']};
-            --jbls-error: {$options['jbls_error']};
-            --jbls-success: {$options['jbls_success']};
-          }
-        ";
-    } else {
-      $custom_css = "
-        :root {
-          --jbls-family: inherit;
-          --jbls-accent: {$options['jbls_accent']};
-          --jbls-on-accent: {$options['jbls_on_accent']};
-          --jbls-background: {$options['jbls_background']};
-          --jbls-on-background-primary: {$options['jbls_on_background_primary']};
-          --jbls-on-background-secondary: {$options['jbls_on_background_secondary']};
-          --jbls-on-background-border: {$options['jbls_on_background_border']};
-          --jbls-surface: {$options['jbls_surface']};
-          --jbls-on-surface-primary: {$options['jbls_on_surface_primary']};
-          --jbls-on-surface-secondary: {$options['jbls_on_surface_secondary']};
-          --jbls-on-surface-border: {$options['jbls_on_surface_border']};
-          --jbls-error: {$options['jbls_error']};
-          --jbls-success: {$options['jbls_success']};
-        }
-      ";
+    // Fetch options. If not set, use an empty array as fallback
+    $options = get_option('jbls_options', []);
+
+    // Include Google font import if jbls_google_font_url is set and not empty.
+    $custom_css = !empty($options['jbls_google_font_url'])
+                  ? "@import url('{$options['jbls_google_font_url']}');\n"
+                  : '';
+
+    $style_options = [];
+
+    foreach ($defaults as $key => $default) {
+      if (!empty($options[$key])) {
+        $style_options[$key] = $options[$key];
+      } else {
+        $style_options[$key] = $default;
+      }
     }
 
+    $custom_css .= ":root {\n";
+
+    // Loop through each option and add to CSS
+    foreach ($style_options as $key => $value) {
+      $css_var_name = str_replace(['jbls_', '_'], ['--jbls-', '-'], $key);
+      $custom_css .= "  {$css_var_name}: {$value};\n";
+    }
+  
+    $custom_css .= "}";
+    
+    // Add custom CSS to the registered style
     wp_add_inline_style('jbls-style', $custom_css);
   }
 }

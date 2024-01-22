@@ -19,7 +19,7 @@ class JBLS_Post_Types
     $labels = [
       "name" => "Jobs",
       "singular_name" => "Job",
-      "menu_name" => "Jobs",
+      "menu_name" => "JobLister",
       "all_items" => "All Jobs",
       "add_new" => "Add new",
       "add_new_item" => "Add new Job",

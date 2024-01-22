@@ -23,9 +23,28 @@ class JBLS_Scripts
       true // Enqueue script before </body>
     );
 
-    // Localize the script with Settings page data
-    $options = get_option('jbls_options');
+    // Define default values for the settings
+    $defaults = [
+      'jbls_per_page' => 10,
+      'jbls_wordpress_username' => '',
+      'jbls_application_password' => '',
+      'jbls_captcha_site_key' => '6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI',
+      'jbls_privacy_url' => '/privacy-policy',
+    ];
 
+    // Get options
+    $options = get_option('jbls_options', $defaults);
+
+    $general_options = [];
+
+    foreach ($defaults as $key => $default) {
+      if (!empty($options[$key])) {
+        $general_options[$key] = $options[$key];
+      } else {
+        $general_options[$key] = $default;
+      }
+    }
+    
     // If the permalink structure is empty, it means WordPress is using "Plain" permalinks,
     // and we should use "&" to append query parameters to the URL.
     // Otherwise, we can use "?".
@@ -34,13 +53,15 @@ class JBLS_Scripts
 
     $data = array(
       'restBaseUrl' => rest_url(),
-      'perPage' => $options['jbls_per_page'],
-      'wordpressUsername' => $options['jbls_wordpress_username'],
-      'applicationPassword' => $options['jbls_application_password'],
-      'captchaSiteKey' => $options['jbls_captcha_site_key'],
-      'privacyLink' => $options['jbls_privacy_link'],
+      'perPage' => $general_options['jbls_per_page'],
+      'wordpressUsername' => $general_options['jbls_wordpress_username'],
+      'applicationPassword' => $general_options['jbls_application_password'],
+      'captchaSiteKey' => $general_options['jbls_captcha_site_key'],
+      'privacyUrl' => $general_options['jbls_privacy_url'],
       'separator' => $separator,
     );
+
+    // Localize the script
     wp_localize_script('jbls-script', 'jblsData', $data);
   }
 }

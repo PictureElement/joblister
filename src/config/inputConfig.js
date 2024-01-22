@@ -30,7 +30,7 @@ const inputConfig = [
   {
     name: 'consent',
     type: 'checkbox',
-    label: `I consent to have this website collect my submitted information so they can respond to my inquiry. I have read and accept the <a target="_blank" rel="noopener noreferrer" href="${jblsData.privacyLink}">Privacy Policy</a>.`
+    label: `I consent to have this website collect my submitted information so they can respond to my inquiry. I have read and accept the <a target="_blank" rel="noopener noreferrer" href="${jblsData.privacyUrl}">Privacy Policy</a>.`
   }
 ];
 
