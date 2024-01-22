@@ -12,11 +12,6 @@ class JBLS_Taxonomies
     add_action('init', [$this, 'jbls_register_jbls_category']);
     add_action('init', [$this, 'jbls_register_jbls_type']);
     add_action('init', [$this, 'jbls_register_jbls_experience_level']);
-    // Disable the "No term" option on the "jbls_location" taxonomy
-    // add_filter("radio_buttons_for_taxonomies_no_term_jbls_location", __return_false());
-    // add_filter("radio_buttons_for_taxonomies_no_term_jbls_category", __return_false());
-    // add_filter("radio_buttons_for_taxonomies_no_term_jbls_type", __return_false());
-    // add_filter("radio_buttons_for_taxonomies_no_term_jbls_experience_level", __return_false());
   }
 
   // Register "jbls_location" taxonomy
