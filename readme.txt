@@ -38,8 +38,8 @@ JobLister is a free and open-source WordPress plugin that allows you to set up a
 
 1. Visit the 'Plugins' menu within your dashboard and select ‘Add New Plugin’.
 2. Search for ‘JobLister’.
-3. Install and activate the JobLister plugin.
-4. Go to ‘After activation’ below.
+3. Install the JobLister plugin.
+4. Go to ‘After installation’ below.
 
 = Install JobLister manually =
 
@@ -47,7 +47,7 @@ JobLister is a free and open-source WordPress plugin that allows you to set up a
 2. Activate the JobLister plugin through the ‘Plugins’ menu within your dashboard.
 3. Go to ‘After activation’ below.
 
-= After activation =
+= After installation =
 
 1. Visit the 'Plugins' menu within your dashboard and select 'Add New Plugin'.
 2. Search for 'Radio Buttons for Taxonomies'.
