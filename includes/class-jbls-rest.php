@@ -134,6 +134,14 @@ class JBLS_REST
 
   public function jbls_application_post_callback($request)
   {
+    // Retrieve the nonce from the request headers
+    $nonce = $request->get_header('X-WP-Nonce');
+
+    // Verify the nonce
+    if (!wp_verify_nonce($nonce, 'jbls_nonce')) {
+      return new WP_Error('nonce_verification_failed', 'Nonce verification failed', array('status' => 401));
+    }
+
     // Sanitize & validate job_id
     $job_id = intval(sanitize_text_field($request['job_id']));
     if (empty($job_id) || !$this->jbls_job_exists($job_id)) {

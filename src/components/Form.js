@@ -65,21 +65,13 @@ function Form() {
     for (var pair of formData.entries()) {
       console.log(pair[0]+ ', ' + pair[1]); 
     }
-  
-    // Retrieve credentials for accessing the WP REST API
-    const username = jblsData.wordpressUsername;
-    const password = jblsData.applicationPassword;
-
-    // Encode credentials in Base64
-    const encodedCredentials = window.btoa(`${username}:${password}`);
-    const basicAuthHeader = `Basic ${encodedCredentials}`;
 
     // Initiate POST request
     try {
       const response = await fetch(jblsData.restBaseUrl + "wp/v2/jbls-applications", {
         method: "POST",
         headers: {
-          "Authorization": basicAuthHeader
+          "X-WP-Nonce": jblsData.nonce
         },
         body: formData
       });

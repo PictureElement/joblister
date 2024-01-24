@@ -110,22 +110,6 @@ class JBLS_Settings {
     );
 
     add_settings_field(
-      'jbls_wordpress_username',
-      'WordPress Username',
-      array($this, 'jbls_wordpress_username_callback'),
-      'jbls_settings_page',
-      'jbls_general'
-    );
-
-    add_settings_field(
-      'jbls_application_password',
-      'Application Password',
-      array($this, 'jbls_application_password_callback'),
-      'jbls_settings_page',
-      'jbls_general'
-    );
-    
-    add_settings_field(
       'jbls_captcha_site_key',
       'Invisible reCAPTCHA v2 Site Key',
       array($this, 'jbls_captcha_site_key_callback'),
@@ -192,20 +176,6 @@ class JBLS_Settings {
     <?php
   }
 
-  public function jbls_wordpress_username_callback() {
-    $options = get_option('jbls_options');
-    ?>
-    <input style="width: 100%;" type="text" id="jbls_wordpress_username" name="jbls_options[jbls_wordpress_username]" value="<?php echo isset($options['jbls_wordpress_username']) ? esc_attr($options['jbls_wordpress_username']) : ''; ?>">
-    <?php
-  }
-
-  public function jbls_application_password_callback() {
-    $options = get_option('jbls_options');
-    ?>
-    <input style="width: 100%;" type="text" id="jbls_application_password" name="jbls_options[jbls_application_password]" value="<?php echo isset($options['jbls_application_password']) ? esc_attr($options['jbls_application_password']) : ''; ?>">
-    <?php
-  }
-
   public function jbls_captcha_site_key_callback() {
     $options = get_option('jbls_options');
     ?>
@@ -253,13 +223,7 @@ class JBLS_Settings {
   public function jbls_options_validate($input) {
     // Validate and set 'jbls_per_page'. Ensure it's a positive number, otherwise set to null.
     $input['jbls_per_page'] = (isset($input['jbls_per_page']) && is_numeric($input['jbls_per_page']) && intval($input['jbls_per_page']) > 0) ? intval($input['jbls_per_page']) : null;
-
-    // Sanitize the 'jbls_wordpress_username' field. Set to null if not provided.
-    $input['jbls_wordpress_username'] = isset($input['jbls_wordpress_username']) ? sanitize_text_field(trim($input['jbls_wordpress_username'])) : null;
-
-    // Sanitize the 'jbls_application_password' field. Set to null if not provided.
-    $input['jbls_application_password'] = isset($input['jbls_application_password']) ? sanitize_text_field(trim($input['jbls_application_password'])) : null;
-    
+        
     // Sanitize 'jbls_captcha_site_key'. Set to null if not provided.
     $input['jbls_captcha_site_key'] = isset($input['jbls_captcha_site_key']) ? sanitize_text_field(trim($input['jbls_captcha_site_key'])) : null;
 
