@@ -61,11 +61,6 @@ function Form() {
     formData.append('resume', values.resume);
     formData.append('consent', values.consent);
 
-    // Display the key/value pairs
-    for (var pair of formData.entries()) {
-      console.log(pair[0]+ ', ' + pair[1]); 
-    }
-
     // Initiate POST request
     try {
       const response = await fetch(jblsData.restBaseUrl + "wp/v2/jbls-applications", {
