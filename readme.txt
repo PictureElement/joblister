@@ -53,9 +53,8 @@ JobLister is a free and open-source WordPress plugin that allows you to set up a
 2. Search for 'Radio Buttons for Taxonomies'.
 3. Install and activate the Radio Buttons for Taxonomies plugin, a required dependency for JobLister to function correctly.
 4. Visit 'Settings > Radio Buttons for Taxonomies' within your dashboard, and select `jbls_category`, `jbls_experience_level`, `jbls_location`, and `jbls_type`. Then, save your changes.
-5. Visit your user's 'Profile' page within your dashboard and generate a new application password. Note down the username and password.
 6. [Sign up for a Google reCAPTCHA API key pair](http://www.google.com/recaptcha/admin) for your site, choosing 'reCAPTCHA v2, Invisible'. Note down the API Site Key.
-7. Visit 'Jobs > Settings' within your dashboard and enter the noted username, password and reCAPTCHA API Site Key.
+7. Visit 'Jobs > Settings' within your dashboard and enter the noted reCAPTCHA API Site Key.
 8. Take a few minutes to adjust the rest of the settings to your liking.
 9. Insert the [jbls_jobs] shortcode on any page.
 10. You're done!

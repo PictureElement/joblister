@@ -147,18 +147,6 @@ To make custom post types and custom taxonomies available to FakerPress, set `"p
 - Types: `/wp-json/wp/v2/jbls-types`
 - Experience Levels: `/wp-json/wp/v2/jbls-experience-levels`
 
-### Authentication
-
-We utilize the *Application Passwords* feature of WordPress to authenticate our React application, thereby enabling it to make POST requests to the WP REST API.
-
-Please note that this feature necessitates an SSL/HTTPS connection as a default security measure.
-
-In case you are operating in a development environment devoid of SSL/HTTPS and wish to test the functionality, override the default requirement by adding the following code to your theme's `functions.php` file:
-
-```php
-add_filter( 'wp_is_application_passwords_available', '__return_false' );
-```
-
 ## Contributing
 
 Your contributions are highly appreciated! If you wish to contribute to this project, please adhere to the following steps:
