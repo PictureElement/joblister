@@ -52,7 +52,7 @@ class JBLS_Scripts
     $separator = empty($permalink_structure) ? '&' : '?';
 
     $data = array(
-      'nonce' => wp_create_nonce('jbls_nonce'),
+      'nonce' => wp_create_nonce('wp_rest'),
       'restBaseUrl' => rest_url(),
       'perPage' => $general_options['jbls_per_page'],
       'captchaSiteKey' => $general_options['jbls_captcha_site_key'],

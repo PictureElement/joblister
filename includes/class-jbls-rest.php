@@ -116,6 +116,7 @@ class JBLS_REST
     $endpoints['/wp/v2/jbls-applications'] = array(
       'methods'  => 'POST',
       'callback' => array($this, 'jbls_application_post_callback'),
+      'permission_callback' => '__return_true', // This allows access to everyone
     );
 
     return $endpoints;
@@ -138,7 +139,7 @@ class JBLS_REST
     $nonce = $request->get_header('X-WP-Nonce');
 
     // Verify the nonce
-    if (!wp_verify_nonce($nonce, 'jbls_nonce')) {
+    if (!wp_verify_nonce($nonce, 'wp_rest')) {
       return new WP_Error('nonce_verification_failed', 'Nonce verification failed', array('status' => 401));
     }
 
