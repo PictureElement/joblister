@@ -862,6 +862,7 @@
     font-family: var(--jbls-google-font-family);
     font-size: 200px;
     color: var(--jbls-on-background-primary);
+    line-height: 1.2;
     margin-bottom: 12px;
     @media (max-width: 767px) {
       font-size: 100px;
@@ -897,6 +898,7 @@
     font-family: var(--jbls-google-font-family);
     font-size: 100px;
     color: var(--jbls-success);
+    line-height: 1.2;
     margin-bottom: 12px;
     @media (max-width: 575px) {
       font-size: 64px;

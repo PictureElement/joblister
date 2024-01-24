@@ -3,7 +3,7 @@ Contributors: msofokleous
 Donate link: https://www.buymeacoffee.com/msofokleous
 Tags: jobs, job listing, job lists, job openings, careers page, jobs page, joblister
 Requires at least: 5.6
-Tested up to: 6.3
+Tested up to: 6.4
 Stable tag: 1.0.0
 Requires PHP: 7.2
 License: GPL-3.0

@@ -131,6 +131,7 @@ This process compiles all necessary files into a zip format, ready for deploymen
 1. Overcoming the current 100-record limit per API request by implementing a system for handling multiple API requests. This will allow for managing larger datasets seamlessly.
 2. Work towards removing the 'Radio Buttons for Taxonomies' plugin as a dependency.
 3. Expanding language support to make JobLister accessible to a global audience.
+4. Display a loading indicator during the form submission process.
 
 ## Technical Details
 
