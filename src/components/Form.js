@@ -4,7 +4,8 @@ import InputFactory from '../helpers/InputFactory';
 import inputConfig from '../config/inputConfig';
 import validate from '../helpers/validate';
 import ReCAPTCHA from "react-google-recaptcha";
-import Success from './Success';
+import FormSuccess from './FormSuccess';
+import FormError from './FormError';
 
 function Form() {
   
@@ -25,9 +26,9 @@ function Form() {
     resume: '',
     consent: ''
   })
-  const [verified, setVerified] = useState(false);
   const [isFormSubmitted, setIsFormSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [formError, setFormError] = useState(null);
   const recaptchaRef = useRef();
 
   // Get the :idDashSlug parameter from the URL.
@@ -47,8 +48,6 @@ function Form() {
     const isFormValid = Object.values(validationErrors).every(x => !x);
 
     if (isFormValid) {
-      // Start submitting
-      setIsSubmitting(true);
       // Execute the invisible ReCAPTCHA check
       recaptchaRef.current.execute();
     }
@@ -63,6 +62,9 @@ function Form() {
     formData.append('cover', values.cover);
     formData.append('resume', values.resume);
     formData.append('consent', values.consent);
+
+    // Start submitting
+    setIsSubmitting(true);
 
     // Initiate POST request
     try {
@@ -99,8 +101,8 @@ function Form() {
       // Stop submitting after successful submission
       setIsSubmitting(false);
     } catch (error) {
-      // Handle any errors
-      console.error(error);
+      // Set the error message
+      setFormError(`Submission failed: ${error.message}`);
       // Reset captcha
       if (recaptchaRef.current) {
         recaptchaRef.current.reset();
@@ -132,45 +134,53 @@ function Form() {
 
   function onCaptchaVerification(value) {
     if (value) {
-      setVerified(true);
       // Continue with the form submission
       submitForm();
     } else {
       // Handle the case where the ReCAPTCHA verification failed
-      console.error('ReCAPTCHA verification failed');
+      setFormError('ReCAPTCHA verification failed. Please try again.');
+      // Reset captcha
+      if (recaptchaRef.current) {
+        recaptchaRef.current.reset();
+      }
+      // Stop submitting
+      setIsSubmitting(false);
     }
   }
   
   return (
     <div className="jbls-form">
       {isFormSubmitted ? (
-        <Success />
+        <FormSuccess />
       ) : (
-        <form className="jbls-form__form" onSubmit={handleSubmit} encType="multipart/form-data">
-          <h2 className="jbls-form__title">Apply for this job</h2>
-          <p className="jbls-form__subtitle">Use the form below to submit your job application</p>
-          <div className="jbls-form__required jbls-text-size-small">* indicates a required field</div>
-          {inputConfig.map((config, index) => {
-            return (
-              <InputFactory
-                key={index}
-                {...config}
-                onChange={onChange}
-                value={values[config.name]}
-                error={errors[config.name]}
-              />
-            );
-          })}
-          <ReCAPTCHA
-            ref={recaptchaRef}
-            sitekey={jblsData.captchaSiteKey}
-            size="invisible"
-            onChange={onCaptchaVerification}
-          />
-          <button disabled={isSubmitting} type="submit" className="jbls-form__submit">
-            {isSubmitting ? 'Submitting...' : 'Submit'}
-          </button>
-        </form>
+        <>
+          {formError && <FormError errorMessage={formError} />}
+          <form className="jbls-form__form" onSubmit={handleSubmit} encType="multipart/form-data">
+            <h2 className="jbls-form__title">Apply for this job</h2>
+            <p className="jbls-form__subtitle">Use the form below to submit your job application</p>
+            <div className="jbls-form__required jbls-text-size-small">* indicates a required field</div>
+            {inputConfig.map((config, index) => {
+              return (
+                <InputFactory
+                  key={index}
+                  {...config}
+                  onChange={onChange}
+                  value={values[config.name]}
+                  error={errors[config.name]}
+                />
+              );
+            })}
+            <ReCAPTCHA
+              ref={recaptchaRef}
+              sitekey={jblsData.captchaSiteKey}
+              size="invisible"
+              onChange={onCaptchaVerification}
+            />
+            <button disabled={isSubmitting} type="submit" className="jbls-form__submit">
+              {isSubmitting ? 'Submitting...' : 'Submit'}
+            </button>
+          </form>
+        </>
       )}
     </div>
   )

@@ -127,7 +127,7 @@
   }
 }
 
-// Job List Component
+// JobList Component
 //
 #jbls-root .jbls-job-list {
   list-style-type: none;
@@ -138,7 +138,7 @@
   }
 }
 
-// Job Item Component
+// JobItem Component
 //
 #jbls-root .jbls-job-item {
   &__link {
@@ -858,7 +858,7 @@
   }
 }
 
-// No Jobs Found Component
+// NoJobsFound Component
 //
 #jbls-root .jbls-no-jobs-found {
   text-align: center;
@@ -894,9 +894,9 @@
   }
 }
 
-// Success Component
+// FormSuccess Component
 //
-#jbls-root .jbls-success {
+#jbls-root .jbls-form-success {
   text-align: center;
   &__emoji {
     font-family: var(--jbls-google-font-family);
@@ -910,6 +910,26 @@
   }
   &__text {
     color: var(--jbls-success);
+  }
+}
+
+// FormError Component
+//
+#jbls-root .jbls-form-error {
+  text-align: center;
+  margin-bottom: 20px;
+  &__emoji {
+    font-family: var(--jbls-google-font-family);
+    font-size: 100px;
+    color: var(--jbls-error);
+    line-height: 1.2;
+    margin-bottom: 12px;
+    @media (max-width: 575px) {
+      font-size: 64px;
+    }
+  }
+  &__text {
+    color: var(--jbls-error);
   }
 }
 
