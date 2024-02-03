@@ -116,7 +116,7 @@ class JBLS_REST
     $endpoints['/wp/v2/jbls-applications'] = array(
       'methods'  => 'POST',
       'callback' => array($this, 'jbls_application_post_callback'),
-      'permission_callback' => '__return_true', // This allows access to everyone
+      'permission_callback' => '__return_true',
     );
 
     return $endpoints;
@@ -205,6 +205,7 @@ class JBLS_REST
       $file = wp_handle_upload($files['resume'], $overrides);
 
       if (isset($file['error'])) {
+        error_log('Error 1');
         return new WP_Error('upload_error', $file['error'], array('status' => 500));
       }
 
@@ -219,6 +220,7 @@ class JBLS_REST
 
       $attachment_id = wp_insert_attachment($attachment, $file['file']);
       if (is_wp_error($attachment_id)) {
+        error_log('Error 2');
         return new WP_Error('attachment_creation_failed', $attachment_id->get_error_message(), array('status' => 500));
       }
 
@@ -250,6 +252,7 @@ class JBLS_REST
       }
       return new WP_REST_Response('Application created successfully.', 201);
     } else {
+      error_log('Error 3');
       return new WP_Error('application_creation_failed', 'Failed to create application.', array('status' => 500));
     }
   }

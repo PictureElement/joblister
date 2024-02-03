@@ -774,6 +774,10 @@
     display: inline-block;
     color: var(--jbls-on-accent);
     text-align: center;
+    &:disabled {
+      opacity: 0.65;
+      pointer-events: none;
+    }
     &:hover {
       filter: brightness(90%);
     }

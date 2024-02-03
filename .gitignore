@@ -2,4 +2,3 @@ node_modules
 /build
 .DS_Store
 joblister.zip
-debug.log

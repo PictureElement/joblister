@@ -7,8 +7,5 @@
     "SCRIPT_DEBUG": true,
     "WP_DEBUG_DISPLAY": true,
     "WP_PHP_BINARY": "php"
-  },
-  "mappings": {
-    "wp-content/debug.log": "./debug.log"
   }
 }

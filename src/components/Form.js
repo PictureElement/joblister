@@ -27,6 +27,7 @@ function Form() {
   })
   const [verified, setVerified] = useState(false);
   const [isFormSubmitted, setIsFormSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const recaptchaRef = useRef();
 
   // Get the :idDashSlug parameter from the URL.
@@ -46,6 +47,8 @@ function Form() {
     const isFormValid = Object.values(validationErrors).every(x => !x);
 
     if (isFormValid) {
+      // Start submitting
+      setIsSubmitting(true);
       // Execute the invisible ReCAPTCHA check
       recaptchaRef.current.execute();
     }
@@ -63,6 +66,7 @@ function Form() {
 
     // Initiate POST request
     try {
+      console.log(jblsData.nonce);
       const response = await fetch(jblsData.restBaseUrl + "wp/v2/jbls-applications", {
         method: "POST",
         headers: {
@@ -92,13 +96,17 @@ function Form() {
       if (recaptchaRef.current) {
         recaptchaRef.current.reset();
       }
+      // Stop submitting after successful submission
+      setIsSubmitting(false);
     } catch (error) {
       // Handle any errors
-      console.error('Error:', error);
+      console.error(error);
       // Reset captcha
       if (recaptchaRef.current) {
         recaptchaRef.current.reset();
       }
+      // Stop submitting on errors
+      setIsSubmitting(false);
     }
   }
   
@@ -159,7 +167,9 @@ function Form() {
             size="invisible"
             onChange={onCaptchaVerification}
           />
-          <button type="submit" className="jbls-form__submit">Submit</button>
+          <button disabled={isSubmitting} type="submit" className="jbls-form__submit">
+            {isSubmitting ? 'Submitting...' : 'Submit'}
+          </button>
         </form>
       )}
     </div>
