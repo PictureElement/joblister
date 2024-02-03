@@ -1,11 +1,10 @@
-import Input from "../components/Input";
-import Textarea from "../components/Textarea";
-import Checkbox from "../components/Checkbox";
+import Input from '../components/Input';
+import Textarea from '../components/Textarea';
+import Checkbox from '../components/Checkbox';
 
 // InputFactory dynamically creates input field components based on input type
 // This improves code organization and separation of concerns
 function InputFactory(props) {
-
   const { type, value, ...remainingProps } = props;
 
   switch (type) {

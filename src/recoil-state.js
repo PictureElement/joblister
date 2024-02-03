@@ -4,57 +4,57 @@ import { atom, selector } from 'recoil';
  * Atoms
  */
 const allJobsState = atom({
-  key: "allJobsState",
+  key: 'allJobsState',
   default: []
 });
 
 const allLocationsState = atom({
-  key: "allLocationsState",
+  key: 'allLocationsState',
   default: []
 });
 
 const allCategoriesState = atom({
-  key: "allCategoriesState",
+  key: 'allCategoriesState',
   default: []
 });
 
 const allTypesState = atom({
-  key: "allTypesState",
+  key: 'allTypesState',
   default: []
 });
 
 const allExperienceLevelsState = atom({
-  key: "allExperienceLevelsState",
+  key: 'allExperienceLevelsState',
   default: []
 });
 
 const searchQueryState = atom({
-  key: "searchQueryState",
+  key: 'searchQueryState',
   default: ''
 });
 
 const locationFiltersState = atom({
-  key: "locationFiltersState",
+  key: 'locationFiltersState',
   default: []
 });
 
 const categoryFiltersState = atom({
-  key: "categoryFiltersState",
+  key: 'categoryFiltersState',
   default: []
 });
 
 const typeFiltersState = atom({
-  key: "typeFiltersState",
+  key: 'typeFiltersState',
   default: []
 });
 
 const experienceLevelFiltersState = atom({
-  key: "experienceLevelFiltersState",
+  key: 'experienceLevelFiltersState',
   default: []
 });
 
 const currentPageState = atom({
-  key: "currentPageState",
+  key: 'currentPageState',
   default: 1
 });
 
@@ -62,7 +62,7 @@ const currentPageState = atom({
  * Selectors
  */
 const filteredJobsState = selector({
-  key: "filteredJobsState",
+  key: 'filteredJobsState',
   get: ({ get }) => {
     const searchQuery = get(searchQueryState);
     const locationFilters = get(locationFiltersState);

@@ -29,41 +29,41 @@ export default function validate(values) {
   let errors = {};
   
   if (!values.name) {
-    errors.name = "Enter your name";
+    errors.name = 'Enter your name';
   } else if (values.name.length < 2) {
-    errors.name = "Use 2 characters or more for your name";
+    errors.name = 'Use 2 characters or more for your name';
   } else if (values.name.length > 70) {
-    errors.name = "Use 70 characters or less for your name";
+    errors.name = 'Use 70 characters or less for your name';
   }
   
   const validEmailRegex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
   if (!values.email) {
-    errors.email = "Enter your email";
+    errors.email = 'Enter your email';
   } else if (!validEmailRegex.test(values.email)) {
-    errors.email = "Enter a valid email address";
+    errors.email = 'Enter a valid email address';
   }
 
   const maxLength = 4000;
 
   if (!values.cover) {
-    errors.cover = "Provide a cover letter";
+    errors.cover = 'Provide a cover letter';
   } else if (values.cover.length > maxLength) {
     errors.cover = `Cover letter should be no more than ${maxLength} characters`;
   }
 
   if (!values.resume) {
-    errors.resume = "Upload your resume";
+    errors.resume = 'Upload your resume';
   } else if (!['pdf', 'doc', 'docx'].includes(values.resume.name.split('.').pop().toLowerCase())) {
     errors.resume = 'Invalid file extension. Please upload a .pdf, .doc, or .docx file.';
   } else if (!['application/pdf', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'].includes(values.resume.type)) {
-    errors.resume = "Invalid file type. Please upload a .pdf, .doc, or .docx file.";
+    errors.resume = 'Invalid file type. Please upload a .pdf, .doc, or .docx file.';
   } else if (values.resume.size > 5000000) {
-    errors.resume = "File size is too large. Please upload a file that is 5MB or less.";
+    errors.resume = 'File size is too large. Please upload a file that is 5MB or less.';
   }
 
   if (!values.consent) {
-    errors.consent = "Consent is required.";
+    errors.consent = 'Consent is required.';
   }
 
   return errors;

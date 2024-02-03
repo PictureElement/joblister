@@ -36,7 +36,7 @@ function Multiple() {
   const setCurrentPage = useSetRecoilState(currentPageState);
   const { totalJobs } = useRecoilValue(filteredJobsState);
 
-  function handleFilterChange(filterState, setFilterState, actionType) {
+  const handleFilterChange = (filterState, setFilterState, actionType) => {
     // Clear search
     setSearchQuery('');
     // Reset current page

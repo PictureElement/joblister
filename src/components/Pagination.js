@@ -10,7 +10,7 @@ function Pagination() {
    * - Use useRecoilValue() when a component intends to read state without writing to it.
    */
   const [currentPage, setCurrentPage] = useRecoilState(currentPageState);
-  const {filteredJobs, totalPages} = useRecoilValue(filteredJobsState);
+  const { filteredJobs, totalPages } = useRecoilValue(filteredJobsState);
   const visiblePages = 3;
 
   const handlePageChange = (page) => {

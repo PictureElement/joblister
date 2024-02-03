@@ -15,7 +15,7 @@ import {
   FacebookIcon,
   LinkedinIcon,
   TwitterIcon
-} from "react-share";
+} from 'react-share';
 
 function Single() {
   /**
@@ -25,7 +25,7 @@ function Single() {
   const allJobs = useRecoilValue(allJobsState);
 
   // Get the :idDashSlug parameter from the URL.
-  const { idDashSlug} = useParams();
+  const { idDashSlug } = useParams();
 
   // Extract the job id.
   const id = parseInt(idDashSlug.split('-').shift());
@@ -45,7 +45,7 @@ function Single() {
   const shareUrl = window.location.href;
 
   // Smoothly scroll to the application form
-  function scrollToForm() {
+  const handleScrollToForm = () => {
     document.querySelector('.jbls-form').scrollIntoView({ behavior: 'smooth' });
   };
   
@@ -53,8 +53,8 @@ function Single() {
     <div className="jbls-single">
       <div className="jbls-single__header">
         <div className="jbls-single__header-left">
-          { title.__html ?
-            <h1 className="jbls-single__title jbls-text-size-h1" dangerouslySetInnerHTML={ title }></h1>
+          {title.__html ?
+            <h1 className="jbls-single__title jbls-text-size-h1" dangerouslySetInnerHTML={title}></h1>
             :
             <h1 className="jbls-single__title jbls-text-size-h1">(no title)</h1>
           } 
@@ -63,13 +63,13 @@ function Single() {
           </div>
         </div>
         <div className="jbls-single__header-right">
-          <button onClick={scrollToForm} className="jbls-single__apply">Apply</button>
+          <button onClick={handleScrollToForm} className="jbls-single__apply">Apply</button>
         </div>
       </div>
       <div className="jbls-single__body">
         <div className="jbls-single__body-left">
-          { content.__html ?
-            <div className="jbls-single__content" dangerouslySetInnerHTML={ content }></div>
+          {content.__html ?
+            <div className="jbls-single__content" dangerouslySetInnerHTML={content}></div>
             :
             <div className="jbls-single__content">—</div>
           }

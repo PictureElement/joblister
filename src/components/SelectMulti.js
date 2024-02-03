@@ -8,7 +8,7 @@ function SelectMulti(props) {
       isMulti
       onChange={props.handleChange}
       options={props.options}
-      getOptionValue={(option) => `${option['id']}`}
+      getOptionValue={(option) =>`${option['id']}`}
       getOptionLabel={(option) => `${option['name']}`}
       className="jbls-select"
       classNamePrefix="jbls-select"

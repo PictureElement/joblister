@@ -130,7 +130,8 @@ This process compiles all necessary files into a zip format, ready for deploymen
 
 1. Overcoming the current 100-record limit per API request by implementing a system for handling multiple API requests. This system will sequentially fetch data in chunks until all available data is retrieved. This will allow for managing larger datasets seamlessly.
 2. Work towards removing the 'Radio Buttons for Taxonomies' plugin as a dependency.
-3. Expanding language support to make JobLister accessible to a global audience.
+3. Detect network status and alert your users when they've lost internet connectivity. (Offline.js or navigator.onLine).
+4. Implement error handling for API GET requests to provide clear user feedback.
 
 ## Technical Details
 

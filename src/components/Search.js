@@ -1,6 +1,14 @@
-import { useRecoilState, useSetRecoilState } from 'recoil';
-import { searchQueryState, locationFiltersState, categoryFiltersState, typeFiltersState, experienceLevelFiltersState, currentPageState } from '../recoil-state';
 import { ReactComponent as SearchIcon } from '../icons/search.svg';
+import { useRecoilState, useSetRecoilState } from 'recoil';
+import {
+  searchQueryState,
+  locationFiltersState,
+  categoryFiltersState,
+  typeFiltersState,
+  experienceLevelFiltersState,
+  currentPageState 
+} from '../recoil-state';
+
 
 function Search() {
   /**
@@ -15,7 +23,7 @@ function Search() {
   const setCurrentPage = useSetRecoilState(currentPageState);
   const [searchQuery, setSearchQuery] = useRecoilState(searchQueryState);
 
-  function handleChange(e) {
+  const handleChange = (e) => {
     // Clear all filters
     setLocationFilters([]);
     setCategoryFilters([]);

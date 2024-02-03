@@ -10,7 +10,6 @@ import {
 } from '../recoil-state';
 
 function NoJobsFound() {
-
   /**
    * State variables
    * - Use useSetRecoilState() when a component intends to write to state without reading it.

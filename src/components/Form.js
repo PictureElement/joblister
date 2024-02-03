@@ -8,7 +8,6 @@ import FormSuccess from './FormSuccess';
 import FormError from './FormError';
 
 function Form() {
-  
   /**
    * State variables
    */
@@ -26,7 +25,7 @@ function Form() {
     resume: '',
     consent: ''
   })
-  const [isFormSubmitted, setIsFormSubmitted] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formError, setFormError] = useState(null);
   const recaptchaRef = useRef();
@@ -35,8 +34,28 @@ function Form() {
   const { idDashSlug } = useParams();
   // Extract the job id.
   const id = parseInt(idDashSlug.split('-').shift());
+  
+  const handleChange = (e) => {
+    if (e.target.type === 'file') {
+      const file = e.target.files.length > 0 ? e.target.files[0] : null;
+      setValues({
+        ...values,
+        [e.target.name]: file,
+      });
+    } else if (e.target.type === 'checkbox') {
+      setValues({
+        ...values,
+        [e.target.name]: e.target.checked,
+      });
+    } else {
+      setValues({
+        ...values,
+        [e.target.name]: e.target.value,
+      });
+    }
+  }
 
-  function handleSubmit(e) {
+  const handleSubmit = (e) => {
     // Prevent the browser from reloading the page
     e.preventDefault();
   
@@ -53,7 +72,23 @@ function Form() {
     }
   }
 
-  async function submitForm() {
+  const handleCaptchaVerification = (value) => {
+    if (value) {
+      // Continue with the form submission
+      submitForm();
+    } else {
+      // Handle the case where the ReCAPTCHA verification failed
+      setFormError('ReCAPTCHA verification failed. Please try again.');
+      // Reset captcha
+      if (recaptchaRef.current) {
+        recaptchaRef.current.reset();
+      }
+      // Stop submitting
+      setIsSubmitting(false);
+    }
+  }
+
+  const submitForm = async () => {
     const formData = new FormData();
     
     formData.append('job_id', id);
@@ -69,10 +104,10 @@ function Form() {
     // Initiate POST request
     try {
       console.log(jblsData.nonce);
-      const response = await fetch(jblsData.restBaseUrl + "wp/v2/jbls-applications", {
-        method: "POST",
+      const response = await fetch(jblsData.restBaseUrl + 'wp/v2/jbls-applications', {
+        method: 'POST',
         headers: {
-          "X-WP-Nonce": jblsData.nonce
+          'X-WP-Nonce': jblsData.nonce
         },
         body: formData
       });
@@ -84,13 +119,25 @@ function Form() {
       const data = await response.json();
 
       // Handle successful submission
-      setIsFormSubmitted(true);
+      setIsSubmitted(true);
       
       // Handle the response data
       console.log(data);
       // Reset state
-      setValues({name: '', email: '', cover: '', resume: null, consent: false});
-      setErrors({name: '', email: '', cover: '', resume: '', consent: ''});
+      setValues({
+        name: '',
+        email: '',
+        cover: '',
+        resume: null,
+        consent: false
+      });
+      setErrors({
+        name: '',
+        email: '',
+        cover: '',
+        resume: '',
+        consent: ''
+      });
       // Reset all file input elements
       const fileInputs = document.querySelectorAll('.jbls-form input[type="file"]');
       fileInputs.forEach((input) => (input.value = ''));
@@ -112,45 +159,9 @@ function Form() {
     }
   }
   
-  function onChange(e) {
-    if (e.target.type === 'file') {
-      const file = e.target.files.length > 0 ? e.target.files[0] : null;
-      setValues({
-        ...values,
-        [e.target.name]: file,
-      });
-    } else if (e.target.type === 'checkbox') {
-      setValues({
-        ...values,
-        [e.target.name]: e.target.checked,
-      });
-    } else {
-      setValues({
-        ...values,
-        [e.target.name]: e.target.value,
-      });
-    }
-  }
-
-  function onCaptchaVerification(value) {
-    if (value) {
-      // Continue with the form submission
-      submitForm();
-    } else {
-      // Handle the case where the ReCAPTCHA verification failed
-      setFormError('ReCAPTCHA verification failed. Please try again.');
-      // Reset captcha
-      if (recaptchaRef.current) {
-        recaptchaRef.current.reset();
-      }
-      // Stop submitting
-      setIsSubmitting(false);
-    }
-  }
-  
   return (
     <div className="jbls-form">
-      {isFormSubmitted ? (
+      {isSubmitted ? (
         <FormSuccess />
       ) : (
         <>
@@ -164,7 +175,7 @@ function Form() {
                 <InputFactory
                   key={index}
                   {...config}
-                  onChange={onChange}
+                  onChange={handleChange}
                   value={values[config.name]}
                   error={errors[config.name]}
                 />
@@ -174,7 +185,7 @@ function Form() {
               ref={recaptchaRef}
               sitekey={jblsData.captchaSiteKey}
               size="invisible"
-              onChange={onCaptchaVerification}
+              onChange={handleCaptchaVerification}
             />
             <button disabled={isSubmitting} type="submit" className="jbls-form__submit">
               {isSubmitting ? 'Submitting...' : 'Submit'}

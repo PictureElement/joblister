@@ -22,7 +22,7 @@ function JobItem(props) {
           <div className="jbls-job-item__row">
             <div className="jbls-job-item__job">
               {title.__html ?
-                <div className="jbls-job-item__title jbls-text-size-h3" dangerouslySetInnerHTML={ title }></div>
+                <div className="jbls-job-item__title jbls-text-size-h3" dangerouslySetInnerHTML={title}></div>
                 :
                 <div className="jbls-job-item__title jbls-text-size-h3">(no title)</div>
               }
