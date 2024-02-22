@@ -71,7 +71,7 @@ class JBLS_Meta_Boxes
     </div>
     <div style="margin-bottom:1em;">
       <label style="display:block;margin-bottom:4px;" for="resume">Resume</label>
-      <input style="padding:0;" type="file" id="resume" name="resume" accept=".pdf,.doc,.docx">
+      <input style="padding:0;" type="file" id="resume" name="resume" accept=".pdf">
     </div>
     <div style="display:flex;align-items:center;">
       <label style="margin-inline-end:4px;cursor:default;" for="uploaded_file">Uploaded File:</label>
@@ -101,22 +101,22 @@ class JBLS_Meta_Boxes
 
     // Setup the array of supported file types
     $supported_types = array(
-      'application/pdf', // PDF
-      'application/msword', // DOC
-      'application/vnd.openxmlformats-officedocument.wordprocessingml.document' // DOCX
+      'application/pdf' // PDF
     );
 
     // File upload
     if (isset($_FILES['resume']) && $_FILES['resume']['size'] > 0) {
-      // Sanitize the file name
-      $filename = sanitize_file_name($_FILES['resume']['name']);
-
-      // Check the file type
-      $validate = wp_check_filetype_and_ext($_FILES['resume']['name'], $filename);
+      $file_array = [
+        'name' => sanitize_file_name($_FILES['resume']['name']), // Sanitized file name
+        'tmp_name' => $_FILES['resume']['tmp_name'] // Temporary file path on the server
+      ];
+    
+      // Validate file type and extension
+      $validate = wp_check_filetype_and_ext($file_array['tmp_name'], $file_array['name']);
       $file_type = $validate['type'];
 
       if (!in_array($file_type, $supported_types)) {
-        wp_die("The file type that you've uploaded is not a PDF/DOC/DOCX.");
+        wp_die("The file type that you've uploaded is not a PDF.");
       }
 
       // Save the file submitted from the POST request and create an attachment post for it.

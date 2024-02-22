@@ -15,9 +15,8 @@
  * 
  * For resume file:
  * - It checks if the file is provided.
- * - It validates the file extension, ensuring it is one of: 'pdf', 'doc', 'docx'.
- * - It validates the file type, ensuring it is one of: 'application/pdf', 'application/msword', 
- *   'application/vnd.openxmlformats-officedocument.wordprocessingml.document'.
+ * - It validates the file extension, ensuring it is one of: 'pdf'.
+ * - It validates the file type, ensuring it is one of: 'application/pdf'.
  * - It checks if the file size is less than or equal to 5MB.
  * 
  * @param {Object} values - The input values to validate. It should have properties 'name', 'email', and 'resume'.
@@ -54,10 +53,10 @@ export default function validate(values) {
 
   if (!values.resume) {
     errors.resume = 'Upload your resume';
-  } else if (!['pdf', 'doc', 'docx'].includes(values.resume.name.split('.').pop().toLowerCase())) {
-    errors.resume = 'Invalid file extension. Please upload a .pdf, .doc, or .docx file.';
-  } else if (!['application/pdf', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'].includes(values.resume.type)) {
-    errors.resume = 'Invalid file type. Please upload a .pdf, .doc, or .docx file.';
+  } else if (!['pdf'].includes(values.resume.name.split('.').pop().toLowerCase())) {
+    errors.resume = 'Invalid file extension. Please upload a .pdf file.';
+  } else if (!['application/pdf'].includes(values.resume.type)) {
+    errors.resume = 'Invalid file type. Please upload a .pdf file.';
   } else if (values.resume.size > 5000000) {
     errors.resume = 'File size is too large. Please upload a file that is 5MB or less.';
   }

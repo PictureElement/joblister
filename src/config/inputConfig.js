@@ -23,9 +23,9 @@ const inputConfig = [
   {
     name: 'resume',
     type: 'file',
-    helper: 'Allowed Type(s): .pdf, .doc, .docx',
+    helper: 'Allowed Type(s): .pdf',
     label: '* Resume',
-    accept: '.pdf,.doc,.docx'
+    accept: '.pdf'
   },
   {
     name: 'consent',

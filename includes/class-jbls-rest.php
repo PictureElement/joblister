@@ -183,15 +183,15 @@ class JBLS_REST
 
       // Validate file extension
       $file_extension = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
-      $allowed_extensions = ['pdf', 'doc', 'docx'];
+      $allowed_extensions = ['pdf'];
       if (!in_array($file_extension, $allowed_extensions)) {
-        return new WP_Error('invalid_file_extension', 'Invalid file extension. Please upload a .pdf, .doc, or .docx file.', array('status' => 400));
+        return new WP_Error('invalid_file_extension', 'Invalid file extension. Please upload a .pdf file.', array('status' => 400));
       }
 
       // Validate MIME type
       $allowed_mime_types = ['application/pdf', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'];
       if (!in_array($file['type'], $allowed_mime_types)) {
-        return new WP_Error('invalid_file_type', 'Invalid file type. Please upload a .pdf, .doc, or .docx file.', array('status' => 400));
+        return new WP_Error('invalid_file_type', 'Invalid file type. Please upload a .pdf file.', array('status' => 400));
       }
 
       // Validate file size
