@@ -19,7 +19,7 @@ class JBLS_Styles
       'jbls-style', // Name of the style
       plugin_dir_url(__DIR__) . '/build/index.css', // Full URL of the style
       [], // Dependencies
-      rand(), // Style version number (Change this to null for production)
+      wp_rand(), // Style version number (Change this to null for production)
       'all' // Media
     );
 

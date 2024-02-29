@@ -19,7 +19,7 @@ class JBLS_Scripts
       'jbls-script', // Name of the script
       plugin_dir_url(__DIR__) . '/build/index.js', // Full URL of the script
       ['wp-element'], // Dependencies
-      rand(), // Script version number (Change this to null for production)
+      wp_rand(), // Script version number (Change this to null for production)
       true // Enqueue script before </body>
     );
 
