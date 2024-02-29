@@ -1,7 +1,7 @@
 === JobLister ===
 Contributors: msofokleous
 Donate link: https://www.buymeacoffee.com/msofokleous
-Tags: jobs, job listing, job lists, job openings, careers page, jobs page, joblister
+Tags: careers page, job board, job listing, job lists, jobs
 Requires at least: 5.6
 Tested up to: 6.4
 Stable tag: 1.0.0
