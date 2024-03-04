@@ -124,9 +124,9 @@ class JBLS_Meta_Boxes
 
       // Check for upload errors
       if (is_wp_error($attachment_id)) {
-        wp_die($attachment_id->get_error_message());
+        wp_die(esc_html($attachment_id->get_error_message()));
       }
-
+      
       update_post_meta($post_id, 'resume', $attachment_id);
     }
 
