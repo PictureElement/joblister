@@ -83,6 +83,7 @@ class JBLS_Meta_Boxes
         <?php endif; ?>
       </output>
     </div>
+    <?php wp_nonce_field('jbls_save_application_meta', 'jbls_application_nonce'); ?>
 <?php
   }
 
@@ -96,6 +97,11 @@ class JBLS_Meta_Boxes
 
     // Skip saving if it's an autosave operation
     if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) {
+      return;
+    }
+
+    // Check if our nonce is set and verify that the request is valid.
+    if (!isset($_POST['jbls_application_nonce']) || !wp_verify_nonce($_POST['jbls_application_nonce'], 'jbls_save_application_meta')) {
       return;
     }
 
@@ -126,7 +132,7 @@ class JBLS_Meta_Boxes
       if (is_wp_error($attachment_id)) {
         wp_die(esc_html($attachment_id->get_error_message()));
       }
-      
+
       update_post_meta($post_id, 'resume', $attachment_id);
     }
 
