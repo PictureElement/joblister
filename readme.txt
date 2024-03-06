@@ -30,7 +30,6 @@ JobLister is a free and open-source WordPress plugin that allows you to set up a
 * **Application Form:** Apply easily using a form protected by Google reCAPTCHA.
 * **Responsive Design:** Ensures a seamless experience across all devices.
 * **RTL-Ready Design:** Supports Right-to-Left languages.
-* **Support for Multiple File Formats:** Accept resumes in various formats.
 
 == Installation ==
 

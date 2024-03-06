@@ -113,8 +113,8 @@ class JBLS_Meta_Boxes
     // File upload
     if (isset($_FILES['resume']) && $_FILES['resume']['size'] > 0) {
       $file_array = [
-        'name' => sanitize_file_name($_FILES['resume']['name']), // Sanitized file name
-        'tmp_name' => $_FILES['resume']['tmp_name'] // Temporary file path on the server
+        'name' => sanitize_file_name($_FILES['resume']['name']), // Sanitized file name from the browser
+        'tmp_name' => sanitize_text_field($_FILES['resume']['tmp_name']) // Temporary file path on the server
       ];
     
       // Validate file type and extension

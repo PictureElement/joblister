@@ -89,7 +89,6 @@ This process compiles all necessary files into a zip format, ready for deploymen
 * **Application Form:** Apply easily using a form protected by Google reCAPTCHA.
 * **Responsive Design:** Ensures a seamless experience across all devices.
 * **RTL-Ready Design:** Supports Right-to-Left languages.
-* **Support for Multiple File Formats:** Accept resumes in various formats.
 
 ## Screenshots
 
@@ -132,6 +131,7 @@ This process compiles all necessary files into a zip format, ready for deploymen
 2. Work towards removing the 'Radio Buttons for Taxonomies' plugin as a dependency.
 3. Detect network status and alert your users when they've lost internet connectivity. (Offline.js or navigator.onLine).
 4. Implement error handling for API GET requests to provide clear user feedback.
+5. Accept resumes in more formats.
 
 ## Technical Details
 
