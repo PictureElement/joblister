@@ -101,7 +101,7 @@ class JBLS_Meta_Boxes
     }
 
     // Check if our nonce is set and verify that the request is valid.
-    if (!isset($_POST['jbls_application_nonce']) || !wp_verify_nonce($_POST['jbls_application_nonce'], 'jbls_save_application_meta')) {
+    if (!isset($_POST['jbls_application_nonce']) || !wp_verify_nonce(sanitize_text_field(wp_unslash($_POST['jbls_application_nonce'])), 'jbls_save_application_meta')) {
       return;
     }
 

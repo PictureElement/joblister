@@ -136,7 +136,7 @@ class JBLS_REST
   public function jbls_application_post_callback($request)
   {
     // Retrieve the nonce from the request headers
-    $nonce = $request->get_header('X-WP-Nonce');
+    $nonce = sanitize_text_field($request->get_header('X-WP-Nonce'));
 
     // Verify the nonce
     if (!wp_verify_nonce($nonce, 'wp_rest')) {
