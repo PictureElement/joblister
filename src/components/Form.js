@@ -103,7 +103,6 @@ function Form() {
 
     // Initiate POST request
     try {
-      console.log(jblsData.nonce);
       const response = await fetch(jblsData.restBaseUrl + 'wp/v2/jbls-applications', {
         method: 'POST',
         headers: {
@@ -122,7 +121,6 @@ function Form() {
       setIsSubmitted(true);
       
       // Handle the response data
-      console.log(data);
       // Reset state
       setValues({
         name: '',
