@@ -4,7 +4,7 @@ Donate link: https://www.buymeacoffee.com/msofokleous
 Tags: careers page, job board, job listing, job lists, jobs
 Requires at least: 5.6
 Tested up to: 6.4
-Stable tag: 1.0.0
+Stable tag: 1.0.1
 Requires PHP: 7.2
 License: GPL-3.0
 License URI: https://www.gnu.org/licenses/gpl-3.0.en.html
@@ -92,6 +92,7 @@ The application form is designed to collect essential information from job appli
 
 = 1.0.1 =
 * Remove custom color property from .jbls-select__multi-value__label.
+* Remove border style on select input control option when focused.
 
 = 1.0.0 =
 * Initial release.

@@ -568,7 +568,6 @@
     cursor: pointer;
     &--is-focused {
       filter: brightness(90%);
-      border-inline-start: 3px solid var(--jbls-accent);
     }
   }
   &__value-container {
