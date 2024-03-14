@@ -90,10 +90,8 @@ The application form is designed to collect essential information from job appli
 
 == Changelog ==
 
-= 1.0.0 =
-* Initial release.
-
-== Upgrade Notice ==
+= 1.0.1 =
+* Remove custom color property from .jbls-select__multi-value__label.
 
 = 1.0.0 =
 * Initial release.
