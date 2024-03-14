@@ -93,6 +93,7 @@ The application form is designed to collect essential information from job appli
 = 1.0.1 =
 * Remove custom color property from .jbls-select__multi-value__label.
 * Remove border style on select input control option when focused.
+* Replace Twitter's original icon with 'X' icon.
 
 = 1.0.0 =
 * Initial release.

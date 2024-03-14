@@ -14,7 +14,7 @@ import {
   EmailIcon,
   FacebookIcon,
   LinkedinIcon,
-  TwitterIcon
+  XIcon
 } from 'react-share';
 
 function Single() {
@@ -104,7 +104,7 @@ function Single() {
                 <LinkedinIcon size={32} />
               </LinkedinShareButton>
               <TwitterShareButton url={shareUrl}>
-                <TwitterIcon size={32} />
+                <XIcon size={32} />
               </TwitterShareButton>
               <EmailShareButton url={shareUrl}>
                 <EmailIcon size={32} />
