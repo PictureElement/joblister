@@ -15,6 +15,8 @@ JobLister is a free and open-source WordPress plugin that allows you to set up a
 
 JobLister is a free and open-source WordPress plugin that allows you to set up a job listing page on your WordPress website using a simple [jbls_jobs] shortcode. The plugin is powered by React and functions as a Single-page app, providing a range of features including a search functionality, filters, an application form, and a RTL-ready design.
 
+**[View Demo](https://joblister.msof.me/)**
+
 = Features =
 
 * **Free and Open Source:** Collaborate to improve JobLister with the community.
@@ -94,6 +96,7 @@ The application form is designed to collect essential information from job appli
 * Remove custom color property from .jbls-select__multi-value__label.
 * Remove border style on select input control option when focused.
 * Replace Twitter's original icon with 'X' icon.
+* Add demo page link to readme.
 
 = 1.0.0 =
 * Initial release.
