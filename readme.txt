@@ -78,17 +78,19 @@ The application form is designed to collect essential information from job appli
 
 == Screenshots ==
 
-1. Job listings - Frontend
-2. No Jobs Found (Searching) - Frontend
-3. No Jobs Found (Filtering) - Frontend
-4. A single job listing - Frontend
-5. Successfull application submission - Frontend
-6. The application form - Frontend
-7. Job listings - Backend
-8. Edit job - Backend
-9. Application list - Backend
-10. Edit Application - Backend
-11. Settings - Backend
+1. Job Listings, Search & Filters - Light Theme
+2. Job Listings, Search & Filters - Dark Theme
+3. Single Job Listing With Application Form - Light Theme
+4. Single Job Listing With Application Form - Dark Theme
+5. Successful Submission
+6. Failed Submission
+7. No Jobs Found After Filtering
+8. No Jobs Found After Searching
+9. Jobs In WP Admin
+10. Edit Job In WP Admin
+11. Applications In WP Admin
+12. Edit Application In WP Admin
+13. Settings In WP Admin
 
 == Changelog ==
 

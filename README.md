@@ -6,6 +6,8 @@
 
 JobLister is a free and open-source WordPress plugin that allows you to set up a job listing page on your WordPress website using a simple [jbls_jobs] shortcode. The plugin is powered by React and functions as a Single-page app, providing a range of features including a search functionality, filters, an application form, and a RTL-ready design.
 
+**[View Demo](https://joblister.msof.me/)**
+
 ## Development Setup Instructions
 
 This guide outlines the steps to configure the development environment for JobLister. Follow the instructions closely to ensure a successful setup.
@@ -92,38 +94,44 @@ This process compiles all necessary files into a zip format, ready for deploymen
 
 ## Screenshots
 
-![Job listings - Frontend](assets/screenshot-1.png)
-*Job listings - Frontend*
+![Job Listings, Search & Filters - Light Theme](assets/screenshot-1.png)
+*Job Listings, Search & Filters - Light Theme*
 
-![No Jobs Found (Searching) - Frontend](assets/screenshot-2.png)
-*No Jobs Found (Searching) - Frontend*
+![Job Listings, Search & Filters - Dark Theme](assets/screenshot-2.png)
+*Job Listings, Search & Filters - Dark Theme*
 
-![No Jobs Found (Filtering) - Frontend](assets/screenshot-3.png)
-*No Jobs Found (Filtering) - Frontend*
+![Single Job Listing With Application Form - Light Theme](assets/screenshot-3.png)
+*Single Job Listing With Application Form - Light Theme*
 
-![A single job listing - Frontend](assets/screenshot-4.png)
-*A single job listing - Frontend*
+![Single Job Listing With Application Form - Dark Theme](assets/screenshot-4.png)
+*Single Job Listing With Application Form - Dark Theme*
 
-![Successfull application submission - Frontend](assets/screenshot-5.png)
-*Successfull application submission - Frontend*
+![Successful Submission](assets/screenshot-5.png)
+*Successful Submission*
 
-![The application form - Frontend](assets/screenshot-6.png)
-*The application form - Frontend*
+![Failed Submission](assets/screenshot-6.png)
+*Failed Submission*
 
-![Job listings - Backend](assets/screenshot-7.png)
-*Job listings - Backend*
+![No Jobs Found After Filtering](assets/screenshot-7.png)
+*No Jobs Found After Filtering*
 
-![Edit job - Backend](assets/screenshot-8.png)
-*Edit job - Backend*
+![No Jobs Found After Searching](assets/screenshot-8.png)
+*No Jobs Found After Searching*
 
-![Application list - Backend](assets/screenshot-9.png)
-*Application list - Backend*
+![Jobs In WP Admin](assets/screenshot-9.png)
+*Jobs In WP Admin*
 
-![Edit Application - Backend](assets/screenshot-10.png)
-*Edit Application - Backend*
+![Edit Job In WP Admin](assets/screenshot-10.png)
+*Edit Job In WP Admin*
 
-![Settings - Backend](assets/screenshot-11.png)
-*Settings - Backend*
+![Applications In WP Admin](assets/screenshot-11.png)
+*Applications In WP Admin*
+
+![Edit Application In WP Admin](assets/screenshot-12.png)
+*Edit Application In WP Admin*
+
+![Settings In WP Admin](assets/screenshot-13.png)
+*Settings In WP Admin*
 
 ## Future Enhancements
 
