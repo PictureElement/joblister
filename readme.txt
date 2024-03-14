@@ -97,6 +97,7 @@ The application form is designed to collect essential information from job appli
 * Remove border style on select input control option when focused.
 * Replace Twitter's original icon with 'X' icon.
 * Add demo page link to readme.
+* Append a trailing slash to the end of the default privacy policy URL.
 
 = 1.0.0 =
 * Initial release.

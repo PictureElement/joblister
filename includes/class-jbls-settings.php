@@ -188,7 +188,7 @@ class JBLS_Settings {
     $options = get_option('jbls_options');
     ?>
     <input style="width: 100%;" type="url" id="jbls_privacy_url" name="jbls_options[jbls_privacy_url]" value="<?php echo isset($options['jbls_privacy_url']) ? esc_attr($options['jbls_privacy_url']) : ''; ?>">
-    <p class="description">Enter the absolute URL, including the protocol (http:// or https://). Defaults to relative URL /privacy-policy.</p>
+    <p class="description">Enter the absolute URL, including the protocol (http:// or https://). Defaults to relative URL /privacy-policy/.</p>
     <?php
   }
 
