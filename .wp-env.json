@@ -1,11 +1,9 @@
 {
   "core": null,
-  "plugins": [ "." ],
-  "config": {
-    "WP_DEBUG": true,
-    "WP_DEBUG_LOG": true,
-    "SCRIPT_DEBUG": true,
-    "WP_DEBUG_DISPLAY": true,
-    "WP_PHP_BINARY": "php"
-  }
+  "plugins": [
+    "https://downloads.wordpress.org/plugin/radio-buttons-for-taxonomies.2.4.7.zip",
+    ".",
+    "https://downloads.wordpress.org/plugin/elementor.3.21.5.zip"
+  ],
+  "themes": [ "https://downloads.wordpress.org/theme/hello-elementor.3.0.1.zip" ]
 }

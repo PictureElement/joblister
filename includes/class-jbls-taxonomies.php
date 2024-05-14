@@ -64,6 +64,7 @@ class JBLS_Taxonomies
       "show_in_quick_edit" => true,
       "sort" => false,
       "show_in_graphql" => false,
+      "rest_namespace" => "jbls/v1",
     ];
     register_taxonomy("jbls_location", array('jbls_job'), $args);
   }
@@ -118,6 +119,7 @@ class JBLS_Taxonomies
       "show_in_quick_edit" => true,
       "sort" => false,
       "show_in_graphql" => false,
+      "rest_namespace" => "jbls/v1",
     ];
     register_taxonomy("jbls_category", ["jbls_job"], $args);
   }
@@ -172,6 +174,7 @@ class JBLS_Taxonomies
       "show_in_quick_edit" => true,
       "sort" => false,
       "show_in_graphql" => false,
+      "rest_namespace" => "jbls/v1",
     ];
     register_taxonomy("jbls_type", ["jbls_job"], $args);
   }
@@ -226,6 +229,7 @@ class JBLS_Taxonomies
       "show_in_quick_edit" => true,
       "sort" => false,
       "show_in_graphql" => false,
+      "rest_namespace" => "jbls/v1",
     ];
     register_taxonomy("jbls_experience_level", ["jbls_job"], $args);
   }

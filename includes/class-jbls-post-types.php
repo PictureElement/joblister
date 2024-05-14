@@ -73,7 +73,8 @@ class JBLS_Post_Types
       "rewrite" => true,
       "query_var" => true,
       "supports" => ["title", "editor"],
-      "show_in_graphql" => false
+      "show_in_graphql" => false,
+      "rest_namespace" => "jbls/v1",
     ];
 
     register_post_type("jbls_job", $args);
@@ -133,7 +134,7 @@ class JBLS_Post_Types
       "public" => false,
       "publicly_queryable" => false,
       "show_ui" => true,
-      "show_in_rest" => true,
+      "show_in_rest" => false,
       "rest_base" => "jbls-applications",
       "rest_controller_class" => "WP_REST_Posts_Controller",
       "has_archive" => false,
@@ -148,7 +149,8 @@ class JBLS_Post_Types
       "rewrite" => true,
       "query_var" => true,
       "supports" => false,
-      "show_in_graphql" => false
+      "show_in_graphql" => false,
+      "rest_namespace" => "jbls/v1",
     ];
 
     register_post_type("jbls_application", $args);

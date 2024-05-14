@@ -149,11 +149,11 @@ To make custom post types and custom taxonomies available to FakerPress, set `"p
 
 ### Generated API Endpoints
 
-- Jobs: `/wp-json/wp/v2/jbls-jobs`
-- Categories: `/wp-json/wp/v2/jbls-categories`
-- Locations: `/wp-json/wp/v2/jbls-locations`
-- Types: `/wp-json/wp/v2/jbls-types`
-- Experience Levels: `/wp-json/wp/v2/jbls-experience-levels`
+- Jobs: `/wp-json/jbls/v1/jbls-jobs`
+- Categories: `/wp-json/jbls/v1/jbls-categories`
+- Locations: `/wp-json/jbls/v1/jbls-locations`
+- Types: `/wp-json/jbls/v1/jbls-types`
+- Experience Levels: `/wp-json/jbls/v1/jbls-experience-levels`
 
 ## Contributing
 

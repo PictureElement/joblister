@@ -21,11 +21,11 @@ function App() {
   const setAllCategories = useSetRecoilState(allCategoriesState);
   const setAllTypes = useSetRecoilState(allTypesState);
   const setAllExperienceLevels = useSetRecoilState(allExperienceLevelsState);
-  const [endpointJobs] = useState(jblsData.restBaseUrl + 'wp/v2/jbls-jobs' + jblsData.separator + 'per_page=100');
-  const [endpointLocations] = useState(jblsData.restBaseUrl + 'wp/v2/jbls-locations' + jblsData.separator + 'per_page=100');
-  const [endpointCategories] = useState(jblsData.restBaseUrl + 'wp/v2/jbls-categories' + jblsData.separator + 'per_page=100');
-  const [endpointTypes] = useState(jblsData.restBaseUrl + 'wp/v2/jbls-types' + jblsData.separator + 'per_page=100');
-  const [endpointExperienceLevels] = useState(jblsData.restBaseUrl + 'wp/v2/jbls-experience-levels' + jblsData.separator + 'per_page=100');
+  const [endpointJobs] = useState(jblsData.restBaseUrl + 'jbls/v1/jbls-jobs' + jblsData.separator + 'per_page=100');
+  const [endpointLocations] = useState(jblsData.restBaseUrl + 'jbls/v1/jbls-locations' + jblsData.separator + 'per_page=100');
+  const [endpointCategories] = useState(jblsData.restBaseUrl + 'jbls/v1/jbls-categories' + jblsData.separator + 'per_page=100');
+  const [endpointTypes] = useState(jblsData.restBaseUrl + 'jbls/v1/jbls-types' + jblsData.separator + 'per_page=100');
+  const [endpointExperienceLevels] = useState(jblsData.restBaseUrl + 'jbls/v1/jbls-experience-levels' + jblsData.separator + 'per_page=100');
   const [loading, setLoading] = useState(true);
 
   const getData = async() => {
