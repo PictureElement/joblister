@@ -16,9 +16,9 @@ function JobList() {
       id={job.id}
       modifiedGmt={job.modified_gmt}
       title={job.title}
-      location={job.location.name}
-      category={job.category.name}
-      experienceLevel={job.experience_level.name}
+      location={job.location?.name}
+      category={job.category?.name}
+      experienceLevel={job.experience_level?.name}
     />
   );
 

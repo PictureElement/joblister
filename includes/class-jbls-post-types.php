@@ -8,9 +8,14 @@ class JBLS_Post_Types
   // Constructor
   public function __construct()
   {
-    add_action('init', array($this, 'jbls_register_cpt_jbls_job'));
+    add_action('init', array($this, 'jbls_init'));
     add_filter('use_block_editor_for_post_type', array($this, 'jbls_disable_gutenberg_editor'), 10, 2);
-    add_action('init', array($this, 'jbls_register_cpt_jbls_application'));
+  }
+
+  // Initialize custom post types
+  public function jbls_init() {
+    $this->jbls_register_cpt_jbls_job();
+    $this->jbls_register_cpt_jbls_application();
   }
 
   // Register "jbls_job" post type
@@ -58,9 +63,7 @@ class JBLS_Post_Types
       "public" => false,
       "publicly_queryable" => false,
       "show_ui" => true,
-      "show_in_rest" => true,
-      "rest_base" => "jbls-jobs",
-      "rest_controller_class" => "WP_REST_Posts_Controller",
+      "show_in_rest" => false,
       "has_archive" => false,
       "show_in_menu" => true,
       "show_in_nav_menus" => true,
@@ -74,7 +77,6 @@ class JBLS_Post_Types
       "query_var" => true,
       "supports" => ["title", "editor"],
       "show_in_graphql" => false,
-      "rest_namespace" => "jbls/v1",
     ];
 
     register_post_type("jbls_job", $args);

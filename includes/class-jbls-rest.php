@@ -7,12 +7,102 @@ class JBLS_REST
 {
   public function __construct()
   {
-    add_filter('rest_prepare_jbls_job', array($this, 'jbls_filter_rest_jbls_job'));
     add_filter('rest_prepare_jbls_location', array($this, 'jbls_filter_rest_jbls_location'));
     add_filter('rest_prepare_jbls_category', array($this, 'jbls_filter_rest_jbls_category'));
     add_filter('rest_prepare_jbls_type', array($this, 'jbls_filter_rest_jbls_type'));
     add_filter('rest_prepare_jbls_experience_level', array($this, 'jbls_filter_rest_jbls_experience_level'));
-    add_filter('rest_endpoints', array($this, 'jbls_modify_jbls_application_post_endpoint'));
+  
+    add_action('rest_api_init', array($this, 'jbls_register_custom_rest_routes'));
+  }
+
+  public function jbls_register_custom_rest_routes() {
+    register_rest_route('jbls/v1', '/jbls-jobs', [
+      'methods' => 'GET',
+      'callback' => array($this, 'jbls_get_jobs'),
+      'permission_callback' => '__return_true',
+    ]);
+  }
+
+  // Callback function for custom REST route
+  public function jbls_get_jobs($request) {
+    $args = [
+      'post_type' => 'jbls_job',
+      'posts_per_page' => -1,
+    ];
+
+    $jobs = get_posts($args);
+    $data = [];
+
+    foreach ($jobs as $job) {
+      // Get the location terms for each job
+      $locations = wp_get_post_terms($job->ID, 'jbls_location');
+
+      // Prepare location data
+      $location_data = null;
+      if (!is_wp_error($locations) && !empty($locations)) {
+        // Get the first term
+        $first_location = $locations[0];
+        $location_data = [
+          'id' => $first_location->slug,
+          'name' => $first_location->name,
+        ];
+      }
+
+      // Get the experience level terms for each job
+      $experience_levels = wp_get_post_terms($job->ID, 'jbls_experience_level');
+
+      // Prepare experience level data
+      $experience_level_data = null;
+      if (!is_wp_error($experience_levels) && !empty($experience_levels)) {
+        // Get the first term
+        $first_experience_level = $experience_levels[0];
+        $experience_level_data = [
+          'id' => $first_experience_level->slug,
+          'name' => $first_experience_level->name,
+        ];
+      }
+
+      // Get the category terms for each job
+      $categories = wp_get_post_terms($job->ID, 'jbls_category');
+
+      // Prepare category data
+      $category_data = null;
+      if (!is_wp_error($categories) && !empty($categories)) {
+        // Get the first term
+        $first_category = $categories[0];
+        $category_data = [
+          'id' => $first_category->slug,
+          'name' => $first_category->name,
+        ];
+      }
+
+      // Get the type terms for each job
+      $types = wp_get_post_terms($job->ID, 'jbls_type');
+
+      // Prepare type data
+      $type_data = null;
+      if (!is_wp_error($types) && !empty($types)) {
+        // Get the first term
+        $first_type = $types[0];
+        $type_data = [
+          'id' => $first_type->slug,
+          'name' => $first_type->name,
+        ];
+      }
+
+      $data[] = [
+        'id' => $job->ID,
+        'modified_gmt' => $job->post_modified_gmt,
+        'title' => $job->post_title,
+        'content' => apply_filters('the_content', $job->post_content),
+        'location' => $location_data,
+        'category' => $category_data,
+        'type' => $type_data,
+        'experience_level' => $experience_level_data,
+      ];
+    }
+
+    return new WP_REST_Response($data, 200);
   }
 
   // Utility function that process the taxonomy term for the REST API response
@@ -24,42 +114,6 @@ class JBLS_REST
     // Use html_entity_decode() to avoid html entities like &amp;
     $result->name = html_entity_decode(get_term($term_id)->name);
     return $result;
-  }
-
-  // Filter the "jbls_job" post data for the REST API response
-  public function jbls_filter_rest_jbls_job($response)
-  {
-    $location = '';
-    if (isset($response->data['jbls-locations'][0])) {
-      $location = $this->jbls_process_taxonomy_term($response->data['jbls-locations'][0]);
-    }
-
-    $category = '';
-    if (isset($response->data['jbls-categories'][0])) {
-      $category = $this->jbls_process_taxonomy_term($response->data['jbls-categories'][0]);
-    }
-
-    $type = '';
-    if (isset($response->data['jbls-types'][0])) {
-      $type = $this->jbls_process_taxonomy_term($response->data['jbls-types'][0]);
-    }
-
-    $experience_level = '';
-    if (isset($response->data['jbls-experience-levels'][0])) {
-      $experience_level = $this->jbls_process_taxonomy_term($response->data['jbls-experience-levels'][0]);
-    }
-
-    return [
-      'id' => $response->data['id'],
-      'modified_gmt' => $response->data['modified_gmt'] . 'Z', // Append 'Z' to indicate GMT/UTC time
-      // Use html_entity_decode() to avoid html entities like &amp;
-      'title' => html_entity_decode($response->data['title']['rendered']),
-      'content' => html_entity_decode($response->data['content']['rendered']),
-      'location' => $location,
-      'category' => $category,
-      'type' => $type,
-      'experience_level' => $experience_level,
-    ];
   }
 
   // Filter the "jbls_location" post data for the REST API response

@@ -37,10 +37,10 @@ function Single() {
   const title = { __html: DOMPurify.sanitize(job.title) };
   const content = { __html: DOMPurify.sanitize(job.content) };
   const updatedTimeAgo = calculateTimeAgo(job.modified_gmt);
-  const location = job.location.name;
-  const category = job.category.name;
-  const type = job.type.name;
-  const experienceLevel = job.experience_level.name;
+  const location = job.location?.name;
+  const category = job.category?.name;
+  const type = job.type?.name;
+  const experienceLevel = job.experience_level?.name;
   
   const shareUrl = window.location.href;
 
