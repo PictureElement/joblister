@@ -146,22 +146,22 @@ This process compiles all necessary files into a zip format, ready for deploymen
 
 To make custom post types and custom taxonomies available to FakerPress, set `"public" => true` in the respective post type and taxonomy configurations. However, it's crucial to revert this setting to `"public" => false` if you're operating in a production environment.
 
-### REST API Endpoints
+### REST API Routes & Endpoints
 
-The following endpoints are available for interacting with JobLister:
+The following routes & endpoints are available for interacting with JobLister:
 
-* Fetch all jobs:
-  * `GET /wp-json/jbls/v1/jbls-jobs`
-* Fetch all categories:
-  * `GET /wp-json/jbls/v1/jbls-categories`
-* Fetch all locations:
-  * `GET /wp-json/jbls/v1/jbls-locations`
-* Fetch all types:
-  * `GET /wp-json/jbls/v1/jbls-types`
-* Fetch all experience levels:
-  * `GET /wp-json/jbls/v1/jbls-experience-levels`
-* Submit a job application:
-  * `POST /wp-json/jbls/v1/jbls-applications`
+* `wp-json/jbls/v1/jbls-jobs`
+  * GET endpoint to fetch all jobs
+* `wp-json/jbls/v1/jbls-categories`
+  * GET endpoint to fetch all categories
+* `wp-json/jbls/v1/jbls-locations`
+  * GET endpoint to fetch all locations
+* `wp-json/jbls/v1/jbls-types`
+  * GET endpoint to fetch all types
+* `wp-json/jbls/v1/jbls-experience-levels`
+  * GET endpoint to fetch all experience levels
+* `wp-json/jbls/v1/jbls-applications`
+  * POST endpoint to submit a job application
 
 ## Contributing
 
