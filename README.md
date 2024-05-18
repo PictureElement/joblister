@@ -135,11 +135,10 @@ This process compiles all necessary files into a zip format, ready for deploymen
 
 ## Future Enhancements
 
-1. Overcoming the current 100-record limit per API request by implementing a system for handling multiple API requests. This system will sequentially fetch data in chunks until all available data is retrieved. This will allow for managing larger datasets seamlessly.
-2. Work towards removing the 'Radio Buttons for Taxonomies' plugin as a dependency.
-3. Detect network status and alert your users when they've lost internet connectivity. (Offline.js or navigator.onLine).
-4. Implement error handling for API GET requests to provide clear user feedback.
-5. Accept resumes in more formats.
+1. Work towards removing the 'Radio Buttons for Taxonomies' plugin as a dependency.
+2. Detect network status and alert your users when they've lost internet connectivity. (Offline.js or navigator.onLine).
+3. Implement error handling for API GET requests to provide clear user feedback.
+4. Accept resumes in more formats.
 
 ## Technical Details
 
@@ -149,12 +148,20 @@ To make custom post types and custom taxonomies available to FakerPress, set `"p
 
 ### REST API Endpoints
 
-- GET   `/wp-json/jbls/v1/jbls-jobs`
-- GET   `/wp-json/jbls/v1/jbls-categories`
-- GET   `/wp-json/jbls/v1/jbls-locations`
-- GET   `/wp-json/jbls/v1/jbls-types`
-- GET   `/wp-json/jbls/v1/jbls-experience-levels`
-- POST  `/wp-json/jbls/v1/jbls-applications`
+The following endpoints are available for interacting with JobLister:
+
+* Fetch all jobs:
+  * `GET /wp-json/jbls/v1/jbls-jobs`
+* Fetch all categories:
+  * `GET /wp-json/jbls/v1/jbls-categories`
+* Fetch all locations:
+  * `GET /wp-json/jbls/v1/jbls-locations`
+* Fetch all types:
+  * `GET /wp-json/jbls/v1/jbls-types`
+* Fetch all experience levels:
+  * `GET /wp-json/jbls/v1/jbls-experience-levels`
+* Submit a job application:
+  * `POST /wp-json/jbls/v1/jbls-applications`
 
 ## Contributing
 
