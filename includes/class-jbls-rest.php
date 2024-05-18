@@ -7,11 +7,6 @@ class JBLS_REST
 {
   public function __construct()
   {
-    add_filter('rest_prepare_jbls_location', array($this, 'jbls_filter_rest_jbls_location'));
-    add_filter('rest_prepare_jbls_category', array($this, 'jbls_filter_rest_jbls_category'));
-    add_filter('rest_prepare_jbls_type', array($this, 'jbls_filter_rest_jbls_type'));
-    add_filter('rest_prepare_jbls_experience_level', array($this, 'jbls_filter_rest_jbls_experience_level'));
-  
     add_action('rest_api_init', array($this, 'jbls_register_custom_rest_routes'));
   }
 
@@ -39,6 +34,11 @@ class JBLS_REST
     register_rest_route('jbls/v1', '/jbls-experience-levels', [
       'methods' => 'GET',
       'callback' => array($this, 'jbls_get_experience_levels'),
+      'permission_callback' => '__return_true',
+    ]);
+    register_rest_route('jbls/v1', 'jbls-applications', [
+      'methods'  => 'POST',
+      'callback' => array($this, 'jbls_post_appication'),
       'permission_callback' => '__return_true',
     ]);
   }
@@ -217,42 +217,8 @@ class JBLS_REST
     return new WP_REST_Response($data, 200);
   }
 
-
-  // Utility function that process the taxonomy term for the REST API response
-  private function jbls_process_taxonomy_term($term_id)
-  {
-    $result = new stdClass();
-    // Use slug as id
-    $result->id = get_term($term_id)->slug;
-    // Use html_entity_decode() to avoid html entities like &amp;
-    $result->name = html_entity_decode(get_term($term_id)->name);
-    return $result;
-  }
-
-  // Add a custom POST endpoint for the "jbls_application" post type
-  public function jbls_modify_jbls_application_post_endpoint($endpoints)
-  {
-    $endpoints['/wp/v2/jbls-applications'] = array(
-      'methods'  => 'POST',
-      'callback' => array($this, 'jbls_application_post_callback'),
-      'permission_callback' => '__return_true',
-    );
-
-    return $endpoints;
-  }
-
-  private function jbls_job_exists($job_id) {
-    $args = array(
-        'post_type' => 'jbls_job',
-        'p' => $job_id,
-    );
-    $job_posts = get_posts($args);
-
-    // If there is at least one post returned, it means the job post with the given ID exists
-    return count($job_posts) > 0;
-  }
-
-  public function jbls_application_post_callback($request)
+  // Callback function for custom REST route
+  public function jbls_post_appication($request)
   {
     // Retrieve the nonce from the request headers
     $nonce = sanitize_text_field($request->get_header('X-WP-Nonce'));
@@ -374,5 +340,16 @@ class JBLS_REST
       error_log('Error 3');
       return new WP_Error('application_creation_failed', 'Failed to create application.', array('status' => 500));
     }
+  }
+
+  private function jbls_job_exists($job_id) {
+    $args = array(
+        'post_type' => 'jbls_job',
+        'p' => $job_id,
+    );
+    $job_posts = get_posts($args);
+
+    // If there is at least one post returned, it means the job post with the given ID exists
+    return count($job_posts) > 0;
   }
 }

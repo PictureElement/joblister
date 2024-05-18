@@ -103,7 +103,7 @@ function Form() {
 
     // Initiate POST request
     try {
-      const response = await fetch(jblsData.restBaseUrl + 'wp/v2/jbls-applications', {
+      const response = await fetch(jblsData.restBaseUrl + 'jbls/v1/jbls-applications', {
         method: 'POST',
         headers: {
           'X-WP-Nonce': jblsData.nonce

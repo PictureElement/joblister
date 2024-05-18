@@ -147,13 +147,14 @@ This process compiles all necessary files into a zip format, ready for deploymen
 
 To make custom post types and custom taxonomies available to FakerPress, set `"public" => true` in the respective post type and taxonomy configurations. However, it's crucial to revert this setting to `"public" => false` if you're operating in a production environment.
 
-### Generated API Endpoints
+### REST API Endpoints
 
-- Jobs: `/wp-json/jbls/v1/jbls-jobs`
-- Categories: `/wp-json/jbls/v1/jbls-categories`
-- Locations: `/wp-json/jbls/v1/jbls-locations`
-- Types: `/wp-json/jbls/v1/jbls-types`
-- Experience Levels: `/wp-json/jbls/v1/jbls-experience-levels`
+- GET   `/wp-json/jbls/v1/jbls-jobs`
+- GET   `/wp-json/jbls/v1/jbls-categories`
+- GET   `/wp-json/jbls/v1/jbls-locations`
+- GET   `/wp-json/jbls/v1/jbls-types`
+- GET   `/wp-json/jbls/v1/jbls-experience-levels`
+- POST  `/wp-json/jbls/v1/jbls-applications`
 
 ## Contributing
 

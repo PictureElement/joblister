@@ -137,8 +137,6 @@ class JBLS_Post_Types
       "publicly_queryable" => false,
       "show_ui" => true,
       "show_in_rest" => false,
-      "rest_base" => "jbls-applications",
-      "rest_controller_class" => "WP_REST_Posts_Controller",
       "has_archive" => false,
       "show_in_menu" => 'edit.php?post_type=jbls_job', // Set the menu location to match the "jbls_job" post type
       "show_in_nav_menus" => true,
@@ -152,7 +150,6 @@ class JBLS_Post_Types
       "query_var" => true,
       "supports" => false,
       "show_in_graphql" => false,
-      "rest_namespace" => "jbls/v1",
     ];
 
     register_post_type("jbls_application", $args);
