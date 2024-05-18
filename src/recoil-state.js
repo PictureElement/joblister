@@ -99,22 +99,22 @@ const filteredJobsState = selector({
 
     if (locationFiltersIds.length) {
       // Include the job if its ID is included in the locationFilterIds
-      jobList = jobList.filter(job => locationFiltersIds.includes(job.location.id));
+      jobList = jobList.filter(job => job.location && locationFiltersIds.includes(job.location.id));
     }
 
     if (categoryFiltersIds.length) {
       // Include the job if its ID is included in the categoryFilterIds
-      jobList = jobList.filter(job => categoryFiltersIds.includes(job.category.id));
+      jobList = jobList.filter(job => job.category && categoryFiltersIds.includes(job.category.id));
     }
 
     if (typeFiltersIds.length) {
       // Include the job if its ID is included in the typeFilterIds
-      jobList = jobList.filter(job => typeFiltersIds.includes(job.type.id));
+      jobList = jobList.filter(job => job.type && typeFiltersIds.includes(job.type.id));
     }
 
     if (experienceLevelFiltersIds.length) {
       // Include the job if its ID is included in the experienceLevelFiltersIds
-      jobList = jobList.filter(job => experienceLevelFiltersIds.includes(job.experience_level.id));
+      jobList = jobList.filter(job => job.experience_level && experienceLevelFiltersIds.includes(job.experience_level.id));
     }
 
     const filteredJobs = jobList.slice(startIndex, endIndex);
