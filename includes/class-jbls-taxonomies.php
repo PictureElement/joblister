@@ -8,14 +8,19 @@ class JBLS_Taxonomies
 
   public function __construct()
   {
-    add_action('init', [$this, 'jbls_register_jbls_location']);
-    add_action('init', [$this, 'jbls_register_jbls_category']);
-    add_action('init', [$this, 'jbls_register_jbls_type']);
-    add_action('init', [$this, 'jbls_register_jbls_experience_level']);
+    add_action('init', array($this, 'jbls_init'));
+  }
+
+  // Initialize custom taxonomies
+  public function jbls_init() {
+    $this->jbls_register_taxonomy_jbls_location();
+    $this->jbls_register_taxonomy_jbls_category();
+    $this->jbls_register_taxonomy_jbls_type();
+    $this->jbls_register_taxonomy_jbls_experience_level();
   }
 
   // Register "jbls_location" taxonomy
-  public function jbls_register_jbls_location()
+  public function jbls_register_taxonomy_jbls_location()
   {
     $labels = [
       "name" => "Locations",
@@ -57,20 +62,17 @@ class JBLS_Taxonomies
       "query_var" => true,
       "rewrite" => true,
       "show_admin_column" => true,
-      "show_in_rest" => true,
+      "show_in_rest" => false,
       "show_tagcloud" => false,
-      "rest_base" => "jbls-locations",
-      "rest_controller_class" => "WP_REST_Terms_Controller",
       "show_in_quick_edit" => true,
       "sort" => false,
       "show_in_graphql" => false,
-      "rest_namespace" => "jbls/v1",
     ];
     register_taxonomy("jbls_location", array('jbls_job'), $args);
   }
 
   // Register "jbls_category" taxonomy
-  public function jbls_register_jbls_category()
+  public function jbls_register_taxonomy_jbls_category()
   {
     $labels = [
       "name" => "Categories",
@@ -112,20 +114,17 @@ class JBLS_Taxonomies
       "query_var" => true,
       "rewrite" => true,
       "show_admin_column" => true,
-      "show_in_rest" => true,
+      "show_in_rest" => false,
       "show_tagcloud" => false,
-      "rest_base" => "jbls-categories",
-      "rest_controller_class" => "WP_REST_Terms_Controller",
       "show_in_quick_edit" => true,
       "sort" => false,
       "show_in_graphql" => false,
-      "rest_namespace" => "jbls/v1",
     ];
     register_taxonomy("jbls_category", ["jbls_job"], $args);
   }
 
   // Register "jbls_type" taxonomy
-  public function jbls_register_jbls_type()
+  public function jbls_register_taxonomy_jbls_type()
   {
     $labels = [
       "name" => "Types",
@@ -167,20 +166,17 @@ class JBLS_Taxonomies
       "query_var" => true,
       "rewrite" => true,
       "show_admin_column" => true,
-      "show_in_rest" => true,
+      "show_in_rest" => false,
       "show_tagcloud" => false,
-      "rest_base" => "jbls-types",
-      "rest_controller_class" => "WP_REST_Terms_Controller",
       "show_in_quick_edit" => true,
       "sort" => false,
       "show_in_graphql" => false,
-      "rest_namespace" => "jbls/v1",
     ];
     register_taxonomy("jbls_type", ["jbls_job"], $args);
   }
 
   // Register "jbls_experience_level" taxonomy
-  public function jbls_register_jbls_experience_level()
+  public function jbls_register_taxonomy_jbls_experience_level()
   {
     $labels = [
       "name" => "Experience Levels",
@@ -222,14 +218,11 @@ class JBLS_Taxonomies
       "query_var" => true,
       "rewrite" => true,
       "show_admin_column" => true,
-      "show_in_rest" => true,
+      "show_in_rest" => false,
       "show_tagcloud" => false,
-      "rest_base" => "jbls-experience-levels",
-      "rest_controller_class" => "WP_REST_Terms_Controller",
       "show_in_quick_edit" => true,
       "sort" => false,
       "show_in_graphql" => false,
-      "rest_namespace" => "jbls/v1",
     ];
     register_taxonomy("jbls_experience_level", ["jbls_job"], $args);
   }

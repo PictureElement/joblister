@@ -21,6 +21,26 @@ class JBLS_REST
       'callback' => array($this, 'jbls_get_jobs'),
       'permission_callback' => '__return_true',
     ]);
+    register_rest_route('jbls/v1', '/jbls-locations', [
+      'methods' => 'GET',
+      'callback' => array($this, 'jbls_get_locations'),
+      'permission_callback' => '__return_true',
+    ]);
+    register_rest_route('jbls/v1', '/jbls-categories', [
+      'methods' => 'GET',
+      'callback' => array($this, 'jbls_get_categories'),
+      'permission_callback' => '__return_true',
+    ]);
+    register_rest_route('jbls/v1', '/jbls-types', [
+      'methods' => 'GET',
+      'callback' => array($this, 'jbls_get_types'),
+      'permission_callback' => '__return_true',
+    ]);
+    register_rest_route('jbls/v1', '/jbls-experience-levels', [
+      'methods' => 'GET',
+      'callback' => array($this, 'jbls_get_experience_levels'),
+      'permission_callback' => '__return_true',
+    ]);
   }
 
   // Callback function for custom REST route
@@ -105,6 +125,99 @@ class JBLS_REST
     return new WP_REST_Response($data, 200);
   }
 
+  // Callback function for custom REST route
+  public function jbls_get_locations($request) {
+    $args = [
+      'taxonomy' => 'jbls_location',
+      'hide_empty' => false,
+    ];
+
+    $terms = get_terms($args);
+    $data = [];
+
+    foreach ($terms as $term) {
+      $data[] = [
+        // Use slug as id
+        'id' => $term->slug,
+        'count' => $term->count,
+        // Use html_entity_decode() to avoid html entities like &amp;
+        'name' => html_entity_decode($term->name),
+      ];
+    }
+
+    return new WP_REST_Response($data, 200);
+  }
+
+  // Callback function for custom REST route
+  public function jbls_get_categories($request) {
+    $args = [
+      'taxonomy' => 'jbls_category',
+      'hide_empty' => false,
+    ];
+
+    $terms = get_terms($args);
+    $data = [];
+
+    foreach ($terms as $term) {
+      $data[] = [
+        // Use slug as id
+        'id' => $term->slug,
+        'count' => $term->count,
+        // Use html_entity_decode() to avoid html entities like &amp;
+        'name' => html_entity_decode($term->name),
+      ];
+    }
+
+    return new WP_REST_Response($data, 200);
+  }
+
+  // Callback function for custom REST route
+  public function jbls_get_types($request) {
+    $args = [
+      'taxonomy' => 'jbls_type',
+      'hide_empty' => false,
+    ];
+
+    $terms = get_terms($args);
+    $data = [];
+
+    foreach ($terms as $term) {
+      $data[] = [
+        // Use slug as id
+        'id' => $term->slug,
+        'count' => $term->count,
+        // Use html_entity_decode() to avoid html entities like &amp;
+        'name' => html_entity_decode($term->name),
+      ];
+    }
+
+    return new WP_REST_Response($data, 200);
+  }
+
+  // Callback function for custom REST route
+  public function jbls_get_experience_levels($request) {
+    $args = [
+      'taxonomy' => 'jbls_experience_level',
+      'hide_empty' => false,
+    ];
+
+    $terms = get_terms($args);
+    $data = [];
+
+    foreach ($terms as $term) {
+      $data[] = [
+        // Use slug as id
+        'id' => $term->slug,
+        'count' => $term->count,
+        // Use html_entity_decode() to avoid html entities like &amp;
+        'name' => html_entity_decode($term->name),
+      ];
+    }
+
+    return new WP_REST_Response($data, 200);
+  }
+
+
   // Utility function that process the taxonomy term for the REST API response
   private function jbls_process_taxonomy_term($term_id)
   {
@@ -114,54 +227,6 @@ class JBLS_REST
     // Use html_entity_decode() to avoid html entities like &amp;
     $result->name = html_entity_decode(get_term($term_id)->name);
     return $result;
-  }
-
-  // Filter the "jbls_location" post data for the REST API response
-  public function jbls_filter_rest_jbls_location($response)
-  {
-    return [
-      // Use slug as id
-      'id' => $response->data['slug'],
-      'count' => $response->data['count'],
-      // Use html_entity_decode() to avoid html entities like &amp;
-      'name' => html_entity_decode($response->data['name']),
-    ];
-  }
-
-  // Filter the "jbls_category" post data for the REST API response
-  public function jbls_filter_rest_jbls_category($response)
-  {
-    return [
-      // Use slug as id
-      'id' => $response->data['slug'],
-      'count' => $response->data['count'],
-      // Use html_entity_decode() to avoid html entities like &amp;
-      'name' => html_entity_decode($response->data['name']),
-    ];
-  }
-
-  // Filter the "jbls_type" post data for the REST API response
-  public function jbls_filter_rest_jbls_type($response)
-  {
-    return [
-      // Use slug as id
-      'id' => $response->data['slug'],
-      'count' => $response->data['count'],
-      // Use html_entity_decode() to avoid html entities like &amp;
-      'name' => html_entity_decode($response->data['name']),
-    ];
-  }
-
-  // Filter the "jbls_experience_level" post data for the REST API response
-  public function jbls_filter_rest_jbls_experience_level($response)
-  {
-    return [
-      // Use slug as id
-      'id' => $response->data['slug'],
-      'count' => $response->data['count'],
-      // Use html_entity_decode() to avoid html entities like &amp;
-      'name' => html_entity_decode($response->data['name']),
-    ];
   }
 
   // Add a custom POST endpoint for the "jbls_application" post type
