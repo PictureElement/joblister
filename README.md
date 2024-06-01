@@ -139,6 +139,9 @@ This process compiles all necessary files into a zip format, ready for deploymen
 2. Detect network status and alert your users when they've lost internet connectivity. (Offline.js or navigator.onLine).
 3. Implement error handling for API GET requests to provide clear user feedback.
 4. Accept resumes in more formats.
+5. Ensure posts display at the top of the page when opened.
+6. Retain applied filters and pagination on page refresh using Local Storage.
+7. Append page numbers directly to the URL (e.g., ?page=1, ?page=2) to enhance bookmarking, sharing, and user experience.
 
 ## Technical Details
 

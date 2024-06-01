@@ -1,6 +1,6 @@
-import { useParams } from 'react-router-dom';
+import { useEffect } from 'react';
+import { useParams, Link } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
-import { Link } from 'react-router-dom';
 import { allJobsState } from '../recoil-state';
 import DOMPurify from 'dompurify';
 import { calculateTimeAgo } from '../utils';
@@ -43,6 +43,10 @@ function Single() {
   const experienceLevel = job.experience_level?.name;
   
   const shareUrl = window.location.href;
+
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
 
   // Smoothly scroll to the application form
   const handleScrollToForm = () => {
