@@ -41,6 +41,7 @@ function Search() {
         <div className="jbls-visually-hidden">Search for jobs by keyword</div>
         <SearchIcon />
         <input
+          autoFocus
           autoComplete="off"
           value={searchQuery}
           aria-label="Search for jobs by keyword"
