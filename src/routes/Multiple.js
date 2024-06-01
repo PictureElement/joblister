@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import JobList from '../components/JobList';
 import Search from '../components/Search';
 import SelectMulti from '../components/SelectMulti';
@@ -89,6 +90,11 @@ function Multiple() {
     // Reset current page
     setCurrentPage(1);
   }
+
+  // Scroll to the top of the page when the component is mounted
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
   
   return (
     <div className="jbls-multiple">

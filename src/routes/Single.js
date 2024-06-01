@@ -44,6 +44,7 @@ function Single() {
   
   const shareUrl = window.location.href;
 
+  // Scroll to the top of the page when the component is mounted
   useEffect(() => {
     window.scrollTo(0, 0)
   }, [])
