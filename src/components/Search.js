@@ -8,7 +8,7 @@ import {
   experienceLevelFiltersState,
   currentPageState 
 } from '../recoil-state';
-
+import { useNavigate } from 'react-router-dom';
 
 function Search() {
   /**
@@ -23,6 +23,8 @@ function Search() {
   const setCurrentPage = useSetRecoilState(currentPageState);
   const [searchQuery, setSearchQuery] = useRecoilState(searchQueryState);
 
+  const navigate = useNavigate();
+
   const handleChange = (e) => {
     // Clear all filters
     setLocationFilters([]);
@@ -31,6 +33,8 @@ function Search() {
     setExperienceLevelFilters([]);
     // Reset current page
     setCurrentPage(1);
+    // Update the URL
+    navigate('');
     // Update search query
     setSearchQuery(e.target.value);
   }

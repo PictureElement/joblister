@@ -17,6 +17,7 @@ import {
   searchQueryState,
   filteredJobsState 
 } from '../recoil-state';
+import { useNavigate } from 'react-router-dom';
 
 function Multiple() {
   /**
@@ -37,11 +38,15 @@ function Multiple() {
   const setCurrentPage = useSetRecoilState(currentPageState);
   const { totalJobs } = useRecoilValue(filteredJobsState);
 
+  const navigate = useNavigate();
+
   const handleFilterChange = (filterState, setFilterState, actionType) => {
     // Clear search
     setSearchQuery('');
     // Reset current page
     setCurrentPage(1);
+    // Update the URL
+    navigate('');
   
     if (actionType.action === 'clear') {
       // Clear filters
@@ -89,6 +94,9 @@ function Multiple() {
     setExperienceLevelFilters([]);
     // Reset current page
     setCurrentPage(1);
+    // Update the URL
+    navigate('');
+    
   }
 
   // Scroll to the top of the page when the component is mounted

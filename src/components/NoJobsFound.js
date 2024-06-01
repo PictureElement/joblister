@@ -8,6 +8,7 @@ import {
   currentPageState,
   searchQueryState
 } from '../recoil-state';
+import { useNavigate } from 'react-router-dom';
 
 function NoJobsFound() {
   /**
@@ -22,6 +23,8 @@ function NoJobsFound() {
   const setExperienceLevelFilters = useSetRecoilState(experienceLevelFiltersState);
   const setCurrentPage = useSetRecoilState(currentPageState);
 
+  const navigate = useNavigate();
+
   const handleClearAll = () => {
     // Clear search
     setSearchQuery('');
@@ -32,6 +35,8 @@ function NoJobsFound() {
     setExperienceLevelFilters([]);
     // Reset current page
     setCurrentPage(1);
+    // Update the URL
+    navigate('');
   }
 
   return (
