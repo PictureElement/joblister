@@ -66,7 +66,7 @@ class JBLS_REST
         $first_location = $locations[0];
         $location_data = [
           'id' => $first_location->slug,
-          'name' => $first_location->name,
+          'name' => html_entity_decode($first_location->name),
         ];
       }
 
@@ -80,7 +80,7 @@ class JBLS_REST
         $first_experience_level = $experience_levels[0];
         $experience_level_data = [
           'id' => $first_experience_level->slug,
-          'name' => $first_experience_level->name,
+          'name' => html_entity_decode($first_experience_level->name),
         ];
       }
 
@@ -94,7 +94,7 @@ class JBLS_REST
         $first_category = $categories[0];
         $category_data = [
           'id' => $first_category->slug,
-          'name' => $first_category->name,
+          'name' => html_entity_decode($first_category->name),
         ];
       }
 
@@ -108,7 +108,7 @@ class JBLS_REST
         $first_type = $types[0];
         $type_data = [
           'id' => $first_type->slug,
-          'name' => $first_type->name,
+          'name' => html_entity_decode($first_type->name),
         ];
       }
 
@@ -142,7 +142,6 @@ class JBLS_REST
         // Use slug as id
         'id' => $term->slug,
         'count' => $term->count,
-        // Use html_entity_decode() to avoid html entities like &amp;
         'name' => html_entity_decode($term->name),
       ];
     }
@@ -165,7 +164,6 @@ class JBLS_REST
         // Use slug as id
         'id' => $term->slug,
         'count' => $term->count,
-        // Use html_entity_decode() to avoid html entities like &amp;
         'name' => html_entity_decode($term->name),
       ];
     }
@@ -188,7 +186,6 @@ class JBLS_REST
         // Use slug as id
         'id' => $term->slug,
         'count' => $term->count,
-        // Use html_entity_decode() to avoid html entities like &amp;
         'name' => html_entity_decode($term->name),
       ];
     }
@@ -211,7 +208,6 @@ class JBLS_REST
         // Use slug as id
         'id' => $term->slug,
         'count' => $term->count,
-        // Use html_entity_decode() to avoid html entities like &amp;
         'name' => html_entity_decode($term->name),
       ];
     }

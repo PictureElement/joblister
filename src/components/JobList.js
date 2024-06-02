@@ -9,7 +9,7 @@ function JobList() {
    * - Use useRecoilValue() when a component intends to read state without writing to it.
    */
   const { filteredJobs } = useRecoilValue(filteredJobsState);
-
+  
   const jobItems = filteredJobs.map(job =>
     <JobItem
       key={job.id}

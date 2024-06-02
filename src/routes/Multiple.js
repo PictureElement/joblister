@@ -57,7 +57,6 @@ function Multiple() {
     }
   
     if (actionType.action === 'select-option') {
-      console.log(actionType.option);
       setFilterState([...filterState, actionType.option]);
     }
   
@@ -105,7 +104,7 @@ function Multiple() {
   };
   
   const updateStateFromURL = () => {
-    console.log('Update state from URL');
+    // console.log('Update state from URL');
     const params = new URLSearchParams(location.search);
 
     const locationParam = params.getAll('location');
@@ -127,7 +126,7 @@ function Multiple() {
   };
 
   const updateURLFromState = () => {
-    console.log('Update URL from state');
+    // console.log('Update URL from state');
     const params = new URLSearchParams();
 
     if (currentPage > 1) params.append('page', currentPage);
