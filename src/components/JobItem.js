@@ -4,11 +4,15 @@ import slugify from 'react-slugify';
 import { calculateTimeAgo } from '../utils';
 import { ReactComponent as LocationIcon } from '../icons/location.svg';
 
+function sanitizeToPlainText(html) {
+  return DOMPurify.sanitize(html, { ALLOWED_TAGS: [], ALLOWED_ATTR: [] });
+}
+
 function JobItem(props) {
   // Props
   const id = props.id;
   const updatedTimeAgo = calculateTimeAgo(props.modifiedGmt);
-  const title = { __html: DOMPurify.sanitize(props.title) };
+  const title = sanitizeToPlainText(props.title);
   const slug = slugify(props.title);
   const idDashSlug = `${id}-${slug}`;
   const location = props.location;
@@ -21,11 +25,7 @@ function JobItem(props) {
         <div className="jbls-job-item__table">
           <div className="jbls-job-item__row">
             <div className="jbls-job-item__job">
-              {title.__html ?
-                <div className="jbls-job-item__title jbls-text-size-h3" dangerouslySetInnerHTML={title}></div>
-                :
-                <div className="jbls-job-item__title jbls-text-size-h3">(no title)</div>
-              }
+              <div className="jbls-job-item__title jbls-text-size-h3">{title ? title : '(no title)'}</div>
               <div className="jbls-job-item__subtitle jbls-text-size-small">
                 Job ID: {id} | Updated {updatedTimeAgo}
               </div>

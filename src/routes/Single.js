@@ -17,6 +17,10 @@ import {
   XIcon
 } from 'react-share';
 
+function sanitizeToPlainText(html) {
+  return DOMPurify.sanitize(html, { ALLOWED_TAGS: [], ALLOWED_ATTR: [] });
+}
+
 function Single() {
   /**
    * State variables
@@ -34,7 +38,7 @@ function Single() {
   const job = allJobs.find((job) => job.id == id);
 
   // Job details
-  const title = { __html: DOMPurify.sanitize(job.title) };
+  const title = sanitizeToPlainText(job.title);
   const content = { __html: DOMPurify.sanitize(job.content) };
   const updatedTimeAgo = calculateTimeAgo(job.modified_gmt);
   const location = job.location?.name;
@@ -58,11 +62,7 @@ function Single() {
     <div className="jbls-single">
       <div className="jbls-single__header">
         <div className="jbls-single__header-left">
-          {title.__html ?
-            <h1 className="jbls-single__title jbls-text-size-h1" dangerouslySetInnerHTML={title}></h1>
-            :
-            <h1 className="jbls-single__title jbls-text-size-h1">(no title)</h1>
-          } 
+          <h1 className="jbls-single__title jbls-text-size-h1">{title ? title : '(no title)'}</h1>
           <div className="jbls-single__subtitle jbls-text-size-small">
             Job ID: {id} | Updated {updatedTimeAgo}
           </div>
