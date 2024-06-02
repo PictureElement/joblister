@@ -174,6 +174,9 @@ function Multiple() {
       <div className="jbls-multiple__search">
         <Search />
       </div>
+      <div className="jbls-multiple__divider">
+        <span>OR</span>
+      </div>
       <div className="jbls-multiple__filters">
         <SelectMulti
           value={categoryFilters}
