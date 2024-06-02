@@ -3,6 +3,8 @@
 // Exit if accessed directly.
 defined('ABSPATH') || exit;
 
+require_once(ABSPATH . 'wp-admin/includes/image.php');
+
 class JBLS_REST
 {
   public function __construct()
@@ -308,8 +310,6 @@ class JBLS_REST
         error_log('Error 2');
         return new WP_Error('attachment_creation_failed', $attachment_id->get_error_message(), array('status' => 500));
       }
-
-      require_once(ABSPATH . 'wp-admin/includes/image.php');
 
       $attachment_data = wp_generate_attachment_metadata($attachment_id, $file['file']);
       wp_update_attachment_metadata($attachment_id, $attachment_data);

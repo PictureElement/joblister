@@ -3,10 +3,20 @@
 // Exit if accessed directly.
 defined( 'ABSPATH' ) || exit;
 
+require_once plugin_dir_path(__FILE__) . '/class-jbls-settings.php';
+require_once plugin_dir_path(__FILE__) . '/class-jbls-dependencies.php';
+require_once plugin_dir_path(__FILE__) . '/class-jbls-scripts.php';
+require_once plugin_dir_path(__FILE__) . '/class-jbls-styles.php';
+require_once plugin_dir_path(__FILE__) . '/class-jbls-shortcodes.php';
+require_once plugin_dir_path(__FILE__) . '/class-jbls-post-types.php';
+require_once plugin_dir_path(__FILE__) . '/class-jbls-taxonomies.php';
+require_once plugin_dir_path(__FILE__) . '/class-jbls-rest.php';
+require_once plugin_dir_path(__FILE__) . '/class-jbls-meta-boxes.php';
+require_once plugin_dir_path(__FILE__) . '/class-jbls-admin-columns.php';
+
 if (!class_exists('JBLS')) {
   class JBLS
   {
-
     // Constructor
     public function __construct()
     {
@@ -16,23 +26,7 @@ if (!class_exists('JBLS')) {
     // Initialization method
     public function jbls_init()
     {
-      $this->jbls_load_dependencies();
       $this->jbls_initialize_classes();
-    }
-
-    // Load dependencies
-    private function jbls_load_dependencies()
-    {
-      require_once plugin_dir_path(__FILE__) . '/class-jbls-settings.php';
-      require_once plugin_dir_path(__FILE__) . '/class-jbls-dependencies.php';
-      require_once plugin_dir_path(__FILE__) . '/class-jbls-scripts.php';
-      require_once plugin_dir_path(__FILE__) . '/class-jbls-styles.php';
-      require_once plugin_dir_path(__FILE__) . '/class-jbls-shortcodes.php';
-      require_once plugin_dir_path(__FILE__) . '/class-jbls-post-types.php';
-      require_once plugin_dir_path(__FILE__) . '/class-jbls-taxonomies.php';
-      require_once plugin_dir_path(__FILE__) . '/class-jbls-rest.php';
-      require_once plugin_dir_path(__FILE__) . '/class-jbls-meta-boxes.php';
-      require_once plugin_dir_path(__FILE__) . '/class-jbls-admin-columns.php';
     }
 
     // Initialize classes

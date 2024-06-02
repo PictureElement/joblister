@@ -5,7 +5,7 @@ defined( 'ABSPATH' ) || exit;
 
 class JBLS_Taxonomies
 {
-
+  // Constructor
   public function __construct()
   {
     add_action('init', array($this, 'jbls_init'));
