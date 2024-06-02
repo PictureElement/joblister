@@ -8,10 +8,10 @@ const domNode = document.getElementById('jbls-root');
 if (domNode) {
   const root = createRoot(domNode);
   root.render(
-    <React.StrictMode>
+    // <React.StrictMode>
       <RecoilRoot>
         <App />
       </RecoilRoot>
-    </React.StrictMode>
+    // </React.StrictMode>
   );
 }

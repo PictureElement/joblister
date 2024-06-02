@@ -1,9 +1,9 @@
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import JobList from '../components/JobList';
 import Search from '../components/Search';
 import SelectMulti from '../components/SelectMulti';
 import Pagination from '../components/Pagination';
-import { useRecoilValue, useRecoilState, useSetRecoilState } from 'recoil';
+import { useRecoilValue, useRecoilState } from 'recoil';
 import {
   allLocationsState,
   locationFiltersState,
@@ -17,7 +17,7 @@ import {
   searchQueryState,
   filteredJobsState 
 } from '../recoil-state';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 function Multiple() {
   /**
@@ -34,19 +34,22 @@ function Multiple() {
   const [typeFilters, setTypeFilters] = useRecoilState(typeFiltersState);
   const allExperienceLevels = useRecoilValue(allExperienceLevelsState);
   const [experienceLevelFilters, setExperienceLevelFilters] = useRecoilState(experienceLevelFiltersState);
-  const setSearchQuery = useSetRecoilState(searchQueryState);
-  const setCurrentPage = useSetRecoilState(currentPageState);
-  const { totalJobs } = useRecoilValue(filteredJobsState);
+  const [searchQuery, setSearchQuery] = useRecoilState(searchQueryState);
+  const [currentPage, setCurrentPage] = useRecoilState(currentPageState);
+  const { totalPages, totalJobs } = useRecoilValue(filteredJobsState);
 
   const navigate = useNavigate();
+  const location = useLocation();
+  
+  const isInitialLoad = useRef(true);
+  const isUpdatingState = useRef(false);
+  const isUpdatingURL = useRef(false);
 
   const handleFilterChange = (filterState, setFilterState, actionType) => {
     // Clear search
     setSearchQuery('');
     // Reset current page
     setCurrentPage(1);
-    // Update the URL
-    navigate('');
   
     if (actionType.action === 'clear') {
       // Clear filters
@@ -54,6 +57,7 @@ function Multiple() {
     }
   
     if (actionType.action === 'select-option') {
+      console.log(actionType.option);
       setFilterState([...filterState, actionType.option]);
     }
   
@@ -94,12 +98,73 @@ function Multiple() {
     setExperienceLevelFilters([]);
     // Reset current page
     setCurrentPage(1);
-    // Update the URL
-    navigate('');
-    
   }
 
-  // Scroll to the top of the page when the component is mounted
+  const findFilterByName = (allFilters, names) => {
+    return names.map(name => allFilters.find(filter => filter.name === name)).filter(Boolean);
+  };
+  
+  const updateStateFromURL = () => {
+    console.log('Update state from URL');
+    const params = new URLSearchParams(location.search);
+
+    const locationParam = params.getAll('location');
+    const categoryParam = params.getAll('category');
+    const typeParam = params.getAll('type');
+    const experienceParam = params.getAll('experience');
+    const pageParam = Number(params.get('page'));
+    const queryParam = params.get('q');
+
+    setLocationFilters(findFilterByName(allLocations, locationParam));
+    setCategoryFilters(findFilterByName(allCategories, categoryParam));
+    setTypeFilters(findFilterByName(allTypes, typeParam));
+    setExperienceLevelFilters(findFilterByName(allExperienceLevels, experienceParam));
+
+    if (!isNaN(pageParam) && pageParam > 0 && pageParam <= totalPages) {
+      setCurrentPage(pageParam);
+    }
+    setSearchQuery(queryParam || '');
+  };
+
+  const updateURLFromState = () => {
+    console.log('Update URL from state');
+    const params = new URLSearchParams();
+
+    if (currentPage > 1) params.append('page', currentPage);
+    if (searchQuery) params.append('q', searchQuery);
+    locationFilters.forEach(filter => params.append('location', filter.name));
+    categoryFilters.forEach(filter => params.append('category', filter.name));
+    typeFilters.forEach(filter => params.append('type', filter.name));
+    experienceLevelFilters.forEach(filter => params.append('experience', filter.name));
+
+    navigate('?' + params.toString(), { replace: true });
+  };
+
+  // Update state from URL when the URL changes
+  useEffect(() => {
+    if (isUpdatingURL.current) {
+      isUpdatingURL.current = false;
+      return;
+    }
+    isUpdatingState.current = true;
+    updateStateFromURL();
+  }, [location.search]);
+
+  // Update URL when the state changes
+  useEffect(() => {
+    if (isInitialLoad.current) {
+      isInitialLoad.current = false;
+      return;
+    }
+    if (isUpdatingState.current) {
+      isUpdatingState.current = false;
+      return;
+    }
+    isUpdatingURL.current = true;
+    updateURLFromState();
+  }, [locationFilters, categoryFilters, typeFilters, experienceLevelFilters, currentPage]);
+
+  // Scroll to the top of the page (only on first render)
   useEffect(() => {
     window.scrollTo(0, 0)
   }, [])

@@ -140,7 +140,6 @@ This process compiles all necessary files into a zip format, ready for deploymen
 3. Implement error handling for API GET requests to provide clear user feedback.
 4. Accept resumes in more formats.
 5. Retain applied filters and pagination on page refresh using Local Storage.
-6. Use filter URL parameters (e.g., &category=Marketing, &location=Berlin, q=senior+developer etc.) to enhance bookmarking, sharing, and user experience.
 
 ## Technical Details
 

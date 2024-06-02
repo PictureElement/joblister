@@ -2,7 +2,6 @@ import { currentPageState, filteredJobsState } from '../recoil-state';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import { ReactComponent as PreviousIcon } from '../icons/previous.svg';
 import { ReactComponent as NextIcon } from '../icons/next.svg';
-import { useNavigate, useParams, useLocation } from 'react-router-dom';
 import { useEffect } from 'react';
 
 function Pagination() {
@@ -15,22 +14,11 @@ function Pagination() {
   const { filteredJobs, totalPages } = useRecoilValue(filteredJobsState);
   const visiblePages = 3;
 
-  const navigate = useNavigate();
-  const location = useLocation();
-
-  useEffect(() => {
-    const params = new URLSearchParams(location.search);
-    const pageFromUrl = Number(params.get('page'));
-  
-    // Check if the page number from the URL is valid and is a number
-    if (!isNaN(pageFromUrl) && pageFromUrl > 0 && pageFromUrl <= totalPages) {
-      setCurrentPage(pageFromUrl);
-    }
-  }, [location]);
+  // Make component rerender when currentPage changes
+  useEffect(() => { }, [currentPage]);
 
   const handlePageChange = (page) => {
-    // Update the URL with the new page parameter
-    navigate(`?page=${page}`);
+    setCurrentPage(page);
   };
 
   const generatePagination = () => {
