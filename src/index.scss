@@ -485,13 +485,21 @@
     }
   }
   &__back-to-listing {
+    all: unset;
+    box-sizing: border-box;
+    margin-top: 16px;
+    cursor: pointer;
+    user-select: none;
+    background-color: transparent;
+    font-family: var(--jbls-google-font-family);
+    font-size: 16px;
+    line-height: 44px;
+    font-weight: 400;
+    padding: 0;
     display: inline-flex;
     align-items: center;
-    font-family: var(--jbls-google-font-family);
-    font-weight: 400;
-    height: 44px;
     color: var(--jbls-accent);
-    margin-top: 16px;
+    text-align: center;
     &:hover {
       text-decoration: underline;
     }

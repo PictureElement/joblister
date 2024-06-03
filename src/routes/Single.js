@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
 import { allJobsState } from '../recoil-state';
 import DOMPurify from 'dompurify';
@@ -27,6 +27,8 @@ function Single() {
    * - Use useRecoilValue() when a component intends to read state without writing to it.
    */
   const allJobs = useRecoilValue(allJobsState);
+
+  const navigate = useNavigate();
 
   // Get the :idDashSlug parameter from the URL.
   const { idDashSlug } = useParams();
@@ -59,7 +61,7 @@ function Single() {
   const handleScrollToForm = () => {
     document.querySelector('.jbls-form').scrollIntoView({ behavior: 'smooth' });
   };
-  
+
   return (
     <div className="jbls-single">
       <div className="jbls-single__header">
@@ -121,9 +123,12 @@ function Single() {
         </div>
       </div>
       <Form />
-      <Link to="/" className="jbls-single__back-to-listing jbls-text-size-h4">
+      <button
+        onClick={() => navigate(-1)}
+        className="jbls-single__back-to-listing jbls-text-size-h4"
+      >
         <BackIcon /> Back to jobs
-      </Link>  
+      </button>
     </div>
   )
 }
