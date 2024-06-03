@@ -39,7 +39,9 @@ function Single() {
 
   // Job details
   const title = sanitizeToPlainText(job.title);
-  const content = { __html: DOMPurify.sanitize(job.content) };
+  console.log(job.content);
+  const content = { __html: DOMPurify.sanitize(job.content, {ALLOWED_ATTR: ['target', 'href', 'rel']}) };
+  console.log(content);
   const updatedTimeAgo = calculateTimeAgo(job.modified_gmt);
   const location = job.location?.name;
   const category = job.category?.name;
