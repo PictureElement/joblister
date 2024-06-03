@@ -135,11 +135,10 @@ This process compiles all necessary files into a zip format, ready for deploymen
 
 ## Future Enhancements
 
-1. Work towards removing the 'Radio Buttons for Taxonomies' plugin as a dependency.
-2. Detect network status and alert your users when they've lost internet connectivity. (Offline.js or navigator.onLine).
-3. Implement error handling for API GET requests to provide clear user feedback.
-4. Accept resumes in more formats.
-5. Retain applied filters and pagination on page refresh using Local Storage.
+1. Detect network status and alert your users when they've lost internet connectivity. (Offline.js or navigator.onLine).
+2. Implement error handling for API GET requests to provide clear user feedback.
+3. Accept resumes in more formats.
+4. Send notification emails.
 
 ## Technical Details
 
@@ -163,6 +162,9 @@ The following routes & endpoints are available for interacting with JobLister:
   * GET endpoint to fetch all experience levels
 * `wp-json/jbls/v1/jbls-applications`
   * POST endpoint to submit a job application
+
+## Acknowledgements
+Special thanks to [Helga the Viking](https://github.com/helgatheviking) for developing the [Radio Buttons for Taxonomies](https://github.com/helgatheviking/Radio-Buttons-for-Taxonomies) plugin, which is a crucial dependency for JobLister.
 
 ## Contributing
 
