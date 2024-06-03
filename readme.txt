@@ -4,7 +4,7 @@ Donate link: https://www.buymeacoffee.com/msofokleous
 Tags: careers page, job board, job listing, job lists, jobs
 Requires at least: 5.6
 Tested up to: 6.4
-Stable tag: 1.0.1
+Stable tag: 1.13.0
 Requires PHP: 7.2
 License: GPL-3.0
 License URI: https://www.gnu.org/licenses/gpl-3.0.en.html
@@ -94,12 +94,30 @@ The application form is designed to collect essential information from job appli
 
 == Changelog ==
 
+= 1.2.0 =
+* feat: Add ID and slug validation to Single component with error handling.
+* fix: Update "Back to jobs" button to navigate back in history.
+* fix: Ensure external links within job description open in a new tab.
+* fix: Decode HTML entities in REST API responses and ensure proper rendering.
+* fix: Add null checks for job attributes in filter conditions to prevent errors.
+* feat: Add OR divider between search input and filters to improve UI clarity.
+* feat: Sync filters and search query with URL for enhanced bookmarking and sharing.
+* feat: Use page parameters in URL for improved UX.
+* feat: Add autoFocus to search field for improved user experience.
+* feat: Scroll to top of page on the listing view.
+* feat: Scroll to top of page on post open.
+* refactor: Enhance initialization process and fix undefined method error.
+* refactor: Disable default REST API for 'jbls_application' CPT and add custom POST endpoint.
+* refactor: Disable default REST API for custom taxonomies and add custom endpoints.
+* refactor: Disable default REST API for the 'jbls_job' CPT and add custom REST endpoint for fetching jobs.
+* refactor: Update REST API namespace from `wp/v2` to `jbls/v1`.
+* feat: Add "Requires Plugins" header to specify plugin dependencies.
+
 = 1.0.1 =
-* Remove custom color property from .jbls-select__multi-value__label.
-* Remove border style on select input control option when focused.
-* Replace Twitter's original icon with 'X' icon.
-* Add demo page link to readme.
-* Append a trailing slash to the end of the default privacy policy URL.
+* fix: Remove custom color property from `.jbls-select__multi-value__label`.
+* fix: Remove border style on select input control option when focused.
+* fix: Replace Twitter's original icon with 'X' icon.
+* fix: Append a trailing slash to the end of the default privacy policy URL.
 
 = 1.0.0 =
 * Initial release.
