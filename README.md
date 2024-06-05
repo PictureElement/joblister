@@ -46,7 +46,7 @@ This guide outlines the steps to configure the development environment for JobLi
 
 5. Install and activate the [Radio Buttons for Taxonomies](https://wordpress.org/plugins/radio-buttons-for-taxonomies/) plugin, a required dependency for JobLister to function correctly.
 
-6. Navigate to 'Settings > Radio Buttons for Taxonomies' and select `jbls_category`, `jbls_experience_level`, `jbls_location`, and `jbls_type`, and save your changes.
+6. Navigate to "Settings > Radio Buttons for Taxonomies" and select `jbls_category`, `jbls_experience_level`, `jbls_location`, and `jbls_type`, and save your changes.
 
 7. To interact with the plugin, insert the [jbls_jobs] shortcode on any page.
 
@@ -78,19 +78,20 @@ This process compiles all necessary files into a zip format, ready for deploymen
 
 ## Features
 
-* **Free and Open Source:** Collaborate to improve JobLister with the community.
+* **Free and Open Source:** Collaborate with the community to improve JobLister.
 * **Single Page Application with React:** Offers lightning-fast interactions and a seamless user experience.
 * **Versatile Job Listings Display:**
   * **Overview Mode:** List jobs with search and filter capabilities.
   * **Detail Mode:** View job details and apply directly.
 * **Efficient Job Search and Filter Functionality:** Narrow down job searches by keywords, categories, location, type, and experience.
-* **Customization Settings:** Personalize the appearance and functionality with an intuitive settings page.
+* **Enhanced URL Handling:** Sync filters and search queries with the URL for better bookmarking and sharing.
+* **Customization Settings:** Personalize appearance and functionality with an intuitive settings page.
 * **No Account Required:** Applicants can submit job applications without the need to log in, ensuring a user-friendly and accessible process.
 * **Convenient Pagination:** Navigate through job listings with ease.
-* **Sharable Links:** Share job listings with others through shareable links.
+* **Shareable Links:** Share job listings with others through shareable links.
 * **Application Form:** Apply easily using a form protected by Google reCAPTCHA.
 * **Responsive Design:** Ensures a seamless experience across all devices.
-* **RTL-Ready Design:** Supports Right-to-Left languages.
+* **RTL-Ready Design:** Supports right-to-left languages.
 
 ## Screenshots
 
@@ -164,6 +165,7 @@ The following routes & endpoints are available for interacting with JobLister:
   * POST endpoint to submit a job application
 
 ## Acknowledgements
+
 Special thanks to [Helga the Viking](https://github.com/helgatheviking) for developing the [Radio Buttons for Taxonomies](https://github.com/helgatheviking/Radio-Buttons-for-Taxonomies) plugin, which is a crucial dependency for JobLister.
 
 ## Contributing

@@ -3,7 +3,7 @@ Contributors: msofokleous
 Donate link: https://www.buymeacoffee.com/msofokleous
 Tags: careers page, job board, job listing, job lists, jobs
 Requires at least: 5.6
-Tested up to: 6.4
+Tested up to: 6.5
 Stable tag: 1.13.0
 Requires PHP: 7.2
 License: GPL-3.0
@@ -19,43 +19,44 @@ JobLister is a free and open-source WordPress plugin that allows you to set up a
 
 = Features =
 
-* **Free and Open Source:** Collaborate to improve JobLister with the community.
+* **Free and Open Source:** Collaborate with the community to improve JobLister.
 * **Single Page Application with React:** Offers lightning-fast interactions and a seamless user experience.
 * **Versatile Job Listings Display:**
   * **Overview Mode:** List jobs with search and filter capabilities.
   * **Detail Mode:** View job details and apply directly.
 * **Efficient Job Search and Filter Functionality:** Narrow down job searches by keywords, categories, location, type, and experience.
-* **Customization Settings:** Personalize the appearance and functionality with an intuitive settings page.
+* **Enhanced URL Handling:** Sync filters and search queries with the URL for better bookmarking and sharing.
+* **Customization Settings:** Personalize appearance and functionality with an intuitive settings page.
 * **No Account Required:** Applicants can submit job applications without the need to log in, ensuring a user-friendly and accessible process.
 * **Convenient Pagination:** Navigate through job listings with ease.
-* **Sharable Links:** Share job listings with others through shareable links.
+* **Shareable Links:** Share job listings with others through shareable links.
 * **Application Form:** Apply easily using a form protected by Google reCAPTCHA.
 * **Responsive Design:** Ensures a seamless experience across all devices.
-* **RTL-Ready Design:** Supports Right-to-Left languages.
+* **RTL-Ready Design:** Supports right-to-left languages.
 
 == Installation ==
 
 = Install JobLister from within WordPress =
 
-1. Visit the 'Plugins' menu within your dashboard and select ‘Add New Plugin’.
-2. Search for ‘JobLister’.
+1. Visit the "Plugins" menu within your dashboard and select "Add New Plugin".
+2. Search for "JobLister".
 3. Install the JobLister plugin.
-4. Go to ‘After installation’ below.
+4. Go to "After installation" below.
 
 = Install JobLister manually =
 
-1. Upload the ‘joblister’ folder to the `/wp-content/plugins/` directory.
-2. Activate the JobLister plugin through the ‘Plugins’ menu within your dashboard.
-3. Go to ‘After activation’ below.
+1. Upload the "joblister" folder to the `/wp-content/plugins/` directory.
+2. Activate the JobLister plugin through the "Plugins" menu within your dashboard.
+3. Go to "After activation" below.
 
 = After installation =
 
-1. Visit the 'Plugins' menu within your dashboard and select 'Add New Plugin'.
-2. Search for 'Radio Buttons for Taxonomies'.
+1. Visit the "Plugins" menu within your dashboard and select "Add New Plugin".
+2. Search for "Radio Buttons for Taxonomies".
 3. Install and activate the Radio Buttons for Taxonomies plugin, a required dependency for JobLister to function correctly.
-4. Visit 'Settings > Radio Buttons for Taxonomies' within your dashboard, and select `jbls_category`, `jbls_experience_level`, `jbls_location`, and `jbls_type`. Then, save your changes.
-6. [Sign up for a Google reCAPTCHA API key pair](http://www.google.com/recaptcha/admin) for your site, choosing 'reCAPTCHA v2, Invisible'. Note down the API Site Key.
-7. Visit 'Jobs > Settings' within your dashboard and enter the noted reCAPTCHA API Site Key.
+4. Visit "Settings > Radio Buttons for Taxonomies" within your dashboard, and select `jbls_category`, `jbls_experience_level`, `jbls_location`, and `jbls_type`. Then, save your changes.
+6. [Sign up for a Google reCAPTCHA API key pair](http://www.google.com/recaptcha/admin) for your site, choosing "reCAPTCHA v2, Invisible". Note down the API Site Key.
+7. Visit "Jobs > Settings" within your dashboard and enter the noted reCAPTCHA API Site Key.
 8. Take a few minutes to adjust the rest of the settings to your liking.
 9. Insert the [jbls_jobs] shortcode on any page.
 10. You're done!
@@ -92,6 +93,10 @@ The application form is designed to collect essential information from job appli
 12. Edit Application In WP Admin
 13. Settings In WP Admin
 
+== Acknowledgements ==
+
+Special thanks to [Helga the Viking](https://github.com/helgatheviking) for developing the [Radio Buttons for Taxonomies](https://github.com/helgatheviking/Radio-Buttons-for-Taxonomies) plugin, which is a crucial dependency for JobLister.
+
 == Changelog ==
 
 = 1.2.0 =
@@ -107,16 +112,16 @@ The application form is designed to collect essential information from job appli
 * feat: Scroll to top of page on the listing view.
 * feat: Scroll to top of page on post open.
 * refactor: Enhance initialization process and fix undefined method error.
-* refactor: Disable default REST API for 'jbls_application' CPT and add custom POST endpoint.
+* refactor: Disable default REST API for `jbls_application` CPT and add custom POST endpoint.
 * refactor: Disable default REST API for custom taxonomies and add custom endpoints.
-* refactor: Disable default REST API for the 'jbls_job' CPT and add custom REST endpoint for fetching jobs.
+* refactor: Disable default REST API for the `jbls_job` CPT and add custom REST endpoint for fetching jobs.
 * refactor: Update REST API namespace from `wp/v2` to `jbls/v1`.
 * feat: Add "Requires Plugins" header to specify plugin dependencies.
 
 = 1.0.1 =
 * fix: Remove custom color property from `.jbls-select__multi-value__label`.
 * fix: Remove border style on select input control option when focused.
-* fix: Replace Twitter's original icon with 'X' icon.
+* fix: Replace Twitter's original icon with "X" icon.
 * fix: Append a trailing slash to the end of the default privacy policy URL.
 
 = 1.0.0 =
