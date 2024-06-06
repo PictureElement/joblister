@@ -162,11 +162,6 @@ function Multiple() {
     isUpdatingURL.current = true;
     updateURLFromState();
   }, [locationFilters, categoryFilters, typeFilters, experienceLevelFilters, currentPage]);
-
-  // Scroll to the top of the page (only on first render)
-  useEffect(() => {
-    window.scrollTo(0, 0)
-  }, [])
   
   return (
     <div className="jbls-multiple">

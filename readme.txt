@@ -4,7 +4,7 @@ Donate link: https://www.buymeacoffee.com/msofokleous
 Tags: careers page, job board, job listing, job lists, jobs
 Requires at least: 5.6
 Tested up to: 6.5
-Stable tag: 1.13.0
+Stable tag: 1.2.1
 Requires PHP: 7.2
 License: GPL-3.0
 License URI: https://www.gnu.org/licenses/gpl-3.0.en.html
@@ -93,11 +93,11 @@ The application form is designed to collect essential information from job appli
 12. Edit Application In WP Admin
 13. Settings In WP Admin
 
-== Acknowledgements ==
-
-Special thanks to [Helga the Viking](https://github.com/helgatheviking) for developing the [Radio Buttons for Taxonomies](https://github.com/helgatheviking/Radio-Buttons-for-Taxonomies) plugin, which is a crucial dependency for JobLister.
-
 == Changelog ==
+
+= 1.2.1 =
+* revert: remove autoFocus from search field and scroll to top on listing view.
+* Update readme.txt
 
 = 1.2.0 =
 * feat: Add ID and slug validation to Single component with error handling.
