@@ -84,12 +84,11 @@ This process compiles all necessary files into a zip format, ready for deploymen
   * **Overview Mode:** List jobs with search and filter capabilities.
   * **Detail Mode:** View job details and apply directly.
 * **Efficient Job Search and Filter Functionality:** Narrow down job searches by keywords, categories, location, type, and experience.
-* **Enhanced URL Handling:** Sync filters and search queries with the URL for better bookmarking and sharing.
+* **Enhanced Bookmarking and Sharing:** Utilized filter, page, and query parameters in the URL.
 * **Customization Settings:** Personalize appearance and functionality with an intuitive settings page.
 * **No Account Required:** Applicants can submit job applications without the need to log in, ensuring a user-friendly and accessible process.
 * **Convenient Pagination:** Navigate through job listings with ease.
-* **Shareable Links:** Share job listings with others through shareable links.
-* **Application Form:** Apply easily using a form protected by Google reCAPTCHA.
+* **Spam-free submissions:** Use a form protected by Google reCAPTCHA.
 * **Responsive Design:** Ensures a seamless experience across all devices.
 * **RTL-Ready Design:** Supports right-to-left languages.
 
