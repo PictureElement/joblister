@@ -118,6 +118,14 @@ class JBLS_Settings {
     );
 
     add_settings_field(
+      'jbls_captcha_secret_key',
+      'Invisible reCAPTCHA v2 Secret Key',
+      array($this, 'jbls_captcha_secret_key_callback'),
+      'jbls_settings_page',
+      'jbls_general'
+    );
+
+    add_settings_field(
       'jbls_privacy_url',
       'Privacy Policy URL',
       array($this, 'jbls_privacy_url_callback'),
@@ -180,7 +188,15 @@ class JBLS_Settings {
     $options = get_option('jbls_options');
     ?>
     <input style="width: 100%;" type="text" id="jbls_captcha_site_key" name="jbls_options[jbls_captcha_site_key]" value="<?php echo isset($options['jbls_captcha_site_key']) ? esc_attr($options['jbls_captcha_site_key']) : ''; ?>">
-    <p class="description">Defaults to the reCAPTCHA v2 test key 6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI.</p>
+    <p class="description">Defaults to the reCAPTCHA v2 site test key 6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI.</p>
+    <?php
+  }
+
+  public function jbls_captcha_secret_key_callback() {
+    $options = get_option('jbls_options');
+    ?>
+    <input style="width: 100%;" type="text" id="jbls_captcha_secret_key" name="jbls_options[jbls_captcha_secret_key]" value="<?php echo isset($options['jbls_captcha_secret_key']) ? esc_attr($options['jbls_captcha_secret_key']) : ''; ?>">
+    <p class="description">Defaults to the reCAPTCHA v2 secret test key 6LeIxAcTAAAAAGG-vFI1TnRWxMZNFuojJ4WifJWe.</p>
     <?php
   }
 
@@ -226,6 +242,9 @@ class JBLS_Settings {
         
     // Sanitize 'jbls_captcha_site_key'. Set to null if not provided.
     $input['jbls_captcha_site_key'] = isset($input['jbls_captcha_site_key']) ? sanitize_text_field(trim($input['jbls_captcha_site_key'])) : null;
+
+    // Sanitize 'jbls_captcha_secret_key'. Set to null if not provided.
+    $input['jbls_captcha_secret_key'] = isset($input['jbls_captcha_secret_key']) ? sanitize_text_field(trim($input['jbls_captcha_secret_key'])) : null;
 
     // Sanitize the 'jbls_privacy_url' field. Set to null if not provided.
     $input['jbls_privacy_url'] = isset($input['jbls_privacy_url']) ? sanitize_url(trim($input['jbls_privacy_url'])) : null;

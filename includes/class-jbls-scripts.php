@@ -26,8 +26,6 @@ class JBLS_Scripts
     // Define default values for the settings
     $defaults = [
       'jbls_per_page' => 10,
-      'jbls_wordpress_username' => '',
-      'jbls_application_password' => '',
       'jbls_captcha_site_key' => '6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI',
       'jbls_privacy_url' => '/privacy-policy/',
     ];

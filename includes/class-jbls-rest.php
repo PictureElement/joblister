@@ -216,14 +216,21 @@ class JBLS_REST
   }
 
   // Callback function for custom REST route
-  public function jbls_post_appication($request)
-  {
+  public function jbls_post_appication($request) {
     // Retrieve the nonce from the request headers
     $nonce = sanitize_text_field($request->get_header('X-WP-Nonce'));
 
     // Verify the nonce
     if (!wp_verify_nonce($nonce, 'wp_rest')) {
       return new WP_Error('nonce_verification_failed', 'Nonce verification failed', array('status' => 401));
+    }
+
+    // Sanitize & validate reCAPTCHA token
+    $recaptcha_token = sanitize_text_field($request['recaptcha_token']);
+    $recaptcha_response = $this->jbls_verify_recaptcha($recaptcha_token);
+
+    if (!$recaptcha_response->success) {
+      return new WP_Error('recaptcha_verification_failed', 'reCAPTCHA verification failed.', array('status' => 400));
     }
 
     // Sanitize & validate job_id
@@ -336,6 +343,27 @@ class JBLS_REST
       error_log('Error 3');
       return new WP_Error('application_creation_failed', 'Failed to create application.', array('status' => 500));
     }
+  }
+
+  // Helper function to verify reCAPTCHA token
+  private function jbls_verify_recaptcha($token) {
+    $options = get_option('jbls_options');
+    // Get the reCAPTCHA secret key from the options, or use the default test key.
+    $recaptcha_secret_key = empty($options['jbls_captcha_secret_key']) ? '6LeIxAcTAAAAAGG-vFI1TnRWxMZNFuojJ4WifJWe' : $options['jbls_captcha_secret_key'];
+
+    $response = wp_remote_post('https://www.google.com/recaptcha/api/siteverify', array(
+      'body' => array(
+        'secret' => $recaptcha_secret_key,
+        'response' => $token,
+      ),
+    ));
+
+    if (is_wp_error($response)) {
+      return new WP_Error('recaptcha_error', 'Failed to verify reCAPTCHA.', array('status' => 500));
+    }
+
+    $body = wp_remote_retrieve_body($response);
+    return json_decode($body);
   }
 
   private function jbls_job_exists($job_id) {

@@ -4,7 +4,7 @@
  * Requires Plugins:  radio-buttons-for-taxonomies
  * Plugin URI:        https://github.com/PictureElement/joblister
  * Description:       React-powered job listing made simple for WordPress.
- * Version:           1.2.1
+ * Version:           1.2.2
  * Author:            Marios Sofokleous
  * Author URI:        https://www.msof.me/
  * License:           GPL-3.0

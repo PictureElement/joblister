@@ -78,7 +78,7 @@ function Form() {
       submitForm();
     } else {
       // Handle the case where the ReCAPTCHA verification failed
-      setFormError('ReCAPTCHA verification failed. Please try again.');
+      setFormError('Submission failed: reCAPTCHA verification failed. Please try again.');
       // Reset captcha
       if (recaptchaRef.current) {
         recaptchaRef.current.reset();
@@ -97,6 +97,11 @@ function Form() {
     formData.append('cover', values.cover);
     formData.append('resume', values.resume);
     formData.append('consent', values.consent);
+
+    // Get the reCAPTCHA token
+    const recaptchaToken = await recaptchaRef.current.executeAsync();
+
+    formData.append('recaptcha_token', recaptchaToken);
 
     // Start submitting
     setIsSubmitting(true);
