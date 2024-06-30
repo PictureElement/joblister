@@ -117,7 +117,11 @@ function Form() {
       });
       
       if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
+        // Parse the response body to extract error message
+        const errorData = await response.json();
+        const errorMessage = errorData.message || 'An error occurred';
+        console.log('Error:', errorMessage);
+        throw new Error(errorMessage);
       }
 
       const data = await response.json();
@@ -152,6 +156,7 @@ function Form() {
       setIsSubmitting(false);
     } catch (error) {
       // Set the error message
+      console.log(error);
       setFormError(`Submission failed: ${error.message}`);
       // Reset captcha
       if (recaptchaRef.current) {

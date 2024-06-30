@@ -69,7 +69,7 @@ class JBLS_REST
           'name' => html_entity_decode($first_location->name),
         ];
       }
-
+ 
       // Get the experience level terms for each job
       $experience_levels = wp_get_post_terms($job->ID, 'jbls_experience_level');
 
@@ -230,40 +230,38 @@ class JBLS_REST
     $recaptcha_response = $this->jbls_verify_recaptcha($recaptcha_token);
 
     if (!$recaptcha_response->success) {
-      return new WP_Error('recaptcha_verification_failed', 'reCAPTCHA verification failed.', array('status' => 400));
+      return new WP_Error('recaptcha_verification_failed', 'reCAPTCHA verification failed', array('status' => 400));
     }
 
     // Sanitize & validate job_id
     $job_id = intval(sanitize_text_field($request['job_id']));
     if (empty($job_id) || !$this->jbls_job_exists($job_id)) {
-      return new WP_Error('invalid_job_id', 'Invalid job ID.', array('status' => 400));
+      return new WP_Error('invalid_job_id', 'Invalid job ID', array('status' => 400));
     }
     
     // Sanitize & validate name
     $name = sanitize_text_field($request['name']);
     if (empty($name)) {
-      return new WP_Error('empty_name', 'Enter your name.', array('status' => 400));
+      return new WP_Error('empty_name', 'Enter your name', array('status' => 400));
     } elseif (strlen($name) < 2) {
-      return new WP_Error('short_name', 'Use 2 characters or more for your name.', array('status' => 400));
+      return new WP_Error('short_name', 'Use 2 characters or more for your name', array('status' => 400));
     } elseif (strlen($name) > 70) {
-      return new WP_Error('long_name', 'Use 70 characters or less for your name.', array('status' => 400));
+      return new WP_Error('long_name', 'Use 70 characters or less for your name', array('status' => 400));
     }
 
     // Sanitize & validate email
     $email = sanitize_email($request['email']);
-    if (empty($email)) {
-      return new WP_Error('empty_email', 'Enter your email.', array('status' => 400));
-    } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-      return new WP_Error('invalid_email', 'Enter a valid email address.', array('status' => 400));
+    if (empty($email) || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
+      return new WP_Error('invalid_email', 'Email missing or invalid', array('status' => 400));
     }
 
     // Sanitize & validate cover
     $cover = sanitize_textarea_field($request['cover']);
     $max_length = 4000;
     if (empty($cover)) {
-      return new WP_Error('empty_cover', 'Provide a cover letter.', array('status' => 400));
+      return new WP_Error('empty_cover', 'Provide a cover letter', array('status' => 400));
     } elseif (strlen($cover) > $max_length) {
-      return new WP_Error('long_cover', "Cover letter should be no more than {$max_length} characters.", array('status' => 400));
+      return new WP_Error('long_cover', "Cover letter should be no more than {$max_length} characters", array('status' => 400));
     }
 
     // Sanitize & validate resume
@@ -321,7 +319,7 @@ class JBLS_REST
     // Sanitize and validate consent
     $consent = isset($request['consent']) && ($request['consent'] === true || $request['consent'] === 'true') ? true : false;
     if (!$consent) {
-      return new WP_Error('invalid_consent', 'Consent must be provided.', array('status' => 400));
+      return new WP_Error('invalid_consent', 'Consent must be provided', array('status' => 400));
     }
 
     $new_jbls_application_id = wp_insert_post(array(
@@ -341,7 +339,7 @@ class JBLS_REST
       return new WP_REST_Response('Application created successfully.', 201);
     } else {
       error_log('Error 3');
-      return new WP_Error('application_creation_failed', 'Failed to create application.', array('status' => 500));
+      return new WP_Error('application_creation_failed', 'Failed to create application', array('status' => 500));
     }
   }
 
@@ -359,7 +357,7 @@ class JBLS_REST
     ));
 
     if (is_wp_error($response)) {
-      return new WP_Error('recaptcha_error', 'Failed to verify reCAPTCHA.', array('status' => 500));
+      return new WP_Error('recaptcha_error', 'Failed to verify reCAPTCHA', array('status' => 500));
     }
 
     $body = wp_remote_retrieve_body($response);
