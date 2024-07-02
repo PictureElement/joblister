@@ -384,27 +384,27 @@
     justify-content: space-between;
     margin-bottom: 16px;
   }
+  &__switch {
+    .react-switch-bg {
+      background: transparent!important;
+      border: 1px solid var(--jbls-on-background-border);
+    }
+    .react-switch-handle {
+      background-color: var(--jbls-accent)!important;
+      > div {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        svg {
+          fill: var(--jbls-on-accent);
+        }
+      }
+    }
+  }
   &__controls {
     display: flex;
     align-items: center;
     column-gap: 8px;
-  }
-  &__toggle {
-    all: unset;
-    cursor: pointer;
-    padding: 10px;
-    text-align: center;
-    display: inline-block;
-    border: 1px solid var(--jbls-on-background-border);
-    > svg {
-      display: block;
-      fill: var(--jbls-on-background-primary);
-    }
-    &_active {
-      > svg {
-        fill: var(--jbls-accent);
-      }
-    }
   }
   &__count {
     font-family: var(--jbls-google-font-family);

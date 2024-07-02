@@ -21,6 +21,7 @@ import {
 import { useNavigate, useLocation } from 'react-router-dom';
 import { ReactComponent as ListIcon } from '../icons/list.svg';
 import { ReactComponent as GridIcon } from '../icons/grid.svg';
+import Switch from "react-switch";
 
 function Multiple() {
   /**
@@ -143,6 +144,14 @@ function Multiple() {
     navigate('?' + params.toString(), { replace: true });
   };
 
+  const toggleListView = () => {
+    setView('list');
+  };
+  
+  const toggleGridView = () => {
+    setView('grid');
+  };
+
   // Update state from URL when the URL changes
   useEffect(() => {
     if (isUpdatingURL.current) {
@@ -204,20 +213,18 @@ function Multiple() {
       <div className="jbls-multiple__count-controls">
         <div className="jbls-multiple__count jbls-text-size-h4"><strong>{totalJobs}</strong> jobs found</div>
         <div className="jbls-multiple__controls">
-          <button
-            className={`jbls-multiple__toggle ${view === 'list' ? 'jbls-multiple__toggle_active' : ''}`}
-            onClick={() => setView('list')}
-            aria-label="List View"
-          >
-            <ListIcon />
-          </button>
-          <button 
-            className={`jbls-multiple__toggle ${view === 'grid' ? 'jbls-multiple__toggle_active' : ''}`}
-            onClick={() => setView('grid')}
-            aria-label="Grid View"
-          >
-            <GridIcon />
-          </button>
+          <Switch
+            className="jbls-multiple__switch"
+            aria-label="Toggle between list view and grid view"
+            checked={view === "grid"}
+            onChange={checked => checked ? toggleGridView() : toggleListView()}
+            checkedIcon={false}
+            uncheckedIcon={false}
+            checkedHandleIcon={<GridIcon />}
+            uncheckedHandleIcon={<ListIcon />}
+            height={28}
+            handleDiameter={32}
+          />
           <button onClick={handleClearAll} className="jbls-multiple__clear jbls-text-size-h4">Clear all</button>
         </div>
       </div>

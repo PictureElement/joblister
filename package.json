@@ -33,6 +33,7 @@
     "react-select": "^5.7.3",
     "react-share": "^5.1.0",
     "react-slugify": "^3.0.2",
+    "react-switch": "^7.0.0",
     "recoil": "^0.7.7"
   },
   "files": [
