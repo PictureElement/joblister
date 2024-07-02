@@ -1,5 +1,6 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import JobList from '../components/JobList';
+import JobListAlternative from '../components/JobListAlternative';
 import Search from '../components/Search';
 import SelectMulti from '../components/SelectMulti';
 import Pagination from '../components/Pagination';
@@ -18,6 +19,8 @@ import {
   filteredJobsState 
 } from '../recoil-state';
 import { useNavigate, useLocation } from 'react-router-dom';
+import { ReactComponent as ListIcon } from '../icons/list.svg';
+import { ReactComponent as GridIcon } from '../icons/grid.svg';
 
 function Multiple() {
   /**
@@ -37,6 +40,7 @@ function Multiple() {
   const [searchQuery, setSearchQuery] = useRecoilState(searchQueryState);
   const [currentPage, setCurrentPage] = useRecoilState(currentPageState);
   const { totalPages, totalJobs } = useRecoilValue(filteredJobsState);
+  const [view, setView] = useState('list');
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -162,7 +166,7 @@ function Multiple() {
     isUpdatingURL.current = true;
     updateURLFromState();
   }, [locationFilters, categoryFilters, typeFilters, experienceLevelFilters, currentPage]);
-  
+
   return (
     <div className="jbls-multiple">
       <div className="jbls-multiple__search">
@@ -197,21 +201,40 @@ function Multiple() {
           options={allExperienceLevels}
         />
       </div>
-      <div className="jbls-multiple__count-clear">
+      <div className="jbls-multiple__count-controls">
         <div className="jbls-multiple__count jbls-text-size-h4"><strong>{totalJobs}</strong> jobs found</div>
-        <button onClick={handleClearAll} className="jbls-multiple__clear jbls-text-size-h4">Clear all</button>
+        <div className="jbls-multiple__controls">
+          <button
+            className={`jbls-multiple__toggle ${view === 'list' ? 'jbls-multiple__toggle_active' : ''}`}
+            onClick={() => setView('list')}
+            aria-label="List View"
+          >
+            <ListIcon />
+          </button>
+          <button 
+            className={`jbls-multiple__toggle ${view === 'grid' ? 'jbls-multiple__toggle_active' : ''}`}
+            onClick={() => setView('grid')}
+            aria-label="Grid View"
+          >
+            <GridIcon />
+          </button>
+          <button onClick={handleClearAll} className="jbls-multiple__clear jbls-text-size-h4">Clear all</button>
+        </div>
       </div>
       <div className="jbls-multiple__pagination jbls-multiple__pagination_top">
         <Pagination />
       </div>
-      <div className="jbls-multiple__header jbls-clearfix">
-        <span className="jbls-text-size-small">Job Title</span>
-        <span className="jbls-text-size-small">Category</span>
-        <span className="jbls-text-size-small">Location</span>
-        <span className="jbls-text-size-small">Experience</span>
-      </div>
+      {view === 'list' &&
+        <div className="jbls-multiple__header jbls-clearfix">
+          <span className="jbls-text-size-small">Job Title</span>
+          <span className="jbls-text-size-small">Category</span>
+          <span className="jbls-text-size-small">Location</span>
+          <span className="jbls-text-size-small">Type</span>
+          <span className="jbls-text-size-small">Experience</span>
+        </div>
+      }
       <div className="jbls-multiple__list">
-        <JobList />
+        {view === 'list' ? <JobList /> : <JobListAlternative />}
       </div>
       <div className="jbls-multiple__pagination jbls-multiple__pagination_bottom">
         <Pagination />

@@ -1,9 +1,9 @@
 import { useRecoilValue } from 'recoil';
 import { filteredJobsState } from '../recoil-state';
-import JobItem from "./JobItem";
+import JobItemAlternative from './JobItemAlternative';
 import NoJobsFound from './NoJobsFound';
 
-function JobList() {
+function JobListAlternative() {
   /**
    * State variables
    * - Use useRecoilValue() when a component intends to read state without writing to it.
@@ -11,7 +11,7 @@ function JobList() {
   const { filteredJobs } = useRecoilValue(filteredJobsState);
   
   const jobItems = filteredJobs.map(job =>
-    <JobItem
+    <JobItemAlternative
       key={job.id}
       id={job.id}
       modifiedGmt={job.modified_gmt}
@@ -27,7 +27,7 @@ function JobList() {
     <>
       {filteredJobs.length > 0
         ?
-          <ul className="jbls-job-list">
+          <ul className="jbls-job-list-alternative">
             {jobItems}
           </ul>
         :
@@ -37,4 +37,4 @@ function JobList() {
   )
 }
 
-export default JobList;
+export default JobListAlternative;
