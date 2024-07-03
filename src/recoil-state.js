@@ -58,6 +58,11 @@ const currentPageState = atom({
   default: 1
 });
 
+const viewState = atom({
+  key: 'viewState',
+  default: 'list'
+});
+
 /**
  * Selectors
  */
@@ -142,5 +147,6 @@ export {
   typeFiltersState,
   experienceLevelFiltersState,
   currentPageState,
+  viewState,
   filteredJobsState
 };

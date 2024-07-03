@@ -16,7 +16,8 @@ import {
   experienceLevelFiltersState,
   currentPageState,
   searchQueryState,
-  filteredJobsState 
+  filteredJobsState, 
+  viewState
 } from '../recoil-state';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { ReactComponent as ListIcon } from '../icons/list.svg';
@@ -41,7 +42,7 @@ function Multiple() {
   const [searchQuery, setSearchQuery] = useRecoilState(searchQueryState);
   const [currentPage, setCurrentPage] = useRecoilState(currentPageState);
   const { totalPages, totalJobs } = useRecoilValue(filteredJobsState);
-  const [view, setView] = useState('list');
+  const [view, setView] = useRecoilState(viewState);
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -144,14 +145,6 @@ function Multiple() {
     navigate('?' + params.toString(), { replace: true });
   };
 
-  const toggleListView = () => {
-    setView('list');
-  };
-  
-  const toggleGridView = () => {
-    setView('grid');
-  };
-
   // Update state from URL when the URL changes
   useEffect(() => {
     if (isUpdatingURL.current) {
@@ -217,7 +210,7 @@ function Multiple() {
             className="jbls-multiple__switch"
             aria-label="Toggle between list view and grid view"
             checked={view === "grid"}
-            onChange={checked => checked ? toggleGridView() : toggleListView()}
+            onChange={checked => checked ? setView('grid') : setView('list')}
             checkedIcon={false}
             uncheckedIcon={false}
             checkedHandleIcon={<GridIcon />}
