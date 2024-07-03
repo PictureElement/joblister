@@ -95,9 +95,9 @@ The application form is designed to collect essential information from job appli
 == Changelog ==
 
 = 1.3.0 =
-feat: Add Grid view for job listings and a toggle switch to easily switch between List and Grid views.
-fix: Implement reCAPTCHA token validation on the backend.
-fix: Made adjustments to the formatting and content of custom error messages for consistency.
+* feat: Add Grid view for job listings and a toggle switch to easily switch between List and Grid views.
+* fix: Implement reCAPTCHA token validation on the backend.
+* fix: Made adjustments to the formatting and content of custom error messages for consistency.
 
 = 1.2.1 =
 * revert: remove autoFocus from search field and scroll to top on listing view.
